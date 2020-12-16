@@ -1,0 +1,22 @@
+.footer {
+    background: #000000;
+    padding-top: 16px;
+    padding-bottom: 16px;
+}
+
+.footer_logo img {
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+}
+
+.footer p {
+    font-size: 28px;
+    letter-spacing: 1px;
+    line-height: 28px;
+    color: #ffffff;
+    font-weight: 400;
+    font-family: "Poppins";
+    text-align: center;
+    margin-top: 16px;
+}
