@@ -1,3 +1,4 @@
+
 <div class="container-fluid outer_all">
 <div class="image_bg">
 
@@ -5,11 +6,11 @@
     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the </p>
     <div class="button_slide">
         <button class="btn btn_rounded"  onclick="document.getElementById('id01').style.display='block'">I am a Promoter </button>
-        <button class="btn btn_rounded">I am a Influencer </button>
+        <button class="btn btn_rounded"  onclick="document.getElementById('id02').style.display='block'">I am a Influencer </button>
     </div>
 </div>
 <div class="right_sec"><img src="./assets/images/homeslide_1.png"></div>
-</div></div>
+</div></div> 
 <div class="next_sec">
     <h1>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown </h1>
     </div>
@@ -116,6 +117,27 @@
         </ul>
     </div>
     </div>
+    <div class="w3-container">
+  <div id="id01" class="w3-modal">
+          <div class="w3-modal-content">
+       <div class="w3-container">
+              <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+          <app-promoter-sign-up></app-promoter-sign-up>
+       </div>
+     
+          </div>
+        </div>
+      </div>
 
-
+      <div class="w3-container">
+        <div id="id02" class="w3-modal">
+                <div class="w3-modal-content">
+             <div class="w3-container">
+                    <span onclick="document.getElementById('id02').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                <app-promoter-sign-up></app-promoter-sign-up>
+             </div>
+           
+                </div>
+              </div>
+            </div>
    

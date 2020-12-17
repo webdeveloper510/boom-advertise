@@ -1,0 +1,17 @@
+<div class="promoter_signup">
+    <h2>Promoter’s SignUp</h2>
+    <p>It’s Free!</p>
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+    <div formGroupName="promoter_signup">
+<input type="text" formControlName="name_person" placeholder="Name" required>
+   <input type="email" formControlName="email" placeholder="Email" required>
+  <input type="password" formControlName="password" placeholder="Password" required>
+    <input type="password" formControlName="confirm" placeholder="Confirm Password" required>
+    <input type="checkbox" id="checked" formControlName="checked">
+    <label for="horns" class="text_check">I Agree to <b>Terms of Service</b> and <b>Privacy Policy.</b></label>
+        <button type="submit" [disabled]="!profileForm.valid">SignUp</button>
+
+        <p class="have_account">Already have an account ? <b><u>LogIn</u></b></p>
+      </div>
+    </form>
+</div>
