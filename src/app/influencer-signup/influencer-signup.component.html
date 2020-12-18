@@ -1,17 +1,42 @@
 <div class="promoter_signup">
-    <h2>Promoter’s SignUp</h2>
+    <h2>Influencer’s SignUp</h2>
     <p>It’s Free!</p>
 <form [formGroup]="influencer" (ngSubmit)="onSubmit()">
-    <div formGroupName="promoter_signup">
+    <div formGroupName="influencer_signup">
 <input type="text" formControlName="name_person" placeholder="Name" required>
    <input type="email" formControlName="email" placeholder="Email" required>
   <input type="password" formControlName="password" placeholder="Password" required>
     <input type="password" formControlName="confirm" placeholder="Confirm Password" required>
+
+
+
+
+    <div class="influencer_media">
+      <ul> 
+        <li><input type="checkbox"  class="checkboxes" id="tiktok" formControlName="tiktok">
+        <img src="/assets/images/tiktok icon 2.png"/>
+        </li> 
+        <li><input type="checkbox" class="checkboxes" id="insta" formControlName="insta">
+          <img src="/assets/images/insta iconn 2.png"> 
+          </li>
+          
+          <li><input type="checkbox" class="checkboxes" id="fb" formControlName="fb">
+            <img src="/assets/images/fb icon 2.png"> 
+            </li> 
+            <li><input type="checkbox" class="checkboxes" id="twitter" formControlName="twitter">
+              <img src="/assets/images/twitter 2.png"> 
+              </li> 
+         
+      </ul>
+     
+    </div>
     <input type="checkbox" id="checked" formControlName="checked">
     <label for="horns" class="text_check">I Agree to <b>Terms of Service</b> and <b>Privacy Policy.</b></label>
-        <button type="submit" [disabled]="!influencer.valid">SignUp</button>
+        <button class="influencer_btn" type="submit" [disabled]="!influencer.valid">SignUp</button>
 
         <p class="have_account">Already have an account ? <b><u>LogIn</u></b></p>
       </div>
     </form>
 </div>
+
+

@@ -9,6 +9,8 @@ import { FooterComponent } from './footer/footer.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PromoterSignUpComponent } from './promoter-sign-up/promoter-sign-up.component';
 import { InfluencerSignupComponent } from './influencer-signup/influencer-signup.component';
+import { SigninComponent } from './signin/signin.component';
+
 
 @NgModule({
   declarations: [
@@ -17,12 +19,14 @@ import { InfluencerSignupComponent } from './influencer-signup/influencer-signup
     HeaderComponent,
     FooterComponent,
     PromoterSignUpComponent,
-    InfluencerSignupComponent
+    InfluencerSignupComponent,
+    SigninComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule
+
 
   ],
   providers: [],
