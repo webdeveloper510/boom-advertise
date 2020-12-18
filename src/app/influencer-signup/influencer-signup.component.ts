@@ -8,12 +8,16 @@ import { FormControl, FormGroup} from '@angular/forms';
 })
 export class InfluencerSignupComponent implements OnInit {
   influencer = new FormGroup({
-   promoter_signup: new FormGroup({
+   influencer_signup: new FormGroup({
       name_person: new FormControl(''),
       email: new FormControl(''),
       password: new FormControl(''),
       confirm: new FormControl(''),
-      checked: new FormControl('')
+      checked: new FormControl(''),
+      tiktok: new FormControl(''),
+      insta: new FormControl(''),
+      fb: new FormControl(''),
+      twitter: new FormControl('')
     })
   });
   constructor() { }
@@ -26,3 +30,5 @@ export class InfluencerSignupComponent implements OnInit {
   }
 
 }
+
+
