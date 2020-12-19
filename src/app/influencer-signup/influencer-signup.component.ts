@@ -20,6 +20,7 @@ export class InfluencerSignupComponent implements OnInit {
       twitter: new FormControl('')
     })
   });
+  
   constructor() { }
   onSubmit() {
 
