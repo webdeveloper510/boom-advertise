@@ -2,7 +2,7 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
-const promoter = require('../models/promoters');
+const influencer = require('../models/influencers');
 //const email = require('../config/email');
 //const nodemailer = require('nodemailer');
 var passwordHash = require('password-hash');
@@ -10,34 +10,34 @@ var passwordHash = require('password-hash');
 //process.env.NODE_TLS_REJECT_UNAUTHORIZED = "1";
 
 router.post('/register', function(req,res) {
-console.log(req.body.promoter_signup);
-      var promoterCreate =  new promoter.promoters(req.body.promoter_signup);
+console.log(req.body.influencer_signup);
+      var influencerCreate =  new influencer.influencers(req.body.influencer_signup);
 
       var datetime = new Date();
-      let pass = passwordHash.generate(req.body.promoter_signup.password)
+      let pass = passwordHash.generate(req.body.influencer_signup.password)
 
-      promoterCreate.joindate = datetime
-      promoterCreate.password = pass
+      influencerCreate.joindate = datetime
+      influencerCreate.password = pass
       
-      promoter.promoters.findOne({email:req.body.promoter_signup.email}, function(err, promoters) {
+      influencer.influencers.findOne({email:req.body.influencer_signup.email}, function(err, influencers) {
         if (err)  res.json({status:"failure",statusCode:100,error:err});
         
-        if(promoters){
-          console.log(promoters)
+        if(influencers){
+          console.log(influencers)
           res.json({status:"failure",statusCode:100,error:"Email already exists!!"});
         }else{
-            promoter.promoters.findOne({name:req.body.promoter_signup.name}, function(err, promoters) {
+            influencer.influencers.findOne({name:req.body.influencer_signup.name}, function(err, influencers) {
             if (err)  res.json({status:"failure",statusCode:100,error:err});
         
-            if(promoters){
-              console.log(promoters)
+            if(influencers){
+              console.log(influencers)
               res.json({status:"failure",statusCode:100,error:"Username already exists!!"});
             }
             else{
-                promoterCreate.save(function (err, promoter) {
+                influencerCreate.save(function (err, influencer) {
                 if (err) res.json({status:"failure",statusCode:100,error:err});
             
-                res.json({status:"success",statusCode:200,data:promoter});
+                res.json({status:"success",statusCode:200,data:influencer});
               });
             }
           })

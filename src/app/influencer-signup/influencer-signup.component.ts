@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup} from '@angular/forms';
+import { InfluencerRegisterService } from '../services/influencer-register.service';
+import {HttpClient} from '@angular/common/http';
+
 
 @Component({
   selector: 'app-influencer-signup',
@@ -8,8 +11,8 @@ import { FormControl, FormGroup} from '@angular/forms';
 })
 export class InfluencerSignupComponent implements OnInit {
   influencer = new FormGroup({
-   influencer_signup: new FormGroup({
-      name_person: new FormControl(''),
+    influencer_signup: new FormGroup({
+      name: new FormControl(''),
       email: new FormControl(''),
       password: new FormControl(''),
       confirm: new FormControl(''),
@@ -20,16 +23,26 @@ export class InfluencerSignupComponent implements OnInit {
       twitter: new FormControl('')
     })
   });
-  
-  constructor() { }
-  onSubmit() {
 
-    // TODO: Use EventEmitter with form value
-    console.warn(this.influencer.value);
-  }
+  constructor(private influregservice:InfluencerRegisterService,private http : HttpClient) { }
+
   ngOnInit(): void {
   }
 
+  onSubmit() {
+    console.warn(this.influencer.value);
+    console.log(this.influencer.value);
+    const data = this.influencer.value
+    this.influregservice.register(data)
+    .subscribe(
+      (response) => {                           
+        console.log(response)
+  
+      },
+      (error) => {                            
+        console.error(error)
+      }
+    );
+  }
+
 }
-
-

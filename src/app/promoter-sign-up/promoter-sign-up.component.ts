@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup} from '@angular/forms';
+import { PromoterRegisterService } from '../services/promoter-register.service';
+import {HttpClient} from '@angular/common/http';
+
 
 @Component({
   selector: 'app-promoter-sign-up',
@@ -8,9 +11,8 @@ import { FormControl, FormGroup} from '@angular/forms';
 })
 export class PromoterSignUpComponent implements OnInit {
   profileForm = new FormGroup({
-  
     promoter_signup: new FormGroup({
-      name_person: new FormControl(''),
+      name: new FormControl(''),
       email: new FormControl(''),
       password: new FormControl(''),
       confirm: new FormControl(''),
@@ -18,16 +20,25 @@ export class PromoterSignUpComponent implements OnInit {
     })
   });
 
-
-  onSubmit() {
-
-    // TODO: Use EventEmitter with form value
-    console.warn(this.profileForm.value);
-  }
-
-  constructor() { }
+  constructor(private proregservice:PromoterRegisterService,private http : HttpClient) { }
 
   ngOnInit(): void {
+  }
+
+  onSubmit() {
+    console.warn(this.profileForm.value);
+    console.log(this.profileForm.value);
+    const data = this.profileForm.value
+    this.proregservice.register(data)
+    .subscribe(
+      (response) => {                           
+        console.log(response)
+  
+      },
+      (error) => {                            
+        console.error(error)
+      }
+    );
   }
 
 }
