@@ -9,12 +9,12 @@ import {HttpClient} from '@angular/common/http';
   styleUrls: ['./signin.component.css']
 })
 export class SigninComponent implements OnInit {
-  influencer = new FormGroup({
-    influencer_signup: new FormGroup({
+  signin = new FormGroup({
+    signin: new FormGroup({
        //name_person: new FormControl(''),
        email: new FormControl(''),
        password: new FormControl(''),
-      // confirm: new FormControl(''),
+       user_type: new FormControl(''),
        checked: new FormControl(''),
       // tiktok: new FormControl(''),
      //  insta: new FormControl(''),
@@ -30,8 +30,8 @@ export class SigninComponent implements OnInit {
   onSubmit() {
     // TODO: Use EventEmitter with form value
       // this.http.post(this.loginservice.apiUrl,data)
-    console.log(this.influencer.value);
-    const data = this.influencer.value
+    console.log(this.signin.value);
+    const data = this.signin.value
     this.loginservice.login(data)
     .subscribe(
       (response) => {                           
