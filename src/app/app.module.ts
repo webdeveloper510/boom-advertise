@@ -12,6 +12,8 @@ import { PromoterSignUpComponent } from './promoter-sign-up/promoter-sign-up.com
 import { InfluencerSignupComponent } from './influencer-signup/influencer-signup.component';
 import { SigninComponent } from './signin/signin.component';
 
+import { WorkersRegisterComponent } from './workers-register/workers-register.component';
+
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { SigninComponent } from './signin/signin.component';
     FooterComponent,
     PromoterSignUpComponent,
     InfluencerSignupComponent,
-    SigninComponent
+    SigninComponent,
+    WorkersRegisterComponent
   ],
   imports: [
     BrowserModule,

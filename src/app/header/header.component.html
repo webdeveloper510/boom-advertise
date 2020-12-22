@@ -9,7 +9,7 @@
         <li><img src="./assets/images/logo.png"/></li>
         <li>Contact Us </li>
         <li  onclick="document.getElementById('id03').style.display='block'">LogIn</li>
-        <li>SignUp</li>
+        <li  onclick="document.getElementById('id04').style.display='block'" >Register</li>
     </ul>
 
 </div>
@@ -24,4 +24,16 @@
           </div>
         </div>
       </div>
+
+      <div class="w3-container">
+        <div id="id04" class="w3-modal">
+                <div class="w3-modal-content">
+             <div class="w3-container">
+                    <span onclick="document.getElementById('id04').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                <app-workers-register></app-workers-register>
+             </div>
+           
+                </div>
+              </div>
+            </div>
 </div>
