@@ -50,7 +50,7 @@ export class SigninComponent implements OnInit {
     .subscribe(
       (response) => {                           
         console.log(response)
-        if(response.status == 'success'){
+        if(response == 'success'){
             this.success_div = true;
             this.error_div = false;
            this.router.navigate(['/influencer-account']);
