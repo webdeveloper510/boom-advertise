@@ -5,6 +5,11 @@
     <div formGroupName="influencer_signup">
    <input type="email" formControlName="email" placeholder="Email" required>
   <input type="password" formControlName="password" placeholder="Password" required>
+  <select formControlName="user_type">
+      <option value="">Please select</option>
+      <option value="0">Influencer</option>
+      <option value="1">Promoter</option>
+  </select>
 <input type="checkbox" id="checked" formControlName="checked">
     <label for="horns" class="text_check">Remember Me</label><span class="forget">Forgot Password ?</span>
         <button class="influencer_btn" type="submit" [disabled]="!influencer.valid">Login</button>

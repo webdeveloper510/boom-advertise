@@ -7,6 +7,8 @@ import {HttpClient} from '@angular/common/http';
 export class LoginService {
 
   apiUrl : string = "http://localhost:3000";
+  user_id : any ;
+  is_logged_in : boolean  = false;
   constructor(private http : HttpClient) { }
 
   // httpOptions = {
