@@ -155,3 +155,18 @@ select {
 select:focus {
     outline: unset;
 }
+button.cupon {
+    width: 34% !important;
+    /* border-radius: unset !important; */
+    padding: 3px !important;
+    font-size: 23px !important;
+    border-radius: 7px !important;
+    box-shadow: unset !important;
+    background: #000 !important;
+    margin-top: 0 !important;
+    color: #fff !important;
+}
+input.coupon {
+    width: 65% !important;
+    float: left;
+}

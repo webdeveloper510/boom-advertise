@@ -1,21 +1,16 @@
 <div class="promoter_signup">
     <h2>SignIn</h2>
     <p>Welcome Back !</p>
-<form [formGroup]="influencer" (ngSubmit)="onSubmit()"> 
-    <div formGroupName="influencer_signup">
-   <input type="email" formControlName="email" placeholder="Email" required>
-  <input type="password" formControlName="password" placeholder="Password" required>
-  <select formControlName="user_type"  placeholder="Please Select">
-      <option value="">Please select</option>
-      <option value="0">Influencer</option>
-      <option value="1">Promoter</option>
-  </select>
+<form [formGroup]="worker_register" (ngSubmit)="onSubmit()"> 
+    <div formGroupName="worker_register">
+   <input type="text" formControlName="name" placeholder="Name" required>
+  <input type="email" formControlName="email" placeholder="Email" required>
+<input class="coupon" type="text" formControlName="coupon" placeholder="Enter Coupon" required>
+<button type="submit" class="cupon" (ngSubmit)="onApply()">Apply</button>
 <input type="checkbox" id="checked" formControlName="checked">
-    <label for="horns" class="text_check">Remember Me</label><span class="forget">Forgot Password ?</span>
-        <button class="influencer_btn" type="submit" [disabled]="!influencer.valid">Login</button>
-<p class="center_text">* We will not provide your information to any third party and will never sell it.
-</p>
-<p class="have_account">Don’t have an account ? <b><u>SIGNUP</u></b></p>
+    <label for="horns" class="text_check">Remember Me</label>
+        <button class="influencer_btn" type="submit" [disabled]="!worker_register.valid">Register</button>
+
       </div>
     </form>
 </div>
