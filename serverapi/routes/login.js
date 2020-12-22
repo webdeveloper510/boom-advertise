@@ -19,20 +19,20 @@ var passwordHash = require('password-hash');
 
 
 router.post('/', function(req, res) {
-   console.log(req.body.influencer_signup.email)
-
-    if(!passwordHash.isHashed(req.body.password)){
-      var hashedPassword = passwordHash.generate(req.body.influencer_signup.password);
+   console.log(req.body.signin.user_type)
+return false
+    if(!passwordHash.isHashed(req.body.signin.password)){
+      var hashedPassword = passwordHash.generate(req.body.signin.password);
       //console.log(hashedPassword)
       promoters.promoters
-        .find({ $or : [{name:req.body.influencer_signup.email},{'email':req.body.influencer_signup.email}]},function (err, promoters) {
+        .find({ $or : [{name:req.body.signin.email},{'email':req.body.signin.email}]},function (err, promoters) {
         if (err) {
             res.json({status:"failure",statusCode:100,data:err});
         }else if(promoters.length==0){
           res.json({status:"failure",statusCode:100,data:"Invalid Credentials!!!"});
         }
           else{
-            if(passwordHash.verify(req.body.influencer_signup.password, promoters[0].password)){
+            if(passwordHash.verify(req.body.signin.password, promoters[0].password)){
               console.log(promoters)
               res.json({status:"success",statusCode:200,data:promoters});
             }else{
@@ -45,7 +45,7 @@ router.post('/', function(req, res) {
     }else{
       
     promoters.promoters
-    .find({ $or : [{name:req.body.influencer_signup.email},{'email':req.body.influencer_signup.email}]},function (err, promoters) {
+    .find({ $or : [{name:req.body.signin.email},{'email':req.body.signin.email}]},function (err, promoters) {
       
         if (err) {
             res.json({status:"failure",statusCode:100,data:err});
@@ -53,7 +53,7 @@ router.post('/', function(req, res) {
           res.json({status:"failure",statusCode:100,data:"Invalid Credentials!!!"});
           }
           else{
-            if(passwordHash.verify(req.body.influencer_signup.password, promoters[0].password)){
+            if(passwordHash.verify(req.body.signin.password, promoters[0].password)){
               console.log(promoters)
               res.json({status:"success",statusCode:200,data:promoters});
             }

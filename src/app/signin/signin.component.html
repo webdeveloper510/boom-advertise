@@ -1,8 +1,8 @@
 <div class="promoter_signup">
     <h2>SignIn</h2>
     <p>Welcome Back !</p>
-<form [formGroup]="influencer" (ngSubmit)="onSubmit()"> 
-    <div formGroupName="influencer_signup">
+<form [formGroup]="signin" (ngSubmit)="onSubmit()"> 
+    <div formGroupName="signin">
    <input type="email" formControlName="email" placeholder="Email" required>
   <input type="password" formControlName="password" placeholder="Password" required>
   <select formControlName="user_type">
