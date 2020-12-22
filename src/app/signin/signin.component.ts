@@ -36,8 +36,8 @@ export class SigninComponent implements OnInit {
     // TODO: Use EventEmitter with form value
       // this.http.post(this.loginservice.apiUrl,data)
       
-      this.router.navigate(['/']);
-      return false;
+      //this.router.navigate(['/']);
+      
     console.log(this.signin.value);
     const data = this.signin.value
     this.loginservice.login(data)

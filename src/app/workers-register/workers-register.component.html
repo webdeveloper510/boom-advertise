@@ -1,15 +1,15 @@
 <div class="promoter_signup">
     <h2>SignIn</h2>
     <p>Welcome Back !</p>
-<form [formGroup]="worker_register" (ngSubmit)="onSubmit()"> 
-    <div formGroupName="worker_register">
+<form [formGroup]="worker_signup" (ngSubmit)="onSubmit()"> 
+    <div formGroupName="worker_signup">
    <input type="text" formControlName="name" placeholder="Name" required>
   <input type="email" formControlName="email" placeholder="Email" required>
 <input class="coupon" type="text" formControlName="coupon" placeholder="Enter Coupon" required>
 <button type="submit" class="cupon" (ngSubmit)="onApply()">Apply</button>
 <input type="checkbox" id="checked" formControlName="checked">
     <label for="horns" class="text_check">Remember Me</label>
-        <button class="influencer_btn" type="submit" [disabled]="!worker_register.valid">Register</button>
+        <button class="influencer_btn" type="submit" [disabled]="!worker_signup.valid">Register</button>
 
       </div>
     </form>

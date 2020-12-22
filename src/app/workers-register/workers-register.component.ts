@@ -10,8 +10,8 @@ import { WorkerRegisterService } from '../services/worker-register.service';
   styleUrls: ['./workers-register.component.css']
 })
 export class WorkersRegisterComponent implements OnInit {
-  worker_register = new FormGroup({
-    worker_register: new FormGroup({
+  worker_signup = new FormGroup({
+    worker_signup: new FormGroup({
       name: new FormControl(''),
       email: new FormControl(''),
       coupon: new FormControl(''),
@@ -25,8 +25,9 @@ export class WorkersRegisterComponent implements OnInit {
    onSubmit() {
     // TODO: Use EventEmitter with form value
       // this.http.post(this.loginservice.apiUrl,data)
-    console.log(this.worker_register.value);
-    const data = this.worker_register.value
+    console.log(this.worker_signup.value);
+    const data = this.worker_signup.value
+    this.workerregister.register(data)
     .subscribe(
       (response) => {                           
         console.log(response)
