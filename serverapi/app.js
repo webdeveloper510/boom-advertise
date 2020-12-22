@@ -5,6 +5,7 @@ var path = require('path');
 var cors = require('cors');
 
 var promoters = require('./routes/promoters');
+var workers = require('./routes/workers');
 var influencers = require('./routes/influencers');
 var login = require('./routes/login');
 
@@ -29,6 +30,7 @@ app.use(bodyParser.json({limit:'50mb',extended:true}));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 
+app.use('/workers', workers);
 app.use('/promoters', promoters);
 app.use('/influencers', influencers);
 app.use('/login', login);
