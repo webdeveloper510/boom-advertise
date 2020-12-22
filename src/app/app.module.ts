@@ -14,6 +14,7 @@ import { SigninComponent } from './signin/signin.component';
 
 import { WorkersRegisterComponent } from './workers-register/workers-register.component';
 import { MyAccountComponent } from './my-account/my-account.component';
+import { InfluencerAccountComponent } from './influencer-account/influencer-account.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { MyAccountComponent } from './my-account/my-account.component';
     InfluencerSignupComponent,
     SigninComponent,
     WorkersRegisterComponent,
-    MyAccountComponent
+    MyAccountComponent,
+    InfluencerAccountComponent
   ],
   imports: [
     BrowserModule,

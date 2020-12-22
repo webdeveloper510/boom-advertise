@@ -27,6 +27,7 @@ export class WorkersRegisterComponent implements OnInit {
       // this.http.post(this.loginservice.apiUrl,data)
     console.log(this.worker_register.value);
     const data = this.worker_register.value
+    this.workerregister.register(data)
     .subscribe(
       (response) => {                           
         console.log(response)
