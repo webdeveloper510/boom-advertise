@@ -1,5 +1,5 @@
 <div class="promoter_signup">
-    <h2>SignIn</h2>
+    <h2>Add Worker</h2>
     <p>Welcome Back !</p>
 <form [formGroup]="worker_signup" (ngSubmit)="onSubmit()"> 
     <div formGroupName="worker_signup">
@@ -7,9 +7,7 @@
   <input type="email" formControlName="email" placeholder="Email" required>
   <input type="password" formControlName="password" placeholder="Password" required>
 <input class="coupon" type="text" formControlName="coupon" placeholder="Enter Coupon" required>
-<input type="checkbox" id="checked" formControlName="checked">
-    <label for="horns" class="text_check">Remember Me</label>
-        <button class="influencer_btn" type="submit" [disabled]="!worker_signup.valid">Register</button>
+        <button class="influencer_btn" type="submit" [disabled]="!worker_signup.valid">Add</button>
 
       </div>
     </form>
