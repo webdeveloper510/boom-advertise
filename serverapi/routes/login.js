@@ -20,7 +20,7 @@ var passwordHash = require('password-hash');
 
 router.post('/', function(req, res) {
    console.log(req.body.signin.user_type)
-return false
+   return false
     if(!passwordHash.isHashed(req.body.signin.password)){
       var hashedPassword = passwordHash.generate(req.body.signin.password);
       //console.log(hashedPassword)
