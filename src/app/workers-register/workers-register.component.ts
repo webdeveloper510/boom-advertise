@@ -14,6 +14,7 @@ export class WorkersRegisterComponent implements OnInit {
     worker_signup: new FormGroup({
       name: new FormControl(''),
       email: new FormControl(''),
+      password: new FormControl(''),
       coupon: new FormControl(''),
       checked: new FormControl('')
      })
