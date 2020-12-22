@@ -124,5 +124,8 @@
       }
     }
   },
-  "defaultProject": "boom-advertise"
+  "defaultProject": "boom-advertise",
+  "cli": {
+    "analytics": false
+  }
 }
