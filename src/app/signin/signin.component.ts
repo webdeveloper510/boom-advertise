@@ -42,9 +42,9 @@ export class SigninComponent implements OnInit {
   onSubmit() {
     // TODO: Use EventEmitter with form value
       // this.http.post(this.loginservice.apiUrl,data)
-  
-      this.router.navigate(['/']);
-      return false;
+      
+      this.router.navigate(['home']);
+      
     console.log(this.signin.value);
     const data = this.signin.value
     this.loginservice.login(data)
