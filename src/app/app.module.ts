@@ -13,6 +13,7 @@ import { InfluencerSignupComponent } from './influencer-signup/influencer-signup
 import { SigninComponent } from './signin/signin.component';
 
 import { WorkersRegisterComponent } from './workers-register/workers-register.component';
+import { MyAccountComponent } from './my-account/my-account.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { WorkersRegisterComponent } from './workers-register/workers-register.co
     PromoterSignUpComponent,
     InfluencerSignupComponent,
     SigninComponent,
-    WorkersRegisterComponent
+    WorkersRegisterComponent,
+    MyAccountComponent
   ],
   imports: [
     BrowserModule,
