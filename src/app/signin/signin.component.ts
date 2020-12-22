@@ -3,11 +3,14 @@ import { FormControl, FormGroup} from '@angular/forms';
 import { LoginService } from '../services/login.service';
 import {HttpClient} from '@angular/common/http';
 import { Router } from '@angular/router';
+
+
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.css']
 })
+
 export class SigninComponent implements OnInit {
 
   success_message : string = "Login successfully...";
@@ -27,10 +30,13 @@ export class SigninComponent implements OnInit {
      //  twitter: new FormControl('')
      })
    });
+   
   constructor(private loginservice:LoginService,private http : HttpClient,private router: Router,) { }
 
   ngOnInit(): void {
+  
   }
+  
 
   onSubmit() {
     // TODO: Use EventEmitter with form value
