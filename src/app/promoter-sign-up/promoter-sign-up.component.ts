@@ -33,10 +33,9 @@ export class PromoterSignUpComponent implements OnInit {
     .subscribe(
       (response) => {                           
         console.log(response)
-  
       },
       (error) => {                            
-        console.error(error)
+     
       }
     );
   }

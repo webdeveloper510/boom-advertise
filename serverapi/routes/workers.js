@@ -11,7 +11,7 @@ var passwordHash = require('password-hash');
 
 router.post('/register', function(req,res) {
 console.log(req.body.worker_signup);
-      var workerCreate =  new worker.promoters(req.body.worker_signup);
+      var workerCreate =  new worker.workers(req.body.worker_signup);
 
       var datetime = new Date();
       let pass = passwordHash.generate(req.body.worker_signup.password)

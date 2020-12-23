@@ -4,6 +4,7 @@ var router = express.Router();
 //const nodemailer = require('nodemailer');
 var mongoose = require('mongoose');
 const promoters = require('../models/promoters');
+const influencers = require('../models/influencers');
 var passwordHash = require('password-hash');
 //const user = require('../models/users');
 //const email = require('../config/email');
@@ -20,7 +21,30 @@ var passwordHash = require('password-hash');
 
 router.post('/', function(req, res) {
    console.log(req.body.signin.user_type)
-return false
+  if(req.body.signin.user_type === 0){
+
+    if(!passwordHash.isHashed(req.body.signin.password)){
+      var hashedPassword = passwordHash.generate(req.body.signin.password);
+      //console.log(hashedPassword)
+      influencers.influencers
+        .find({ $or : [{name:req.body.signin.email},{'email':req.body.signin.email}]},function (err, influencers) {
+        if (err) {
+            res.json({status:"failure",statusCode:100,data:err});
+        }else if(influencers.length==0){
+          res.json({status:"failure",statusCode:100,data:"Invalid Credentials!!!"});
+        }
+          else{
+            if(passwordHash.verify(req.body.signin.password, influencers[0].password)){
+              console.log(influencers)
+              res.json({status:"success",statusCode:200,data:influencers});
+            }else{
+              res.json({status:"failure",statusCode:100,data:"Invalid Credentials!!!"});
+            }
+          }
+      });
+    }
+
+  }else{
     if(!passwordHash.isHashed(req.body.signin.password)){
       var hashedPassword = passwordHash.generate(req.body.signin.password);
       //console.log(hashedPassword)
@@ -39,27 +63,26 @@ return false
               res.json({status:"failure",statusCode:100,data:"Invalid Credentials!!!"});
             }
           }
-        
-      
-      });
-    }else{
-      
-    promoters.promoters
-    .find({ $or : [{name:req.body.signin.email},{'email':req.body.signin.email}]},function (err, promoters) {
-      
-        if (err) {
-            res.json({status:"failure",statusCode:100,data:err});
-        }else if(promoters.length==0){
-          res.json({status:"failure",statusCode:100,data:"Invalid Credentials!!!"});
-          }
-          else{
-            if(passwordHash.verify(req.body.signin.password, promoters[0].password)){
-              console.log(promoters)
-              res.json({status:"success",statusCode:200,data:promoters});
-            }
-          }
       });
     }
+  }
+    // else{
+    // promoters.promoters
+    // .find({ $or : [{name:req.body.signin.email},{'email':req.body.signin.email}]},function (err, promoters) {
+      
+    //     if (err) {
+    //         res.json({status:"failure",statusCode:100,data:err});
+    //     }else if(promoters.length==0){
+    //       res.json({status:"failure",statusCode:100,data:"Invalid Credentials!!!"});
+    //       }
+    //       else{
+    //         if(passwordHash.verify(req.body.signin.password, promoters[0].password)){
+    //           console.log(promoters)
+    //           res.json({status:"success",statusCode:200,data:promoters});
+    //         }
+    //       }
+    //   });
+    // } 
   });
 
   module.exports = router;

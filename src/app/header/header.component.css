@@ -11,6 +11,9 @@
 .header ul :nth-child(1) {
     flex: 0  65%;
 }
+.header ul li:focus {
+    outline: unset;
+}
 .outer_all {
     background: #fff952;
 }

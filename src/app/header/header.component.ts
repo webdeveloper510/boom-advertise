@@ -41,16 +41,12 @@ export class HeaderComponent implements OnInit {
   onSubmit() {
 
     console.log("vijay here");
-    console.log(this.signin.value);
     
-    // TODO: Use EventEmitter with form value
-      // this.http.post(this.loginservice.apiUrl,data)
-      
-      // this.router.navigate(['/']);
-      // return false;
+    
     console.log(this.signin.value);
-    const data = this.signin.value;
-    this.loginservice.login(data)
+    console.log(this.loginservice.apiUrl+"/login");
+    let data = this.signin.value;
+    this.http.post(this.loginservice.apiUrl+"/login",data)
     .subscribe(
       (response) => {                           
         console.log(response)
@@ -60,6 +56,8 @@ export class HeaderComponent implements OnInit {
         console.error(error)
       }
     );
+
+    console.log("vijay");
   }
 
 }
