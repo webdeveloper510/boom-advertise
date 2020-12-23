@@ -41,23 +41,33 @@ export class HeaderComponent implements OnInit {
   onSubmit() {
 
     console.log("vijay here");
-    
-    
+   
+  
+    // TODO: Use EventEmitter with form value
+      // this.http.post(this.loginservice.apiUrl,data)
+      
+      // this.router.navigate(['/']);
+      // return false;
     console.log(this.signin.value);
-    console.log(this.loginservice.apiUrl+"/login");
-    let data = this.signin.value;
-    this.http.post(this.loginservice.apiUrl+"/login",data)
+    let data = this.signin.value
+    this.loginservice.login(data)
     .subscribe(
-      (response) => {                           
-        console.log(response)
+      (response:any) => {                           
+        if(response['status'] == 'success'){
+          this.success_div = true;
+          this.error_div = false;
+          this.login_form = false;
+          this.router.navigate(['/influencer-account']);
+        }else{
+          this.success_div = false;
+          this.error_div = true;
+        }
   
       },
-      (error) => {                            
+      (error:any) => {                            
         console.error(error)
       }
     );
-
-    console.log("vijay");
   }
 
 }
