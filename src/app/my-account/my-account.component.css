@@ -1,0 +1,266 @@
+.heading_sec1:before {
+    content: "";
+    background: #fff952;
+    position: absolute;
+    width: 19%;
+    height: 18px;
+    top: 38px;
+    margin: 0 auto;
+    right: 0;
+    left: 0;
+}
+.heading_sec1 {
+    position: relative;
+}
+.heading_sec1 h1 {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 60px;
+    color: #000000;
+    text-align: center;
+    position: relative;
+}
+.box_1.border-size {
+    width: 46%;
+    border: 1px solid #787878;
+    box-sizing: border-box;
+    border-radius: 7px;
+    margin: 0 auto;
+    padding: 30px;
+    border-radius: 7px;
+    display: inline-block;
+    margin-left: 12px;
+    margin-bottom: 35px;
+}
+.box_2.border-size {
+    width: 46%;
+    border: 1px solid #787878;
+    box-sizing: border-box;
+    border-radius: 7px;
+    margin: 0 auto;
+    padding: 54px;
+    border-radius: 7px;
+    margin-left: 12px;
+    margin-bottom: 35px;
+    float: right;
+}
+.image_circle {
+    width: 175px;
+    border-radius: 50%;
+    height: 175px;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+}
+
+.image_circle img {
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+}
+
+p.name {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 35px;
+    line-height: 52px;
+/* identical to box height */
+    color: #000000;
+    text-align: center;
+}
+
+span.tag {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 25px;
+    line-height: 37px;
+/* identical to box height */
+    color: #000000;
+    text-align: center;
+    display: block;
+}
+
+p.singer {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 25px;
+    line-height: 37px;
+/* identical to box height */
+    color: #787878;
+    text-align: center;
+}
+
+.small_elements {
+    display: flex;
+    justify-content: center;
+}
+
+.element_1 {
+    flex: 0 20%;
+}
+
+.element_1 p {
+    font-family: Source Sans Pro;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 25px;
+    line-height: 31px;
+    color: #000000;
+}
+
+.element_1 span {
+    font-family: Source Sans Pro;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 22px;
+    line-height: 28px;
+/* identical to box height */
+    color: #787878;
+}
+
+.element_2 p {
+    font-family: Source Sans Pro;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 25px;
+    line-height: 31px;
+    color: #000000;
+}
+.element_2 span {
+    font-family: Source Sans Pro;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 22px;
+    line-height: 28px;
+/* identical to box height */
+    color: #787878;
+}
+
+button.edit-profile {
+    background: #FFF953;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 7px;
+    border: unset;
+    padding: 10px;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 22px;
+    margin: 0 auto;
+    color: #000000;
+    display: block;
+    margin-top: 16px;
+}
+.first_sec {
+    margin-top: 34px;
+    width: 98%;
+} 
+
+h2.price {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 27px;
+    line-height: 40px;
+    color: #000000;
+    text-align: center;
+    margin-bottom: 45px !important;
+}
+.image_tiktok {
+    width: 132px;
+    height: 132px;
+    margin: 0 auto;
+}
+
+.image_tiktok img {
+    width: 132px;
+    height: 132px;
+    margin: 0 auto;
+}
+.influencer_tiktok {
+    margin-top: 65px;
+}
+.nav-item:nth-child(1)::before{
+    content: url("/assets/images/tiktok icon 1.png");
+    position: absolute;
+    right: 0;
+    left: 45px;
+    z-index: 9;
+    top: 9px;
+}
+h2.text_name {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 27px;
+    color: #000000;
+}
+
+p.discription {
+    font-family: Source Sans Pro;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 19px;
+    color: #787878;
+}
+
+.counts span {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 22px;
+}
+
+.counts {
+    display: flex;
+}
+
+.outer_most {
+   width: 100%;
+   margin-bottom: 20px;
+}
+
+
+
+.section_1 {
+    width: 23%;
+    float: left;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+.likes {
+    flex: 0 70%;
+}
+
+.counts img {
+    margin-right: 5px;
+}
+
+.click_add {
+    display: flex;
+    margin-bottom: 50px;
+}
+
+.Buy {
+    margin-right: 10px;
+}
+.image_start img {
+    height: 274px;
+    object-fit: contain;
+}
+.image_start img {
+    width: 100%;
+}
+
+.section_1:last-child {
+    margin-right: 0 !important;
+}
