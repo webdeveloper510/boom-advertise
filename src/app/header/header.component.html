@@ -1,65 +1,76 @@
 
   
-  <div class="container-fluid outer_all">
-<div class="header">
-  <ul>
-        <li [routerLink]="['/']">Home</li>
-        <li>About</li>
-        <li [routerLink]="['/influencer-account']">Influencers </li>
-        <li  [routerLink]="['/']"><img src="./assets/images/logo.png"/></li>
-        <li>Contact Us </li>
-        <li  (click)="openLoginForm()">LogIn</li>
-        <li  onclick="document.getElementById('id04').style.display='block'" >Register</li>
-    </ul>
+<div class="container-fluid outer_all">
+  <div class="header">
+    <ul>
+          <li [routerLink]="['/']">Home</li>
+          <li>About</li>
+          <li [routerLink]="['/influencer-account']">Influencers </li>
+          <li  [routerLink]="['/']"><img src="./assets/images/logo.png"/></li>
+          <li>Contact Us </li>
+          <li  (click)="openLoginForm()">LogIn</li>
+          <li  (click)="openSignupForm()" >Register</li>
+      </ul>
 
-</div>
-<div class="w3-container">
-  <div id="id03" class="w3-modal" [style.display]="login_form ? 'block' : 'none'">
-          <div class="w3-modal-content">
-       <div class="w3-container">
-              <span (click)="closeLoginForm()" class="w3-button w3-display-topright">&times;</span>
-              <div class="promoter_signup">
-                <h2>SignIn</h2>
-                <p>Welcome Back !</p>
+  </div>
+  <div class="w3-container">
+    <div id="id03" class="w3-modal" [style.display]="login_form ? 'block' : 'none'">
+      <div class="w3-modal-content">
+        <div class="w3-container">
+          <span (click)="closeLoginForm()" class="w3-button w3-display-topright">&times;</span>
+          <div class="promoter_signup">
+            <h2>SignIn</h2>
+            <p>Welcome Back !</p>
             <form [formGroup]="signin" (ngSubmit)="onSubmit()"> 
-                <div formGroupName="signin">
-               <input type="email" formControlName="email" placeholder="Email" required>
-              <input type="password" formControlName="password" placeholder="Password" required>
-              <select formControlName="user_type"  placeholder="Please Select">
+              <div formGroupName="signin">
+                <input type="email" formControlName="email" placeholder="Email" required>
+                <input type="password" formControlName="password" placeholder="Password" required>
+                <select formControlName="user_type"  placeholder="Please Select">
                   <option value="">Please select</option>
                   <option value="0">Influencer</option>
                   <option value="1">Promoter</option>
-              </select>
-            <input type="checkbox" id="checked" formControlName="checked">
+                </select>
+                <input type="checkbox" id="checked" formControlName="checked">
                 <label for="horns" class="text_check">Remember Me</label><span class="forget">Forgot Password ?</span>
-                    <button class="influencer_btn" type="submit" [disabled]="!signin.valid">Login</button>
-            
-                    <p class="centet_text" *ngIf="success_div" style="color: green;font-size: 25px; font-style: italic; font-weight: 600;">{{success_message}}</p>
-                    <p class="centet_text" *ngIf="error_div" style="color: red;font-size: 25px; font-style: italic; font-weight: 600;">{{error_message}}</p>
-            <p class="center_text">* We will not provide your information to any third party and will never sell it.
-            </p>
-            <p class="have_account">Don’t have an account ? <b><u>SIGNUP</u></b></p>
-                  </div>
-                </form>
-            </div>
-            
-            
-            
-       </div>
-     
-          </div>
+                <button class="influencer_btn" type="submit" [disabled]="!signin.valid">Login</button>
+          
+                <p class="centet_text" *ngIf="success_div" style="color: green;font-size: 25px; font-style: italic; font-weight: 600;">{{success_message}}</p>
+                <p class="centet_text" *ngIf="error_div" style="color: red;font-size: 25px; font-style: italic; font-weight: 600;">{{error_message}}</p>
+                <p class="center_text">* We will not provide your information to any third party and will never sell it.
+                </p>
+                <p class="have_account">Don’t have an account ? <b><u>SIGNUP</u></b></p>
+              </div>
+            </form>
+          </div>     
         </div>
       </div>
+    </div>
+  </div>
 
-      <div class="w3-container">
-        <div id="id04" class="w3-modal">
-                <div class="w3-modal-content">
-             <div class="w3-container">
-                    <span onclick="document.getElementById('id04').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-                <app-workers-register></app-workers-register>
-             </div>
-           
-                </div>
+  <div class="w3-container">
+    <div id="id04" class="w3-modal" [style.display]="signup_form ? 'block' : 'none'">
+      <div class="w3-modal-content">
+        <div class="w3-container">
+          <span (click)="closeSignupForm()" class="w3-button w3-display-topright">&times;</span>
+          <div class="promoter_signup">
+            <h2>Add Worker</h2>
+            <p>Welcome Back !</p>
+            <form [formGroup]="worker_signup" (ngSubmit)="workerSignup()"> 
+              <div formGroupName="worker_signup">
+                <input type="text" formControlName="name" placeholder="Name" required>
+                <input type="email" formControlName="email" placeholder="Email" required>
+                <input type="password" formControlName="password" placeholder="Password" required>
+                <!--input class="coupon" type="text" formControlName="coupon" placeholder="Enter Coupon" required--->
+                <button class="influencer_btn" type="submit" [disabled]="!worker_signup.valid">Add</button>
+                <p class="centet_text" *ngIf="signup_success_div" style="color: green;font-size: 25px; font-style: italic; font-weight: 600;">{{signup_success_message}}</p>
+                <p class="centet_text" *ngIf="signup_error_div" style="color: red;font-size: 25px; font-style: italic; font-weight: 600;">{{signup_error_message}}</p>
+                
               </div>
-            </div>
+            </form>
+        </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
 </div>
