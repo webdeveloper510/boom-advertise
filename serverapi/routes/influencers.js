@@ -46,4 +46,7 @@ console.log(req.body.influencer_signup);
       
     });
 
+    router.get('/test', function(req,res) {
+      res.json("it workedvijay");
+    });
     module.exports = router;

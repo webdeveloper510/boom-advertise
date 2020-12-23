@@ -31,6 +31,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 
 app.use('/workers', workers);
+app.use('/test', influencers);
 app.use('/promoters', promoters);
 app.use('/influencers', influencers);
 app.use('/login', login);
