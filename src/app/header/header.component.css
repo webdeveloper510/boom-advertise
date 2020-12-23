@@ -222,3 +222,172 @@ select {
 select:focus {
     outline: unset;
 }
+
+.promoter_signup {
+    width: 425px;
+    margin: 0 auto;
+   padding-bottom: 18px;
+}
+
+.promoter_signup input {
+    width: 100%;
+    margin-bottom: 20px;
+    height: 52px;
+    border-radius: 7px;
+    border: 1px solid #787878;
+    padding-left: 10px;
+}
+
+.promoter_signup input::placeholder {
+    padding-left: 12px;
+}
+
+.promoter_signup h2 {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 60px;
+/* identical to box height */
+    color: #000000;
+    text-align: center;
+}
+
+.promoter_signup p {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 36px;
+/* identical to box height */
+    color: #000000;
+    text-align: center;
+}
+
+.promoter_signup button {
+    background: #FFF953;
+    box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 22px;
+    width: 275px;
+    margin: 0 auto;
+    display: block;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 30px;
+    line-height: 45px;
+    border: unset;
+    color: #000000;
+    padding: 11px;
+    margin-top: 26px;
+    margin-bottom: 26px;
+}
+input#checked {
+    float: left;
+    line-height: 0;
+    width: 28px;
+    height: 28px;
+    border: 1px solid #787878;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+label.text_check {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    color: #787878;
+    margin-top: 5px;
+    margin-left: 7px;
+}
+label.text_check b {
+    color: #000;
+    font-weight: 600;
+}
+p.have_account {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    color: #787878 !important;
+}
+
+p.have_account b {
+    color: #000;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+.promoter_signup input:focus {
+    outline: unset;
+}
+.influencer_media ul li {
+    display: inline-block;
+    width: 24.2%;
+}
+
+.influencer_media ul li img {
+    width: 49px;
+    height: 49px;
+}
+
+.influencer_media .checkboxes {
+    width: 27px !important;
+    float: left;
+    margin-right: 6px !important;
+    top: 0;
+    margin-top: -14px;
+    margin-bottom: 13px !important;
+}
+
+.influencer_media ul {
+    padding-left: 19px;
+}
+button.influencer_btn:focus {
+    outline: unset;
+}
+p.center_text {
+    font-family: Poppins !important;
+    font-style: normal !important;
+    font-weight: normal !important;
+    font-size: 16px !important;
+    line-height: 24px !important;
+    text-align: center !important;
+    color: #C4C4C4 !important;
+}
+span.forget {
+    display: inline-block;
+    text-align: right;
+    width: 64%;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    text-decoration-line: underline;
+    color: #000000 !important;
+}
+select {
+    clear: both;
+    width: 100%;
+    width: 100%;
+    margin-bottom: 20px;
+    height: 52px;
+    border-radius: 7px;
+    border: 1px solid #787878;
+    padding-left: 10px;
+}
+select:focus {
+    outline: unset;
+}
+button.cupon {
+    width: 34% !important;
+    /* border-radius: unset !important; */
+    padding: 3px !important;
+    font-size: 23px !important;
+    border-radius: 7px !important;
+    box-shadow: unset !important;
+    background: #000 !important;
+    margin-top: 0 !important;
+    color: #fff !important;
+}

@@ -121,3 +121,20 @@ p.have_account b {
 button.influencer_btn:focus {
     outline: unset;
 }
+.influencer_media ul p {
+    font-size: 15px !important;
+    display: block !important;
+    float: left;
+    width: 100%;
+    color: #000 !important;
+    font-weight: 500!important;
+    margin-bottom: 0;
+}
+
+.influencer_media input {
+    width: 77px !important;
+    margin: 0 auto !important;
+    text-align: center;
+    display: block;
+    height: 41px !important;
+}
