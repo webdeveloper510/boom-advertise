@@ -8,17 +8,43 @@
         <li>Influencers </li>
         <li><img src="./assets/images/logo.png"/></li>
         <li>Contact Us </li>
-        <li  onclick="document.getElementById('id03').style.display='block'">LogIn</li>
+        <li  (click)="openLoginForm()">LogIn</li>
         <li  onclick="document.getElementById('id04').style.display='block'" >Register</li>
     </ul>
 
 </div>
 <div class="w3-container">
-  <div id="id03" class="w3-modal">
+  <div id="id03" class="w3-modal" [style.display]="login_form ? 'block' : 'none'">
           <div class="w3-modal-content">
        <div class="w3-container">
-              <span onclick="document.getElementById('id03').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-          <app-signin></app-signin>
+              <span (click)="closeLoginForm()" class="w3-button w3-display-topright">&times;</span>
+              <div class="promoter_signup">
+                <h2>SignIn</h2>
+                <p>Welcome Back !</p>
+            <form [formGroup]="signin" (ngSubmit)="onSubmit()"> 
+                <div formGroupName="signin">
+               <input type="email" formControlName="email" placeholder="Email" required>
+              <input type="password" formControlName="password" placeholder="Password" required>
+              <select formControlName="user_type"  placeholder="Please Select">
+                  <option value="">Please select</option>
+                  <option value="0">Influencer</option>
+                  <option value="1">Promoter</option>
+              </select>
+            <input type="checkbox" id="checked" formControlName="checked">
+                <label for="horns" class="text_check">Remember Me</label><span class="forget">Forgot Password ?</span>
+                    <button class="influencer_btn" type="submit" [disabled]="!signin.valid">Login</button>
+            
+                    <p class="centet_text" *ngIf="success_div" style="color: green;font-size: 25px; font-style: italic; font-weight: 600;">{{success_message}}</p>
+                    <p class="centet_text" *ngIf="error_div" style="color: red;font-size: 25px; font-style: italic; font-weight: 600;">{{error_message}}</p>
+            <p class="center_text">* We will not provide your information to any third party and will never sell it.
+            </p>
+            <p class="have_account">Don’t have an account ? <b><u>SIGNUP</u></b></p>
+                  </div>
+                </form>
+            </div>
+            
+            
+            
        </div>
      
           </div>
