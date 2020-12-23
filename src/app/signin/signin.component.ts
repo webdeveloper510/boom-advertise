@@ -14,9 +14,10 @@ import { Router } from '@angular/router';
 export class SigninComponent implements OnInit {
 
   success_message : string = "Login successfully...";
-  error_message : string = "Invalid credentials!";
+  error_message : string = "Invalid credentials!!!";
   success_div : boolean = false;
   error_div : boolean = false;
+
   signin = new FormGroup({
     signin: new FormGroup({
        //name_person: new FormControl(''),
@@ -48,9 +49,9 @@ export class SigninComponent implements OnInit {
     const data = this.signin.value
     this.loginservice.login(data)
     .subscribe(
-      (response) => {                           
+      (response:any) => {                           
         console.log(response)
-        if(response == 'success'){
+        if(response['status'] == 'success'){
             this.success_div = true;
             this.error_div = false;
            this.router.navigate(['/influencer-account']);
