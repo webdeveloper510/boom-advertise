@@ -15,6 +15,11 @@ import { SigninComponent } from './signin/signin.component';
 import { WorkersRegisterComponent } from './workers-register/workers-register.component';
 import { MyAccountComponent } from './my-account/my-account.component';
 import { InfluencerAccountComponent } from './influencer-account/influencer-account.component';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { PromoterAccountComponent } from './promoter-account/promoter-account.component';
 
 
 
@@ -29,12 +34,17 @@ import { InfluencerAccountComponent } from './influencer-account/influencer-acco
     SigninComponent,
     WorkersRegisterComponent,
     MyAccountComponent,
-    InfluencerAccountComponent
+    InfluencerAccountComponent,
+    PromoterAccountComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    ModalModule,
+    TooltipModule,
+    BsDropdownModule, 
+    TabsModule,
     HttpClientModule
 
   ],

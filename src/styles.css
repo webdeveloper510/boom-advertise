@@ -238,3 +238,86 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
 .w3-border-dark-grey,.w3-hover-border-dark-grey:hover,.w3-border-dark-gray,.w3-hover-border-dark-gray:hover{border-color:#616161!important}
 .w3-border-pale-red,.w3-hover-border-pale-red:hover{border-color:#ffe7e7!important}.w3-border-pale-green,.w3-hover-border-pale-green:hover{border-color:#e7ffe7!important}
 .w3-border-pale-yellow,.w3-hover-border-pale-yellow:hover{border-color:#ffffcc!important}.w3-border-pale-blue,.w3-hover-border-pale-blue:hover{border-color:#e7ffff!important}
+li.nav-item.active {
+    background: #FFF953 !important;
+    border: unset !important;
+    border-radius: 7px;
+}
+.tabs_set li.nav-item.active a {
+    background: #FFF953 !important;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    margin: 0 auto;
+    line-height: 27px;
+    color: #000000 !important;
+    border: unset !important;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 7px;
+    text-align: center;
+}
+
+.tabs_set li.nav-item span {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 27px;
+/* identical to box height */
+    color: #000000;
+    text-align: center;
+    display: block;
+}
+
+.tabs_set li.nav-item.active a:hover {
+    background: #FFF953;
+}
+li.nav-item {
+    border: 1px solid;
+    border-radius: 7px;
+    width:23%;
+    margin-right: 27px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.1);
+}
+
+li.nav-item:last-child {
+    margin-right: 0 !important;
+}
+
+li.active.nav-item {
+    border: unset;
+}
+
+ul.nav.nav-tabs {
+    border-bottom: unset !important;
+}
+.tabs_set {
+    width: 80%;
+    margin: 0 auto;
+}
+li.nav-item a:hover {
+    background: transparent !important;
+    border-color: unset !important;
+    border: unset;
+}
+
+li.nav-item:hover {
+    background: transparent !important;
+}
+li.nav-item a {
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+    line-height: 0;
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    margin: 0 auto;
+    line-height: 27px;
+    color: #000000 !important;
+    border: unset !important;
+    border-radius: 7px;
+    text-align: center;
+}
