@@ -23,14 +23,18 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // common variables start
+  is_login : boolean =  false;
+ // common variables end
+
   // Promotor variables start
   tiktok_fol : boolean  = false;
   twitter : boolean  = false;
   fb: boolean  = false;
   insta: boolean  = false;
   promotor_login_form : boolean  = false;
-  promotor_success_message : string = "Signup Successfully";
-  promotor_error_message : string = "Signup Failed";
+  promotor_success_message : string = "";
+  promotor_error_message : string = "";
   promotor_success_div : boolean = false;
   promotor_error_div : boolean = false;
   
@@ -40,8 +44,8 @@ export class HomeComponent implements OnInit {
   // influnncer variables start
   
   influnncer_login_form : boolean  = false;
-  influnncer_success_message : string = "Signup Successfully";
-  influnncer_error_message : string = "Signup Failed";
+  influnncer_success_message : string = "";
+  influnncer_error_message : string = "";
   influnncer_success_div : boolean = false;
   influnncer_error_div : boolean = false;
   
@@ -127,16 +131,19 @@ if(this.twitter == true){
     .subscribe(
       (response:any) => {                           
         if(response['status'] == 'success'){
+          this.promotor_success_message = response['msg'];
+          this.is_login = true;
           this.promotor_success_div = true;
           this.promotor_error_div = false;
           this.profileForm.reset();
           setTimeout (() => {
             this.promotor_success_div = false;
             this.promotor_login_form = false;
-            this.router.navigate(['/influencer-account']);
-          }, 2000)
+            this.router.navigate(['/']);
+          }, 3000)
           
         }else{
+          this.promotor_error_message = response['msg'];
           this.promotor_success_div = false;
           this.promotor_error_div = true;
         }
@@ -157,16 +164,19 @@ if(this.twitter == true){
     .subscribe(
       (response:any) => {                           
         if(response['status'] == 'success'){
+          this.influnncer_success_message = response['msg'];
+          this.is_login = true;
           this.influnncer_success_div = true;
           this.influnncer_error_div = false;
           this.influencer.reset();
           setTimeout (() => {
             this.influnncer_success_div = false;
             this.influnncer_login_form = false;
-            this.router.navigate(['/influencer-account']);
-          }, 2000)
+            this.router.navigate(['/']);
+          }, 3000)
           
         }else{
+          this.influnncer_error_message = response['msg'];
           this.influnncer_success_div = false;
           this.influnncer_error_div = true;
         }

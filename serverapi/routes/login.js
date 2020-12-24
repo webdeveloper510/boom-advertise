@@ -20,7 +20,7 @@ var passwordHash = require('password-hash');
 
 
 router.post('/', function(req, res) {
-   console.log(req.body.signin.user_type)
+   console.log(req.body.signin)
   if(req.body.signin.user_type === 0){
 
     if(!passwordHash.isHashed(req.body.signin.password)){
@@ -29,16 +29,18 @@ router.post('/', function(req, res) {
       influencers.influencers
         .find({ $or : [{name:req.body.signin.email},{'email':req.body.signin.email}]},function (err, influencers) {
         if (err) {
-            res.json({status:"failure",statusCode:100,data:err});
+            res.json({status:"failure",statusCode:600,msg:err});
         }else if(influencers.length==0){
-          res.json({status:"failure",statusCode:100,data:"Invalid Credentials!!!"});
+          console.log('hii man');
+          console.log(influencers.length);
+          res.json({status:"failure",statusCode:500,msg:"Invalid Credentials!!!"});
         }
           else{
             if(passwordHash.verify(req.body.signin.password, influencers[0].password)){
               console.log(influencers)
-              res.json({status:"success",statusCode:200,data:influencers});
+              res.json({status:"success",statusCode:200,data:influencers,msg:"Login successfully..."});
             }else{
-              res.json({status:"failure",statusCode:100,data:"Invalid Credentials!!!"});
+              res.json({status:"failure",statusCode:100,msg:"Invalid Credentials!!!"});
             }
           }
       });
@@ -51,16 +53,16 @@ router.post('/', function(req, res) {
       promoters.promoters
         .find({ $or : [{name:req.body.signin.email},{'email':req.body.signin.email}]},function (err, promoters) {
         if (err) {
-            res.json({status:"failure",statusCode:100,data:err});
+            res.json({status:"failure",statusCode:100,msg:err});
         }else if(promoters.length==0){
-          res.json({status:"failure",statusCode:100,data:"Invalid Credentials!!!"});
+          res.json({status:"failure",statusCode:100,msg:"Invalid Credentials!!!"});
         }
           else{
             if(passwordHash.verify(req.body.signin.password, promoters[0].password)){
               console.log(promoters)
-              res.json({status:"success",statusCode:200,data:promoters});
+              res.json({status:"success",statusCode:200,data:promoters,msg:"Login successfully..."});
             }else{
-              res.json({status:"failure",statusCode:100,data:"Invalid Credentials!!!"});
+              res.json({status:"failure",statusCode:100,msg:"Invalid Credentials!!!"});
             }
           }
       });

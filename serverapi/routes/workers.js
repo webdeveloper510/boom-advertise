@@ -43,6 +43,7 @@ var sendEmail = function(to,subject,html) {
 
 
 router.post('/register', function(req,res) {
+  var coupon_code  = Math.random().toString(36).slice(2)
 console.log(req.body.worker_signup);
       var workerCreate =  new worker.workers(req.body.worker_signup);
 
@@ -51,38 +52,39 @@ console.log(req.body.worker_signup);
 
       workerCreate.joindate = datetime
       workerCreate.password = pass
+      workerCreate.coupon_code = coupon_code
       
       worker.workers.findOne({email:req.body.worker_signup.email}, function(err, workers) {
-        if (err)  res.json({status:"failure",statusCode:100,error:err});
+        if (err)  res.json({status:"failure",statusCode:100,msg:err});
         
         if(workers){
-          console.log(workers)
-          res.json({status:"failure",statusCode:100,error:"Email already exists!!"});
+          res.json({status:"failure",statusCode:100,msg:"Email already exists!!"});
         }else{
             worker.workers.findOne({name:req.body.worker_signup.name}, function(err, workers) {
-            if (err)  res.json({status:"failure",statusCode:100,error:err});
+            if (err)  res.json({status:"failure",statusCode:100,msg:err});
         
             if(workers){
               console.log(workers)
-              res.json({status:"failure",statusCode:100,error:"Username already exists!!"});
+              res.json({status:"failure",statusCode:100,msg:"Username already exists!!"});
             }
             else{
                 workerCreate.save(function (err, worker) {
-               if (err) res.json({status:"failure",statusCode:100,error:err});
-                res.json({status:"success",statusCode:200,data:worker});
+               if (err) res.json({status:"failure",statusCode:100,error:msg});
+
+                res.json({status:"success",statusCode:200,data:worker,msg:"Worker added successfully and an email has been sent to the worker."});
                 /******Send email***** */
                 var a =  sendEmail(req.body.worker_signup.email,
                   "Your login account!",
-                  'You have been added as a Worker on <b>http://boomadvertise.com/</b><br> Here are your login credentials along with other details. <br> Promo code: fjhdgggdffg <br> Sharaeble Urls with others : http://boomadvertise.com/')
+                  "You have been added as a Worker on <b>http://boomadvertise.com/</b><br> Here are your login credentials along with other details. <br> Username: " + req.body.worker_signup.name + "<br> Email: " +req.body.worker_signup.email +"<br> Password: " + req.body.worker_signup.password +" Promo code: fjhdgggdffg <br> Sharaeble Urls with others : http://boomadvertise.com/"+res.json(worker['_id']))
                   a.then((result) => { 
                 if(result){
-                  res.json({status:"success",statusCode:200,data:'hii sent email...'});
+                 // res.json({status:"success",statusCode:200,data:'hii sent email...'});
                 }
                 else{
-                  res.json({status:"failure",statusCode:100,message:"There was some error in your request!!!",data:[]});
+                 // res.json({status:"failure",statusCode:100,message:"There was some error in your request!!!",data:[]});
                 }
                   }).catch((err) => {
-                    res.json({status:"failure",statusCode:100,message:"Could Not Send Email!!!",data:err});
+                 //   res.json({status:"failure",statusCode:100,message:"Could Not Send Email!!!",data:err});
                   });
            /******Send email end***** */
               });
@@ -96,19 +98,21 @@ console.log(req.body.worker_signup);
     
     router.post('/email', function(req,res) { 
       /******Send email***** */
-      var a =  sendEmail('manpreet@codenomad.net',
-        "Your login account!",
-        'You have been added as a Worker on <b>http://boomadvertise.com/</b><br> Here are your login credentials along with other details. <br> Promo code: fjhdgggdffg <br> Sharaeble Urls with others : http://boomadvertise.com/')
-        a.then((result) => { 
-       if(result){
-        res.json({status:"success",statusCode:200,data:'hii sent email...'});
-       }
-       else{
-        res.json({status:"failure",statusCode:100,message:"There was some error in youyr request!!!",data:[]});
-       }
-        }).catch((err) => {
-          res.json({status:"failure",statusCode:100,message:"Could Not Send Email!!!",data:err});
-        });
+      console.log(Math.random().toString(36).slice(2));
+      
+      // var a =  sendEmail('manpreet@codenomad.net',
+      //   "Your login account!",
+      //   'You have been added as a Worker on <b>http://boomadvertise.com/</b><br> Here are your login credentials along with other details. <br> Promo code: fjhdgggdffg <br> Sharaeble Urls with others : http://boomadvertise.com/')
+      //   a.then((result) => { 
+      //  if(result){
+      //   res.json({status:"success",statusCode:200,data:'hii sent email...'});
+      //  }
+      //  else{
+      //   res.json({status:"failure",statusCode:100,message:"There was some error in youyr request!!!",data:[]});
+      //  }
+      //   }).catch((err) => {
+      //     res.json({status:"failure",statusCode:100,message:"Could Not Send Email!!!",data:err});
+      //   });
      /******Send email end***** */
       });
 

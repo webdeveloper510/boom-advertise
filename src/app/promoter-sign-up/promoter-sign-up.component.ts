@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup} from '@angular/forms';
 import { PromoterRegisterService } from '../services/promoter-register.service';
 import {HttpClient} from '@angular/common/http';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -20,12 +21,16 @@ export class PromoterSignUpComponent implements OnInit {
     })
   });
 
-  constructor(private proregservice:PromoterRegisterService,private http : HttpClient) { }
+  constructor(
+    private proregservice:PromoterRegisterService,
+    private http : HttpClient,
+    private router: Router,
+    ) { }
 
   ngOnInit(): void {
   }
 
-  onSubmit() {
+  promoter_onSubmit() {
     console.warn(this.profileForm.value);
     console.log(this.profileForm.value);
     const data = this.profileForm.value
@@ -33,6 +38,7 @@ export class PromoterSignUpComponent implements OnInit {
     .subscribe(
       (response) => {                           
         console.log(response)
+        this.router.navigate(['/promoter-account']);
       },
       (error) => {                            
      
