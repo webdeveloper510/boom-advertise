@@ -22,30 +22,23 @@
     text-align: center;
     position: relative;
 }
-.box_1.border-size {
-    width: 46%;
+.border-size {
+    width: 29%;
     border: 1px solid #787878;
     box-sizing: border-box;
     border-radius: 7px;
-    margin: 0 auto;
     padding: 30px;
     border-radius: 7px;
-    display: inline-block;
-    margin-left: 12px;
+    margin-right: 136px;
     margin-bottom: 35px;
 }
-.box_2.border-size {
-    width: 46%;
-    border: 1px solid #787878;
-    box-sizing: border-box;
-    border-radius: 7px;
-    margin: 0 auto;
-    padding: 54px;
-    border-radius: 7px;
-    margin-left: 12px;
-    margin-bottom: 35px;
-    float: right;
+.allside {
+    display: flex;
 }
+.border-size:last-child {
+    margin-right: 0;
+}
+
 .image_circle {
     width: 175px;
     border-radius: 50%;
@@ -155,6 +148,7 @@ button.edit-profile {
     margin: 0 auto;
     color: #000000;
     display: block;
+  
     margin-top: 16px;
 }
 .first_sec {
@@ -264,3 +258,56 @@ p.discription {
 .section_1:last-child {
     margin-right: 0 !important;
 }
+
+.insider {
+    width: 33%;
+    display: inline-block;
+}
+
+.media.insider img {
+    width: 40px;
+}
+
+.first_viewer {
+    margin-bottom: 30px;
+}
+
+.viwers.insider p {
+    font-family: Source Sans Pro;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 22px;
+    line-height: 21px;
+    color: #787878;
+    text-align: center;
+}
+
+.edit_delete.insider span img {
+    display: inline-block;
+    text-align: center;
+    line-height: 0;
+}
+
+.edit_delete.insider {
+    text-align: right;
+    line-height: 0;
+    float: right;
+    margin-top: 8px;
+}
+
+.edit_delete.insider span {
+    margin-right: 6px;
+}
+
+.edit_delete.insider span:last-child {
+    margin-right: 0;
+}
+
+.box_3.border-size {
+    position: relative;
+    background: url("/assets/images/Group 58.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 999;
+}
+
