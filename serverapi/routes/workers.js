@@ -42,7 +42,7 @@ var sendEmail = function(to,subject,html) {
 }
 
 
-router.post('/register', function(req,res) {
+router.post('/register', function(req,res,next) {
   var coupon_code  = Math.random().toString(36).slice(2)
 console.log(req.body.worker_signup);
       var workerCreate =  new worker.workers(req.body.worker_signup);
