@@ -1,0 +1,24 @@
+.heading_sec1:before {
+    content: "";
+    background: #fff952;
+    position: absolute;
+    width: 48%;
+    height: 18px;
+    top: 38px;
+    margin: 0 auto;
+    right: 0;
+    left: 0;
+}
+.heading_sec1 {
+    position: relative;
+}
+.heading_sec1 h1 {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 60px;
+    color: #000000;
+    text-align: center;
+    position: relative;
+}

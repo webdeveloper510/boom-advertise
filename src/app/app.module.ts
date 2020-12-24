@@ -21,6 +21,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { PromoterAccountComponent } from './promoter-account/promoter-account.component';
 import { FormcustomComponent } from './formcustom/formcustom.component';
+import { TopAuthenticInfluencersRankingComponent } from './top-authentic-influencers-ranking/top-authentic-influencers-ranking.component';
 
 
 
@@ -36,7 +37,8 @@ import { FormcustomComponent } from './formcustom/formcustom.component';
     MyAccountComponent,
     InfluencerAccountComponent,
     PromoterAccountComponent,
-    FormcustomComponent
+    FormcustomComponent,
+    TopAuthenticInfluencersRankingComponent
   ],
   imports: [
     BrowserModule,
