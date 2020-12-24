@@ -28,7 +28,10 @@ export class HomeComponent implements OnInit {
  // common variables end
 
   // Promotor variables start
-
+  tiktok_fol : boolean  = false;
+  twitter : boolean  = false;
+  fb: boolean  = false;
+  insta: boolean  = false;
   promotor_login_form : boolean  = false;
   promotor_success_message : string = "";
   promotor_error_message : string = "";
@@ -68,10 +71,54 @@ export class HomeComponent implements OnInit {
       tiktok: new FormControl(''),
       insta: new FormControl(''),
       fb: new FormControl(''),
-      twitter: new FormControl('')
+      twitter: new FormControl(''),
+      tiktok_followers: new FormControl(''),
+      twitter_followers: new FormControl(''),
+      fb_followers: new FormControl(''),
+      insta_followers: new FormControl('')
+
     })
   });
+  clickedon(){
 
+    if(this.tiktok_fol == true){
+      this.tiktok_fol= false;
+      
+    } else {
+      this.tiktok_fol= true;
+    }
+  
+ 
+  }
+ 
+  clickedon1(){
+
+   if(this.insta == true){
+    this.insta= false;
+    
+  } else {
+    this.insta= true;
+  }
+
+  }
+  clickedon2(){
+ if(this.fb == true){
+  this.fb= false;
+  
+} else {
+  this.fb= true;
+}
+
+  }
+  clickedon3(){
+
+if(this.twitter == true){
+  this.twitter= false;
+  
+} else {
+  this.twitter= true;
+}
+  }
   openPromotorForm(){ this.promotor_login_form  = true; }
   closePromotorForm(){ this.promotor_login_form  = false; }
   openInfluencerForm(){ this.influnncer_login_form  = true; }

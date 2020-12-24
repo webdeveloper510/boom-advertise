@@ -9,7 +9,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PromoterSignUpComponent } from './promoter-sign-up/promoter-sign-up.component';
-import { InfluencerSignupComponent } from './influencer-signup/influencer-signup.component';
+
 import { SigninComponent } from './signin/signin.component';
 
 import { WorkersRegisterComponent } from './workers-register/workers-register.component';
@@ -20,6 +20,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { PromoterAccountComponent } from './promoter-account/promoter-account.component';
+import { FormcustomComponent } from './formcustom/formcustom.component';
 
 
 
@@ -30,12 +31,12 @@ import { PromoterAccountComponent } from './promoter-account/promoter-account.co
     HeaderComponent,
     FooterComponent,
     PromoterSignUpComponent,
-    InfluencerSignupComponent,
     SigninComponent,
     WorkersRegisterComponent,
     MyAccountComponent,
     InfluencerAccountComponent,
-    PromoterAccountComponent
+    PromoterAccountComponent,
+    FormcustomComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +46,9 @@ import { PromoterAccountComponent } from './promoter-account/promoter-account.co
     TooltipModule,
     BsDropdownModule, 
     TabsModule,
-    HttpClientModule
+    HttpClientModule,
+    
+    
 
   ],
   providers: [],
