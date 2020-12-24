@@ -1,7 +1,7 @@
 <div class="promoter_signup">
     <h2>Promoter’s SignUp</h2>
     <p>It’s Free!</p>
-<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="profileForm" (ngSubmit)="promoter_onSubmit()">
     <div formGroupName="promoter_signup">
 <input type="text" formControlName="name" placeholder="Name" required>
    <input type="email" formControlName="email" placeholder="Email" required>

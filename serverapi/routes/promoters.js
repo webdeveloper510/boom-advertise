@@ -20,24 +20,24 @@ console.log(req.body.promoter_signup);
       promoterCreate.password = pass
       
       promoter.promoters.findOne({email:req.body.promoter_signup.email}, function(err, promoters) {
-        if (err)  res.json({status:"failure",statusCode:100,error:err});
+        if (err)  res.json({status:"failure",statusCode:100,msg:err});
         
         if(promoters){
           console.log(promoters)
-          res.json({status:"failure",statusCode:100,error:"Email already exists!!"});
+          res.json({status:"failure",statusCode:100,msg:"Email already exists!!"});
         }else{
             promoter.promoters.findOne({name:req.body.promoter_signup.name}, function(err, promoters) {
-            if (err)  res.json({status:"failure",statusCode:100,error:err});
+            if (err)  res.json({status:"failure",statusCode:100,msg:err});
         
             if(promoters){
               console.log(promoters)
-              res.json({status:"failure",statusCode:100,error:"Username already exists!!"});
+              res.json({status:"failure",statusCode:100,msg:"Username already exists!!"});
             }
             else{
                 promoterCreate.save(function (err, promoter) {
-                if (err) res.json({status:"failure",statusCode:100,error:err});
+                if (err) res.json({status:"failure",statusCode:100,msg:err});
             
-                res.json({status:"success",statusCode:200,data:promoter});
+                res.json({status:"success",statusCode:200,data:promoter,msg:"Signup Successfully! Click login to continueee..."});
               });
             }
           })

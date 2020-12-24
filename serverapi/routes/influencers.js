@@ -20,24 +20,24 @@ console.log(req.body.influencer_signup);
       influencerCreate.password = pass
       
       influencer.influencers.findOne({email:req.body.influencer_signup.email}, function(err, influencers) {
-        if (err)  res.json({status:"failure",statusCode:100,error:err});
+        if (err)  res.json({status:"failure",statusCode:100,msg:err});
         
         if(influencers){
           console.log(influencers)
-          res.json({status:"failure",statusCode:100,error:"Email already exists!!"});
+          res.json({status:"failure",statusCode:100,msg:"Email already exists!!"});
         }else{
             influencer.influencers.findOne({name:req.body.influencer_signup.name}, function(err, influencers) {
-            if (err)  res.json({status:"failure",statusCode:100,error:err});
+            if (err)  res.json({status:"failure",statusCode:100,msg:err});
         
             if(influencers){
               console.log(influencers)
-              res.json({status:"failure",statusCode:100,error:"Username already exists!!"});
+              res.json({status:"failure",statusCode:100,msg:"Username already exists!!"});
             }
             else{
                 influencerCreate.save(function (err, influencer) {
-                if (err) res.json({status:"failure",statusCode:100,error:err});
+                if (err) res.json({status:"failure",statusCode:100,msg:err});
             
-                res.json({status:"success",statusCode:200,data:influencer});
+                res.json({status:"success",statusCode:200,data:influencer,msg:"Signup Successfully! Click login to continueee..."});
               });
             }
           })

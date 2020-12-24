@@ -20,11 +20,12 @@ export class HeaderComponent implements OnInit {
     private workerregister:WorkerRegisterService,
   ) { }
 
+    is_login : boolean =  false;
   // Login variables start 
 
   login_form : boolean  = false;
-  success_message : string = "Login Successfully";
-  error_message : string = "Login Failed";
+  success_message : string = "";
+  error_message : string = "";
   success_div : boolean = false;
   error_div : boolean = false;
 
@@ -33,8 +34,8 @@ export class HeaderComponent implements OnInit {
   // register variables start
   
   signup_form : boolean  = false;
-  signup_success_message : string = "Signup Successfully";
-  signup_error_message : string = "Signup Failed";
+  signup_success_message : string = "";
+  signup_error_message : string = "";
   signup_success_div : boolean = false;
   signup_error_div : boolean = false;
   
@@ -61,8 +62,6 @@ export class HeaderComponent implements OnInit {
       })
     });
 
- 
-
   ngOnInit(): void {
   }
 
@@ -72,23 +71,33 @@ export class HeaderComponent implements OnInit {
   closeSignupForm(){ this.signup_form = false; }
 
   onSubmit() {
-    
     console.log(this.signin.value);
     let data = this.signin.value
     this.loginservice.login(data)
     .subscribe(
-      (response:any) => {                           
+      (response:any) => {   
+        console.log(response)                       
         if(response['status'] == 'success'){
+          this.success_message = response["msg"];
+          localStorage.setItem('login_userid',response["data"][0]['_id'])
+          localStorage.setItem('logindata',JSON.stringify(response["data"][0]))
+
+          this.is_login = true;
           this.success_div = true;
           this.error_div = false;
           this.signin.reset();
           setTimeout (() => {
             this.success_div = false;
             this.login_form = false;
-            this.router.navigate(['/influencer-account']);
+            if(response["data"][0]['user_type'] == 0){
+              this.router.navigate(['/my-account']);
+            }else{
+              this.router.navigate(['/promoter-account']);
+            }
           }, 2000)
           
         }else{
+          this.error_message = response["msg"];
           this.success_div = false;
           this.error_div = true;
         }
@@ -108,6 +117,7 @@ export class HeaderComponent implements OnInit {
       (response:any) => {                           
         console.log(response)
         if(response['status'] == 'success'){
+          this.signup_success_message = response['msg'];
           this.signup_success_div = true;
           this.signup_error_div = false;
           this.worker_signup.reset();
@@ -116,10 +126,11 @@ export class HeaderComponent implements OnInit {
             this.signup_success_div = false;
             this.signup_error_div = false;
             this.signup_form = false;
-            this.router.navigate(['/influencer-account']);
-          }, 2000)
+            this.router.navigate(['/']);
+          }, 4000)
           
         }else{
+          this.signup_error_message = response['msg'];
           this.signup_success_div = false;
           this.signup_error_div = true;
         }
@@ -129,6 +140,10 @@ export class HeaderComponent implements OnInit {
         console.error(error)
       }
     );
+  }
+
+  logOut(){
+    this.is_login = false;
   }
 
 }

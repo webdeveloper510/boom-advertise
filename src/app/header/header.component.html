@@ -8,7 +8,8 @@
           <li [routerLink]="['/influencer-account']">Influencers </li>
           <li  [routerLink]="['/']"><img src="./assets/images/logo.png"/></li>
           <li>Contact Us </li>
-          <li  (click)="openLoginForm()">LogIn</li>
+          <li  (click)="openLoginForm()" *ngIf="!is_login">LogIn</li>
+          <li  (click)="logOut()" *ngIf="is_login">Logout</li>
           <li  (click)="openSignupForm()" >Admin</li>
       </ul>
 

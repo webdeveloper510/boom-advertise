@@ -6,6 +6,7 @@ const workersSchema = new Schema({
   name: String,
   email:   String,
   password:   String,
+  coupon_code:   String,
   joindate:   Date
 });
 const workers = mongoose.model('workers', workersSchema);
