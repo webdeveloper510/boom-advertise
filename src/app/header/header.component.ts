@@ -160,6 +160,7 @@ export class HeaderComponent implements OnInit {
 
   logOut(){
     this.loginservice.logOut();
+    this.router.navigate(['/']);
   }
 
 }
