@@ -70,6 +70,7 @@ export class HeaderComponent implements OnInit {
   openSignupForm(){ this.signup_form = true; }
   closeSignupForm(){ this.signup_form = false; }
 
+
   onSubmit() {
 
     
@@ -158,7 +159,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logOut(){
-    this.is_login = false;
+    this.loginservice.logOut();
   }
 
 }

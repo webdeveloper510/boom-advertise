@@ -42,5 +42,12 @@ export class LoginService {
     return this.http.post(this.apiUrl+"/login",data)
   }
 
+  logOut(){
+    this.is_logged_in = false;
+    this.user_id      = "";
+    localStorage.removeItem(this.local_storage_key)
+
+  }
+
 }
 
