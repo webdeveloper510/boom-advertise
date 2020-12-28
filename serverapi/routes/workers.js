@@ -42,7 +42,7 @@ var sendEmail = function(to,subject,html) {
 }
 
 
-router.post('/register', function(req,res,next) {
+router.post('/register', function(req,res) {
   var coupon_code  = Math.random().toString(36).slice(2)
 console.log(req.body.worker_signup);
       var workerCreate =  new worker.workers(req.body.worker_signup);
@@ -69,22 +69,21 @@ console.log(req.body.worker_signup);
             }
             else{
                 workerCreate.save(function (err, worker) {
-               if (err) res.json({status:"failure",statusCode:100,error:msg});
-
-                res.json({status:"success",statusCode:200,data:worker,msg:"Worker added successfully and an email has been sent to the worker."});
+                  if (err) res.json({status:"failure",statusCode:100,msg:error});
+                  res.json({status:"success",statusCode:200,data:worker,msg:"Worker added successfully and an email has been sent to the worker."});
+                //  res.setHeader("Content-Type", "text/html");
                 /******Send email***** */
-                var a =  sendEmail(req.body.worker_signup.email,
-                  "Your login account!",
-                  "You have been added as a Worker on <b>http://boomadvertise.com/</b><br> Here are your login credentials along with other details. <br> Username: " + req.body.worker_signup.name + "<br> Email: " +req.body.worker_signup.email +"<br> Password: " + req.body.worker_signup.password +" Promo code: fjhdgggdffg <br> Sharaeble Urls with others : http://boomadvertise.com/"+res.json(worker['_id']))
-                  a.then((result) => { 
+               var a = sendEmail(req.body.worker_signup.email,
+                  "Your login account!","You have been added as a Worker on <b>http://boomadvertise.com/</b><br> Here are your login credentials along with other details. <br> Username: " + req.body.worker_signup.name + "<br> Email: " +req.body.worker_signup.email +"<br> Password: " + req.body.worker_signup.password +" Promo code: fjhdgggdffg <br> Sharaeble Urls with others : http://boomadvertise.com/"+res.json(worker['_id']));
+                    a.then((result) => { 
                 if(result){
-                 // res.json({status:"success",statusCode:200,data:'hii sent email...'});
+                  res.json({status:"success",statusCode:200,data:'hii sent email...'});
                 }
                 else{
-                 // res.json({status:"failure",statusCode:100,message:"There was some error in your request!!!",data:[]});
+                 res.json({status:"failure",statusCode:100,message:"There was some error in your request!!!",data:[]});
                 }
                   }).catch((err) => {
-                 //   res.json({status:"failure",statusCode:100,message:"Could Not Send Email!!!",data:err});
+                   res.json({status:"failure",statusCode:100,message:"Could Not Send Email!!!",data:err});
                   });
            /******Send email end***** */
               });
@@ -98,21 +97,21 @@ console.log(req.body.worker_signup);
     
     router.post('/email', function(req,res) { 
       /******Send email***** */
-      console.log(Math.random().toString(36).slice(2));
+     // console.log(Math.random().toString(36).slice(2));
       
-      // var a =  sendEmail('manpreet@codenomad.net',
-      //   "Your login account!",
-      //   'You have been added as a Worker on <b>http://boomadvertise.com/</b><br> Here are your login credentials along with other details. <br> Promo code: fjhdgggdffg <br> Sharaeble Urls with others : http://boomadvertise.com/')
-      //   a.then((result) => { 
-      //  if(result){
-      //   res.json({status:"success",statusCode:200,data:'hii sent email...'});
-      //  }
-      //  else{
-      //   res.json({status:"failure",statusCode:100,message:"There was some error in youyr request!!!",data:[]});
-      //  }
-      //   }).catch((err) => {
-      //     res.json({status:"failure",statusCode:100,message:"Could Not Send Email!!!",data:err});
-      //   });
+      var a =  sendEmail('manpreet@codenomad.net',
+        "Your login account!",
+        'You have been added as a Worker on <b>http://boomadvertise.com/</b><br> Here are your login credentials along with other details. <br> Promo code: fjhdgggdffg <br> Sharaeble Urls with others : http://boomadvertise.com/')
+        a.then((result) => { 
+       if(result){
+        res.json({status:"success",statusCode:200,data:'hii sent email...'});
+       }
+       else{
+        res.json({status:"failure",statusCode:100,message:"There was some error in youyr request!!!",data:[]});
+       }
+        }).catch((err) => {
+          res.json({status:"failure",statusCode:100,message:"Could Not Send Email!!!",data:err});
+        });
      /******Send email end***** */
       });
 

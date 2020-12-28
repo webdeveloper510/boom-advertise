@@ -18,6 +18,10 @@ console.log(req.body.influencer_signup);
 
       influencerCreate.joindate = datetime
       influencerCreate.password = pass
+      influencerCreate.tiktok = req.body.influencer_signup.tiktok
+      influencerCreate.instagram = req.body.influencer_signup.insta
+      influencerCreate.facebook = req.body.influencer_signup.fb
+      influencerCreate.twitter = req.body.influencer_signup.twitter
       
       influencer.influencers.findOne({email:req.body.influencer_signup.email}, function(err, influencers) {
         if (err)  res.json({status:"failure",statusCode:100,msg:err});

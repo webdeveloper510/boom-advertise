@@ -6,6 +6,10 @@ const influencersSchema = new Schema({
   name: String,
   email:   String,
   password:   String,
+  tiktok:   Boolean,
+  instagram:   Boolean,
+  facebook:   Boolean,
+  twitter:   Boolean,
   joindate:   Date
 });
 const  influencers = mongoose.model('influencers', influencersSchema);
