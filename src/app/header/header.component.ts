@@ -14,7 +14,7 @@ import { WorkerRegisterService } from '../services/worker-register.service';
 export class HeaderComponent implements OnInit {
 
   constructor(
-    private loginservice:LoginService,
+    public loginservice:LoginService,
     private http : HttpClient,
     private router: Router,
     private workerregister:WorkerRegisterService,
@@ -71,6 +71,9 @@ export class HeaderComponent implements OnInit {
   closeSignupForm(){ this.signup_form = false; }
 
   onSubmit() {
+
+    
+   
     console.log(this.signin.value);
     let data = this.signin.value
     this.loginservice.login(data)
@@ -78,17 +81,21 @@ export class HeaderComponent implements OnInit {
       (response:any) => {   
         console.log(response)                       
         if(response['status'] == 'success'){
-          this.success_message = response["msg"];
-          localStorage.setItem('login_userid',response["data"][0]['_id'])
-          localStorage.setItem('logindata',JSON.stringify(response["data"][0]))
 
-          this.is_login = true;
-          this.success_div = true;
-          this.error_div = false;
+          this.success_message = response["msg"];
+          localStorage.setItem('login_userid',response["data"][0]['_id']);
+          localStorage.setItem('logindata',JSON.stringify(response["data"][0]));
+
+          this.loginservice.is_logged_in  = true;
+          this.is_login                   = this.loginservice.is_logged_in;
+          this.success_div                = true;
+          this.error_div                  = false;
           this.signin.reset();
+
           setTimeout (() => {
-            this.success_div = false;
-            this.login_form = false;
+
+            this.success_div  = false;
+            this.login_form   = false;
             if(response["data"][0]['user_type'] == 0){
               this.router.navigate(['/my-account']);
             }else{
@@ -118,10 +125,18 @@ export class HeaderComponent implements OnInit {
         console.log(response)
         if(response['status'] == 'success'){
           this.signup_success_message = response['msg'];
+          
+          localStorage.setItem('login_user_data',JSON.stringify(response["data"]));
           this.signup_success_div = true;
           this.signup_error_div = false;
           this.worker_signup.reset();
           this.worker_signup.reset();
+
+          this.loginservice.is_logged_in = true; 
+          this.is_login = this.loginservice.is_logged_in;
+          
+          
+
           setTimeout (() => {
             this.signup_success_div = false;
             this.signup_error_div = false;

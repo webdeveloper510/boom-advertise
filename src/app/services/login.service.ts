@@ -9,8 +9,28 @@ export class LoginService {
   apiUrl : string = "http://localhost:3000";
   user_id : any ;
   is_logged_in : boolean  = false;
-  constructor(private http : HttpClient) { }
+  local_storage_key : string = "login_user_data";
+  constructor(private http : HttpClient) { 
+    
+    //this.loginCheck();
+  }
 
+
+  loginCheck() {
+
+    if(typeof(localStorage.getItem(this.local_storage_key))!='undefined' && localStorage.getItem(this.local_storage_key) != null){
+        let user_data:any = localStorage.getItem(this.local_storage_key);
+        user_data         = JSON.parse(user_data);
+        this.user_id      = user_data._id;
+        this.is_logged_in = true;
+        console.log("user alreday login");
+
+    } else {
+      this.user_id      = "";
+      this.is_logged_in = false;
+
+    }
+  }
   // httpOptions = {
   //   headers: new HttpHeaders({
   //     'Accept':  'application/json',

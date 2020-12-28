@@ -4,6 +4,7 @@ import { PromoterRegisterService } from '../services/promoter-register.service';
 import { FormControl, FormGroup} from '@angular/forms';
 import { Router } from '@angular/router';
 import { InfluencerRegisterService } from '../services/influencer-register.service';
+import { LoginService } from '../services/login.service';
 
 
 @Component({
@@ -12,19 +13,27 @@ import { InfluencerRegisterService } from '../services/influencer-register.servi
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+  is_logged_in : any ;
+  _subscription: any;
   constructor(
                 private proregservice:PromoterRegisterService,
                 private http : HttpClient,
                 private router: Router,
                 private influregservice:InfluencerRegisterService,
-                ) { }
+                public login_service:LoginService,
+                ) {
+
+                  this.is_logged_in = login_service.is_logged_in;
+   
+
+
+  }
 
   ngOnInit(): void {
   }
 
   // common variables start
-  is_login : boolean =  false;
+  is_login : boolean =  this.login_service.is_logged_in;
  // common variables end
 
   // Promotor variables start
@@ -80,51 +89,28 @@ export class HomeComponent implements OnInit {
     })
   });
   clickedon(){
-
-    if(this.tiktok_fol == true){
-      this.tiktok_fol= false;
-      
-    } else {
-      this.tiktok_fol= true;
-    }
-  
- 
+    this.tiktok_fol = !this.tiktok_fol;
   }
  
   clickedon1(){
-
-   if(this.insta == true){
-    this.insta= false;
-    
-  } else {
-    this.insta= true;
-  }
-
+    this.insta = !this.insta;
   }
   clickedon2(){
- if(this.fb == true){
-  this.fb= false;
-  
-} else {
-  this.fb= true;
-}
+    this.fb = !this.fb;
 
   }
   clickedon3(){
-
-if(this.twitter == true){
-  this.twitter= false;
-  
-} else {
-  this.twitter= true;
-}
+    this.twitter = !this.twitter;
   }
+  
   openPromotorForm(){ this.promotor_login_form  = true; }
   closePromotorForm(){ this.promotor_login_form  = false; }
   openInfluencerForm(){ this.influnncer_login_form  = true; }
   closeInfluencerForm(){ this.influnncer_login_form  = false; }
 
   promotersignup(){
+
+    console.log(this.login_service.is_logged_in);
 
     let data = this.profileForm.value
     this.proregservice.register(data)
@@ -136,6 +122,7 @@ if(this.twitter == true){
           this.promotor_success_div = true;
           this.promotor_error_div = false;
           this.profileForm.reset();
+          this.login_service.is_logged_in = true;
           setTimeout (() => {
             this.promotor_success_div = false;
             this.promotor_login_form = false;
@@ -169,6 +156,8 @@ if(this.twitter == true){
           this.influnncer_success_div = true;
           this.influnncer_error_div = false;
           this.influencer.reset();
+          this.login_service.is_logged_in = true;
+          
           setTimeout (() => {
             this.influnncer_success_div = false;
             this.influnncer_login_form = false;
