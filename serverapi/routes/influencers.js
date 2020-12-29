@@ -63,4 +63,16 @@ console.log(req.body.influencer_signup);
     router.get('/test', function(req,res) {
       res.json("it workedvijay");
     });
+
+    router.get('/getInfluencers', function(req, res, next) {
+     // influencer.populated('influencers_data');
+     // influencer.influencers_data._id;
+      influencer.influencers.find({}, function(err, influencers_dt) {
+      // influencers_data.influencers_data.find({}, function(err1, influencers_data) {
+        if (err)  res.json({status:"failure",statusCode:100,error:err});
+        res.json({status:"success",statusCode:200,data:influencers_dt});
+      //});
+     });
+    });
+
     module.exports = router;
