@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup} from '@angular/forms';
+import { InfluencersRankingService } from '../services/influencers-ranking.service';
+import {HttpClient} from '@angular/common/http';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-top-authentic-influencers-ranking',
   templateUrl: './top-authentic-influencers-ranking.component.html',
@@ -7,14 +10,11 @@ import { FormControl, FormGroup} from '@angular/forms';
 })
 export class TopAuthenticInfluencersRankingComponent implements OnInit {
   public socialmedia: string="";
-  constructor() { }
+  constructor(private InfluencersRankingService:InfluencersRankingService,private http : HttpClient,private router: Router,) { 
+ 
+  }
 
-  public data = [
-    {Srno:'1', Username: 'therichpost', Followers: '0.2B', EngagementRate:'2.44%',AuthenticEngagement:'1.1m',socialmedia:'Fb'},
-    {Srno:'1', Username: 'therichpost', Followers: '0.2B', EngagementRate:'2.44%',AuthenticEngagement:'1.1m',socialmedia:'Insta'},
-    {Srno:'1', Username: 'therichpost', Followers: '0.2B', EngagementRate:'2.44%',AuthenticEngagement:'1.1m',socialmedia:'Twitter'},
-    {Srno:'1', Username: 'therichpost', Followers: '0.2B', EngagementRate:'2.44%',AuthenticEngagement:'1.1m',socialmedia:'Tik-Tok'},
-];
+  public data:any = [ ];
   title1 = 'angulardatatables  multiple filter';
   positionList: string[] = ['Fb', 'Insta', 'Twitter','Tik-Tok'];
   filterForm = new FormGroup({
@@ -29,13 +29,23 @@ export class TopAuthenticInfluencersRankingComponent implements OnInit {
   get position() { return this.filterForm.get('position'); }
   dtOptions: DataTables.Settings = {};
   ngOnInit() {
+    this.influencers()
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 5,
       processing: true,
      
     };
-   
+
+    }
+    influencers(){
+     // this.data1()
+      this.InfluencersRankingService.getdata().subscribe(
+           (response:any) =>{
+           console.log(response)
+         //  this.data1 = response['data']
+         this.data = response['data']
+         })
     }
     filter(){
       console.log(this.filterForm.value);
@@ -46,8 +56,10 @@ export class TopAuthenticInfluencersRankingComponent implements OnInit {
 
         console.log(this.data[i].socialmedia);
       }
-      console.log(this.data);
+
     } 
-          
+    value1(){
+
+    }       
   
 }

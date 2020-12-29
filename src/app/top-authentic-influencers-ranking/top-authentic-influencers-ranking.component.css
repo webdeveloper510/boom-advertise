@@ -45,3 +45,49 @@
 }
 
 .social_media select {width: 111px;height: 26px;}
+.image {
+    margin: 0 auto;
+    float: left;
+    margin-left: 36px;
+    border-radius: 50%;
+    text-align: center;
+    width: 72px;
+    height: 71px;
+}
+.image img {
+    width: 100%;
+    border-radius: 50%;
+    height: 100%;
+}
+.data {
+    width: 55%;
+    float: left;
+}
+.mail {
+    font-family: Source Sans Pro;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 01;
+    color: #FF0000;
+}
+.outer_promote table th {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500!important;
+    font-size: 21px;
+    line-height: 45px;
+/* identical to box height */
+    color: #787878;
+    text-align: center;
+}
+
+.outer_promote table tr td {
+    font-family: Source Sans Pro;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 21px;
+    line-height: 38px;
+    text-align: center;
+    color: #000000;
+    vertical-align: middle;
+}
