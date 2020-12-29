@@ -22,3 +22,26 @@
     text-align: center;
     position: relative;
 }
+.social_media {
+    position: absolute;
+    right: 0;
+    width: max-content;
+    z-index: 99;
+    left: 0;
+    margin: 0 auto;
+    text-align: center;
+}
+.main_out {
+    width: 80%;
+    margin-top: 46px;
+    margin-bottom: 46px;
+}
+
+
+.social_media label {
+    margin-right: 8px;
+    font-size: 16px;
+    font-family: Poppins;
+}
+
+.social_media select {width: 111px;height: 26px;}

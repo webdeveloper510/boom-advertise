@@ -23,7 +23,7 @@ const routes: Routes = [
 {
   path: 'influencers-ranking', component: TopAuthenticInfluencersRankingComponent
 }
-
+ 
 ];
 
 @NgModule({
