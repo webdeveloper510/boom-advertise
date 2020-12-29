@@ -22,10 +22,10 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { PromoterAccountComponent } from './promoter-account/promoter-account.component';
 import { FormcustomComponent } from './formcustom/formcustom.component';
 import { TopAuthenticInfluencersRankingComponent } from './top-authentic-influencers-ranking/top-authentic-influencers-ranking.component';
+import {DataTablesModule} from 'angular-datatables';
 
 
-
-@NgModule({
+@NgModule({ 
   declarations: [
     AppComponent,
     HomeComponent,
@@ -49,6 +49,8 @@ import { TopAuthenticInfluencersRankingComponent } from './top-authentic-influen
     BsDropdownModule, 
     TabsModule,
     HttpClientModule,
+    DataTablesModule
+    
     
     
 

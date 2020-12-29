@@ -23,13 +23,13 @@
     position: relative;
 }
 .border-size {
-    width: 29%;
+    width: 100%;
     border: 1px solid #787878;
     box-sizing: border-box;
     border-radius: 7px;
     padding: 30px;
     border-radius: 7px;
-    margin-right: 136px;
+    margin-right: 40px;
     margin-bottom: 35px;
 }
 .allside {
