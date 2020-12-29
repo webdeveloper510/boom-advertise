@@ -5,8 +5,8 @@
 <div class="left_sec"><h1>Create engaging videos <br> and make an impact</h1>
     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the </p>
     <div class="button_slide">
-        <button class="btn btn_rounded"  (click)="openPromotorForm()">I am a Promoter </button>
-        <button class="btn btn_rounded"  (click)="openInfluencerForm()">I am a Influencer </button>
+        <button class="btn btn_rounded"  (click)="openPromotorForm()" *ngIf="!this.login_service.is_logged_in" >I am a Promoter </button>
+        <button class="btn btn_rounded"  (click)="openInfluencerForm()" *ngIf="!this.login_service.is_logged_in" >I am a Influencer </button>
     </div>
 </div>
 <div class="right_sec"><img src="./assets/images/homeslide_1.png"></div>

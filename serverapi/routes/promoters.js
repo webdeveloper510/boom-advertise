@@ -37,7 +37,7 @@ console.log(req.body.promoter_signup);
                 promoterCreate.save(function (err, promoter) {
                 if (err) res.json({status:"failure",statusCode:100,msg:err});
             
-                res.json({status:"success",statusCode:200,data:promoter,msg:"Signup Successfully! Click login to continueee..."});
+                res.json({status:"success",statusCode:200,data:promoter,msg:"Signup & SignIn successfully!"});
               });
             }
           })
