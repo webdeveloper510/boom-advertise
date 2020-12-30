@@ -16,15 +16,9 @@ export class TopAuthenticInfluencersRankingComponent implements OnInit {
  
   }
 
-<<<<<<< Updated upstream
-  public data:any = [ ];
-  title1 = 'angulardatatables multiple filter';
-  positionList: string[] = ['Fb', 'Insta', 'Twitter','Tik-Tok'];
-=======
   data:any = [];
   title1 = 'angulardatatables  multiple filter';
   positionList: string[] = ['facebook', 'instagram', 'twitter','tiktok'];
->>>>>>> Stashed changes
   filterForm = new FormGroup({
     position: new FormControl(),
   });

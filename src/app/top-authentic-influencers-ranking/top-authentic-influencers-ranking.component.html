@@ -25,16 +25,16 @@
       <td>
      
         <div class="data1"> 
-          <div class="name"><p>{{group. name}}</p></div>
-          <div class="mail"><p>{{group.email}}</p></div>
+          <div class="name"><p>{{group.vals[0].name}}</p></div>
+          <div class="mail"><p>{{group.vals[0].email}}</p></div>
         </div>
       </td>
    
       <td> <ul>
-      <li *ngIf="group.tiktok"> Tiktok (30)  </li>
-      <li *ngIf="group.instagram"> Instagram (30) </li>
-      <li *ngIf="group.twitter"> Twitter (30) </li>  
-      <li *ngIf="group.facebook"> Facebook (30)  </li>
+      <li *ngIf="group.vals[0].tiktok"> Tiktok - <span><b>Followers:</b> {{group.tiktokfollowers}}</span>  </li>
+      <li *ngIf="group.vals[0].instagram"> Instagram - <span><b>Followers:</b> {{group.instagramfollowers}}</span> </li>
+      <li *ngIf="group.vals[0].twitter"> Twitter  - <span><b>Followers:</b> {{group.twitterfollowers}}</span> </li>  
+      <li *ngIf="group.vals[0].facebook"> Facebook -  <span><b>Followers:</b> {{group.facebookfollowers}}</span>  </li>
       </ul></td>
        </tr>
     </tbody>
