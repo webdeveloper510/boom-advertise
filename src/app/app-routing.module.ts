@@ -21,7 +21,7 @@ const routes: Routes = [
   path: 'my-account', component: MyAccountComponent
 },
 {
-  path: 'influencers-ranking', component: TopAuthenticInfluencersRankingComponent
+  path: 'influencers', component: TopAuthenticInfluencersRankingComponent
 }
  
 ];

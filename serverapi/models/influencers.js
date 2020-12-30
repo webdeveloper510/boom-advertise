@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const influencersSchema = new Schema({
-  id:  Boolean, // String is shorthand for {type: String}
+  id:  String, // String is shorthand for {type: String}
   name: String,
   email:   String,
   password:   String,
@@ -10,7 +10,8 @@ const influencersSchema = new Schema({
   instagram:   Boolean,
   facebook:   Boolean,
   twitter:   Boolean,
-  joindate:   Date
-});
+  joindate:   Date,
+}
+);
 const  influencers = mongoose.model('influencers', influencersSchema);
 module.exports = { influencers,influencersSchema } ;
