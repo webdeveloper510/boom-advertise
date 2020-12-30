@@ -8,24 +8,37 @@
  
   </form>
   <div class="outer_promote">
-  <table class="table table-striped table-bordered table-sm row-border hover" datatable [dtOptions]="dtOptions">
+  <table id="datatableexample" class="table table-striped table-bordered table-sm row-border hover" datatable [dtOptions]="dtOptions">
 
     <thead>
       <tr> 
         <th>Srno</th>
+        
         <th>Username</th>
-        <th>Followers</th>
+ 
         <th>Social Media</th>
       </tr>
     </thead>
     <tbody>
-     <tr *ngFor="let group of data">
-      <td>{{group.Srno}}</td>
-           <td><div class="image"><img src="/assets/images/loren-gray-x-things-you-never-knew-about-the-tiktok-star-1586962638-view-0.png"></div><div class="data"> <div class="name"><p>{{group.name}}</p></div><div class="mail"><p>{{group.email}}</p></div></div></td>
-           <td>{{group.Followers}}</td>
-           <td>{{group.socialmedia}}</td>
+     <tr *ngFor="let group of data ; index as i">
+      <td>{{i+1}}</td>
+      <td>
+     
+        <div class="data1"> 
+          <div class="name"><p>{{group. name}}</p></div>
+          <div class="mail"><p>{{group.email}}</p></div>
+        </div>
+      </td>
+   
+      <td> <ul>
+      <li *ngIf="group.tiktok"> Tiktok (30)  </li>
+      <li *ngIf="group.instagram"> Instagram (30) </li>
+      <li *ngIf="group.twitter"> Twitter (30) </li>  
+      <li *ngIf="group.facebook"> Facebook (30)  </li>
+      </ul></td>
        </tr>
     </tbody>
   </table>
+  
 </div>
 </div>

@@ -9,14 +9,22 @@ import { Router } from '@angular/router';
   styleUrls: ['./top-authentic-influencers-ranking.component.css']
 })
 export class TopAuthenticInfluencersRankingComponent implements OnInit {
+
   public socialmedia: string="";
+  public tiktok: string="";
   constructor(private InfluencersRankingService:InfluencersRankingService,private http : HttpClient,private router: Router,) { 
  
   }
 
+<<<<<<< Updated upstream
   public data:any = [ ];
   title1 = 'angulardatatables multiple filter';
   positionList: string[] = ['Fb', 'Insta', 'Twitter','Tik-Tok'];
+=======
+  data:any = [];
+  title1 = 'angulardatatables  multiple filter';
+  positionList: string[] = ['facebook', 'instagram', 'twitter','tiktok'];
+>>>>>>> Stashed changes
   filterForm = new FormGroup({
     position: new FormControl(),
   });
@@ -27,7 +35,10 @@ export class TopAuthenticInfluencersRankingComponent implements OnInit {
     status: ''
 }
   get position() { return this.filterForm.get('position'); }
-  dtOptions: DataTables.Settings = {};
+  
+  dtOptions: DataTables.Settings = {
+    
+  };
   ngOnInit() {
     this.influencers()
     this.dtOptions = {
@@ -44,7 +55,8 @@ export class TopAuthenticInfluencersRankingComponent implements OnInit {
            (response:any) =>{
            console.log(response)
          //  this.data1 = response['data']
-         this.data = response['data']
+         this.data = response['data'];
+        
          })
     }
     filter(){
@@ -54,12 +66,10 @@ export class TopAuthenticInfluencersRankingComponent implements OnInit {
 
       for(i =0; i < this.data.length; i++){
 
-        console.log(this.data[i].socialmedia);
+        console.log(this.data[i]);
       }
 
-    } 
-    value1(){
 
-    }       
-  
+    } 
+
 }
