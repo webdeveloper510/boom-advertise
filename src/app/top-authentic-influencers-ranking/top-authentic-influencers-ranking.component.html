@@ -1,4 +1,4 @@
-<div class="heading_sec1"> <h1>Top Authentic Influencers Ranking</h1></div>
+<div class="heading_sec1"> <h1> Authentic Influencers</h1></div>
 <div class="container-fluid main_out">
   <form [formGroup]="filterForm" class="social_media" >
     <label>Sort By Social Media: </label>
@@ -25,16 +25,17 @@
       <td>
      
         <div class="data1"> 
-          <div class="name"><p>{{group.vals[0].name}}</p></div>
+          <div class="image"><img src="/assets/images/total influeners.png"></div>
+          <div class="name"><p  [routerLink]="['/influencer-account']">{{group.vals[0].name}}</p></div>
           <div class="mail"><p>{{group.vals[0].email}}</p></div>
         </div>
       </td>
    
       <td> <ul>
-      <li *ngIf="group.vals[0].tiktok"> Tiktok - <span><b>Followers:</b> {{group.tiktokfollowers}}</span>  </li>
-      <li *ngIf="group.vals[0].instagram"> Instagram - <span><b>Followers:</b> {{group.instagramfollowers}}</span> </li>
-      <li *ngIf="group.vals[0].twitter"> Twitter  - <span><b>Followers:</b> {{group.twitterfollowers}}</span> </li>  
-      <li *ngIf="group.vals[0].facebook"> Facebook -  <span><b>Followers:</b> {{group.facebookfollowers}}</span>  </li>
+      <li *ngIf="group.vals[0].tiktok"> <img src="/assets/images/tiktok icon 2.png"> - <span><b>Followers:</b> {{group.tiktokfollowers}}</span>  </li>
+      <li *ngIf="group.vals[0].instagram"> <img src="/assets/images/insta iconn 2.png"> - <span><b>Followers:</b> {{group.instagramfollowers}}</span> </li>
+      <li *ngIf="group.vals[0].twitter"> <img src="/assets/images/twitter 2.png">  - <span><b>Followers:</b> {{group.twitterfollowers}}</span> </li>  
+      <li *ngIf="group.vals[0].facebook"> <img src="/assets/images/fb icon 2.png"> -  <span><b>Followers:</b> {{group.facebookfollowers}}</span>  </li>
       </ul></td>
        </tr>
     </tbody>

@@ -2,7 +2,7 @@
     content: "";
     background: #fff952;
     position: absolute;
-    width: 48%;
+    width: 33%;
     height: 18px;
     top: 38px;
     margin: 0 auto;
@@ -93,6 +93,21 @@
 }
 table#datatableexample UL LI {
     FONT-SIZE: 19PX;
-    MARGIN-RIGHT: 19PX;
-    list-style:none;
+    MARGIN-RIGHT: 23PX;
+    list-style: none;
+    display: inline-block;
+    width: 44%;
+    margin-bottom: 6px;
+}
+li img {
+    width: 29px;
+    margin-right: 5px;
+}
+.name {
+    width: 66%;
+    float: left;
+    cursor: pointer;
+}
+.name p:focus {
+    outline:unset;
 }
