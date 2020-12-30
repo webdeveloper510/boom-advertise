@@ -111,3 +111,10 @@ li img {
 .name p:focus {
     outline:unset;
 }
+
+.data1{
+    cursor: pointer;
+}
+.data1:focus{
+    outline:unset;
+}

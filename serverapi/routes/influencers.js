@@ -114,5 +114,12 @@ console.log(req.body.influencer_signup);
 
      });
 
+     router.post('/singleInfluencer', function(req, res) {
+      influencer.influencers.find({_id:req.body.id}, function(err, influencer_data) {
+        if (err)  res.json({status:"failure",statusCode:100,error:err});
+        res.json({status:"success",statusCode:200,data:influencer_data});
+      });
+    });
+
 
     module.exports = router;
