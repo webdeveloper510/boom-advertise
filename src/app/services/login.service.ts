@@ -22,7 +22,7 @@ export class LoginService {
   }
   
   saveAccessToken(oauthToken: string, oauthVerifier: string) {
-    return this.http.get(this.apiUrl+`/sessions/saveAccessTokens?oauth_token=${oauthToken}&oauth_verifier=${oauthVerifier}`)
+    return this.http.post(this.apiUrl+`/sessions/saveAccessTokens`,{oauth_token:oauthToken,oauth_verifier:oauthVerifier})
   }
 
 

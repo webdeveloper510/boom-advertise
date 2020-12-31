@@ -66,7 +66,11 @@ export class HeaderComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe(params => {
       const oauthVerifier = params['oauth_verifier'];
       const oauthToken = params['oauth_token'];
+      
+      
       if (oauthToken && oauthVerifier) {
+        console.log("vijay rana");
+        console.log(params);
         this.saveAccessToken(oauthToken, oauthVerifier);
       }
     });
@@ -96,8 +100,13 @@ export class HeaderComponent implements OnInit {
   closeSignupForm(){ this.signup_form = false; }
 
 
-  onSubmit1() {
+  onSubmit(number:any = "") {
+   
+    if(number != 1){
 
+      alert("vijayh");
+      return;
+    }
     
     console.log(this.signin.value);
     let data = this.signin.value
