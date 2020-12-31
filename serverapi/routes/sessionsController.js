@@ -6,6 +6,11 @@ const _twitterConsumerKey = process.env.TWITTER_CONSUMER_KEY;
 const _twitterConsumerSecret = process.env.TWITTER_CONSUMER_SECRET;
 const twitterCallbackUrl = process.env.TWITTER_CALLBACK_URL;
 const consumer = new oauth.OAuth("https://twitter.com/oauth/request_token", "https://twitter.com/oauth/access_token",_twitterConsumerKey, _twitterConsumerSecret, "1.0A", twitterCallbackUrl, "HMAC-SHA1");
+
+//var url = require('url');
+//var url_parts = url.parse(request.url, true);
+//var query = url_parts.query;
+
 router.get('/connect', (req, res) => {
   consumer.getOAuthRequestToken(function (error, oauthToken,   oauthTokenSecret, results) {
     if (error) {
@@ -20,7 +25,7 @@ redirectUrl: `https://twitter.com/oauth/authorize?oauth_token=${req.session.oaut
     }
   });
 });
-router.get('/saveAccessTokens', (req, res) => {
+router.post('/saveAccessTokens', (req, res) => {
   consumer.getOAuthAccessToken(
   req.body.oauth_token,
   req.session.oauthRequestTokenSecret,
