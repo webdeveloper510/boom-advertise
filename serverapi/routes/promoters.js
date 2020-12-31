@@ -37,13 +37,20 @@ console.log(req.body.promoter_signup);
                 promoterCreate.save(function (err, promoter) {
                 if (err) res.json({status:"failure",statusCode:100,msg:err});
             
-                res.json({status:"success",statusCode:200,data:promoter,msg:"Signup Successfully! Click login to continueee..."});
+                res.json({status:"success",statusCode:200,data:promoter,msg:"Signup & SignIn successfully!"});
               });
             }
           })
         }
       }); 
       
+    });
+
+    router.post('/singlePromoter', function(req, res) {
+      promoter.promoters.find({_id:req.body.id}, function(err, promoter_data) {
+        if (err)  res.json({status:"failure",statusCode:100,error:err});
+        res.json({status:"success",statusCode:200,data:promoter_data});
+      });
     });
 
     module.exports = router;

@@ -321,3 +321,18 @@ li.nav-item a {
     border-radius: 7px;
     text-align: center;
 }
+
+div#DataTables_Table_0_paginate {
+    background: #000000;
+    padding: 10px;
+    margin-top: 4px;
+}
+
+div#DataTables_Table_0_paginate a {
+    color: #fff952 !important;
+}
+
+a.paginate_button.current {
+    background: #1c8bbf !important;
+    border: unset !important;
+}

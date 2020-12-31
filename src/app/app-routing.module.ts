@@ -21,12 +21,9 @@ const routes: Routes = [
   path: 'my-account', component: MyAccountComponent
 },
 {
-  path: 'influencers-ranking', component: TopAuthenticInfluencersRankingComponent
-},
-{
-  path:'privacy-policy' , component : PrivacyComponent
+  path: 'influencers', component: TopAuthenticInfluencersRankingComponent
 }
-
+ 
 ];
 
 @NgModule({

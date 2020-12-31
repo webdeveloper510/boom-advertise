@@ -30,8 +30,6 @@
     margin: 0 auto;
     padding: 30px;
     border-radius: 7px;
-    display: inline-block;
-    margin-left: 12px;
     margin-bottom: 35px;
 }
 .box_2.border-size {
@@ -47,9 +45,9 @@
     float: right;
 }
 .image_circle {
-    width: 175px;
+    width: 121px;
     border-radius: 50%;
-    height: 175px;
+    height: 121px;
     text-align: center;
     display: block;
     margin: 0 auto;
@@ -263,4 +261,57 @@ p.discription {
 
 .section_1:last-child {
     margin-right: 0 !important;
+}
+.outer_promote {
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 27px;
+    margin-top: 28px;
+}   
+
+.outer_promote table th {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500!important;
+    font-size: 21px;
+    line-height: 45px;
+/* identical to box height */
+    color: #787878;
+    text-align: center;
+}
+
+.outer_promote table tr td {
+    font-family: Source Sans Pro;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 21px;
+    line-height: 38px;
+    text-align: center;
+    color: #000000;
+    vertical-align: middle;
+}
+.image {
+    margin: 0 auto;
+    float: left;
+    margin-left: 36px;
+    border-radius: 50%;
+    text-align: center;
+    width: 72px;
+    height: 71px;
+}
+.image img {
+    width: 100%;
+    border-radius: 50%;
+    height: 100%;
+}
+.data {
+    width: 55%;
+    float: left;
+}
+.mail {
+    font-family: Source Sans Pro;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 01;
+    color: #FF0000;
 }

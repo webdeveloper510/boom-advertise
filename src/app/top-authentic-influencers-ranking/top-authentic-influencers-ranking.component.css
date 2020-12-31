@@ -2,7 +2,7 @@
     content: "";
     background: #fff952;
     position: absolute;
-    width: 48%;
+    width: 33%;
     height: 18px;
     top: 38px;
     margin: 0 auto;
@@ -21,4 +21,100 @@
     color: #000000;
     text-align: center;
     position: relative;
+}
+.social_media {
+    position: absolute;
+    right: 0;
+    width: max-content;
+    z-index: 99;
+    left: 0;
+    margin: 0 auto;
+    text-align: center;
+}
+.main_out {
+    width: 80%;
+    margin-top: 46px;
+    margin-bottom: 46px;
+}
+
+
+.social_media label {
+    margin-right: 8px;
+    font-size: 16px;
+    font-family: Poppins;
+}
+
+.social_media select {width: 111px;height: 26px;}
+.image {
+    margin: 0 auto;
+    float: left;
+    margin-left: 36px;
+    border-radius: 50%;
+    text-align: center;
+    width: 72px;
+    height: 71px;
+}
+.image img {
+    width: 100%;
+    border-radius: 50%;
+    height: 100%;
+}
+.data {
+    width: 55%;
+    float: left;
+}
+.mail {
+    font-family: Source Sans Pro;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 01;
+    color: #FF0000;
+}
+.outer_promote table th {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: 500!important;
+    font-size: 21px;
+    line-height: 45px;
+/* identical to box height */
+    color: #787878;
+    text-align: center;
+}
+
+.outer_promote table tr td {
+    font-family: Source Sans Pro;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 21px;
+    line-height: 38px;
+    text-align: center;
+    color: #000000;
+    vertical-align: middle;
+}
+table#datatableexample UL LI {
+    FONT-SIZE: 19PX;
+    MARGIN-RIGHT: 23PX;
+    list-style: none;
+    display: inline-block;
+    width: 44%;
+    margin-bottom: 6px;
+}
+li img {
+    width: 29px;
+    margin-right: 5px;
+}
+.name {
+    width: 66%;
+    float: left;
+    cursor: pointer;
+}
+.name p:focus {
+    outline:unset;
+}
+
+.data1{
+    cursor: pointer;
+}
+.data1:focus{
+    outline:unset;
 }

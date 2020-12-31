@@ -5,7 +5,7 @@
     <ul>
           <li [routerLink]="['/']">Home</li>
           <li>About</li>
-          <li [routerLink]="['/influencer-account']">Influencers </li>
+          <li [routerLink]="['/influencers']">Influencers </li>
           <li  [routerLink]="['/']"><img src="./assets/images/logo.png"/></li>
           <li>Contact Us </li>
           <li  (click)="openLoginForm()" *ngIf="!this.loginservice.is_logged_in">LogIn</li>
