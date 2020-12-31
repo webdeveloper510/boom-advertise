@@ -32,10 +32,6 @@ import {DataTablesModule} from 'angular-datatables';
 //   MAT_DIALOG_DEFAULT_OPTIONS,
 // } from '@angular/material';
 
-@NgModule({
-
-
-
 @NgModule({ 
   declarations: [
     AppComponent,

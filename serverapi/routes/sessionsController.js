@@ -20,14 +20,14 @@ redirectUrl: `https://twitter.com/oauth/authorize?  oauth_token=${req.session.oa
     }
   });
 });
-router.get('/saveAccessTokens', authCheck, (req, res) => {
+router.get('/saveAccessTokens', (req, res) => {
   consumer.getOAuthAccessToken(
-  req.query.oauth_token,
+  req.body.oauth_token,
   req.session.oauthRequestTokenSecret,
-  req.query.oauth_verifier,
+  req.body.oauth_verifier,
   (error, oauthAccessToken, oauthAccessTokenSecret, results) => {
     if (error) {
-      logger.error(error);
+     // logger.error(error);
       res.send(error, 500);
     }
     else {
