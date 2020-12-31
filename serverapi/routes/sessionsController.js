@@ -14,7 +14,7 @@ router.get('/connect', (req, res) => {
       req.session.oauthRequestToken = oauthToken;
       req.session.oauthRequestTokenSecret = oauthTokenSecret;
       const redirect = { 
-redirectUrl: `https://twitter.com/oauth/authorize?  oauth_token=${req.session.oauthRequestToken}`
+redirectUrl: `https://twitter.com/oauth/authorize?oauth_token=${req.session.oauthRequestToken}`
     }
       res.send(redirect);
     }
