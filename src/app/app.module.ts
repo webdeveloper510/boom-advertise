@@ -22,8 +22,15 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { PromoterAccountComponent } from './promoter-account/promoter-account.component';
 import { FormcustomComponent } from './formcustom/formcustom.component';
 import { TopAuthenticInfluencersRankingComponent } from './top-authentic-influencers-ranking/top-authentic-influencers-ranking.component';
+import { PrivacyComponent } from './privacy/privacy.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+//import { MatButtonModule} from '@angular/material/button';
 
-
+// import {
+  
+//   MatTableModule,
+//   MAT_DIALOG_DEFAULT_OPTIONS,
+// } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -38,7 +45,9 @@ import { TopAuthenticInfluencersRankingComponent } from './top-authentic-influen
     InfluencerAccountComponent,
     PromoterAccountComponent,
     FormcustomComponent,
-    TopAuthenticInfluencersRankingComponent
+    TopAuthenticInfluencersRankingComponent,
+    PrivacyComponent,
+    PrivacyComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +58,7 @@ import { TopAuthenticInfluencersRankingComponent } from './top-authentic-influen
     BsDropdownModule, 
     TabsModule,
     HttpClientModule,
-    
+    BrowserAnimationsModule,
     
 
   ],

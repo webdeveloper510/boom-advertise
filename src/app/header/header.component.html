@@ -22,7 +22,7 @@
           <div class="promoter_signup">
             <h2>SignIn</h2>
             <p>Welcome Back !</p>
-            <form [formGroup]="signin" (ngSubmit)="onSubmit()"> 
+            <form [formGroup]="signin" (ngSubmit)="onSubmit1()"> 
               <div formGroupName="signin">
                 <input type="email" formControlName="email" placeholder="Email" required>
                 <input type="password" formControlName="password" placeholder="Password" required>
@@ -40,6 +40,9 @@
                 <p class="center_text">* We will not provide your information to any third party and will never sell it.
                 </p>
                 <p class="have_account">Don’t have an account ? <b><u>SIGNUP</u></b></p>
+                <div>
+                  <button (click)='redirectToTwitter()'>Connect to Twitter Account</button>
+                </div>
               </div>
             </form>
           </div>     

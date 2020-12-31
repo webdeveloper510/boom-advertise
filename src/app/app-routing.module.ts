@@ -5,7 +5,7 @@ import { InfluencerAccountComponent } from './influencer-account/influencer-acco
 import { MyAccountComponent } from './my-account/my-account.component';
 import { PromoterAccountComponent } from './promoter-account/promoter-account.component';
 import { TopAuthenticInfluencersRankingComponent } from './top-authentic-influencers-ranking/top-authentic-influencers-ranking.component';
-
+import { PrivacyComponent } from './privacy/privacy.component';
 const routes: Routes = [
  { path: '', pathMatch: 'full' ,  component: HomeComponent},
   {
@@ -22,6 +22,9 @@ const routes: Routes = [
 },
 {
   path: 'influencers-ranking', component: TopAuthenticInfluencersRankingComponent
+},
+{
+  path:'privacy-policy' , component : PrivacyComponent
 }
 
 ];

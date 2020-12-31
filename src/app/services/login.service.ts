@@ -1,18 +1,28 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  apiUrl : string = "http://localhost:3000";
+  apiUrl : string = `${environment.apiUrl}`;
   user_id : any ;
   is_logged_in : boolean  = false;
   local_storage_key : string = "login_user_data";
   constructor(private http : HttpClient) { 
     
+    console.log();
     //this.loginCheck();
+  }
+
+  getRedirectUrl() {
+
+    return this.http.get(this.apiUrl+`/sessions/connect`)
+  }
+  
+  saveAccessToken(oauthToken: string, oauthVerifier: string) {
+    return this.http.get(this.apiUrl+`/sessions/saveAccessTokens?oauth_token=${oauthToken}&oauth_verifier=${oauthVerifier}`)
   }
 
 

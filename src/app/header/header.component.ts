@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup} from '@angular/forms';
 import { LoginService } from '../services/login.service';
 import {HttpClient} from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router ,ActivatedRoute } from '@angular/router';
 import { applySourceSpanToExpressionIfNeeded } from '@angular/compiler/src/output/output_ast';
 import { WorkerRegisterService } from '../services/worker-register.service';
 
@@ -13,14 +13,7 @@ import { WorkerRegisterService } from '../services/worker-register.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(
-    public loginservice:LoginService,
-    private http : HttpClient,
-    private router: Router,
-    private workerregister:WorkerRegisterService,
-  ) { }
-
-    is_login : boolean =  false;
+  is_login : boolean =  false;
   // Login variables start 
 
   login_form : boolean  = false;
@@ -62,6 +55,38 @@ export class HeaderComponent implements OnInit {
       })
     });
 
+  constructor(
+    public loginservice:LoginService,
+    private http : HttpClient,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private workerregister:WorkerRegisterService,
+  ) { 
+
+    this.activatedRoute.queryParams.subscribe(params => {
+      const oauthVerifier = params['oauth_verifier'];
+      const oauthToken = params['oauth_token'];
+      if (oauthToken && oauthVerifier) {
+        this.saveAccessToken(oauthToken, oauthVerifier);
+      }
+    });
+  }
+
+  saveAccessToken(oauthToken: string, oauthVerifier: string) {
+    this.loginservice.saveAccessToken(oauthToken, oauthVerifier).subscribe(res => {
+    alert('Token saved');
+    })
+  }
+
+  redirectToTwitter() {
+    
+    this.loginservice.getRedirectUrl().subscribe((res: any) => {
+      location.href = res.redirectUrl;
+    })
+  }
+
+
+
   ngOnInit(): void {
   }
 
@@ -71,10 +96,9 @@ export class HeaderComponent implements OnInit {
   closeSignupForm(){ this.signup_form = false; }
 
 
-  onSubmit() {
+  onSubmit1() {
 
     
-   
     console.log(this.signin.value);
     let data = this.signin.value
     this.loginservice.login(data)
@@ -157,6 +181,10 @@ export class HeaderComponent implements OnInit {
       }
     );
   }
+
+  
+
+
 
   logOut(){
     this.loginservice.logOut();
