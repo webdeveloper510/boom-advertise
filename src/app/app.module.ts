@@ -25,7 +25,7 @@ import { TopAuthenticInfluencersRankingComponent } from './top-authentic-influen
 import { PrivacyComponent } from './privacy/privacy.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //import { MatButtonModule} from '@angular/material/button';
-import {DataTablesModule} from 'angular-datatables';
+//import {DataTablesModule} from 'angular-datatables';
 // import {
   
 //   MatTableModule,
@@ -59,7 +59,7 @@ import {DataTablesModule} from 'angular-datatables';
     TabsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    DataTablesModule
+   // DataTablesModule
     
     
     
