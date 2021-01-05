@@ -22,7 +22,7 @@
           <div class="promoter_signup">
             <h2>SignIn</h2>
             <p>Welcome Back !</p>
-            <form [formGroup]="signin" (ngSubmit)="onSubmit('1')"> 
+            <form [formGroup]="signin" (ngSubmit)="onSubmit()"> 
               <div formGroupName="signin">
                 <input type="email" formControlName="email" placeholder="Email" required>
                 <input type="password" formControlName="password" placeholder="Password" required>

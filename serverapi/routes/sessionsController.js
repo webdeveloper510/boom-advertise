@@ -36,9 +36,31 @@ router.post('/saveAccessTokens', (req, res) => {
       res.send(error, 500);
     }
     else {
-      req.session.oauthAccessToken = oauthAccessToken;
-      req.session.oauthAccessTokenSecret = oauthAccessTokenSecret
-      return res.send({ message: 'token saved' });
+      req.session.oauthAccessToken        = oauthAccessToken;
+      req.session.oauthAccessTokenSecret  = oauthAccessTokenSecret;
+      return res.send(results);
+      // var Twitter = require('twitter');
+
+      // const client = new Twitter({
+      //     consumer_key: _twitterConsumerKey,
+      //     consumer_secret: _twitterConsumerSecret,
+      //     access_token: req.body.oauth_token,
+      //     access_token_secret: req.body.oauth_verifier
+      //   });
+      
+   
+      // client.get('account/verify_credentials',{ skip_status: false }).then(user => {
+      //   return res.send(user)
+      // }).catch(error => {
+      //   return res.send(error);
+      // });
+      
+      // return res.send({
+      //   consumer_key: _twitterConsumerKey,
+      //   consumer_secret: _twitterConsumerSecret,
+      //   access_token: req.body.oauth_token,
+      //   access_token_secret: req.body.oauth_verifier,
+      // });
     }
   });
 });
