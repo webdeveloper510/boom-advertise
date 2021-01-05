@@ -178,5 +178,12 @@ export class HomeComponent implements OnInit {
 
   }
 
+  redirectToTwitter() {
+    
+    this.login_service.getRedirectUrl().subscribe((res: any) => {
+      location.href = res.redirectUrl;
+    })
+  }
+
 }
 
