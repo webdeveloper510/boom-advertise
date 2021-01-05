@@ -183,11 +183,14 @@
                                           <p>Followers</p>
                                           <input type="number" formControlName="fb_followers" class="input_all"/></div>
                                           </li> 
-                                          <li><input type="checkbox" class="checkboxes alll" id="twitter" formControlName="twitter" (click)="clickedon3()">
+                                          <li>
+                                            <img (click)='redirectToTwitter()' src="/assets/images/twitter 2.png"> 
+                                            <!--button (click)='redirectToTwitter()'>Twitter</button-->
+                                              <!---input type="checkbox" class="checkboxes alll" id="twitter" formControlName="twitter" (click)="clickedon3()">
                                             <img src="/assets/images/twitter 2.png"> 
                                              <div class="box_in" [style.display]="twitter ? 'block' : 'none'">
                                             <p>Followers</p>
-                                            <input type="number" formControlName="twitter_followers" class="input_all"/></div>
+                                            <input type="number" formControlName="twitter_followers" class="input_all"/></div--->
                                             </li> 
                                          
                                     </ul>

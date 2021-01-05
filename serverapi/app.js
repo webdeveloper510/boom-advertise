@@ -4,6 +4,15 @@ var bodyParser = require('body-parser');
 var path = require('path');
 var cors = require('cors');
 
+const Twitter = require('twit');
+const client = new Twitter({
+  consumer_key: 'PwtlyF8xzKLgIPNDwS42nL87G',
+  consumer_secret: 'hg9QMATkfZp0ZW3K5TXRFvwfsMCe5JChzlbf2Tb3JjL7rJCWUc',
+  access_token: '1344238274177617920-piB0c83dH5ofjZpLYkQdlTEpmvm09Q',
+  access_token_secret: 'ld4Y9vi6Txj1mULJapoix0wiHVuA03KyNaB7WviHZEKFd'
+});
+
+
 /** */
 require("@babel/register");
 
@@ -19,7 +28,7 @@ var promoters = require('./routes/promoters');
 var workers = require('./routes/workers');
 var influencers = require('./routes/influencers');
 var login = require('./routes/login');
-const sessions = require('./routes/sessionsController');
+var sessions = require('./routes/sessionsController');
 
 var app = express();
 app.get('/', (req, res) => {
@@ -64,6 +73,13 @@ app.use('/sessions', sessions);
 // app.listen(8080, () => {
 //   console.log('App running on port 8080!');
 // });
+app.get('/api/user', (req, res) => {
+  client.get('account/verify_credentials').then(user => {
+    res.send(user)
+  }).catch(error => {
+    res.send(error);
+  });
+});
 
 
 module.exports = app;
