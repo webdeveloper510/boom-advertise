@@ -77,11 +77,6 @@ export class HeaderComponent implements OnInit {
 
   saveAccessToken(oauthToken: string, oauthVerifier: string) {
     this.loginservice.saveAccessToken(oauthToken, oauthVerifier).subscribe(res => {
-<<<<<<< HEAD
-=======
-    alert('Token saved');
-    console.log("result");
->>>>>>> 1bcf4f566f961a8009796efe0318f9f1052dff2b
     console.log(res);
     })
   }

@@ -4,10 +4,6 @@
 
 export const environment = {
   production: false,
-<<<<<<< HEAD
-=======
-  //apiUrl : "http://boomadvertise.com"
->>>>>>> 1bcf4f566f961a8009796efe0318f9f1052dff2b
   apiUrl : "http://localhost:3000"
 };
 
