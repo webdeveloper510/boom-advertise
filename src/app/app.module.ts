@@ -24,6 +24,7 @@ import { FormcustomComponent } from './formcustom/formcustom.component';
 import { TopAuthenticInfluencersRankingComponent } from './top-authentic-influencers-ranking/top-authentic-influencers-ranking.component';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 //import { MatButtonModule} from '@angular/material/button';
 //import {DataTablesModule} from 'angular-datatables';
 // import {
