@@ -24,7 +24,9 @@ import { FormcustomComponent } from './formcustom/formcustom.component';
 import { TopAuthenticInfluencersRankingComponent } from './top-authentic-influencers-ranking/top-authentic-influencers-ranking.component';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+//import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import { SocialLoginModule, SocialAuthServiceConfig} from "angularx-social-login";
+import { FacebookLoginProvider } from "angularx-social-login";
 //import { MatButtonModule} from '@angular/material/button';
 //import {DataTablesModule} from 'angular-datatables';
 // import {
@@ -32,6 +34,7 @@ import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-logi
 //   MatTableModule,
 //   MAT_DIALOG_DEFAULT_OPTIONS,
 // } from '@angular/material';
+
 
 @NgModule({ 
   declarations: [
@@ -60,13 +63,37 @@ import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-logi
     TabsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    SocialLoginModule
    // DataTablesModule
-    
-    
-    
 
   ],
-  providers: [],
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('203844031476846')
+          }
+        ]
+      } as SocialAuthServiceConfig,
+    }
+  ],
   bootstrap: [AppComponent] 
+
 })
+
+
+
+
+
+
+
+
+
+
+
+
 export class AppModule { }

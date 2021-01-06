@@ -52,3 +52,5 @@
 ::1 - - [Tue, 05 Jan 2021 11:19:16 GMT] "GET /sessions/connect HTTP/1.1" 200 93 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"
 ::1 - - [Tue, 05 Jan 2021 11:19:17 GMT] "GET /sessions/connect HTTP/1.1" 200 93 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"
 ::1 - - [Tue, 05 Jan 2021 11:19:23 GMT] "POST /sessions/saveAccessTokens HTTP/1.1" 200 5487 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"
+::1 - - [Tue, 05 Jan 2021 12:18:43 GMT] "GET /sessions/connect HTTP/1.1" 200 93 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"
+::1 - - [Tue, 05 Jan 2021 12:18:58 GMT] "POST /sessions/saveAccessTokens HTTP/1.1" 200 5487 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"

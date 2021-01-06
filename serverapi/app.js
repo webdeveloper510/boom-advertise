@@ -3,14 +3,16 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var path = require('path');
 var cors = require('cors');
+// const jwt = require('jsonwebtoken');
+// const expressJwt = require('express-jwt');
 
-const Twitter = require('twit');
-const client = new Twitter({
-  consumer_key: 'PwtlyF8xzKLgIPNDwS42nL87G',
-  consumer_secret: 'hg9QMATkfZp0ZW3K5TXRFvwfsMCe5JChzlbf2Tb3JjL7rJCWUc',
-  access_token: '1344238274177617920-piB0c83dH5ofjZpLYkQdlTEpmvm09Q',
-  access_token_secret: 'ld4Y9vi6Txj1mULJapoix0wiHVuA03KyNaB7WviHZEKFd'
-});
+// const Twitter = require('twit');
+// const client = new Twitter({
+//   consumer_key: 'PwtlyF8xzKLgIPNDwS42nL87G',
+//   consumer_secret: 'hg9QMATkfZp0ZW3K5TXRFvwfsMCe5JChzlbf2Tb3JjL7rJCWUc',
+//   access_token: '1344238274177617920-piB0c83dH5ofjZpLYkQdlTEpmvm09Q',
+//   access_token_secret: 'ld4Y9vi6Txj1mULJapoix0wiHVuA03KyNaB7WviHZEKFd'
+// });
 
 
 /** */
@@ -23,6 +25,13 @@ const logger = require('express-logger');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 /** */
+
+// const corsOption = {
+//   origin: true,
+//   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+//   credentials: true,
+//   exposedHeaders: ['x-auth-token']
+// };
 
 var promoters = require('./routes/promoters');
 var workers = require('./routes/workers');
@@ -60,7 +69,45 @@ app.use('/login', login);
 
 /** */
 
-app.use(logger({ path: "log/express.log" }));
+// const authenticate = expressJwt({
+//   secret: process.env.EXPRESS_JWT_SECRET,
+//   requestProperty: 'auth',
+//   getToken: (req) => {
+//       if(req.headers['x-auth-token']) {
+//           return req.headers['x-auth-token'];
+//       }
+//       return null;
+//   }
+// });
+
+
+
+// const getCurrentUser = async (req, res, next) => {
+//   try {   
+//       const user = await User.findById(req.auth.id);
+//       req.user = user;
+//       next();
+//   } catch(error) {
+//       next(error);
+//   }
+// };
+
+// const getSingle = (req, res) => {
+//   const user = req.user.toObject();
+//   delete user['facebook'];
+//   delete user['__v'];
+//   res.json(user);
+// };
+
+// app.use('/users', require('./routes/users'));
+
+// router.route('/auth/me')
+//     .get(authenticate, getCurrentUser, getSingle);
+
+// app.use('/api', router);
+
+
+//app.use(logger({ path: "log/express.log" }));
 app.use(cookieParser());
 app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: true }));
 app.use((req, res, next) => {
@@ -73,13 +120,15 @@ app.use('/sessions', sessions);
 // app.listen(8080, () => {
 //   console.log('App running on port 8080!');
 // });
-app.get('/api/user', (req, res) => {
-  client.get('account/verify_credentials').then(user => {
-    res.send(user)
-  }).catch(error => {
-    res.send(error);
-  });
-});
+
+
+// app.get('/api/user', (req, res) => {
+//   client.get('account/verify_credentials').then(user => {
+//     res.send(user)
+//   }).catch(error => {
+//     res.send(error);
+//   });
+// });
 
 
 module.exports = app;

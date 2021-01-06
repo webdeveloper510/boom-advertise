@@ -5,7 +5,8 @@ import { FormControl, FormGroup} from '@angular/forms';
 import { Router } from '@angular/router';
 import { InfluencerRegisterService } from '../services/influencer-register.service';
 import { LoginService } from '../services/login.service';
-
+import { SocialAuthService } from "angularx-social-login";
+import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
 
 @Component({
   selector: 'app-home',
@@ -21,13 +22,13 @@ export class HomeComponent implements OnInit {
                 private router: Router,
                 private influregservice:InfluencerRegisterService,
                 public login_service:LoginService,
-                ) {
+                private authService: SocialAuthService
+                )
+                
+                {
 
                   this.is_logged_in = login_service.is_logged_in;
-   
-
-
-  }
+                }
 
   ngOnInit(): void {
   }
@@ -184,6 +185,28 @@ export class HomeComponent implements OnInit {
       location.href = res.redirectUrl;
     })
   }
+
+  //  fbLogin() {
+  //   this.login_service.fbLogin().then(() => {
+  //     console.log('Called service from login component');
+  //     // console.log(response);
+  //    // ---this.router.navigate(['dashboard']);
+  //   });
+  // }
+
+  signInWithFB(): void {
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+  }
+
+
+
+
+
+
+
+
+
+
 
 }
 
