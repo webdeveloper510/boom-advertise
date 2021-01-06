@@ -112,7 +112,9 @@ export class HomeComponent implements OnInit {
 
     console.log(this.login_service.is_logged_in);
 
-    let data = this.profileForm.value
+    console.log(this.profileForm.value);
+   
+    let data = this.profileForm.value;
     this.proregservice.register(data)
     .subscribe(
       (response:any) => {                           
@@ -144,13 +146,38 @@ export class HomeComponent implements OnInit {
 
   influencerSignup(){
 
-    console.warn(this.influencer.value);
+    
     console.log(this.influencer.value);
+    
+    let twitter = this.influencer.value.influencer_signup.twitter;
+    let tiktok = this.influencer.value.influencer_signup.tiktok;
+    let instagram = this.influencer.value.influencer_signup.insta;
+    let facebook = this.influencer.value.influencer_signup.fb;
+
+    let local_midia_check:any= {twitter:false,facebook:false,tiktok:false,instagram:false};
+    
+    local_midia_check.twitter = twitter ? true : false;
+    local_midia_check.tiktok  = tiktok ? true : false;
+    local_midia_check.instagram  = instagram ? true : false;
+    local_midia_check.facebook  = facebook ? true : false;
+
+    this.influencer.value.influencer_signup.twitter = local_midia_check.twitter;
+    this.influencer.value.influencer_signup.tiktok= local_midia_check.tiktok;
+    this.influencer.value.influencer_signup.insta= local_midia_check.instagram;
+    this.influencer.value.influencer_signup.fb= local_midia_check.facebook;
+    
     let data = this.influencer.value
     this.influregservice.register(data)
     .subscribe(
       (response:any) => {                           
         if(response['status'] == 'success'){
+
+          console.log(response);
+          localStorage.setItem("local_midia_check", JSON.stringify(local_midia_check));
+
+          localStorage.setItem('login_userid',response["data"]['_id']);
+          localStorage.setItem('logindata',JSON.stringify(response["data"]));
+
           this.influnncer_success_message = response['msg'];
           this.is_login = true;
           this.influnncer_success_div = true;
@@ -158,9 +185,18 @@ export class HomeComponent implements OnInit {
           this.influencer.reset();
           this.login_service.is_logged_in = true;
           
+
+
           setTimeout (() => {
             this.influnncer_success_div = false;
             this.influnncer_login_form = false;
+
+            if(local_midia_check.twitter == true){
+
+              this.redirectToTwitter();
+             
+            }
+
             this.router.navigate(['/']);
           }, 3000)
           
