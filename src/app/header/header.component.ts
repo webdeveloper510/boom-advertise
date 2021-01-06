@@ -84,7 +84,17 @@ export class HeaderComponent implements OnInit {
   saveAccessToken(oauthToken: string, oauthVerifier: string) {
     this.loginservice.saveAccessToken(oauthToken, oauthVerifier).subscribe(res => {
     console.log(res);
-    this.router.navigate(['/my-account']);
+ 
+    let local = localStorage.getItem('local_midia_check');
+    var new1 = JSON.parse(local);
+    console.log('terimehar');
+    console.log(local);
+   // console.log(local.facebook);
+     //if(local.facebook == true){
+     // this.router.navigate(['/influencers']);
+    // }
+   // this.router.navigate(['/my-account']);
+
     })
   }
 

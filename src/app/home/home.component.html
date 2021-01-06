@@ -176,7 +176,9 @@
                                         <input type="number" formControlName="insta_followers" class="input_all"/></div> -->
                                         </li>
                                         
-                                        <li><input type="checkbox" class="checkboxes" id="fb" formControlName="fb" (click)="clickedon2()">
+                                        <li>
+                                            <button (click)="signInWithFB()" class="btn btn-primary">Login Facebook</button>
+                                            <input type="checkbox" class="checkboxes" id="fb" formControlName="fb" (click)="clickedon2()">
                                           <img src="/assets/images/fb icon 2.png">
                                           <!-- <div class="box_in" [style.display]="fb ? 'block' : 'none'">
                                           <p>Followers</p>

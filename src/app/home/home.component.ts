@@ -194,7 +194,8 @@ export class HomeComponent implements OnInit {
 
             if(local_midia_check.twitter == true){
 
-              this.redirectToTwitter();
+             this.redirectToTwitter();
+             // this.signInWithFB();
              
             }
 
