@@ -61,7 +61,13 @@ export class HeaderComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private workerregister:WorkerRegisterService,
-  ) { 
+  ) {
+    
+    let user_id = localStorage.getItem('login_userid');
+
+    if(user_id){
+      this.loginservice.is_logged_in = true;
+    }
 
     this.activatedRoute.queryParams.subscribe(params => {
       const oauthVerifier = params['oauth_verifier'];
@@ -78,6 +84,7 @@ export class HeaderComponent implements OnInit {
   saveAccessToken(oauthToken: string, oauthVerifier: string) {
     this.loginservice.saveAccessToken(oauthToken, oauthVerifier).subscribe(res => {
     console.log(res);
+    this.router.navigate(['/my-account']);
     })
   }
 
