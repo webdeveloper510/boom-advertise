@@ -13,6 +13,9 @@ export class LoginService {
   user_id : any ;
   is_logged_in : boolean  = false;
   local_storage_key : string = "login_user_data";
+  local_storage_login_userid_key : string = "login_userid";
+  local_storage_logindata_key : string = "logindata";
+  local_storage_local_midia_check_key : string = "local_midia_check";
   constructor(private http : HttpClient) { 
     // FB.init({
     //   appId :  '203844031476846',
@@ -62,7 +65,7 @@ export class LoginService {
   logOut(){
     this.is_logged_in = false;
     this.user_id      = "";
-    localStorage.removeItem(this.local_storage_key)
+    localStorage.clear();
   }
 
 

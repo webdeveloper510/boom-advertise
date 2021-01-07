@@ -8,9 +8,9 @@
           <li [routerLink]="['/influencers']">Influencers </li>
           <li  [routerLink]="['/']"><img src="./assets/images/logo.png"/></li>
           <li>Contact Us </li>
-          <li  (click)="openLoginForm()" *ngIf="!this.loginservice.is_logged_in">LogIn</li>
+          <li  (click)="this.login_form = true" *ngIf="!this.loginservice.is_logged_in">LogIn</li>
           <li  (click)="logOut()" *ngIf="this.loginservice.is_logged_in">Logout</li>
-          <li  (click)="openSignupForm()" >Admin</li>
+          <li  (click)="this.signup_form = true" >Admin</li>
       </ul>
 
   </div>
@@ -18,7 +18,7 @@
     <div id="id03" class="w3-modal" [style.display]="login_form ? 'block' : 'none'">
       <div class="w3-modal-content">
         <div class="w3-container">
-          <span (click)="closeLoginForm()" class="w3-button w3-display-topright">&times;</span>
+          <span (click)="this.login_form = false;" class="w3-button w3-display-topright">&times;</span>
           <div class="promoter_signup">
             <h2>SignIn</h2>
             <p>Welcome Back !</p>
@@ -56,7 +56,7 @@
     <div id="id04" class="w3-modal" [style.display]="signup_form ? 'block' : 'none'">
       <div class="w3-modal-content">
         <div class="w3-container">
-          <span (click)="closeSignupForm()" class="w3-button w3-display-topright">&times;</span>
+          <span (click)="this.signup_form = false" class="w3-button w3-display-topright">&times;</span>
           <div class="promoter_signup">
             <h2>Add Worker</h2>
             <p>Welcome Back !</p>

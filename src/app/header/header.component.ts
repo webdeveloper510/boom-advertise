@@ -5,6 +5,8 @@ import {HttpClient} from '@angular/common/http';
 import { Router ,ActivatedRoute } from '@angular/router';
 import { applySourceSpanToExpressionIfNeeded } from '@angular/compiler/src/output/output_ast';
 import { WorkerRegisterService } from '../services/worker-register.service';
+import { SocialAuthService } from "angularx-social-login";
+import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
 
 @Component({
   selector: 'app-header',
@@ -12,6 +14,33 @@ import { WorkerRegisterService } from '../services/worker-register.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+
+  constructor(
+    public loginservice:LoginService,
+    private http : HttpClient,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private workerregister:WorkerRegisterService,
+    private authService: SocialAuthService,
+  ) {
+    
+    this.signInWithFB();
+    let user_id = localStorage.getItem('login_userid');
+
+    if(user_id){
+      this.loginservice.is_logged_in = true;
+    }
+
+    this.activatedRoute.queryParams.subscribe(params => {
+      const oauthVerifier = params['oauth_verifier'];
+      const oauthToken = params['oauth_token'];
+      console.log(params);
+      
+      if (oauthToken && oauthVerifier) {
+        this.saveAccessToken(oauthToken, oauthVerifier);
+      }
+    });
+  }
 
   is_login : boolean =  false;
   // Login variables start 
@@ -55,39 +84,19 @@ export class HeaderComponent implements OnInit {
       })
     });
 
-  constructor(
-    public loginservice:LoginService,
-    private http : HttpClient,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private workerregister:WorkerRegisterService,
-  ) {
-    
-    let user_id = localStorage.getItem('login_userid');
-
-    if(user_id){
-      this.loginservice.is_logged_in = true;
-    }
-
-    this.activatedRoute.queryParams.subscribe(params => {
-      const oauthVerifier = params['oauth_verifier'];
-      const oauthToken = params['oauth_token'];
-     
-      if (oauthToken && oauthVerifier) {
-        console.log("vijay rana");
-        console.log(params);
-        this.saveAccessToken(oauthToken, oauthVerifier);
-      }
-    });
-  }
+  
 
   saveAccessToken(oauthToken: string, oauthVerifier: string) {
     this.loginservice.saveAccessToken(oauthToken, oauthVerifier).subscribe(res => {
     console.log(res);
  
-    let local = localStorage.getItem('local_midia_check');
-    var new1 = JSON.parse(local);
-    console.log('terimehar');
+    let local :any = localStorage.getItem(this.loginservice.local_storage_local_midia_check_key);
+    let local_storage_values = JSON.parse(local)
+    local_storage_values.twitter = false;
+    localStorage.setItem(this.loginservice.local_storage_local_midia_check_key,JSON.stringify(local_storage_values));
+    
+    this.media_check_function();
+    
     console.log(local);
    // console.log(local.facebook);
      //if(local.facebook == true){
@@ -108,13 +117,17 @@ export class HeaderComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    this.authService.authState.subscribe((user) => {
+
+      let local :any = localStorage.getItem(this.loginservice.local_storage_local_midia_check_key);
+      let local_storage_values = JSON.parse(local)
+      local_storage_values.facebook = false;
+      localStorage.setItem(this.loginservice.local_storage_local_midia_check_key,JSON.stringify(local_storage_values));
+      console.log(user);
+     
+    });
   }
-
-  openLoginForm(){ this.login_form = true; }
-  closeLoginForm(){ this.login_form = false; }
-  openSignupForm(){ this.signup_form = true; }
-  closeSignupForm(){ this.signup_form = false; }
-
 
   onSubmit() {
     
@@ -206,10 +219,30 @@ export class HeaderComponent implements OnInit {
     );
   }
 
-  
+  media_check_function(){
 
+    console.log("medi check function");
+    let local :any = localStorage.getItem(this.loginservice.local_storage_local_midia_check_key);
+    let local_storage_values = JSON.parse(local)
 
+    if(local_storage_values.twitter){
+      console.log("in twiiter");
+      this.redirectToTwitter();
+    }else if(local_storage_values.facebook){
+      console.log("in facebook");
+      this.signInWithFB();
+      
+    }else if(local_storage_values.instagram){
+      console.log("in insta");
+    }else if(local_storage_values.tiktok){
+      console.log("in tiktok");
+    }else{}
+    
+  }
 
+  signInWithFB(): void {
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+  }
   logOut(){
     this.loginservice.logOut();
     this.router.navigate(['/']);

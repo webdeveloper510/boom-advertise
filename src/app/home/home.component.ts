@@ -15,7 +15,6 @@ import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-logi
 })
 export class HomeComponent implements OnInit {
   is_logged_in : any ;
-  _subscription: any;
   constructor(
                 private proregservice:PromoterRegisterService,
                 private http : HttpClient,
@@ -23,14 +22,18 @@ export class HomeComponent implements OnInit {
                 private influregservice:InfluencerRegisterService,
                 public login_service:LoginService,
                 private authService: SocialAuthService
-                )
-                
-                {
+                ) {
 
-                  this.is_logged_in = login_service.is_logged_in;
-                }
+    this.is_logged_in = login_service.is_logged_in;
+  }
 
   ngOnInit(): void {
+
+    
+    this.authService.authState.subscribe((user) => {
+      console.log(user);
+     
+    });
   }
 
   // common variables start
@@ -89,25 +92,7 @@ export class HomeComponent implements OnInit {
 
     })
   });
-  clickedon(){
-    this.tiktok_fol = !this.tiktok_fol;
-  }
  
-  clickedon1(){
-    this.insta = !this.insta;
-  }
-  clickedon2(){
-    this.fb = !this.fb;
-
-  }
-  clickedon3(){
-    this.twitter = !this.twitter;
-  }
-  
-  openPromotorForm(){ this.promotor_login_form  = true; }
-  closePromotorForm(){ this.promotor_login_form  = false; }
-  openInfluencerForm(){ this.influnncer_login_form  = true; }
-  closeInfluencerForm(){ this.influnncer_login_form  = false; }
 
   promotersignup(){
 
@@ -150,24 +135,25 @@ export class HomeComponent implements OnInit {
     
     console.log(this.influencer.value);
     
-    let twitter = this.influencer.value.influencer_signup.twitter;
-    let tiktok = this.influencer.value.influencer_signup.tiktok;
+    let twitter   = this.influencer.value.influencer_signup.twitter;
+    let tiktok    = this.influencer.value.influencer_signup.tiktok;
     let instagram = this.influencer.value.influencer_signup.insta;
-    let facebook = this.influencer.value.influencer_signup.fb;
+    let facebook  = this.influencer.value.influencer_signup.fb;
 
     let local_midia_check:any= {twitter:false,facebook:false,tiktok:false,instagram:false};
     
-    local_midia_check.twitter = twitter ? true : false;
-    local_midia_check.tiktok  = tiktok ? true : false;
-    local_midia_check.instagram  = instagram ? true : false;
-    local_midia_check.facebook  = facebook ? true : false;
+    local_midia_check.twitter     = twitter ? true : false;
+    local_midia_check.tiktok      = tiktok ? true : false;
+    local_midia_check.instagram   = instagram ? true : false;
+    local_midia_check.facebook    = facebook ? true : false;
 
     this.influencer.value.influencer_signup.twitter = local_midia_check.twitter;
-    this.influencer.value.influencer_signup.tiktok= local_midia_check.tiktok;
-    this.influencer.value.influencer_signup.insta= local_midia_check.instagram;
-    this.influencer.value.influencer_signup.fb= local_midia_check.facebook;
+    this.influencer.value.influencer_signup.tiktok  = local_midia_check.tiktok;
+    this.influencer.value.influencer_signup.insta   = local_midia_check.instagram;
+    this.influencer.value.influencer_signup.fb      = local_midia_check.facebook;
     
-    let data = this.influencer.value
+    let data = this.influencer.value;
+
     this.influregservice.register(data)
     .subscribe(
       (response:any) => {                           
@@ -175,7 +161,6 @@ export class HomeComponent implements OnInit {
 
           console.log(response);
           localStorage.setItem("local_midia_check", JSON.stringify(local_midia_check));
-
           localStorage.setItem('login_userid',response["data"]['_id']);
           localStorage.setItem('logindata',JSON.stringify(response["data"]));
 

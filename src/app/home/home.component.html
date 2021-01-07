@@ -4,8 +4,8 @@
 <div class="left_sec"><h1>Create engaging videos <br> and make an impact</h1>
     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the </p>
     <div class="button_slide">
-        <button class="btn btn_rounded"  (click)="openPromotorForm()" *ngIf="!this.login_service.is_logged_in" >I am a Promoter </button>
-        <button class="btn btn_rounded"  (click)="openInfluencerForm()" *ngIf="!this.login_service.is_logged_in" >I am a Influencer </button>
+        <button class="btn btn_rounded"  (click)="this.promotor_login_form  = true" *ngIf="!this.login_service.is_logged_in" >I am a Promoter </button>
+        <button class="btn btn_rounded"  (click)="this.influnncer_login_form  = true" *ngIf="!this.login_service.is_logged_in" >I am a Influencer </button>
     </div>
 </div>
 <div class="right_sec"><img src="./assets/images/homeslide_1.png"></div>
@@ -120,7 +120,7 @@
         <div id="id01" class="w3-modal" [style.display]="promotor_login_form ? 'block' : 'none'">
             <div class="w3-modal-content">
                 <div class="w3-container">
-                    <span (click)="closePromotorForm()" class="w3-button w3-display-topright">&times;</span>
+                    <span (click)="this.promotor_login_form  = false" class="w3-button w3-display-topright">&times;</span>
                     <div class="promoter_signup">
                         <h2>Promoter’s SignUp</h2>
                         <p>It’s Free!</p>
@@ -150,7 +150,7 @@
         <div id="id02" class="w3-modal" [style.display]="influnncer_login_form ? 'block' : 'none'">
             <div class="w3-modal-content">
                 <div class="w3-container">
-                    <span (click)="closeInfluencerForm()" class="w3-button w3-display-topright">&times;</span>
+                    <span (click)="this.influnncer_login_form  = false" class="w3-button w3-display-topright">&times;</span>
                     <div class="promoter_signup">
                         <h2>Influencer’s SignUp</h2>
                         <p>It’s Free!</p>
@@ -163,13 +163,13 @@
                     
                                 <div class="influencer_media">
                                     <ul> 
-                                      <li><input type="checkbox"  class="checkboxes all" id="tiktok" formControlName="tiktok" (click)="clickedon()">
+                                      <li><input type="checkbox"  class="checkboxes all" id="tiktok" formControlName="tiktok" (click)="this.tiktok_fol = !this.tiktok_fol">
                                       <img src="/assets/images/tiktok icon 2.png"/>
                                       <!-- <div class="box_in" [style.display]="tiktok_fol ? 'block' : 'none'">
                                       <p>Followers</p>
                                       <input type="number" formControlName="tiktok_followers" class="input_all"/></div> -->
                                       </li> 
-                                      <li><input type="checkbox" class="checkboxes" id="insta" formControlName="insta" (click)="clickedon1()">
+                                      <li><input type="checkbox" class="checkboxes" id="insta" formControlName="insta" (click)="this.insta = !this.insta">
                                         <img src="/assets/images/insta iconn 2.png"> 
                                         <!-- <div class="box_in" [style.display]="insta ? 'block' : 'none'">
                                         <p>Followers</p>
@@ -178,7 +178,7 @@
                                         
                                         <li>
                                             <button (click)="signInWithFB()" class="btn btn-primary">Login Facebook</button>
-                                            <input type="checkbox" class="checkboxes" id="fb" formControlName="fb" (click)="clickedon2()">
+                                            <input type="checkbox" class="checkboxes" id="fb" formControlName="fb" (click)="this.fb = !this.fb">
                                           <img src="/assets/images/fb icon 2.png">
                                           <!-- <div class="box_in" [style.display]="fb ? 'block' : 'none'">
                                           <p>Followers</p>
@@ -187,7 +187,7 @@
                                           <li>
                                             <!-- <img  src="/assets/images/twitter 2.png">  -->
                                             <!--button (click)='redirectToTwitter()'>Twitter</button-->
-                                            <input type="checkbox" class="checkboxes alll" id="twitter"  formControlName="twitter" (click)="clickedon3()">
+                                            <input type="checkbox" class="checkboxes alll" id="twitter"  formControlName="twitter" (click)="this.twitter = !this.twitter">
                                             <img src="/assets/images/twitter 2.png"> 
                                              <!-- <div class="box_in" [style.display]="twitter ? 'block' : 'none'">
                                             <p>Followers</p>
