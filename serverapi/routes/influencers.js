@@ -66,11 +66,6 @@ console.log(req.body.influencer_signup);
     });
 
     router.get('/getInfluencers', function(req, res, next) {
-    //   influencer.influencers.find({}, function(err, influencers_dt) {
-    //     if (err)  res.json({status:"failure",statusCode:100,error:err});
-    //     res.json({status:"success",statusCode:200,data:influencers_dt});
-    //  });
-
     influencers_data.influencers_data.aggregate([
       { "$lookup": {
               "from": "influencers",
@@ -88,12 +83,9 @@ console.log(req.body.influencer_signup);
     });
 
     router.get('/getInfluencers1', function(req, res, next) {
-
-
       influencer.influencers.aggregate([
         { "$lookup": {
                 "from": "influencers_data",
-                //"startWith": "$parent",
                 "localField": "_id",
                 "foreignField": "influencerid",
                 "as": "vals"
@@ -108,35 +100,42 @@ console.log(req.body.influencer_signup);
      });
 
      router.post('/singleInfluencer', function(req, res) {
-      // influencer.influencers.find({_id:req.body.id}, function(err, influencer_data) {
-      //   if (err)  res.json({status:"failure",statusCode:100,error:err});
-      //   res.json({status:"success",statusCode:200,data:influencer_data});
-      // });
-
-      influencers_data.influencers_data.aggregate(
-        [
-          {
-            "$lookup":{
-            
-              from: 'influencers',
-              localField: 'influencerid',
-              foreignField: '_id',
-              as: 'data'
-            
-            }},
-            {
-              "$match":{
-                _id:req.body.id
-              }
-            }
-      ]
-        ,function(err,influencer_data){
-        if(err) res.json({status:"failure",statusCode:100,error:err});
-    
+      influencer.influencers.find({_id:req.body.id}, function(err, influencer_data) {
+        if (err)  res.json({status:"failure",statusCode:100,error:err});
         res.json({status:"success",statusCode:200,data:influencer_data});
-      })
-
+      });
     });
+
+      router.post('/singleInfluencerdata', function(req, res) {
+        influencers_data.influencers_data.find({influencerid:req.body.id}, function(err, singleInfluencerdata) {
+          if (err)  res.json({status:"failure",statusCode:100,error:err});
+          res.json({status:"success",statusCode:200,data:singleInfluencerdata});
+        });
+      });
+      // influencers_data.influencers_data.aggregate(
+      //   [
+      //     {
+      //       "$lookup":{
+            
+      //         from: 'influencers',
+      //         localField: 'influencerid',
+      //         foreignField: '_id',
+      //         as: 'data'
+            
+      //       }},
+      //       {
+      //         "$match":{
+      //           _id:req.body.id
+      //         }
+      //       }
+      // ]
+      //   ,function(err,influencer_data){
+      //   if(err) res.json({status:"failure",statusCode:100,error:err});
+    
+      //   res.json({status:"success",statusCode:200,data:influencer_data});
+      // })
+
+  
 
 
     module.exports = router;

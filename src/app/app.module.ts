@@ -85,15 +85,4 @@ import { FacebookLoginProvider } from "angularx-social-login";
 
 })
 
-
-
-
-
-
-
-
-
-
-
-
 export class AppModule { }

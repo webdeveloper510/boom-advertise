@@ -6,7 +6,7 @@ import { Router ,ActivatedRoute } from '@angular/router';
 import { applySourceSpanToExpressionIfNeeded } from '@angular/compiler/src/output/output_ast';
 import { WorkerRegisterService } from '../services/worker-register.service';
 import { SocialAuthService } from "angularx-social-login";
-import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
+import { FacebookLoginProvider} from "angularx-social-login";
 
 @Component({
   selector: 'app-header',
@@ -96,14 +96,6 @@ export class HeaderComponent implements OnInit {
     localStorage.setItem(this.loginservice.local_storage_local_midia_check_key,JSON.stringify(local_storage_values));
     
     this.media_check_function();
-    
-    console.log(local);
-   // console.log(local.facebook);
-     //if(local.facebook == true){
-     // this.router.navigate(['/influencers']);
-    // }
-   // this.router.navigate(['/my-account']);
-
     })
   }
 
@@ -114,10 +106,8 @@ export class HeaderComponent implements OnInit {
     })
   }
 
-
-
   ngOnInit(): void {
-
+      /*******Getting facebook response data */
     this.authService.authState.subscribe((user) => {
 
       let local :any = localStorage.getItem(this.loginservice.local_storage_local_midia_check_key);
@@ -125,18 +115,11 @@ export class HeaderComponent implements OnInit {
       local_storage_values.facebook = false;
       localStorage.setItem(this.loginservice.local_storage_local_midia_check_key,JSON.stringify(local_storage_values));
       console.log(user);
-     
+      this.media_check_function();
     });
   }
 
   onSubmit() {
-    
-    // if(!this.signin.valid){
-    //   return false;
-    // }
-
-
-  
     let data = this.signin.value
     this.loginservice.login(data)
     .subscribe(
@@ -196,8 +179,6 @@ export class HeaderComponent implements OnInit {
 
           this.loginservice.is_logged_in = true; 
           this.is_login = this.loginservice.is_logged_in;
-          
-          
 
           setTimeout (() => {
             this.signup_success_div = false;
@@ -220,7 +201,6 @@ export class HeaderComponent implements OnInit {
   }
 
   media_check_function(){
-
     console.log("medi check function");
     let local :any = localStorage.getItem(this.loginservice.local_storage_local_midia_check_key);
     let local_storage_values = JSON.parse(local)
@@ -234,15 +214,19 @@ export class HeaderComponent implements OnInit {
       
     }else if(local_storage_values.instagram){
       console.log("in insta");
+      this.router.navigate(['/my-account']);
     }else if(local_storage_values.tiktok){
       console.log("in tiktok");
-    }else{}
-    
+      this.router.navigate(['/my-account']);
+    }else{
+      this.router.navigate(['/my-account']);
+    }
   }
 
   signInWithFB(): void {
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
   }
+  
   logOut(){
     this.loginservice.logOut();
     this.router.navigate(['/']);
