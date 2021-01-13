@@ -13,7 +13,6 @@ export class TopAuthenticInfluencersRankingComponent implements OnInit {
   public socialmedia: string="";
   public tiktok: string="";
   constructor(private InfluencersRankingService:InfluencersRankingService,private http : HttpClient,private router: Router,) { 
- 
   }
 
   data:any = [];
@@ -30,9 +29,8 @@ export class TopAuthenticInfluencersRankingComponent implements OnInit {
 }
   get position() { return this.filterForm.get('position'); }
   
-  dtOptions: DataTables.Settings = {
-    
-  };
+  dtOptions: DataTables.Settings = {};
+  
   ngOnInit() {
     this.influencers()
     this.dtOptions = {
@@ -41,8 +39,9 @@ export class TopAuthenticInfluencersRankingComponent implements OnInit {
       processing: true,
      
     };
-
     }
+
+
     influencers(){
      // this.data1()
       this.InfluencersRankingService.getdata().subscribe(
@@ -53,17 +52,13 @@ export class TopAuthenticInfluencersRankingComponent implements OnInit {
         
          })
     }
+
     filter(){
       console.log(this.filterForm.value);
-
       let i = 0;
-
       for(i =0; i < this.data.length; i++){
-
         console.log(this.data[i]);
       }
-
-
     } 
 
 }

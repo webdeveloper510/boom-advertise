@@ -12,7 +12,7 @@ const {ObjectId} = require('mongodb');
 //process.env.NODE_TLS_REJECT_UNAUTHORIZED = "1";
 
 router.post('/register', async function(req,res) {
-console.log(req.body.influencer_signup);
+      console.log(req.body.influencer_signup);
       var influencerCreate =  new influencer.influencers(req.body.influencer_signup);
       var influencerData =  new influencers_data.influencers_data(req.body.influencer_signup);
 
@@ -49,6 +49,7 @@ console.log(req.body.influencer_signup);
               
                 influencerCreate.save(function (err, influencer_res) {
                   influencerData.influencerid = influencer_res['_id']
+                  influencerData.influencermatchid = influencer_res['_id']
                   influencerData.save(function (err1, influ_data_res) {
                     if (err || err1) res.json({status:"failure",statusCode:100,msg:err});
                     res.json({status:"success",statusCode:200,data:influencer_res,msg:"Signup & SignIn successfully!"});
@@ -66,76 +67,63 @@ console.log(req.body.influencer_signup);
     });
 
     router.get('/getInfluencers', function(req, res, next) {
-    influencers_data.influencers_data.aggregate([
-      { "$lookup": {
-              "from": "influencers",
-              "localField": "influencerid",
-              "foreignField": "_id",
-              "as": "vals"
+        influencers_data.influencers_data.aggregate([
+            { "$lookup": {
+                    "from": "influencers",
+                    "localField": "influencerid",
+                    "foreignField": "_id",
+                    "as": "vals"
+                  }
             }
-      }
 
-      ], function(err, res_data) {
-           if (err)  res.json({status:"failure",statusCode:100,error:err});
-            res.json({status:"success",statusCode:200,data:res_data});
-          })
-
-    });
-
-    router.get('/getInfluencers1', function(req, res, next) {
-      influencer.influencers.aggregate([
-        { "$lookup": {
-                "from": "influencers_data",
-                "localField": "_id",
-                "foreignField": "influencerid",
-                "as": "vals"
-              }
-        }
-
-        ], function(err, res_data) {
-             if (err)  res.json({status:"failure",statusCode:100,error:err});
-              res.json({status:"success",statusCode:200,data:res_data});
+            ], function(err, res_data) {
+              if (err)  res.json({status:"failure",statusCode:100,error:err});
+                res.json({status:"success",statusCode:200,data:res_data});
             })
 
-     });
-
-     router.post('/singleInfluencer', function(req, res) {
-      influencer.influencers.find({_id:req.body.id}, function(err, influencer_data) {
-        if (err)  res.json({status:"failure",statusCode:100,error:err});
-        res.json({status:"success",statusCode:200,data:influencer_data});
-      });
     });
 
-      router.post('/singleInfluencerdata', function(req, res) {
-        influencers_data.influencers_data.find({influencerid:req.body.id}, function(err, singleInfluencerdata) {
-          if (err)  res.json({status:"failure",statusCode:100,error:err});
-          res.json({status:"success",statusCode:200,data:singleInfluencerdata});
-        });
+    /**** Trying to get all influencers data as first table influencers ***/
+      router.get('/getInfluencers1', function(req, res, next) {
+            influencer.influencers.aggregate([
+              { "$lookup": {
+                      "from": "influencers_data",
+                      "localField": "_id",
+                      "foreignField": "influencerid",
+                      "as": "vals"
+                    }
+              }
+              ], function(err, res_data) {
+                  if (err)  res.json({status:"failure",statusCode:100,error:err});
+                    res.json({status:"success",statusCode:200,data:res_data});
+                  })
       });
-      // influencers_data.influencers_data.aggregate(
-      //   [
-      //     {
-      //       "$lookup":{
-            
-      //         from: 'influencers',
-      //         localField: 'influencerid',
-      //         foreignField: '_id',
-      //         as: 'data'
-            
-      //       }},
-      //       {
-      //         "$match":{
-      //           _id:req.body.id
-      //         }
-      //       }
-      // ]
-      //   ,function(err,influencer_data){
-      //   if(err) res.json({status:"failure",statusCode:100,error:err});
-    
-      //   res.json({status:"success",statusCode:200,data:influencer_data});
-      // })
+
+     router.get('/singleInfluencer', function(req, res) {
+        influencers_data.influencers_data.aggregate(
+            [
+              {
+                "$lookup":{
+
+                  "from": "influencers",
+                  "localField": "influencerid",
+                  "foreignField": "_id",
+                  "as": "vals"
+              }}
+              ,
+              {
+                "$match":{
+                  //"influencermatchid" : req.body.influencermatchid
+                  "influencermatchid" : "5ffc1c4779752c2a58fa594e"
+                }
+              }
+          ]
+            ,function(err,influencer_data){
+            if(err) res.json({status:"failure",statusCode:100,error:err});
+        
+            res.json({status:"success",statusCode:200,data:influencer_data});
+          });
+      });
 
   
-
-
     module.exports = router;

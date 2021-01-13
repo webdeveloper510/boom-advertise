@@ -2,16 +2,16 @@
   
 
       
-    <div class="form-group">
-    <input 
-            formControlName="file"
-            id="file" 
-            type="file" 
-            class="form-control" (change)="working()">
-            <p class="filepath" [style.display]="login_form ? 'block' : 'none'">{{filename}}</p>
-            <p class="filepath uploaded" [style.display]="login_form1 ? 'block' : 'none'">Uploaded</p>
-    <button class="btn btn-primary" type="submit" class="upload">Upload</button>
-    </div>
+  <div class="form-group">
+  <input 
+          formControlName="file"
+          id="file" 
+          type="file" 
+          class="form-control" (change)="working()">
+          <p class="filepath" [style.display]="login_form ? 'block' : 'none'">{{filename}}</p>
+          <p class="filepath uploaded" [style.display]="login_form1 ? 'block' : 'none'">Uploaded</p>
+  <button class="btn btn-primary" type="submit" class="upload">Upload</button>
+  </div>
 
-    
+  
 </form>

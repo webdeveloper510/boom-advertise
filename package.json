@@ -27,6 +27,7 @@
     "datatables.net-dt": "^1.10.23",
     "express": "^4.17.1",
     "jquery": "^3.5.1",
+    "ng2-file-upload": "^1.4.0",
     "ngx-bootstrap": "^6.2.0",
     "ngx-webstorage-service": "^4.1.0",
     "rxjs": "~6.6.0",
