@@ -2,13 +2,13 @@
 <div class="heading_sec1"> <h1>My Account</h1></div>
 <div class="first_sec container-fluid">
     <div class="allside">
-    <div class="box_1 border-size">
+    <div *ngFor="let profile_data of data" class="box_1 border-size">
         <div class="image_circle">
         <img src="/assets/images/loren-gray-x-things-you-never-knew-about-the-tiktok-star-1586962638-view-0.png">
     </div>
-        <p class="name">Loren Gray</p>
-        <span class="tag">@lorengray</span>
-        <p class="singer">American Singer</p>
+        <p class="name"> {{ profile_data.vals[0].name }}</p>
+        <span class="tag"> {{ profile_data.vals[0].email }} </span>
+        <p class="singer">Twitter Followers: {{ profile_data.twitterfollowers }}</p>
         <div class="small_elements">
          <div class="element_1">
             <p>44.9M</p>
@@ -149,6 +149,7 @@
                 <div class="comments">
                     <img src="/assets/images/COMMENT 1.png"><span>20.8K</span>
                 </div>
+
             </div>
             <div class="click_add">
                 <div class="Buy"><button type="submit" class="edit-profile">Edit Profile</button></div>

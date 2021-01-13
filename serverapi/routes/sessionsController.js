@@ -6,8 +6,9 @@ const _twitterConsumerKey = process.env.TWITTER_CONSUMER_KEY;
 const _twitterConsumerSecret = process.env.TWITTER_CONSUMER_SECRET;
 const twitterCallbackUrl = process.env.TWITTER_CALLBACK_URL;
 const consumer = new oauth.OAuth("https://twitter.com/oauth/request_token", "https://twitter.com/oauth/access_token",_twitterConsumerKey, _twitterConsumerSecret, "1.0A", twitterCallbackUrl, "HMAC-SHA1");
-
+const influencers_data = require('../models/influencers_data');
 const Twitter = require('twit');
+var ObjectID = require('mongodb').ObjectID;
 
 
 //var url = require('url');
@@ -51,7 +52,28 @@ router.post('/saveAccessTokens', (req, res) => {
       });
 
       client.get('account/verify_credentials').then(user => {
-        res.send(user)
+      //  res.send(user)
+            console.log('mehar');
+            live_twitter_follower = user.data.followers_count;
+
+                        /*******update twitter data */
+                influencers_data.influencers_data.updateOne(
+                  { "influencerid": new ObjectID(req.body._id) },
+                  {
+                    $set: { "twitterfollowers" : live_twitter_follower },
+                  },
+                  function(err,result){ 
+                    if (err) {
+                      console.log(err);
+                      res.json({status:"failure",statusCode:100,error:'could not save data'});
+                    }
+                    else{
+                      console.log(result);
+                    res.json({status:"success",statusCode:200,data:result});
+                    }
+                  });
+                /*******update twitter data */
+
       }).catch(error => {
         res.send(error);
       });

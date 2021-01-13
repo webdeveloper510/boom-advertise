@@ -30,10 +30,10 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
 
     
-    this.authService.authState.subscribe((user) => {
-      console.log(user);
+    // this.authService.authState.subscribe((user) => {
+    //   console.log(user);
      
-    });
+    // });
   }
 
   // common variables start
@@ -131,8 +131,6 @@ export class HomeComponent implements OnInit {
   }
 
   influencerSignup(){
-
-    
     console.log(this.influencer.value);
     
     let twitter   = this.influencer.value.influencer_signup.twitter;
@@ -179,7 +177,7 @@ export class HomeComponent implements OnInit {
 
             if(local_midia_check.twitter == true){
 
-             this.redirectToTwitter();
+             this.signInWithFB();
              // this.signInWithFB();
              
             }

@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const influencers_dataSchema = new Schema({
   id:  String, // String is shorthand for {type: String}
   influencerid: { type: mongoose.Schema.ObjectId},
+  influencermatchid: String,
   tiktokfollowers:   String,
   instagramfollowers:   String,
   facebookfollowers:   String,
