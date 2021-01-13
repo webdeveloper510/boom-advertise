@@ -18,6 +18,7 @@
     "express-logger": "0.0.3",
     "express-session": "^1.17.1",
     "mongoose": "^5.11.8",
+    "multer": "^1.4.2",
     "nodemailer": "^6.4.17",
     "oauth": "^0.9.15",
     "password-hash": "^1.2.2",
