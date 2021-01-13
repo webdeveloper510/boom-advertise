@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
   templateUrl: './my-account.component.html',
   styleUrls: ['./my-account.component.css']
 })
+
 export class MyAccountComponent implements OnInit {
 
   constructor(private MyAccountService:MyAccountService,private http : HttpClient,private router: Router,) { 

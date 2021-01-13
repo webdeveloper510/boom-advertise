@@ -26,6 +26,7 @@ import { PrivacyComponent } from './privacy/privacy.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SocialLoginModule, SocialAuthServiceConfig} from "angularx-social-login";
 import { FacebookLoginProvider } from "angularx-social-login";
+import { FileSelectDirective } from 'ng2-file-upload';
 //import { MatButtonModule} from '@angular/material/button';
 //import {DataTablesModule} from 'angular-datatables';
 // import {
@@ -50,7 +51,7 @@ import { FacebookLoginProvider } from "angularx-social-login";
     FormcustomComponent,
     TopAuthenticInfluencersRankingComponent,
     PrivacyComponent,
-    PrivacyComponent
+    FileSelectDirective,
   ],
   imports: [
     BrowserModule,
