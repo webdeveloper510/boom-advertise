@@ -16,4 +16,9 @@ export class MyAccountService {
   //return this.http.get(environment.url+"/interview/list")
   }
 
+  uploadProfileImage(data:any){
+
+    return this.http.post(this.apiUrl+"/influencers/singleInfluencer",data);
+  }
+
 }

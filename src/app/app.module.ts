@@ -51,7 +51,8 @@ import { FileSelectDirective } from 'ng2-file-upload';
     FormcustomComponent,
     TopAuthenticInfluencersRankingComponent,
     PrivacyComponent,
-    FileSelectDirective,
+    PrivacyComponent,
+    //FileSelectDirective
   ],
   imports: [
     BrowserModule,
@@ -84,5 +85,16 @@ import { FileSelectDirective } from 'ng2-file-upload';
   bootstrap: [AppComponent] 
 
 })
+
+
+
+
+
+
+
+
+
+
+
 
 export class AppModule { }
