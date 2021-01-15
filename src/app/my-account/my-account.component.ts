@@ -13,7 +13,6 @@ import { chown } from 'fs';
 
 export class MyAccountComponent implements OnInit {
 
-  user_data : any ;
   login_form : boolean  = true;
   login_form1 : boolean = false;
   filename:string       = "";
@@ -88,7 +87,7 @@ export class MyAccountComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.user_data = this.MyAccountService.myAccountInfo();
+    
     this.singleInfluencer()
   }
   
