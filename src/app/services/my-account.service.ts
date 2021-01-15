@@ -20,5 +20,26 @@ export class MyAccountService {
 
     return this.http.post(this.apiUrl+"/influencers/singleInfluencer",data);
   }
+  
+  uploadProfile(data:any){
+
+    return this.http.post(this.apiUrl+"/influencers/singleInfluencer",data);
+  }
+  
+  updatePrice(data:any){
+
+    return this.http.post(this.apiUrl+"/influencers/singleInfluencer",data);
+  }
+
+  myAccountInfo(){
+
+    let user_data = localStorage.getItem('login_user_data');
+
+    if(user_data){
+
+      return JSON.parse(user_data);
+      
+    }
+  }
 
 }

@@ -369,3 +369,16 @@ p.filepath.uploaded {
     font-weight: 500;
     font-family: 'Poppins';
 }
+
+.update_post_button  {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+.update_price_button {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+.update_profile_button {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}

@@ -19,71 +19,105 @@
             <span>Views</span>
          </div>  
         </div>
-        <button type="submit" class="edit-profile">Edit Profile</button>
+        <button type="submit" class="edit-profile" (click)="this.profile_edit_model = true;">Edit Profile</button>
     </div>
     <div class="box_2 border-size">
         <h2 class="price">Price</h2>
         <div class="first_viewer">
             <div class="media insider"><img src="/assets/images/tiktok icon 1.png"></div>
-        <div class="viwers insider"> <p>500$/ Post</p>
-         <p>300$/ Story</p></div>
+        <div class="viwers insider"> 
+            <p>{{media_price.tiktok.post_price}}$/ Post</p>
+            <p>{{media_price.tiktok.story_price}}$/ Story</p>
+        </div>
        
         <div class="edit_delete insider">
-            <span><img src="/assets/images/Edit_icon.png"/></span>
-            <span><img src="/assets/images/delete.png"/></span>
+            <a href="javascript:void(0)" (click)="openPriceModel('tiktok')">
+                <span>
+                    <img src="/assets/images/Edit_icon.png"/>
+                </span>
+            </a>
+            <a href="javascript:void(0)">
+                <span>
+                    <img src="/assets/images/delete.png"/>
+                </span>
+            </a>
         </div>
     </div>
 
     <div class="first_viewer">
         <div class="media insider"><img src="/assets/images/fb icon 1.png"></div>
-    <div class="viwers insider"> <p>500$/ Post</p>
-     <p>300$/ Story</p></div>
+        <div class="viwers insider"> 
+            <p>{{media_price.facebook.post_price}}$/ Post</p>
+            <p>{{media_price.facebook.story_price}}$/ Story</p>
+        </div>
    
-    <div class="edit_delete insider">
-        <span><img src="/assets/images/Edit_icon.png"/></span>
-        <span><img src="/assets/images/delete.png"/></span>
-    </div>
+        <div class="edit_delete insider">
+            <a href="javascript:void(0)" (click)="openPriceModel('facebook')">
+                <span>
+                    <img src="/assets/images/Edit_icon.png"/>
+                </span>
+            </a>
+            <a href="javascript:void(0)">
+                <span>
+                    <img src="/assets/images/delete.png"/>
+                </span>
+            </a>
+        </div>
 </div>
 <div class="first_viewer">
     <div class="media insider"><img src="/assets/images/insta iconn 1.png"></div>
-<div class="viwers insider"> <p>500$/ Post</p>
- <p>300$/ Story</p></div>
+    <div class="viwers insider"> 
+        <p>{{media_price.instagram.post_price}}$/ Post</p>
+        <p>{{media_price.instagram.story_price}}$/ Story</p>
+    </div>
 
-<div class="edit_delete insider">
-    <span><img src="/assets/images/Edit_icon.png"/></span>
-    <span><img src="/assets/images/delete.png"/></span>
-</div>
+    <div class="edit_delete insider">
+        <a href="javascript:void(0)" (click)="openPriceModel('instagram')">
+            <span>
+                <img src="/assets/images/Edit_icon.png"/>
+            </span>
+        </a>
+        <a href="javascript:void(0)">
+            <span>
+                <img src="/assets/images/delete.png"/>
+            </span>
+        </a>
+    </div>
 </div>
 <div class="first_viewer">
     <div class="media insider"><img src="/assets/images/twitter 1.png"></div>
-<div class="viwers insider"> <p>500$/ Post</p>
- <p>300$/ Story</p></div>
+    <div class="viwers insider"> 
+        <p>{{media_price.twitter.post_price}}$/ Post</p>
+        <p>{{media_price.twitter.story_price}}$/ Story</p>
+    </div>
 
-<div class="edit_delete insider">
-    <span><img src="/assets/images/Edit_icon.png"/></span>
-    <span><img src="/assets/images/delete.png"/></span>
+    <div class="edit_delete insider">
+        <a href="javascript:void(0)" (click)="openPriceModel('twitter')">
+            <span>
+                <img src="/assets/images/Edit_icon.png"/>
+            </span>
+        </a>
+        <a href="javascript:void(0)">
+            <span>
+                <img src="/assets/images/delete.png"/>
+            </span>
+        </a>
+    </div>
 </div>
-</div>
- </div>
-       <div class="box_3 border-size">
-        <form [formGroup]="myForm" (ngSubmit)="submit()">
-  
-
-      
-            <div class="form-group">
-            <input 
-                    formControlName="file"
-                    id="file" 
-                    type="file" 
-                    class="form-control" (change)="selectFile($event)">
-                    <p class="filepath" [style.display]="login_form ? 'block' : 'none'">{{filename}}</p>
-                    <p class="filepath uploaded" [style.display]="login_form1 ? 'block' : 'none'">Uploaded</p>
-            <button class="btn btn-primary" type="submit" class="upload">Upload</button>
-            </div>
-          
-            
-          </form>
-
+    </div>
+        <div class="box_3 border-size">
+            <form [formGroup]="myForm" (ngSubmit)="submit()">
+                <div class="form-group">
+                    <input 
+                        formControlName="file"
+                        id="file" 
+                        type="file" 
+                        class="form-control" (change)="selectFile($event)">
+                        <p class="filepath" [style.display]="login_form ? 'block' : 'none'">{{filename}}</p>
+                        <p class="filepath uploaded" [style.display]="login_form1 ? 'block' : 'none'">Uploaded</p>
+                    <button class="btn btn-primary" type="submit" class="upload">Upload</button>
+                </div>
+            </form>
         </div>
     </div>
     <div class="tabs_set">
@@ -91,94 +125,55 @@
             <tab>
             <ng-template tabHeading> <img src="/assets/images/tiktok icon 1.png">  Tik Tok</ng-template>
             <div class="outer_most">
-                <div class="section_1">
+                <div class="section_1" *ngFor="let tik_tok_info of media_post.tiktok ; let i = index ">
                     <div class="image_start">
-                        <img src="/assets/images/Group 45.png">
+                        <img [src]="tik_tok_info.image">
                     </div>
-                    <h2 class="text_name">@lorengray</h2>
-                    <p class="discription">Tik Tok human machine recognition page. Find images and videos about Loren only at @lorengeray</p>
+                    <h2 class="text_name">{{tik_tok_info.text_name}}</h2>
+                    <p class="discription">{{tik_tok_info.description}}</p>
                     <div class="counts">
                         <div class="likes">
-                            <img src="/assets/images/favourite red 1.png"><span>50.8K</span>
+                            <img src="/assets/images/favourite red 1.png"><span>{{ tik_tok_info.likes_count}}</span>
                         </div>
                         <div class="comments">
-                            <img src="/assets/images/COMMENT 1.png"><span>20.8K</span>
+                            <img src="/assets/images/COMMENT 1.png"><span>{{ tik_tok_info.comments_count}}</span>
                         </div>
                     </div>
                     <div class="click_add">
-                        <div class="Buy"><button type="submit" class="edit-profile">Edit Profile</button></div>
+                        <div class="Buy"><button type="submit" class="edit-profile" (click)="openPostModel('tiktok',i,tik_tok_info.id)">Edit Profile</button></div>
                         <div class="Quote"><button type="submit" class="edit-profile">   Request Quote</button></div>
 
                     </div>
                 </div>
 
-                <div class="section_1">
-                    <div class="image_start">
-                        <img src="/assets/images/Group 45.png">
-                    </div>
-                    <h2 class="text_name">@lorengray</h2>
-                    <p class="discription">Tik Tok human machine recognition page. Find images and videos about Loren only at @lorengeray</p>
-                    <div class="counts">
-                        <div class="likes">
-                            <img src="/assets/images/favourite red 1.png"><span>50.8K</span>
-                        </div>
-                        <div class="comments">
-                            <img src="/assets/images/COMMENT 1.png"><span>20.8K</span>
-                        </div>
-                    </div>
-                    <div class="click_add">
-                        <div class="Buy"><button type="submit" class="edit-profile">Edit Profile</button></div>
-                        <div class="Quote"><button type="submit" class="edit-profile">   Request Quote</button></div>
-
-                    </div>
-                </div>
                 
                 </div>
             </tab> 
             <tab class="insta">
             <ng-template tabHeading> <img src="/assets/images/insta iconn 1.png">  Instagram</ng-template>
             <div class="outer_most">
-                <div class="section_1">
-        <div class="image_start">
-            <img src="/assets/images/Group 46.png">
-        </div>
-        <h2 class="text_name">@lorengray</h2>
-        <p class="discription">Tik Tok human machine recognition page. Find images and videos about Loren only at @lorengeray</p>
-        <div class="counts">
-            <div class="likes">
-                <img src="/assets/images/favourite red 1.png"><span>50.8K</span>
-            </div>
-            <div class="comments">
-                <img src="/assets/images/COMMENT 1.png"><span>20.8K</span>
-            </div>
-        </div>
-        <div class="click_add">
-            <div class="Buy"><button type="submit" class="edit-profile">Edit Profile</button></div>
-            <div class="Quote"><button type="submit" class="edit-profile">   Request Quote</button></div>
-
-        </div>
-                </div>
-
-                <div class="section_1">
-                <div class="image_start">
-                    <img src="/assets/images/Group 45.png">
-                </div>
-                <h2 class="text_name">@lorengray</h2>
-                <p class="discription">Tik Tok human machine recognition page. Find images and videos about Loren only at @lorengeray</p>
-                <div class="counts">
-                    <div class="likes">
-                        <img src="/assets/images/favourite red 1.png"><span>50.8K</span>
+                <div class="section_1" *ngFor="let Instagram of media_post.instagram; let i = index;">
+                    <div class="image_start">
+                    <img [src]="Instagram.image">
                     </div>
-                    <div class="comments">
-                        <img src="/assets/images/COMMENT 1.png"><span>20.8K</span>
+                    <h2 class="text_name">{{Instagram.text_name}}</h2>
+                    <p class="discription">{{Instagram.description}}</p>
+                    <div class="counts">
+                        <div class="likes">
+                            <img src="/assets/images/favourite red 1.png"><span>{{ Instagram.likes_count}}</span>
+                        </div>
+                        <div class="comments">
+                            <img src="/assets/images/COMMENT 1.png"><span>{{ Instagram.comments_count}}</span>
+                        </div>
                     </div>
-                </div>
-                <div class="click_add">
-                    <div class="Buy"><button type="submit" class="edit-profile">Edit Profile</button></div>
+                    <div class="click_add">
+                    <div class="Buy"><button type="submit" class="edit-profile" (click)="openPostModel('instagram',i,Instagram.id)">Edit Profile</button></div>
                     <div class="Quote"><button type="submit" class="edit-profile">   Request Quote</button></div>
-                    
+
+                    </div>
                 </div>
-                </div>
+
+                
         
 
             </div>
@@ -187,103 +182,138 @@
             <tab class="facebook" > 
                 <ng-template tabHeading> <img src="/assets/images/fb icon 1.png">  Facebook</ng-template>
                 <div class="outer_most">
-                <div class="section_1">
-        <div class="image_start">
-            <img src="/assets/images/Group 45.png">
-        </div>
-        <h2 class="text_name">@lorengray</h2>
-        <p class="discription">Tik Tok human machine recognition page. Find images and videos about Loren only at @lorengeray</p>
-        <div class="counts">
-            <div class="likes">
-                <img src="/assets/images/favourite red 1.png"><span>50.8K</span>
-            </div>
-            <div class="comments">
-                <img src="/assets/images/COMMENT 1.png"><span>20.8K</span>
-            </div>
-        </div>
-        <div class="click_add">
-            <div class="Buy"><button type="submit" class="edit-profile">Edit Profile</button></div>
-            <div class="Quote"><button type="submit" class="edit-profile">   Request Quote</button></div>
-
-        </div>
-                </div>
-
-                <div class="section_1">
-                <div class="image_start">
-                    <img src="/assets/images/Group 45.png">
-                </div>
-                <h2 class="text_name">@lorengray</h2>
-                <p class="discription">Tik Tok human machine recognition page. Find images and videos about Loren only at @lorengeray</p>
-                <div class="counts">
-                    <div class="likes">
-                        <img src="/assets/images/favourite red 1.png"><span>50.8K</span>
+                    <div class="section_1" *ngFor="let Facebook of media_post.facebook; let i = index;">
+                        <div class="image_start">
+                            <img [src]="Facebook.image">
+                        </div>
+                        <h2 class="text_name">{{ Facebook.text_name}}</h2>
+                        <p class="discription">{{ Facebook.description}}</p>
+                        <div class="counts">
+                            <div class="likes">
+                                <img src="/assets/images/favourite red 1.png"><span>{{ Facebook.likes_count}}</span>
+                            </div>
+                            <div class="comments">
+                                <img src="/assets/images/COMMENT 1.png"><span>{{Facebook.comments_count}}</span>
+                            </div>
+                        </div>
+                        <div class="click_add">
+                            <div class="Buy"><button type="submit" class="edit-profile" (click)="openPostModel('facebook',i,Facebook.id)">Edit Profile</button></div>
+                            <div class="Quote"><button type="submit" class="edit-profile">   Request Quote</button></div>
+                        </div>
                     </div>
-                    <div class="comments">
-                        <img src="/assets/images/COMMENT 1.png"><span>20.8K</span>
-                    </div>
-                </div>
-                <div class="click_add">
-                    <div class="Buy"><button type="submit" class="edit-profile">Edit Profile</button></div>
-                    <div class="Quote"><button type="submit" class="edit-profile">   Request Quote</button></div>
-                    
-                </div>
-                </div>
-       
-
+    
             </div>
             </tab>
             
             <tab class="twitter">
-            <ng-template tabHeading> <img src="/assets/images/twitter 1.png">  Twitter</ng-template>
-            <div class="outer_most">
-                <div class="section_1">
-        <div class="image_start">
-            <img src="/assets/images/Group 45.png">
-        </div>
-        <h2 class="text_name">@lorengray</h2>
-        <p class="discription">Tik Tok human machine recognition page. Find images and videos about Loren only at @lorengeray</p>
-        <div class="counts">
-            <div class="likes">
-                <img src="/assets/images/favourite red 1.png"><span>50.8K</span>
-            </div>
-            <div class="comments">
-                <img src="/assets/images/COMMENT 1.png"><span>20.8K</span>
-            </div>
-        </div>
-        <div class="click_add">
-            <div class="Buy"><button type="submit" class="edit-profile">Edit Profile</button></div>
-            <div class="Quote"><button type="submit" class="edit-profile">   Request Quote</button></div>
+                <ng-template tabHeading> <img src="/assets/images/twitter 1.png">  Twitter</ng-template>
+                <div class="outer_most">
+                    <div class="section_1" *ngFor="let Twitter of media_post.twitter; let i = index;">
+                        <div class="image_start">
+                            <img [src]="Twitter.image">
+                        </div>
+                        <h2 class="text_name">{{ Twitter.text_name}}</h2>
+                        <p class="discription">{{ Twitter.description}}</p>
+                        <div class="counts">
+                            <div class="likes">
+                                <img src="/assets/images/favourite red 1.png"><span>{{ Twitter.likes_count}}</span>
+                            </div>
+                            <div class="comments">
+                                <img src="/assets/images/COMMENT 1.png"><span>{{ Twitter.comments_count}}</span>
+                            </div>
+                        </div>
+                        <div class="click_add">
+                        <div class="Buy"><button type="submit" class="edit-profile" (click)="openPostModel('twitter',i,Twitter.id)">Edit Profile</button></div>
+                        <div class="Quote"><button type="submit" class="edit-profile">   Request Quote</button></div>
 
-        </div>
+                        </div>
+                    </div>  
                 </div>
-
-            <div class="section_1">
-            <div class="image_start">
-                <img src="/assets/images/Group 46.png">
-            </div>
-            <h2 class="text_name">@lorengray</h2>
-            <p class="discription">Tik Tok human machine recognition page. Find images and videos about Loren only at @lorengeray</p>
-            <div class="counts">
-                <div class="likes">
-                    <img src="/assets/images/favourite red 1.png"><span>50.8K</span>
-                </div>
-                <div class="comments">
-                    <img src="/assets/images/COMMENT 1.png"><span>20.8K</span>
-                </div>
-            </div>
-            <div class="click_add">
-                <div class="Buy"><button type="submit" class="edit-profile">Edit Profile</button></div>
-                <div class="Quote"><button type="submit" class="edit-profile">   Request Quote</button></div>
-                
-            </div>
-            </div>
-        
-
-        </div>
             </tab>
-            
-            
         </tabset>
     </div>
 
 </div>
+
+<!------------------- Update Profile Model Start------------------------->
+
+<div class="w3-container">
+    <div id="edit_profile" class="w3-modal" [style.display]="profile_edit_model ? 'block' : 'none'">
+      <div class="w3-modal-content">
+        <div class="w3-container">
+          <span (click)="this.profile_edit_model = false;" class="w3-button w3-display-topright">&times;</span>
+          <div class="promoter_signup">
+            <h2>Edit Price</h2>
+            
+            <form [formGroup]="profile_edit" (ngSubmit)="updateProfile()"> 
+                <label for="update_email">Email</label>
+                <input type="email" id="update_email" formControlName="email" class="form-control" placeholder="email">
+                <label for="update_name">Name</label>
+                <input type="text" formControlName="name" id="update_name" placeholder="story price" class="form-control">
+                <input type="submit" value="Update" class="btn btn-info update_profile_button">
+            </form>
+          </div>     
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!------------------- Update Profile Model End------------------------->
+
+<!------------------- Update Price Model Start------------------------->
+
+<div class="w3-container">
+    <div id="edit_price" class="w3-modal" [style.display]="price_edit_model ? 'block' : 'none'">
+      <div class="w3-modal-content">
+        <div class="w3-container">
+          <span (click)="this.price_edit_model = false;" class="w3-button w3-display-topright">&times;</span>
+          <div class="promoter_signup">
+            <h2>Edit Price</h2>
+            
+            <form [formGroup]="price_edit" (ngSubmit)="updatePrice()"> 
+                <input type="hidden" id="media_type" formControlName="media_type" >
+                <label for="update_post">Post</label>
+                <input type="text" id="update_post" formControlName="post_price" class="form-control" placeholder="post price">
+                <label for="update_story">Story</label>
+                <input type="text" formControlName="story_price" id="update_story" placeholder="story price" class="form-control">
+                <input type="submit" value="Update" class="btn btn-info update_price_button">
+            </form>
+          </div>     
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!------------------- Update Price Model End------------------------->
+
+<!------------------- Post Edit Model Start------------------------->
+
+<div class="w3-container">
+    <div id="edit_post" class="w3-modal" [style.display]="post_edit_model ? 'block' : 'none'">
+      <div class="w3-modal-content">
+        <div class="w3-container">
+          <span (click)="this.post_edit_model = false;" class="w3-button w3-display-topright">&times;</span>
+          <div class="promoter_signup">
+            <h2>Edit Profile</h2>
+            
+            <form [formGroup]="post_edit" (ngSubmit)="updatePost()"> 
+                <label for="update_name">Name</label>
+                <input type="hidden" id="update_id" formControlName="id" >
+                <input type="hidden" id="index_value" formControlName="index_value" >
+                <input type="hidden" id="media_type" formControlName="media_type" >
+                <input type="text" id="update_name" formControlName="text_name" class="form-control" placeholder="name">
+                <label for="update_description">Description</label>
+                <textarea formControlName="description" id="update_description" placeholder="description" class="form-control"></textarea>
+                <input type="submit" value="Update" class="btn btn-info update_post_button">
+            </form>
+          </div>     
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!------------------- Post Edit Model End------------------------->
+
+  
