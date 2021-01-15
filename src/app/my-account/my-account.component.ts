@@ -17,16 +17,44 @@ export class MyAccountComponent implements OnInit {
   login_form1 : boolean  = false;
   filename:string="";
   image_value :any = "";
+  data:any = [];
+  media_post : any =  {
+    
+    "tikrok" :[
+                {image :"/assets/images/Group 45.png",text_name:"@lorengray",discription:"Tik Tok human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"},
+                {image :"/assets/images/Group 45.png",text_name:"@lorengray",discription:"Tik Tok human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"},
+                {image :"/assets/images/Group 45.png",text_name:"@lorengray",discription:"Tik Tok human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"}
+              ],
+    "instgram" :[
+                {image :"/assets/images/Group 45.png",text_name:"@lorengray",discription:"Instagram human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"},
+                {image :"/assets/images/Group 45.png",text_name:"@lorengray",discription:"Instagram human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"},
+                {image :"/assets/images/Group 45.png",text_name:"@lorengray",discription:"Instagram human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"}
+              ],
+    "facebook" :[
+                {image :"/assets/images/Group 45.png",text_name:"@lorengray",discription:"Facebook human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"},
+                {image :"/assets/images/Group 45.png",text_name:"@lorengray",discription:"Facebook human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"},
+                {image :"/assets/images/Group 45.png",text_name:"@lorengray",discription:"Facebook human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"}
+              ],
+    "twitter" :[
+                {image :"/assets/images/Group 45.png",text_name:"@lorengray",discription:"Twitter human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"},
+                {image :"/assets/images/Group 45.png",text_name:"@lorengray",discription:"Twitter human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"},
+                {image :"/assets/images/Group 45.png",text_name:"@lorengray",discription:"Twitter human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"}
+              ],
+  };
 
   myForm = new FormGroup({
     file: new FormControl('', [Validators.required]),
    
   });
   
-  constructor(private MyAccountService:MyAccountService,private http : HttpClient,private router: Router,) { 
+  constructor(
+                private MyAccountService:MyAccountService,
+                private http : HttpClient,
+                private router: Router,
+                ) { 
   }
 
-  data:any = [];
+  
 
   ngOnInit(): void {
     this.singleInfluencer()
