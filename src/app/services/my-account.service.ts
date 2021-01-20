@@ -11,24 +11,24 @@ export class MyAccountService {
 
   constructor(private http : HttpClient) { }
 
-  singleInfluencer(){
-    return this.http.get(this.apiUrl+"/influencers/singleInfluencer")
+  singleInfluencer(user_id : any){
+    return this.http.get(this.apiUrl+"/influencers/singleInfluencer/?user_id="+user_id)
   //return this.http.get(environment.url+"/interview/list")
   }
 
-  uploadProfileImage(data:any){
+  uploadPost(data:any){
 
-    return this.http.post(this.apiUrl+"/influencers/singleInfluencer",data);
+    return this.http.post(this.apiUrl+"/influencers/upload_post",data);
   }
   
-  uploadProfile(data:any){
+  updateProfile(data:any){
 
-    return this.http.post(this.apiUrl+"/influencers/singleInfluencer",data);
+    return this.http.post(this.apiUrl+"/influencers/update_profile",data);
   }
   
   updatePrice(data:any){
 
-    return this.http.post(this.apiUrl+"/influencers/singleInfluencer",data);
+    return this.http.post(this.apiUrl+"/influencers/update_price",data);
   }
 
   myAccountInfo(){

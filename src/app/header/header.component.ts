@@ -107,6 +107,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
       /*******Getting facebook response data */
     this.authService.authState.subscribe((user) => {
 
@@ -128,8 +129,9 @@ export class HeaderComponent implements OnInit {
         if(response['status'] == 'success'){
 
           this.success_message = response["msg"];
-          localStorage.setItem('login_userid',response["data"][0]['_id']);
-          localStorage.setItem('logindata',JSON.stringify(response["data"][0]));
+          this.loginservice.user_id = response["data"][0]['_id'];
+          localStorage.setItem(this.loginservice.local_storage_login_userid_key,response["data"][0]['_id']);
+          localStorage.setItem(this.loginservice.local_storage_key,JSON.stringify(response["data"][0]));
 
           this.loginservice.is_logged_in  = true;
           this.is_login                   = this.loginservice.is_logged_in;

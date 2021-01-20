@@ -42,8 +42,9 @@ export class LoginService {
         this.user_id      = user_data._id;
         this.is_logged_in = true;
         console.log("user alreday login");
-
+        
     } else {
+     
       this.user_id      = "";
       this.is_logged_in = false;
 

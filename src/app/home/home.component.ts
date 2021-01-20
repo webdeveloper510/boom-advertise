@@ -159,8 +159,8 @@ export class HomeComponent implements OnInit {
 
           console.log(response);
           localStorage.setItem("local_midia_check", JSON.stringify(local_midia_check));
-          localStorage.setItem('login_userid',response["data"]['_id']);
-          localStorage.setItem('logindata',JSON.stringify(response["data"]));
+          localStorage.setItem(this.login_service.local_storage_login_userid_key,response["data"]['_id']);
+          localStorage.setItem(this.login_service.local_storage_key,JSON.stringify(response["data"]));
 
           this.influnncer_success_message = response['msg'];
           this.is_login = true;

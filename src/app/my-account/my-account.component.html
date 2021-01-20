@@ -2,13 +2,13 @@
 <div class="heading_sec1"> <h1>My Account</h1></div>
 <div class="first_sec container-fluid">
     <div class="allside">
-    <div *ngFor="let profile_data of data" class="box_1 border-size">
+    <div *ngIf="data" class="box_1 border-size">
         <div class="image_circle">
         <img src="/assets/images/loren-gray-x-things-you-never-knew-about-the-tiktok-star-1586962638-view-0.png">
     </div>
-        <p class="name"> {{ profile_data.vals[0].name }}</p>
-        <span class="tag"> {{ profile_data.vals[0].email }} </span>
-        <p class="singer">Twitter Followers: {{ profile_data.twitterfollowers }}</p>
+        <p class="name"> {{ data.name }}</p>
+        <span class="tag"> {{ data.email }} </span>
+        <p class="singer">Twitter Followers: 0</p>
         <div class="small_elements">
          <div class="element_1">
             <p>44.9M</p>
@@ -243,13 +243,13 @@
         <div class="w3-container">
           <span (click)="this.profile_edit_model = false;" class="w3-button w3-display-topright">&times;</span>
           <div class="promoter_signup">
-            <h2>Edit Price</h2>
+            <h2>Edit Profile</h2>
             
             <form [formGroup]="profile_edit" (ngSubmit)="updateProfile()"> 
                 <label for="update_email">Email</label>
-                <input type="email" id="update_email" formControlName="email" class="form-control" placeholder="email">
+                <input type="email" id="update_email" formControlName="email" class="form-control" placeholder="email" >
                 <label for="update_name">Name</label>
-                <input type="text" formControlName="name" id="update_name" placeholder="story price" class="form-control">
+                <input type="text" formControlName="name" id="update_name" placeholder="story price" class="form-control"  >
                 <input type="submit" value="Update" class="btn btn-info update_profile_button">
             </form>
           </div>     
@@ -274,9 +274,9 @@
             <form [formGroup]="price_edit" (ngSubmit)="updatePrice()"> 
                 <input type="hidden" id="media_type" formControlName="media_type" >
                 <label for="update_post">Post</label>
-                <input type="text" id="update_post" formControlName="post_price" class="form-control" placeholder="post price">
+                <input type="text" id="update_post" formControlName="post_price" class="form-control" placeholder="post price" autocomplete="off">
                 <label for="update_story">Story</label>
-                <input type="text" formControlName="story_price" id="update_story" placeholder="story price" class="form-control">
+                <input type="text" formControlName="story_price" id="update_story" placeholder="story price" class="form-control" autocomplete="off">  
                 <input type="submit" value="Update" class="btn btn-info update_price_button">
             </form>
           </div>     

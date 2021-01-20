@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
 import { chown } from 'fs';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-my-account',
@@ -13,11 +14,11 @@ import { chown } from 'fs';
 
 export class MyAccountComponent implements OnInit {
 
-  login_form : boolean  = true;
-  login_form1 : boolean = false;
-  filename:string       = "";
-  image_value :any      = "";
-  data:any              = [];
+  login_form : boolean        = true;
+  login_form1 : boolean       = false;
+  filename:string             = "";
+  image_value :any            = "";
+  data:any                    = [];
   post_edit_model:boolean     = false;
   profile_edit_model:boolean  = false;
   price_edit_model:boolean    = false;
@@ -52,6 +53,23 @@ export class MyAccountComponent implements OnInit {
                                   ],
                       };
 
+  constructor(
+              private MyAccountService:MyAccountService,
+              private loginService : LoginService,
+              private http : HttpClient,
+              private router: Router,
+              ) {  
+              
+  }
+        
+          
+        
+  ngOnInit(): void {
+
+    
+    this.singleInfluencer();
+  }
+
   myForm = new FormGroup({
     file: new FormControl('', [Validators.required]),
    
@@ -70,43 +88,65 @@ export class MyAccountComponent implements OnInit {
       media_type  : new FormControl(''),
     
    });
+   
   price_edit = new FormGroup({
       post_price  : new FormControl(''),
       story_price : new FormControl(''),
       media_type  : new FormControl(''),
    });
   
-  constructor(
-                private MyAccountService:MyAccountService,
-                private http : HttpClient,
-                private router: Router,
-                ) { 
-  }
-
   
 
-  ngOnInit(): void {
+  initProfileEdit(){
 
-    
-    this.singleInfluencer()
+    this.profile_edit.patchValue({
+      name : this.data.name,
+      email : this.data.email,
+    });
   }
   
 
   singleInfluencer(){
-    this.MyAccountService.singleInfluencer()
+
+    
+    console.log(this.loginService.user_id);
+   
+    this.MyAccountService.singleInfluencer(this.loginService.user_id)
       .subscribe(
         (response:any) =>{
-          console.log(response)
+          console.log(response); 
+          console.log(this.loginService.user_id); 
           this.data = response['data'];
+          this.media_price = response.mydata.price_data;
+          this.data = response.mydata.profile_data;
+          this.initProfileEdit();
         }
       )
    }
 
    updateProfile(){
 
+    
+    //let user_data = this.MyAccountService.myAccountInfo();
+    let data = this.profile_edit.value;
+    data.user_id = this.loginService.user_id;
     console.log(this.profile_edit.value);
-    let user_data = this.MyAccountService.myAccountInfo();
-    console.log(user_data);
+
+    this.MyAccountService.updateProfile(data).subscribe(
+      (response : any) => {
+
+        console.log(response);
+        if(response.statusCode == 200){
+
+          this.profile_edit_model = false;
+          this.singleInfluencer();
+
+        }else{
+
+        }
+      }
+    );
+    
     console.log("end");
    }
 
@@ -137,34 +177,37 @@ export class MyAccountComponent implements OnInit {
 
   updatePrice(){
 
+    
+    
+    let data      = this.price_edit.value;
+    data.user_id  = this.loginService.user_id;
     console.log(this.price_edit.value);
-    return false;
-    let data = this.price_edit.value;
-
+    
     this.MyAccountService.updatePrice(data).subscribe(
       (response:any) => {
+        
         console.log(response);
+
+        if(response.statusCode == 200){
+
+          this.price_edit_model = false;
+          this.singleInfluencer();
+
+          console.clear();
+          console.log(this.data);
+        }else{
+
+        }
         
       }
     );
+   
   }
 
   updatePost(){
 
     let data  = this.post_edit.value;
     
-    return false;
-    this.MyAccountService.uploadProfile(data).subscribe(
-      (response:any) => {
-
-        console.log(response);
-        let type  = this.post_edit.value.media_type;
-        let index = this.post_edit.value.index_value;
-        this.media_post[type][index].text_name    = this.post_edit.value.text_name;
-        this.media_post[type][index].description  = this.post_edit.value.description;
-        this.post_edit_model = false;
-      }
-    );
   }
 
   // get f(){
@@ -180,7 +223,7 @@ export class MyAccountComponent implements OnInit {
       const formData = new FormData();
       formData.append('uploadedImage', this.image_value);
       formData.append('user_id', '1');
-      this.MyAccountService.uploadProfileImage(formData).subscribe(
+      this.MyAccountService.uploadPost(formData).subscribe(
         (response:any) =>{
           console.log(response)
           this.image_value = "";

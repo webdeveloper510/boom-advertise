@@ -49,6 +49,8 @@ export class TopAuthenticInfluencersRankingComponent implements OnInit {
            console.log(response)
          //  this.data1 = response['data']
          this.data = response['data'];
+         console.clear();
+         console.log(response);
         
          })
     }
