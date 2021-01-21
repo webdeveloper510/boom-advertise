@@ -22,6 +22,7 @@ export class MyAccountComponent implements OnInit {
   post_edit_model:boolean     = false;
   profile_edit_model:boolean  = false;
   price_edit_model:boolean    = false;
+  type_of_media : any = ['tiktok','instagram', 'facebook' , 'twitter'];
   media_price : any = {
                         tiktok : { post_price : 200, story_price : 300},
                         instagram : { post_price : 400, story_price : 500},
@@ -32,7 +33,7 @@ export class MyAccountComponent implements OnInit {
   media_post : any =  {
     
                         tiktok :[
-                                    {id:1,image :"/assets/images/Group 45.png",text_name:"@lorengray tiktok1",description:"Tik Tok human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"},
+                                    {id:1,image :"http://localhost:3000/uploadedImage-1611207278017.jpg",text_name:"@lorengray tiktok1",description:"Tik Tok human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"},
                                     {id:2,image :"/assets/images/Group 46.png",text_name:"@lorengray tiktok2",description:"Tik Tok human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"},
                                     {id:3,image :"/assets/images/Group 45.png",text_name:"@lorengray tiktok3",description:"Tik Tok human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"}
                                   ],
@@ -66,12 +67,12 @@ export class MyAccountComponent implements OnInit {
         
   ngOnInit(): void {
 
-    
     this.singleInfluencer();
   }
 
   myForm = new FormGroup({
     file: new FormControl('', [Validators.required]),
+    media_name : new FormControl("")
    
   });
 
@@ -119,6 +120,7 @@ export class MyAccountComponent implements OnInit {
           this.data = response['data'];
           this.media_price = response.mydata.price_data;
           this.data = response.mydata.profile_data;
+          this.media_post = response.mydata.posts;
           this.initProfileEdit();
         }
       )
@@ -126,7 +128,6 @@ export class MyAccountComponent implements OnInit {
 
    updateProfile(){
 
-    
     //let user_data = this.MyAccountService.myAccountInfo();
     let data = this.profile_edit.value;
     data.user_id = this.loginService.user_id;
@@ -137,31 +138,14 @@ export class MyAccountComponent implements OnInit {
 
         console.log(response);
         if(response.statusCode == 200){
-
           this.profile_edit_model = false;
           this.singleInfluencer();
-
-        }else{
-
-        }
+        }else{ }
       }
     );
-    
-    console.log("end");
    }
 
-  openPostModel(media_type:string , index_value:number,id:number){
-
-    this.post_edit_model = true;
-
-    this.post_edit.patchValue({
-                                text_name   : this.media_post[media_type][index_value].text_name,
-                                description : this.media_post[media_type][index_value].description,
-                                media_type  : media_type,
-                                id          : id,
-                                index_value : index_value,
-                              });
-  }
+ 
 
   openPriceModel(type:string){
 
@@ -177,8 +161,6 @@ export class MyAccountComponent implements OnInit {
 
   updatePrice(){
 
-    
-    
     let data      = this.price_edit.value;
     data.user_id  = this.loginService.user_id;
     console.log(this.price_edit.value);
@@ -192,21 +174,21 @@ export class MyAccountComponent implements OnInit {
 
           this.price_edit_model = false;
           this.singleInfluencer();
-
-          console.clear();
-          console.log(this.data);
-        }else{
-
-        }
-        
+        }else{}
       }
     );
-   
   }
 
-  updatePost(){
+  deletePost(post_id:any){
 
-    let data  = this.post_edit.value;
+    console.log(post_id);
+
+    this.MyAccountService.deletePost(post_id).subscribe(
+      (response:any) => {
+        console.log(response);
+        this.singleInfluencer();
+      }
+    );
     
   }
 
@@ -214,18 +196,24 @@ export class MyAccountComponent implements OnInit {
   //   return this.myForm.controls;
   // }
 
-  submit(){
+  uploadPost(){
     
     console.log(this.myForm.value);
     
-    if(this.image_value){
+    if(this.image_value && this.myForm.value.media_name){
 
       const formData = new FormData();
       formData.append('uploadedImage', this.image_value);
-      formData.append('user_id', '1');
+      formData.append('user_id', this.loginService.user_id);
+      formData.append('media_type', this.myForm.value.media_name);
+      
       this.MyAccountService.uploadPost(formData).subscribe(
         (response:any) =>{
           console.log(response)
+          this.singleInfluencer();
+          this.myForm.reset();
+          this.myForm.patchValue({media_name : ""});
+          this.filename = "";
           this.image_value = "";
         }
       );
@@ -235,15 +223,8 @@ export class MyAccountComponent implements OnInit {
 
   selectFile(event:any){
 
-    if(event.target.files[0]){
-      this.image_value = event.target.files[0];;
-    }else {
-      this.image_value = "";
-    }
-    
+    this.image_value = event.target.files[0] ? event.target.files[0] : "";
     this.filename=this.myForm.value.file;
-    console.log(this.media_post);
-    console.log("this.media_post");
   }
 
 }

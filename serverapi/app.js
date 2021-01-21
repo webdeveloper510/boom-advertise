@@ -5,7 +5,7 @@ var path = require('path');
 var cors = require('cors');
 
 const multer = require('multer');
-var fileExtension = require('file-extension')
+var fileExtension = require('file-extension');
 // const jwt = require('jsonwebtoken');
 // const expressJwt = require('express-jwt');
 
@@ -45,8 +45,10 @@ var login = require('./routes/login');
 var sessions = require('./routes/sessionsController');
 
 var app = express();
+app.use(express.static('uploads'));
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  
+  res.send("Hello World!")
 });
 
 app.use(function(req, res, next) {

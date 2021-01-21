@@ -12,7 +12,7 @@ const routes: Routes = [
      path: 'home', component: HomeComponent
     },
   {
-     path: 'influencer-account', component: InfluencerAccountComponent
+     path: 'influencer-account/:id', component: InfluencerAccountComponent
 },
 {
   path: 'promoter-account', component: PromoterAccountComponent

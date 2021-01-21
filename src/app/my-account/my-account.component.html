@@ -106,13 +106,18 @@
 </div>
     </div>
         <div class="box_3 border-size">
-            <form [formGroup]="myForm" (ngSubmit)="submit()">
+            <form [formGroup]="myForm" (ngSubmit)="uploadPost()">
                 <div class="form-group">
                     <input 
                         formControlName="file"
                         id="file" 
                         type="file" 
                         class="form-control" (change)="selectFile($event)">
+
+                    <select class="form-control" formControlName="media_name">
+                        <option value="" disabled selected>Select your media type</option>
+                        <option *ngFor="let media_name of type_of_media;" [value]="media_name">{{ media_name | titlecase}}</option>
+                    </select>
                         <p class="filepath" [style.display]="login_form ? 'block' : 'none'">{{filename}}</p>
                         <p class="filepath uploaded" [style.display]="login_form1 ? 'block' : 'none'">Uploaded</p>
                     <button class="btn btn-primary" type="submit" class="upload">Upload</button>
@@ -140,12 +145,14 @@
                         </div>
                     </div>
                     <div class="click_add">
-                        <div class="Buy"><button type="submit" class="edit-profile" (click)="openPostModel('tiktok',i,tik_tok_info.id)">Edit Profile</button></div>
-                        <div class="Quote"><button type="submit" class="edit-profile">   Request Quote</button></div>
+                        <div class="Buy"><button type="submit" class="edit-profile" (click)="deletePost(tik_tok_info.id)">Delete Post</button></div>
+                        
 
                     </div>
                 </div>
-
+                <div *ngIf="media_post.tiktok.length == 0" style="text-align: center;">
+                    <h1>No post found</h1>
+                </div> 
                 
                 </div>
             </tab> 
@@ -167,13 +174,15 @@
                         </div>
                     </div>
                     <div class="click_add">
-                    <div class="Buy"><button type="submit" class="edit-profile" (click)="openPostModel('instagram',i,Instagram.id)">Edit Profile</button></div>
-                    <div class="Quote"><button type="submit" class="edit-profile">   Request Quote</button></div>
+                    <div class="Buy"><button type="submit" class="edit-profile" (click)="deletePost(Instagram.id)">Delete Post</button></div>
+                  
 
                     </div>
                 </div>
 
-                
+                <div *ngIf="media_post.instagram.length == 0" style="text-align: center;">
+                    <h1>No post found</h1>
+                </div> 
         
 
             </div>
@@ -197,18 +206,21 @@
                             </div>
                         </div>
                         <div class="click_add">
-                            <div class="Buy"><button type="submit" class="edit-profile" (click)="openPostModel('facebook',i,Facebook.id)">Edit Profile</button></div>
-                            <div class="Quote"><button type="submit" class="edit-profile">   Request Quote</button></div>
+                            <div class="Buy"><button type="submit" class="edit-profile" (click)="deletePost(Facebook.id)">Delete Post</button></div>
+                            
                         </div>
                     </div>
-    
+                    <div *ngIf="media_post.facebook.length == 0" style="text-align: center;">
+                        <h1>No post found</h1>
+                    </div> 
             </div>
             </tab>
             
             <tab class="twitter">
                 <ng-template tabHeading> <img src="/assets/images/twitter 1.png">  Twitter</ng-template>
                 <div class="outer_most">
-                    <div class="section_1" *ngFor="let Twitter of media_post.twitter; let i = index;">
+                    
+                    <div class="section_1"  *ngFor="let Twitter of media_post.twitter; let i = index;" >
                         <div class="image_start">
                             <img [src]="Twitter.image">
                         </div>
@@ -223,10 +235,13 @@
                             </div>
                         </div>
                         <div class="click_add">
-                        <div class="Buy"><button type="submit" class="edit-profile" (click)="openPostModel('twitter',i,Twitter.id)">Edit Profile</button></div>
-                        <div class="Quote"><button type="submit" class="edit-profile">   Request Quote</button></div>
+                        <div class="Buy"><button type="submit" class="edit-profile" (click)="deletePost(Twitter.id)">Delete Post</button></div>
+                        
 
                         </div>
+                    </div>
+                    <div *ngIf="media_post.twitter.length == 0" style="text-align: center;">
+                        <h1>No post found</h1>
                     </div>  
                 </div>
             </tab>
@@ -288,32 +303,6 @@
 
   <!------------------- Update Price Model End------------------------->
 
-<!------------------- Post Edit Model Start------------------------->
 
-<div class="w3-container">
-    <div id="edit_post" class="w3-modal" [style.display]="post_edit_model ? 'block' : 'none'">
-      <div class="w3-modal-content">
-        <div class="w3-container">
-          <span (click)="this.post_edit_model = false;" class="w3-button w3-display-topright">&times;</span>
-          <div class="promoter_signup">
-            <h2>Edit Profile</h2>
-            
-            <form [formGroup]="post_edit" (ngSubmit)="updatePost()"> 
-                <label for="update_name">Name</label>
-                <input type="hidden" id="update_id" formControlName="id" >
-                <input type="hidden" id="index_value" formControlName="index_value" >
-                <input type="hidden" id="media_type" formControlName="media_type" >
-                <input type="text" id="update_name" formControlName="text_name" class="form-control" placeholder="name">
-                <label for="update_description">Description</label>
-                <textarea formControlName="description" id="update_description" placeholder="description" class="form-control"></textarea>
-                <input type="submit" value="Update" class="btn btn-info update_post_button">
-            </form>
-          </div>     
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!------------------- Post Edit Model End------------------------->
 
   

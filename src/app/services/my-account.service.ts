@@ -20,6 +20,10 @@ export class MyAccountService {
 
     return this.http.post(this.apiUrl+"/influencers/upload_post",data);
   }
+
+  deletePost(post_id:any){
+    return this.http.get(this.apiUrl+"/influencers/delete_post/?post_id="+post_id)
+  }
   
   updateProfile(data:any){
 

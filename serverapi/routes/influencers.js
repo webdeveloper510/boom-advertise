@@ -4,6 +4,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 const influencer = require('../models/influencers');
 const influencers_data = require('../models/influencers_data');
+const influencer_posts = require('../models/influencers_posts');
 //const email = require('../config/email');
 //const nodemailer = require('nodemailer');
 var passwordHash = require('password-hash');
@@ -31,7 +32,7 @@ var upload = multer({
   storage: storage,
   limits: {
       // Setting Image Size Limit to 2MBs
-      fileSize: 2000000
+      fileSize: 200000000
   },
   fileFilter(req, file, cb) {
       if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
@@ -154,16 +155,23 @@ router.post('/register', async function(req,res) {
           ]
             ,function(err,influencer_data){
             if(err) res.json({status:"failure",statusCode:100,error:err});
+
+            
             
             var return_data = {
                                 price_data:{
-                                  tiktok    : { post_price : 0, story_price : 0},
-                                  instagram : { post_price : 0, story_price : 0},
-                                  facebook  : { post_price : 0, story_price : 0},
-                                  twitter   : { post_price : 0, story_price : 0},
+                                  tiktok      : { post_price : 0, story_price : 0},
+                                  instagram   : { post_price : 0, story_price : 0},
+                                  facebook    : { post_price : 0, story_price : 0},
+                                  twitter     : { post_price : 0, story_price : 0},
                                 },
-                                profile_data :"",
-                                
+                                profile_data  :"",
+                                posts         :{
+                                                tiktok    :  [],
+                                                instagram :  [],
+                                                facebook  :  [],
+                                                twitter   :  [],
+                                },
                               };
 
             if(influencer_data[0]){
@@ -183,8 +191,36 @@ router.post('/register', async function(req,res) {
               return_data.profile_data  = influencer_data[0].vals ? influencer_data[0].vals[0] : "";
 
             }
+
+            influencer_posts.influencer_posts.find({influencerid:user_id}, function(post_error, posts) {
+              if (post_error)  res.json({status:"failure",statusCode:100,msg:post_error});
+              
+              if(posts){
+                
+                for(var i = 0 ; i < posts.length;i++){
+                  
+  
+                  var post_value = { 
+                                      id : posts[i]._id ,
+                                      image : "http://"+req.headers.host+"/"+posts[i].post_name,
+                                      text_name:"@lorengray "+posts[i].media_type+i,
+                                      description:posts[i].media_type+" human machine recognition page",
+                                      likes_count:"50.8K",
+                                      comments_count:"20.8K"
+                                    };
+  
+                  return_data.posts[posts[i].media_type].push(post_value); 
+                }
+                res.json({status:"success",statusCode:200,data:influencer_data,mydata:return_data});
+              } else {
+                res.json({status:"success",statusCode:200,data:influencer_data,mydata:return_data});
+              }
+
+            })
+
+            
              
-            res.json({status:"success",statusCode:200,data:influencer_data,mydata:return_data});
+            
           });
       });
 
@@ -258,23 +294,38 @@ router.post('/register', async function(req,res) {
 
       router.post('/upload_post', upload.single('uploadedImage'), (req, res, next) => {
         const file = req.file
-        console.log(req);
+        var user_data = req.body;
+        
         if (!file) {
             const error = new Error('Please upload a file')
             error.httpStatusCode = 400
             return next(error)
         }
-        res.status(200).send({
-            statusCode: 200,
-            status: 'success',
-            uploadedFile: file
-        })
+
+        var post_create = new influencer_posts.influencer_posts();
+        
+        post_create.post_name = file.filename;
+        post_create.influencerid = user_data.user_id;
+        post_create.media_type = user_data.media_type;
+        
+        post_create.save(function(err ,data){
+          if (err)  res.json({status:"failure",statusCode:100,msg:err});
+          res.status(200).send({ statusCode: 200, status: 'success', data: file, })
+        });
       
       }, (error, req, res, next) => {
-        res.status(400).send({
-            error: error.message
-        })
+        res.status(400).send({ error: error.message })
       })
+
+      router.get("/delete_post",function(req , res){
+
+        var  post_id = req.query.post_id;
+
+        influencer_posts.influencer_posts.deleteOne({_id:post_id},function(error , data){
+          if(error) res.json({status:"failure",statusCode:100,data:error});
+          res.json({statusCode: 200, status: 'success', data: data});
+        })
+      });
 
   
     module.exports = router;

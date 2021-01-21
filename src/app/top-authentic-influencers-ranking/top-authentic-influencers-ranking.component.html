@@ -24,7 +24,7 @@
       <td>{{i+1}}</td>
       <td>
      
-        <div [routerLink]="['/influencer-account']" class="data1"> 
+        <div [routerLink]="['/influencer-account',group.vals[0]._id]" class="data1"> 
           <div class="image"><img src="/assets/images/total influeners.png"></div>
           <div class="name"><p>{{group.vals[0].name}}</p></div>
           <div class="mail"><p>{{group.vals[0].email}}</p></div>

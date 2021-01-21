@@ -6,8 +6,12 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
   styleUrls: ['./influencer-account.component.css']
 })
 export class InfluencerAccountComponent implements OnInit {
-
-  constructor() { }
+  id:any ;
+  constructor() { 
+  //   this._Activatedroute.paramMap.subscribe(params => { 
+  //     this.id = params.get('id'); 
+  // });
+  }
 
   ngOnInit(): void {
   }
