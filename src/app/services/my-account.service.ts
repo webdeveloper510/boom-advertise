@@ -12,6 +12,7 @@ export class MyAccountService {
   constructor(private http : HttpClient) { }
 
   singleInfluencer(user_id : any){
+    console.log("my id"+user_id)
     return this.http.get(this.apiUrl+"/influencers/singleInfluencer/?user_id="+user_id)
   //return this.http.get(environment.url+"/interview/list")
   }
@@ -45,5 +46,7 @@ export class MyAccountService {
       
     }
   }
+
+  
 
 }

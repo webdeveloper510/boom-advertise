@@ -264,3 +264,14 @@ p.discription {
 .section_1:last-child {
     margin-right: 0 !important;
 }
+
+.request_quote_button {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+.description {
+    margin-top: 20px;
+    font-size: x-large;
+    font-weight: lighter;
+    margin-bottom: 20px;
+}

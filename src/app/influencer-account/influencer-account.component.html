@@ -2,711 +2,257 @@
 <div class="heading_sec1"> <h1>Influencers Account</h1></div>
 <div class="first_sec container-fluid">
     
-    <div class="box_1 border-size">
+    <div class="box_1 border-size" >
         <div class="image_circle">
-        <img src="/assets/images/loren-gray-x-things-you-never-knew-about-the-tiktok-star-1586962638-view-0.png">
-    </div>
-        <p class="name">Loren Gray</p>
-        <span class="tag">@lorengray</span>
+            <img src="/assets/images/loren-gray-x-things-you-never-knew-about-the-tiktok-star-1586962638-view-0.png">
+        </div>
+        <p class="name">{{influencer_data.profile_data?.name}}</p>
+        <span class="tag">{{influencer_data.profile_data?.email}}</span>
         <p class="singer">American Singer</p>
         <div class="small_elements">
-         <div class="element_1">
-            <p>44.9M</p>
-            <span>Reach</span>
-         </div>  
-         <div class="element_2">
-            <p>44.9M</p>
-            <span>Views</span>
-         </div>  
+            <div class="element_1">
+                <p>44.9M</p>
+                <span>Reach</span>
+            </div>  
+            <div class="element_2">
+                <p>44.9M</p>
+                <span>Views</span>
+            </div>  
         </div>
-        <button type="submit" class="edit-profile">Edit Profile</button>
+        <button type="button" class="edit-profile" > Profile</button>
     </div>
-    <div class="box_2 border-size">
-     <h2 class="price">Price</h2>
-            <div class="image_tiktok">
+    <div class="box_2 border-size" *ngIf="tiktok_price_div">
+        <h2 class="price">Price</h2>
+        <div class="image_tiktok">
             <img src="/assets/images/tiktok icon 2.png">
         </div>
         <div class="influencer_tiktok">
-            <p class="singer">500$/ Post</p>
-            <p class="singer">300$/ Story</p></div>
-            
+            <p class="singer">{{media_price.tiktok.post_price}}$/ Post</p>
+            <p class="singer">{{media_price.tiktok.story_price}}$/ Story</p>
+        </div> 
+    </div>
+    <div class="box_2 border-size" *ngIf="facebook_price_div">
+        <h2 class="price">Price</h2>
+        <div class="image_tiktok">
+            <img src="/assets/images/fb icon 2.png">
         </div>
+        <div class="influencer_tiktok">
+            <p class="singer">{{media_price.facebook.post_price}}$/ Post</p>
+            <p class="singer">{{media_price.facebook.story_price}}$/ Story</p>
+        </div> 
+    </div>
+    <div class="box_2 border-size" *ngIf="instagram_price_div">
+        <h2 class="price">Price</h2>
+        <div class="image_tiktok">
+            <img src="/assets/images/insta iconn 2.png">
+        </div>
+        <div class="influencer_tiktok">
+            <p class="singer">{{media_price.instagram.post_price}}$/ Post</p>
+            <p class="singer">{{media_price.instagram.story_price}}$/ Story</p>
+        </div> 
+    </div>
+    <div class="box_2 border-size" *ngIf="twitter_price_div">
+        <h2 class="price">Price</h2>
+        <div class="image_tiktok">
+            <img src="/assets/images/twitter 2.png">
+        </div>
+        <div class="influencer_tiktok">
+            <p class="singer">{{media_price.twitter.post_price}}$/ Post</p>
+            <p class="singer">{{media_price.twitter.story_price}}$/ Story</p>
+        </div> 
+    </div>
 
-        <div class="tabs_set">
-            <tabset>
-                <tab>
-                <ng-template tabHeading> <img src="/assets/images/tiktok icon 1.png">  Tik Tok</ng-template>
+    <div class="tabs_set">
+        <tabset>
+            <tab>
+                <ng-template tabHeading > 
+                    <span 
+                        (click)="   this.instagram_price_div    =   false; 
+                                    this.tiktok_price_div       =   true;
+                                    this.facebook_price_div     =   false;
+                                    this.twitter_price_div      =   false;
+                                ">
+                        <img src="/assets/images/tiktok icon 1.png">  Tik Tok
+                    </span>
+                </ng-template>
                 <div class="outer_most">
-                    <div class="section_1">
-          <div class="image_start">
-              <img src="/assets/images/Group 45.png">
-          </div>
-          <h2 class="text_name">@lorengray</h2>
-          <p class="discription">Tik Tok human machine recognition page. Find images and videos about Loren only at @lorengeray</p>
-          <div class="counts">
-              <div class="likes">
-                  <img src="/assets/images/favourite red 1.png"><span>50.8K</span>
-              </div>
-              <div class="comments">
-                  <img src="/assets/images/COMMENT 1.png"><span>20.8K</span>
-              </div>
-          </div>
-          <div class="click_add">
-              <div class="Buy"><button type="submit" class="edit-profile">Edit Profile</button></div>
-              <div class="Quote"><button type="submit" class="edit-profile">   Request Quote</button></div>
-           
-          </div>
-        </div>
-
-        <div class="section_1">
-            <div class="image_start">
-                <img src="/assets/images/Group 45.png">
-            </div>
-            <h2 class="text_name">@lorengray</h2>
-            <p class="discription">Tik Tok human machine recognition page. Find images and videos about Loren only at @lorengeray</p>
-            <div class="counts">
-                <div class="likes">
-                    <img src="/assets/images/favourite red 1.png"><span>50.8K</span>
+                    <div class="section_1" *ngFor="let tik_tok_info of media_post.tiktok ; let i = index ">
+                        <div class="image_start">
+                            <img [src]="tik_tok_info.image">
+                        </div>
+                        <h2 class="text_name">{{tik_tok_info.text_name}}</h2>
+                        <p class="discription">{{tik_tok_info.description}}</p>
+                        <div class="counts">
+                            <div class="likes">
+                                <img src="/assets/images/favourite red 1.png"><span>50.8K</span>
+                            </div>
+                            <div class="comments">
+                                <img src="/assets/images/COMMENT 1.png"><span>20.8K</span>
+                            </div>
+                        </div>
+                        <div class="click_add">
+                            <div class="Buy"><button type="submit" class="edit-profile">Buy</button></div>
+                            <div class="Quote"><button type="submit" class="edit-profile" (click)="openRequestModel(tik_tok_info.id,tik_tok_info.influencer_id,'tiktok');">   Request Quote</button></div>
+                        
+                        </div>
+                    </div>
+                    
+                    <div *ngIf="media_post.tiktok.length == 0" style="text-align: center;">
+                        <h1>No post found</h1>
+                    </div> 
+                    
+                    
                 </div>
-                <div class="comments">
-                    <img src="/assets/images/COMMENT 1.png"><span>20.8K</span>
-                </div>
-            </div>
-            <div class="click_add">
-                <div class="Buy"><button type="submit" class="edit-profile">Edit Profile</button></div>
-                <div class="Quote"><button type="submit" class="edit-profile">   Request Quote</button></div>
-             
-            </div>
-          </div>
-          <div class="section_1">
-            <div class="image_start">
-                <img src="/assets/images/Group 45.png">
-            </div>
-            <h2 class="text_name">@lorengray</h2>
-            <p class="discription">Tik Tok human machine recognition page. Find images and videos about Loren only at @lorengeray</p>
-            <div class="counts">
-                <div class="likes">
-                    <img src="/assets/images/favourite red 1.png"><span>50.8K</span>
-                </div>
-                <div class="comments">
-                    <img src="/assets/images/COMMENT 1.png"><span>20.8K</span>
-                </div>
-            </div>
-            <div class="click_add">
-                <div class="Buy"><button type="submit" class="edit-profile">Edit Profile</button></div>
-                <div class="Quote"><button type="submit" class="edit-profile">   Request Quote</button></div>
-             
-            </div>
-          </div>
-          <div class="section_1">
-            <div class="image_start">
-                <img src="/assets/images/Group 45.png">
-            </div>
-            <h2 class="text_name">@lorengray</h2>
-            <p class="discription">Tik Tok human machine recognition page. Find images and videos about Loren only at @lorengeray</p>
-            <div class="counts">
-                <div class="likes">
-                    <img src="/assets/images/favourite red 1.png"><span>50.8K</span>
-                </div>
-                <div class="comments">
-                    <img src="/assets/images/COMMENT 1.png"><span>20.8K</span>
-                </div>
-            </div>
-            <div class="click_add">
-                <div class="Buy"><button type="submit" class="edit-profile">Edit Profile</button></div>
-                <div class="Quote"><button type="submit" class="edit-profile">   Request Quote</button></div>
-             
-            </div>
-          </div>
-          <div class="section_1">
-            <div class="image_start">
-                <img src="/assets/images/Group 45.png">
-            </div>
-            <h2 class="text_name">@lorengray</h2>
-            <p class="discription">Tik Tok human machine recognition page. Find images and videos about Loren only at @lorengeray</p>
-            <div class="counts">
-                <div class="likes">
-                    <img src="/assets/images/favourite red 1.png"><span>50.8K</span>
-                </div>
-                <div class="comments">
-                    <img src="/assets/images/COMMENT 1.png"><span>20.8K</span>
-                </div>
-            </div>
-            <div class="click_add">
-                <div class="Buy"><button type="submit" class="edit-profile">Edit Profile</button></div>
-                <div class="Quote"><button type="submit" class="edit-profile">   Request Quote</button></div>
-             
-            </div>
-          </div>
-          <div class="section_1">
-            <div class="image_start">
-                <img src="/assets/images/Group 45.png">
-            </div>
-            <h2 class="text_name">@lorengray</h2>
-            <p class="discription">Tik Tok human machine recognition page. Find images and videos about Loren only at @lorengeray</p>
-            <div class="counts">
-                <div class="likes">
-                    <img src="/assets/images/favourite red 1.png"><span>50.8K</span>
-                </div>
-                <div class="comments">
-                    <img src="/assets/images/COMMENT 1.png"><span>20.8K</span>
-                </div>
-            </div>
-            <div class="click_add">
-                <div class="Buy"><button type="submit" class="edit-profile">Edit Profile</button></div>
-                <div class="Quote"><button type="submit" class="edit-profile">   Request Quote</button></div>
-             
-            </div>
-          </div>
-          <div class="section_1">
-            <div class="image_start">
-                <img src="/assets/images/Group 45.png">
-            </div>
-            <h2 class="text_name">@lorengray</h2>
-            <p class="discription">Tik Tok human machine recognition page. Find images and videos about Loren only at @lorengeray</p>
-            <div class="counts">
-                <div class="likes">
-                    <img src="/assets/images/favourite red 1.png"><span>50.8K</span>
-                </div>
-                <div class="comments">
-                    <img src="/assets/images/COMMENT 1.png"><span>20.8K</span>
-                </div>
-            </div>
-            <div class="click_add">
-                <div class="Buy"><button type="submit" class="edit-profile">Edit Profile</button></div>
-                <div class="Quote"><button type="submit" class="edit-profile">   Request Quote</button></div>
-             
-            </div>
-          </div>
-          <div class="section_1">
-            <div class="image_start">
-                <img src="/assets/images/Group 46.png">
-            </div>
-            <h2 class="text_name">@lorengray</h2>
-            <p class="discription">Tik Tok human machine recognition page. Find images and videos about Loren only at @lorengeray</p>
-            <div class="counts">
-                <div class="likes">
-                    <img src="/assets/images/favourite red 1.png"><span>50.8K</span>
-                </div>
-                <div class="comments">
-                    <img src="/assets/images/COMMENT 1.png"><span>20.8K</span>
-                </div>
-            </div>
-            <div class="click_add">
-                <div class="Buy"><button type="submit" class="edit-profile">Edit Profile</button></div>
-                <div class="Quote"><button type="submit" class="edit-profile">   Request Quote</button></div>
-             
-            </div>
-          </div>
-          
-        </div>
             </tab> 
-              <tab class="insta">
-                <ng-template tabHeading> <img src="/assets/images/insta iconn 1.png">  Instagram</ng-template>
+            <tab class="insta" >
+                <ng-template tabHeading> 
+                    <span 
+                        (click)="   this.instagram_price_div    =   true; 
+                                    this.tiktok_price_div       =   false;
+                                    this.facebook_price_div     =   false;
+                                    this.twitter_price_div      =   false;
+                                ">
+                        <img src="/assets/images/insta iconn 1.png" >  Instagram
+                    </span>
+                </ng-template>
                 <div class="outer_most">
-                    <div class="section_1">
-          <div class="image_start">
-              <img src="/assets/images/Group 46.png">
-          </div>
-          <h2 class="text_name">@lorengray</h2>
-          <p class="discription">Tik Tok human machine recognition page. Find images and videos about Loren only at @lorengeray</p>
-          <div class="counts">
-              <div class="likes">
-                  <img src="/assets/images/favourite red 1.png"><span>50.8K</span>
-              </div>
-              <div class="comments">
-                  <img src="/assets/images/COMMENT 1.png"><span>20.8K</span>
-              </div>
-          </div>
-          <div class="click_add">
-              <div class="Buy"><button type="submit" class="edit-profile">Edit Profile</button></div>
-              <div class="Quote"><button type="submit" class="edit-profile">   Request Quote</button></div>
-           
-          </div>
-        </div>
-
-        <div class="section_1">
-            <div class="image_start">
-                <img src="/assets/images/Group 45.png">
-            </div>
-            <h2 class="text_name">@lorengray</h2>
-            <p class="discription">Tik Tok human machine recognition page. Find images and videos about Loren only at @lorengeray</p>
-            <div class="counts">
-                <div class="likes">
-                    <img src="/assets/images/favourite red 1.png"><span>50.8K</span>
+                
+                    <div class="section_1" *ngFor="let Instagram of media_post.instagram; let i = index;">
+                        <div class="image_start">
+                            <img [src]="Instagram.image">
+                        </div>
+                        <h2 class="text_name">{{Instagram.text_name}}</h2>
+                        <p class="discription">{{Instagram.description}}</p>
+                        <div class="counts">
+                            <div class="likes">
+                                <img src="/assets/images/favourite red 1.png"><span>50.8K</span>
+                            </div>
+                            <div class="comments">
+                                <img src="/assets/images/COMMENT 1.png"><span>20.8K</span>
+                            </div>
+                        </div>
+                        <div class="click_add">
+                            <div class="Buy"><button type="submit" class="edit-profile">Buy</button></div>
+                            <div class="Quote"><button type="submit" class="edit-profile" (click)="openRequestModel(Instagram.id,Instagram.influencer_id,'instagram');">   Request Quote</button></div>
+                        
+                        </div>
+                    </div>
+                    <div *ngIf="media_post.instagram.length == 0" style="text-align: center;">
+                        <h1>No post found</h1>
+                    </div> 
                 </div>
-                <div class="comments">
-                    <img src="/assets/images/COMMENT 1.png"><span>20.8K</span>
-                </div>
-            </div>
-            <div class="click_add">
-                <div class="Buy"><button type="submit" class="edit-profile">Edit Profile</button></div>
-                <div class="Quote"><button type="submit" class="edit-profile">   Request Quote</button></div>
-             
-            </div>
-          </div>
-          <div class="section_1">
-            <div class="image_start">
-                <img src="/assets/images/Group 46.png">
-            </div>
-            <h2 class="text_name">@lorengray</h2>
-            <p class="discription">Tik Tok human machine recognition page. Find images and videos about Loren only at @lorengeray</p>
-            <div class="counts">
-                <div class="likes">
-                    <img src="/assets/images/favourite red 1.png"><span>50.8K</span>
-                </div>
-                <div class="comments">
-                    <img src="/assets/images/COMMENT 1.png"><span>20.8K</span>
-                </div>
-            </div>
-            <div class="click_add">
-                <div class="Buy"><button type="submit" class="edit-profile">Edit Profile</button></div>
-                <div class="Quote"><button type="submit" class="edit-profile">   Request Quote</button></div>
-             
-            </div>
-          </div>
-          <div class="section_1">
-            <div class="image_start">
-                <img src="/assets/images/Group 45.png">
-            </div>
-            <h2 class="text_name">@lorengray</h2>
-            <p class="discription">Tik Tok human machine recognition page. Find images and videos about Loren only at @lorengeray</p>
-            <div class="counts">
-                <div class="likes">
-                    <img src="/assets/images/favourite red 1.png"><span>50.8K</span>
-                </div>
-                <div class="comments">
-                    <img src="/assets/images/COMMENT 1.png"><span>20.8K</span>
-                </div>
-            </div>
-            <div class="click_add">
-                <div class="Buy"><button type="submit" class="edit-profile">Edit Profile</button></div>
-                <div class="Quote"><button type="submit" class="edit-profile">   Request Quote</button></div>
-             
-            </div>
-          </div>
-          <div class="section_1">
-            <div class="image_start">
-                <img src="/assets/images/Group 45.png">
-            </div>
-            <h2 class="text_name">@lorengray</h2>
-            <p class="discription">Tik Tok human machine recognition page. Find images and videos about Loren only at @lorengeray</p>
-            <div class="counts">
-                <div class="likes">
-                    <img src="/assets/images/favourite red 1.png"><span>50.8K</span>
-                </div>
-                <div class="comments">
-                    <img src="/assets/images/COMMENT 1.png"><span>20.8K</span>
-                </div>
-            </div>
-            <div class="click_add">
-                <div class="Buy"><button type="submit" class="edit-profile">Edit Profile</button></div>
-                <div class="Quote"><button type="submit" class="edit-profile">   Request Quote</button></div>
-             
-            </div>
-          </div>
-          <div class="section_1">
-            <div class="image_start">
-                <img src="/assets/images/Group 45.png">
-            </div>
-            <h2 class="text_name">@lorengray</h2>
-            <p class="discription">Tik Tok human machine recognition page. Find images and videos about Loren only at @lorengeray</p>
-            <div class="counts">
-                <div class="likes">
-                    <img src="/assets/images/favourite red 1.png"><span>50.8K</span>
-                </div>
-                <div class="comments">
-                    <img src="/assets/images/COMMENT 1.png"><span>20.8K</span>
-                </div>
-            </div>
-            <div class="click_add">
-                <div class="Buy"><button type="submit" class="edit-profile">Edit Profile</button></div>
-                <div class="Quote"><button type="submit" class="edit-profile">   Request Quote</button></div>
-             
-            </div>
-          </div>
-          <div class="section_1">
-            <div class="image_start">
-                <img src="/assets/images/Group 45.png">
-            </div>
-            <h2 class="text_name">@lorengray</h2>
-            <p class="discription">Tik Tok human machine recognition page. Find images and videos about Loren only at @lorengeray</p>
-            <div class="counts">
-                <div class="likes">
-                    <img src="/assets/images/favourite red 1.png"><span>50.8K</span>
-                </div>
-                <div class="comments">
-                    <img src="/assets/images/COMMENT 1.png"><span>20.8K</span>
-                </div>
-            </div>
-            <div class="click_add">
-                <div class="Buy"><button type="submit" class="edit-profile">Edit Profile</button></div>
-                <div class="Quote"><button type="submit" class="edit-profile">   Request Quote</button></div>
-             
-            </div>
-          </div>
-          <div class="section_1">
-            <div class="image_start">
-                <img src="/assets/images/Group 45.png">
-            </div>
-            <h2 class="text_name">@lorengray</h2>
-            <p class="discription">Tik Tok human machine recognition page. Find images and videos about Loren only at @lorengeray</p>
-            <div class="counts">
-                <div class="likes">
-                    <img src="/assets/images/favourite red 1.png"><span>50.8K</span>
-                </div>
-                <div class="comments">
-                    <img src="/assets/images/COMMENT 1.png"><span>20.8K</span>
-                </div>
-            </div>
-            <div class="click_add">
-                <div class="Buy"><button type="submit" class="edit-profile">Edit Profile</button></div>
-                <div class="Quote"><button type="submit" class="edit-profile">   Request Quote</button></div>
-             
-            </div>
-          </div>
-          
-        </div>
-                </tab>
-               
-              <tab class="facebook" > 
-                   <ng-template tabHeading> <img src="/assets/images/fb icon 1.png">  Facebook</ng-template>
-                   <div class="outer_most">
-                    <div class="section_1">
-          <div class="image_start">
-              <img src="/assets/images/Group 45.png">
-          </div>
-          <h2 class="text_name">@lorengray</h2>
-          <p class="discription">Tik Tok human machine recognition page. Find images and videos about Loren only at @lorengeray</p>
-          <div class="counts">
-              <div class="likes">
-                  <img src="/assets/images/favourite red 1.png"><span>50.8K</span>
-              </div>
-              <div class="comments">
-                  <img src="/assets/images/COMMENT 1.png"><span>20.8K</span>
-              </div>
-          </div>
-          <div class="click_add">
-              <div class="Buy"><button type="submit" class="edit-profile">Edit Profile</button></div>
-              <div class="Quote"><button type="submit" class="edit-profile">   Request Quote</button></div>
-           
-          </div>
-        </div>
-
-        <div class="section_1">
-            <div class="image_start">
-                <img src="/assets/images/Group 45.png">
-            </div>
-            <h2 class="text_name">@lorengray</h2>
-            <p class="discription">Tik Tok human machine recognition page. Find images and videos about Loren only at @lorengeray</p>
-            <div class="counts">
-                <div class="likes">
-                    <img src="/assets/images/favourite red 1.png"><span>50.8K</span>
-                </div>
-                <div class="comments">
-                    <img src="/assets/images/COMMENT 1.png"><span>20.8K</span>
-                </div>
-            </div>
-            <div class="click_add">
-                <div class="Buy"><button type="submit" class="edit-profile">Edit Profile</button></div>
-                <div class="Quote"><button type="submit" class="edit-profile">   Request Quote</button></div>
-             
-            </div>
-          </div>
-          <div class="section_1">
-            <div class="image_start">
-                <img src="/assets/images/Group 45.png">
-            </div>
-            <h2 class="text_name">@lorengray</h2>
-            <p class="discription">Tik Tok human machine recognition page. Find images and videos about Loren only at @lorengeray</p>
-            <div class="counts">
-                <div class="likes">
-                    <img src="/assets/images/favourite red 1.png"><span>50.8K</span>
-                </div>
-                <div class="comments">
-                    <img src="/assets/images/COMMENT 1.png"><span>20.8K</span>
-                </div>
-            </div>
-            <div class="click_add">
-                <div class="Buy"><button type="submit" class="edit-profile">Edit Profile</button></div>
-                <div class="Quote"><button type="submit" class="edit-profile">   Request Quote</button></div>
-             
-            </div>
-          </div>
-          <div class="section_1">
-            <div class="image_start">
-                <img src="/assets/images/Group 46.png">
-            </div>
-            <h2 class="text_name">@lorengray</h2>
-            <p class="discription">Tik Tok human machine recognition page. Find images and videos about Loren only at @lorengeray</p>
-            <div class="counts">
-                <div class="likes">
-                    <img src="/assets/images/favourite red 1.png"><span>50.8K</span>
-                </div>
-                <div class="comments">
-                    <img src="/assets/images/COMMENT 1.png"><span>20.8K</span>
-                </div>
-            </div>
-            <div class="click_add">
-                <div class="Buy"><button type="submit" class="edit-profile">Edit Profile</button></div>
-                <div class="Quote"><button type="submit" class="edit-profile">   Request Quote</button></div>
-             
-            </div>
-          </div>
-          <div class="section_1">
-            <div class="image_start">
-                <img src="/assets/images/Group 45.png">
-            </div>
-            <h2 class="text_name">@lorengray</h2>
-            <p class="discription">Tik Tok human machine recognition page. Find images and videos about Loren only at @lorengeray</p>
-            <div class="counts">
-                <div class="likes">
-                    <img src="/assets/images/favourite red 1.png"><span>50.8K</span>
-                </div>
-                <div class="comments">
-                    <img src="/assets/images/COMMENT 1.png"><span>20.8K</span>
-                </div>
-            </div>
-            <div class="click_add">
-                <div class="Buy"><button type="submit" class="edit-profile">Edit Profile</button></div>
-                <div class="Quote"><button type="submit" class="edit-profile">   Request Quote</button></div>
-             
-            </div>
-          </div>
-          <div class="section_1">
-            <div class="image_start">
-                <img src="/assets/images/Group 45.png">
-            </div>
-            <h2 class="text_name">@lorengray</h2>
-            <p class="discription">Tik Tok human machine recognition page. Find images and videos about Loren only at @lorengeray</p>
-            <div class="counts">
-                <div class="likes">
-                    <img src="/assets/images/favourite red 1.png"><span>50.8K</span>
-                </div>
-                <div class="comments">
-                    <img src="/assets/images/COMMENT 1.png"><span>20.8K</span>
-                </div>
-            </div>
-            <div class="click_add">
-                <div class="Buy"><button type="submit" class="edit-profile">Edit Profile</button></div>
-                <div class="Quote"><button type="submit" class="edit-profile">   Request Quote</button></div>
-             
-            </div>
-          </div>
-          <div class="section_1">
-            <div class="image_start">
-                <img src="/assets/images/Group 46.png">
-            </div>
-            <h2 class="text_name">@lorengray</h2>
-            <p class="discription">Tik Tok human machine recognition page. Find images and videos about Loren only at @lorengeray</p>
-            <div class="counts">
-                <div class="likes">
-                    <img src="/assets/images/favourite red 1.png"><span>50.8K</span>
-                </div>
-                <div class="comments">
-                    <img src="/assets/images/COMMENT 1.png"><span>20.8K</span>
-                </div>
-            </div>
-            <div class="click_add">
-                <div class="Buy"><button type="submit" class="edit-profile">Edit Profile</button></div>
-                <div class="Quote"><button type="submit" class="edit-profile">   Request Quote</button></div>
-             
-            </div>
-          </div>
-          <div class="section_1">
-            <div class="image_start">
-                <img src="/assets/images/Group 46.png">
-            </div>
-            <h2 class="text_name">@lorengray</h2>
-            <p class="discription">Tik Tok human machine recognition page. Find images and videos about Loren only at @lorengeray</p>
-            <div class="counts">
-                <div class="likes">
-                    <img src="/assets/images/favourite red 1.png"><span>50.8K</span>
-                </div>
-                <div class="comments">
-                    <img src="/assets/images/COMMENT 1.png"><span>20.8K</span>
-                </div>
-            </div>
-            <div class="click_add">
-                <div class="Buy"><button type="submit" class="edit-profile">Edit Profile</button></div>
-                <div class="Quote"><button type="submit" class="edit-profile">   Request Quote</button></div>
-             
-            </div>
-          </div>
-          
-        </div>
-                </tab>
-              
-              <tab class="twitter">
-                <ng-template tabHeading> <img src="/assets/images/twitter 1.png">  Twitter</ng-template>
+            </tab>
+            
+            <tab class="facebook" > 
+                <ng-template tabHeading> 
+                    <span 
+                        (click)="   this.instagram_price_div    =   false; 
+                                    this.tiktok_price_div       =   false;
+                                    this.facebook_price_div     =   true;
+                                    this.twitter_price_div      =   false;
+                                ">    
+                        <img src="/assets/images/fb icon 1.png">  Facebook
+                    </span>
+                </ng-template>
                 <div class="outer_most">
-                    <div class="section_1">
-          <div class="image_start">
-              <img src="/assets/images/Group 45.png">
-          </div>
-          <h2 class="text_name">@lorengray</h2>
-          <p class="discription">Tik Tok human machine recognition page. Find images and videos about Loren only at @lorengeray</p>
-          <div class="counts">
-              <div class="likes">
-                  <img src="/assets/images/favourite red 1.png"><span>50.8K</span>
-              </div>
-              <div class="comments">
-                  <img src="/assets/images/COMMENT 1.png"><span>20.8K</span>
-              </div>
-          </div>
-          <div class="click_add">
-              <div class="Buy"><button type="submit" class="edit-profile">Edit Profile</button></div>
-              <div class="Quote"><button type="submit" class="edit-profile">   Request Quote</button></div>
-           
-          </div>
-        </div>
-
-        <div class="section_1">
-            <div class="image_start">
-                <img src="/assets/images/Group 46.png">
-            </div>
-            <h2 class="text_name">@lorengray</h2>
-            <p class="discription">Tik Tok human machine recognition page. Find images and videos about Loren only at @lorengeray</p>
-            <div class="counts">
-                <div class="likes">
-                    <img src="/assets/images/favourite red 1.png"><span>50.8K</span>
-                </div>
-                <div class="comments">
-                    <img src="/assets/images/COMMENT 1.png"><span>20.8K</span>
-                </div>
-            </div>
-            <div class="click_add">
-                <div class="Buy"><button type="submit" class="edit-profile">Edit Profile</button></div>
-                <div class="Quote"><button type="submit" class="edit-profile">   Request Quote</button></div>
-             
-            </div>
-          </div>
-          <div class="section_1">
-            <div class="image_start">
-                <img src="/assets/images/Group 45.png">
-            </div>
-            <h2 class="text_name">@lorengray</h2>
-            <p class="discription">Tik Tok human machine recognition page. Find images and videos about Loren only at @lorengeray</p>
-            <div class="counts">
-                <div class="likes">
-                    <img src="/assets/images/favourite red 1.png"><span>50.8K</span>
-                </div>
-                <div class="comments">
-                    <img src="/assets/images/COMMENT 1.png"><span>20.8K</span>
-                </div>
-            </div>
-            <div class="click_add">
-                <div class="Buy"><button type="submit" class="edit-profile">Edit Profile</button></div>
-                <div class="Quote"><button type="submit" class="edit-profile">   Request Quote</button></div>
-             
-            </div>
-          </div>
-          <div class="section_1">
-            <div class="image_start">
-                <img src="/assets/images/Group 45.png">
-            </div>
-            <h2 class="text_name">@lorengray</h2>
-            <p class="discription">Tik Tok human machine recognition page. Find images and videos about Loren only at @lorengeray</p>
-            <div class="counts">
-                <div class="likes">
-                    <img src="/assets/images/favourite red 1.png"><span>50.8K</span>
-                </div>
-                <div class="comments">
-                    <img src="/assets/images/COMMENT 1.png"><span>20.8K</span>
-                </div>
-            </div>
-            <div class="click_add">
-                <div class="Buy"><button type="submit" class="edit-profile">Edit Profile</button></div>
-                <div class="Quote"><button type="submit" class="edit-profile">   Request Quote</button></div>
-             
-            </div>
-          </div>
-          <div class="section_1">
-            <div class="image_start">
-                <img src="/assets/images/Group 46.png">
-            </div>
-            <h2 class="text_name">@lorengray</h2>
-            <p class="discription">Tik Tok human machine recognition page. Find images and videos about Loren only at @lorengeray</p>
-            <div class="counts">
-                <div class="likes">
-                    <img src="/assets/images/favourite red 1.png"><span>50.8K</span>
-                </div>
-                <div class="comments">
-                    <img src="/assets/images/COMMENT 1.png"><span>20.8K</span>
-                </div>
-            </div>
-            <div class="click_add">
-                <div class="Buy"><button type="submit" class="edit-profile">Edit Profile</button></div>
-                <div class="Quote"><button type="submit" class="edit-profile">   Request Quote</button></div>
-             
-            </div>
-          </div>
-          <div class="section_1">
-            <div class="image_start">
-                <img src="/assets/images/Group 46.png">
-            </div>
-            <h2 class="text_name">@lorengray</h2>
-            <p class="discription">Tik Tok human machine recognition page. Find images and videos about Loren only at @lorengeray</p>
-            <div class="counts">
-                <div class="likes">
-                    <img src="/assets/images/favourite red 1.png"><span>50.8K</span>
-                </div>
-                <div class="comments">
-                    <img src="/assets/images/COMMENT 1.png"><span>20.8K</span>
-                </div>
-            </div>
-            <div class="click_add">
-                <div class="Buy"><button type="submit" class="edit-profile">Edit Profile</button></div>
-                <div class="Quote"><button type="submit" class="edit-profile">   Request Quote</button></div>
-             
-            </div>
-          </div>
-          <div class="section_1">
-            <div class="image_start">
-                <img src="/assets/images/Group 46.png">
-            </div>
-            <h2 class="text_name">@lorengray</h2>
-            <p class="discription">Tik Tok human machine recognition page. Find images and videos about Loren only at @lorengeray</p>
-            <div class="counts">
-                <div class="likes">
-                    <img src="/assets/images/favourite red 1.png"><span>50.8K</span>
-                </div>
-                <div class="comments">
-                    <img src="/assets/images/COMMENT 1.png"><span>20.8K</span>
-                </div>
-            </div>
-            <div class="click_add">
-                <div class="Buy"><button type="submit" class="edit-profile">Edit Profile</button></div>
-                <div class="Quote"><button type="submit" class="edit-profile">   Request Quote</button></div>
-             
-            </div>
-          </div>
-          <div class="section_1">
-            <div class="image_start">
-                <img src="/assets/images/Group 46.png">
-            </div>
-            <h2 class="text_name">@lorengray</h2>
-            <p class="discription">Tik Tok human machine recognition page. Find images and videos about Loren only at @lorengeray</p>
-            <div class="counts">
-                <div class="likes">
-                    <img src="/assets/images/favourite red 1.png"><span>50.8K</span>
-                </div>
-                <div class="comments">
-                    <img src="/assets/images/COMMENT 1.png"><span>20.8K</span>
-                </div>
-            </div>
-            <div class="click_add">
-                <div class="Buy"><button type="submit" class="edit-profile">Edit Profile</button></div>
-                <div class="Quote"><button type="submit" class="edit-profile">   Request Quote</button></div>
-             
-            </div>
-          </div>
-          
-        </div>
+                
+                        <div class="section_1" *ngFor="let Facebook of media_post.facebook; let i = index;">
+                            <div class="image_start">
+                                <img [src]="Facebook.image">
+                            </div>
+                            <h2 class="text_name">{{ Facebook.text_name}}</h2>
+                            <p class="discription">{{ Facebook.description}}</p>
+                            <div class="counts">
+                                <div class="likes">
+                                    <img src="/assets/images/favourite red 1.png"><span>50.8K</span>
+                                </div>
+                                <div class="comments">
+                                    <img src="/assets/images/COMMENT 1.png"><span>20.8K</span>
+                                </div>
+                            </div>
+                            <div class="click_add">
+                                <div class="Buy"><button type="submit" class="edit-profile" >Buy</button></div>
+                                <div class="Quote"><button type="submit" class="edit-profile" (click)="openRequestModel(Facebook.id,Facebook.influencer_id,'facebook');">   Request Quote</button></div>
+                            
+                            </div>
+                        </div>
+                        <div *ngIf="media_post.facebook.length == 0" style="text-align: center;">
+                            <h1>No post found</h1>
+                        </div> 
+                    </div>
                 </tab>
-              
-              
-            </tabset>
-          </div>
+            
+            <tab class="twitter">
+                <ng-template tabHeading> 
+                    <span 
+                        (click)="   this.instagram_price_div    =   false; 
+                                    this.tiktok_price_div       =   false;
+                                    this.facebook_price_div     =   false;
+                                    this.twitter_price_div      =   true;
+                                ">   
+                        <img src="/assets/images/twitter 1.png">  Twitter
+                    </span>
+                    </ng-template>
+                <div class="outer_most">
+                    
+                    <div class="section_1" *ngFor="let Twitter of media_post.twitter; let i = index;">
+                        <div class="image_start">
+                            <img [src]="Twitter.image">
+                        </div>
+                        <h2 class="text_name">{{ Twitter.text_name}}</h2>
+                        <p class="discription">{{ Twitter.description}}</p>
+                        <div class="counts">
+                            <div class="likes">
+                                <img src="/assets/images/favourite red 1.png"><span>50.8K</span>
+                            </div>
+                            <div class="comments">
+                                <img src="/assets/images/COMMENT 1.png"><span>20.8K</span>
+                            </div>
+                        </div>
+                        <div class="click_add">
+                            <div class="Buy"><button type="submit" class="edit-profile" >Buy</button></div>
+                            <div class="Quote"><button type="submit" class="edit-profile" (click)="openRequestModel(Twitter.id,Twitter.influencer_id,'twitter');">   Request Quote</button></div>
+                        
+                        </div>
+                    </div>
+                    <div *ngIf="media_post.twitter.length == 0" style="text-align: center;">
+                        <h1>No post found</h1>
+                    </div> 
+                </div>
+            </tab>
+            
+            
+        </tabset>
+    </div>
 
 </div>
+
+
+<!------------------- Request Quotes Model Start------------------------->
+
+<div class="w3-container">
+    <div id="edit_price" class="w3-modal" [style.display]="request_quotes_model ? 'block' : 'none'">
+      <div class="w3-modal-content">
+        <div class="w3-container">
+          <span (click)="this.request_quotes_model = false;" class="w3-button w3-display-topright" style="font-size: x-large;">&times;</span>
+          <div class="promoter_signup">
+            
+            <form [formGroup]="request_quotes" (ngSubmit)="sendRequestQuotes()"> 
+                <input type="hidden" id="media_type" formControlName="media_type" >
+                <input type="hidden" id="post_id" formControlName="post_id" >
+                <input type="hidden" id="influencerid" formControlName="influencerid" >
+                <label for="description" class="description">Your Description Here...</label>
+                <textarea formControlName="description" id="description" rows="8" cols="50"  class="form-control" > </textarea> 
+                <br>
+                <br>
+                <input type="submit" value="Request" class="btn btn-info request_quote_button">
+                <br>
+            </form>
+          </div>     
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!------------------- Request Quotes Model End------------------------->

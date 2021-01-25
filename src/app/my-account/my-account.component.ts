@@ -24,10 +24,10 @@ export class MyAccountComponent implements OnInit {
   price_edit_model:boolean    = false;
   type_of_media : any = ['tiktok','instagram', 'facebook' , 'twitter'];
   media_price : any = {
-                        tiktok : { post_price : 200, story_price : 300},
-                        instagram : { post_price : 400, story_price : 500},
-                        facebook : { post_price : 600, story_price : 700},
-                        twitter : { post_price : 100, story_price : 200},
+                        tiktok : { post_price : 0, story_price : 0},
+                        instagram : { post_price : 0, story_price : 0},
+                        facebook : { post_price : 0, story_price : 0},
+                        twitter : { post_price : 0, story_price : 0},
                       };
 
   media_post : any =  {

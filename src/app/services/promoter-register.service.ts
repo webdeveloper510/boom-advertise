@@ -12,5 +12,7 @@ export class PromoterRegisterService {
     return this.http.post(this.apiUrl+"/promoters/register",data)
   }
 
-
+  sendRequestQuotes(data:any) {
+    return this.http.post(this.apiUrl+"/promoters/send_request_quotes",data);
+  }
 }

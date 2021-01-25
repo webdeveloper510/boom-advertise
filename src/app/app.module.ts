@@ -27,6 +27,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SocialLoginModule, SocialAuthServiceConfig} from "angularx-social-login";
 import { FacebookLoginProvider } from "angularx-social-login";
 import { FileSelectDirective } from 'ng2-file-upload';
+import { CheckOutComponent } from './check-out/check-out.component';
+import { MatCardModule } from '@angular/material/card'
+import {MatGridListModule} from '@angular/material/grid-list';
 //import { MatButtonModule} from '@angular/material/button';
 //import {DataTablesModule} from 'angular-datatables';
 // import {
@@ -52,6 +55,8 @@ import { FileSelectDirective } from 'ng2-file-upload';
     TopAuthenticInfluencersRankingComponent,
     PrivacyComponent,
     PrivacyComponent,
+    CheckOutComponent,
+    CheckOutComponent,
     //FileSelectDirective
   ],
   imports: [
@@ -64,7 +69,9 @@ import { FileSelectDirective } from 'ng2-file-upload';
     TabsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    SocialLoginModule
+    SocialLoginModule,
+    MatCardModule,
+    MatGridListModule
    // DataTablesModule
 
   ],
