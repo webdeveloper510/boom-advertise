@@ -23,6 +23,7 @@ export class MyAccountComponent implements OnInit {
   profile_edit_model:boolean  = false;
   price_edit_model:boolean    = false;
   type_of_media : any = ['tiktok','instagram', 'facebook' , 'twitter'];
+  type_of_post : any = ['post','story'];
   media_price : any = {
                         tiktok : { post_price : 0, story_price : 0},
                         instagram : { post_price : 0, story_price : 0},
@@ -72,7 +73,8 @@ export class MyAccountComponent implements OnInit {
 
   myForm = new FormGroup({
     file: new FormControl('', [Validators.required]),
-    media_name : new FormControl("")
+    media_name : new FormControl(""),
+    type_post : new FormControl("")
    
   });
 
@@ -81,7 +83,7 @@ export class MyAccountComponent implements OnInit {
     name : new FormControl(''),
  });
 
-  post_edit = new FormGroup({
+  post_edit = new FormGroup({ 
       text_name   : new FormControl(''),
       description : new FormControl(''),
       id          : new FormControl(''),
@@ -116,11 +118,11 @@ export class MyAccountComponent implements OnInit {
       .subscribe(
         (response:any) =>{
           console.log(response); 
-          console.log(this.loginService.user_id); 
-          this.data = response['data'];
-          this.media_price = response.mydata.price_data;
-          this.data = response.mydata.profile_data;
-          this.media_post = response.mydata.posts;
+          
+          this.data         = response['data'];
+          this.media_price  = response.mydata.price_data;
+          this.data         = response.mydata.profile_data;
+          this.media_post   = response.mydata.posts;
           this.initProfileEdit();
         }
       )
@@ -129,9 +131,8 @@ export class MyAccountComponent implements OnInit {
    updateProfile(){
 
     //let user_data = this.MyAccountService.myAccountInfo();
-    let data = this.profile_edit.value;
-    data.user_id = this.loginService.user_id;
-    console.log(this.profile_edit.value);
+    let data      = this.profile_edit.value;
+    data.user_id  = this.loginService.user_id;
 
     this.MyAccountService.updateProfile(data).subscribe(
       (response : any) => {
@@ -163,7 +164,6 @@ export class MyAccountComponent implements OnInit {
 
     let data      = this.price_edit.value;
     data.user_id  = this.loginService.user_id;
-    console.log(this.price_edit.value);
     
     this.MyAccountService.updatePrice(data).subscribe(
       (response:any) => {
@@ -181,8 +181,6 @@ export class MyAccountComponent implements OnInit {
 
   deletePost(post_id:any){
 
-    console.log(post_id);
-
     this.MyAccountService.deletePost(post_id).subscribe(
       (response:any) => {
         console.log(response);
@@ -198,21 +196,23 @@ export class MyAccountComponent implements OnInit {
 
   uploadPost(){
     
-    console.log(this.myForm.value);
+   
     
-    if(this.image_value && this.myForm.value.media_name){
+    if(this.image_value && this.myForm.value.media_name && this.myForm.value.type_post){
 
       const formData = new FormData();
       formData.append('uploadedImage', this.image_value);
       formData.append('user_id', this.loginService.user_id);
       formData.append('media_type', this.myForm.value.media_name);
+      formData.append('post_type', this.myForm.value.type_post);
       
       this.MyAccountService.uploadPost(formData).subscribe(
         (response:any) =>{
-          console.log(response)
+          console.log(response);
           this.singleInfluencer();
           this.myForm.reset();
           this.myForm.patchValue({media_name : ""});
+          this.myForm.patchValue({type_post : ""});
           this.filename = "";
           this.image_value = "";
         }
@@ -225,6 +225,29 @@ export class MyAccountComponent implements OnInit {
 
     this.image_value = event.target.files[0] ? event.target.files[0] : "";
     this.filename=this.myForm.value.file;
+  }
+
+  updateProfileImage(event:any) {
+
+    if(event.target.files[0]){
+      let image_data = event.target.files[0];
+      
+      const formData = new FormData();
+      formData.append('profileImage', image_data);
+      formData.append('user_id', this.loginService.user_id);
+
+      this.MyAccountService.updateProfileImage(formData).subscribe(
+        (response : any) => {
+          console.log(response);
+          if(response.statusCode == 200){
+
+            this.singleInfluencer();
+          } else {
+
+          }
+        }
+      );
+    }
   }
 
 }

@@ -6,6 +6,7 @@ const influencer_posts_schema = new Schema({
     influencerid    :   { type: mongoose.Schema.ObjectId},
     media_type      :   String,
     post_name       :   String,
+    post_type       :   String,
 });
 
 const influencer_posts = mongoose.model('influencers_posts', influencer_posts_schema);

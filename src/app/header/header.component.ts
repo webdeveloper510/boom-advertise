@@ -121,7 +121,9 @@ export class HeaderComponent implements OnInit {
   }
 
   onSubmit() {
-    let data = this.signin.value
+    let data = this.signin.value;
+    console.log('data');
+    console.log(data);
     this.loginservice.login(data)
     .subscribe(
       (response:any) => {   
@@ -143,12 +145,14 @@ export class HeaderComponent implements OnInit {
 
             this.success_div  = false;
             this.login_form   = false;
-            if(response["data"][0]['user_type'] == 0){
+            
+            if(data.user_type == 0){
               this.router.navigate(['/my-account']);
             }else{
-              this.router.navigate(['/promoter-account']);
+              //this.router.navigate(['/promoter-account']);
+              this.router.navigate(['/my-account']);
             }
-          }, 2000)
+          }, 1000)
           
         }else{
           this.error_message = response["msg"];

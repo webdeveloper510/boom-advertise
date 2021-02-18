@@ -26,10 +26,6 @@ export class LoginService {
   
   saveAccessToken(oauthToken: string, oauthVerifier: string) {
     let user_data:any = localStorage.getItem(this.local_storage_login_userid_key);
-    //user_data         = JSON.parse(user_data);
-    //console.log('manpreet');
-    //console.log(user_data);
-   // let userid       = user_data._id;
     return this.http.post(this.apiUrl+`/sessions/saveAccessTokens`,{oauth_token:oauthToken,oauth_verifier:oauthVerifier,_id:user_data})
   }
 
@@ -41,7 +37,6 @@ export class LoginService {
         user_data         = JSON.parse(user_data);
         this.user_id      = user_data._id;
         this.is_logged_in = true;
-        console.log("user alreday login");
         
     } else {
      

@@ -4,8 +4,9 @@
     <div class="allside">
     <div *ngIf="data" class="box_1 border-size">
         <div class="image_circle">
-        <img src="/assets/images/loren-gray-x-things-you-never-knew-about-the-tiktok-star-1586962638-view-0.png">
-    </div>
+            <img [src]="data.profile_picture">
+        </div>
+
         <p class="name"> {{ data.name }}</p>
         <span class="tag"> {{ data.email }} </span>
         <p class="singer">Twitter Followers: 0</p>
@@ -19,7 +20,8 @@
             <span>Views</span>
          </div>  
         </div>
-        <button type="submit" class="edit-profile" (click)="this.profile_edit_model = true;">Edit Profile</button>
+        <input type="file" #profile_image style="display: none;" (change)="updateProfileImage($event)" accept="image/*">
+        <button type="submit" class="edit-profile" (click)="profile_image.click()">Upload Profile Picture</button>
     </div>
     <div class="box_2 border-size">
         <h2 class="price">Price</h2>
@@ -118,6 +120,12 @@
                         <option value="" disabled selected>Select your media type</option>
                         <option *ngFor="let media_name of type_of_media;" [value]="media_name">{{ media_name | titlecase}}</option>
                     </select>
+                    
+                    <select class="form-control post_type" formControlName="type_post" >
+                        <option value="" disabled selected>Select your post type</option>
+                        <option *ngFor="let post_type of type_of_post;" [value]="post_type">{{ post_type | titlecase}}</option>
+                    </select>
+                    
                         <p class="filepath" [style.display]="login_form ? 'block' : 'none'">{{filename}}</p>
                         <p class="filepath uploaded" [style.display]="login_form1 ? 'block' : 'none'">Uploaded</p>
                     <button class="btn btn-primary" type="submit" class="upload">Upload</button>
@@ -134,7 +142,7 @@
                     <div class="image_start">
                         <img [src]="tik_tok_info.image">
                     </div>
-                    <h2 class="text_name">{{tik_tok_info.text_name}}</h2>
+                    <!-- <h2 class="text_name">{{tik_tok_info.text_name}}</h2>
                     <p class="discription">{{tik_tok_info.description}}</p>
                     <div class="counts">
                         <div class="likes">
@@ -143,7 +151,7 @@
                         <div class="comments">
                             <img src="/assets/images/COMMENT 1.png"><span>{{ tik_tok_info.comments_count}}</span>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="click_add">
                         <div class="Buy"><button type="submit" class="edit-profile" (click)="deletePost(tik_tok_info.id)">Delete Post</button></div>
                         
@@ -163,7 +171,7 @@
                     <div class="image_start">
                     <img [src]="Instagram.image">
                     </div>
-                    <h2 class="text_name">{{Instagram.text_name}}</h2>
+                    <!-- <h2 class="text_name">{{Instagram.text_name}}</h2>
                     <p class="discription">{{Instagram.description}}</p>
                     <div class="counts">
                         <div class="likes">
@@ -172,7 +180,7 @@
                         <div class="comments">
                             <img src="/assets/images/COMMENT 1.png"><span>{{ Instagram.comments_count}}</span>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="click_add">
                     <div class="Buy"><button type="submit" class="edit-profile" (click)="deletePost(Instagram.id)">Delete Post</button></div>
                   
@@ -195,7 +203,7 @@
                         <div class="image_start">
                             <img [src]="Facebook.image">
                         </div>
-                        <h2 class="text_name">{{ Facebook.text_name}}</h2>
+                        <!-- <h2 class="text_name">{{ Facebook.text_name}}</h2>
                         <p class="discription">{{ Facebook.description}}</p>
                         <div class="counts">
                             <div class="likes">
@@ -204,7 +212,7 @@
                             <div class="comments">
                                 <img src="/assets/images/COMMENT 1.png"><span>{{Facebook.comments_count}}</span>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="click_add">
                             <div class="Buy"><button type="submit" class="edit-profile" (click)="deletePost(Facebook.id)">Delete Post</button></div>
                             
@@ -224,7 +232,7 @@
                         <div class="image_start">
                             <img [src]="Twitter.image">
                         </div>
-                        <h2 class="text_name">{{ Twitter.text_name}}</h2>
+                        <!-- <h2 class="text_name">{{ Twitter.text_name}}</h2>
                         <p class="discription">{{ Twitter.description}}</p>
                         <div class="counts">
                             <div class="likes">
@@ -233,7 +241,7 @@
                             <div class="comments">
                                 <img src="/assets/images/COMMENT 1.png"><span>{{ Twitter.comments_count}}</span>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="click_add">
                         <div class="Buy"><button type="submit" class="edit-profile" (click)="deletePost(Twitter.id)">Delete Post</button></div>
                         

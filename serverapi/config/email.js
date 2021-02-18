@@ -2,7 +2,7 @@ var config = {};
 
 
 config.email = 'deligoch@gmail.com'
-config.password= 'ifwmxlltkurvvctb'
+config.password= 'deey5old4rhus_GEEN'
 
 config.adminemail='deligoch@gmail.com'
 config.url='http://boomadvertise.com/'

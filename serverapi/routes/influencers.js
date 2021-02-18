@@ -194,18 +194,22 @@ router.post('/register', async function(req,res) {
             }
 
             influencer.influencers.findOne({_id : user_id},function(err , profile_data){
-              if (err)  res.json({status:"failure",statusCode:100,msg:err});
 
+              if (err)  res.json({status:"failure",statusCode:100,msg:err});
+              
+              if(profile_data){
+
+                profile_data.profile_picture =  profile_data.profile_picture ? "http://"+req.headers.host+"/"+profile_data.profile_picture : "/assets/images/man-avatar-profile.jpg";
+              } 
+             
               return_data.profile_data = profile_data;
               influencer_posts.influencer_posts.find({influencerid:user_id}, function(post_error, posts) {
                 if (post_error)  res.json({status:"failure",statusCode:100,msg:post_error});
                 
                 if(posts){
                   
-                 
                   for(var i = 0 ; i < posts.length;i++){
-                    
-    
+
                     var post_value = { 
                                         id : posts[i]._id ,
                                         influencer_id : posts[i].influencerid ,
@@ -290,7 +294,6 @@ router.post('/register', async function(req,res) {
                               //email:user_data.email,
                           };
         
-        console.log(req.hostname);
         influencer.influencers.updateOne({_id : user_data.user_id} , {$set:update_data},function(err , data){
 
           if(err){
@@ -315,18 +318,20 @@ router.post('/register', async function(req,res) {
 
         var post_create = new influencer_posts.influencer_posts();
         
-        post_create.post_name = file.filename;
-        post_create.influencerid = user_data.user_id;
-        post_create.media_type = user_data.media_type;
+        post_create.post_name     = file.filename;
+        post_create.influencerid  = user_data.user_id;
+        post_create.media_type    = user_data.media_type;
+        post_create.post_type     = user_data.post_type;
         
         post_create.save(function(err ,data){
+
           if (err)  res.json({status:"failure",statusCode:100,msg:err});
           res.status(200).send({ statusCode: 200, status: 'success', data: file, })
         });
       
       }, (error, req, res, next) => {
         res.status(400).send({ error: error.message })
-      })
+      });
 
       router.get("/delete_post",function(req , res){
 
@@ -336,6 +341,34 @@ router.post('/register', async function(req,res) {
           if(error) res.json({status:"failure",statusCode:100,data:error});
           res.json({statusCode: 200, status: 'success', data: data});
         })
+      });
+
+
+      router.post('/upload_profile_image', upload.single('profileImage'), (req, res, next) => {
+        const file = req.file
+        var user_data = req.body;
+        
+        if (!file) {
+            const error = new Error('Please upload a file')
+            error.httpStatusCode = 400
+            return next(error)
+        }
+
+        let update_data = { profile_picture : file.filename };
+
+        influencer.influencers.updateOne({_id : user_data.user_id},{$set:update_data},function(err , update_dta){
+
+          if(err){
+            res.json({status:"failure",statusCode:100,data:err});
+          }else{
+
+            res.json({status:"success",statusCode:200,data:update_dta});
+          }
+        });
+        
+      
+      }, (error, req, res, next) => {
+        res.status(400).send({ error: error.message })
       });
 
   

@@ -17,6 +17,10 @@ export class MyAccountService {
   //return this.http.get(environment.url+"/interview/list")
   }
 
+  updateProfileImage(data:any){
+
+    return this.http.post(this.apiUrl+"/influencers/upload_profile_image",data);
+  }
   uploadPost(data:any){
 
     return this.http.post(this.apiUrl+"/influencers/upload_post",data);

@@ -26,7 +26,7 @@ import { PrivacyComponent } from './privacy/privacy.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SocialLoginModule, SocialAuthServiceConfig} from "angularx-social-login";
 import { FacebookLoginProvider } from "angularx-social-login";
-import { FileSelectDirective } from 'ng2-file-upload';
+
 import { CheckOutComponent } from './check-out/check-out.component';
 import { MatCardModule } from '@angular/material/card'
 import {MatGridListModule} from '@angular/material/grid-list';

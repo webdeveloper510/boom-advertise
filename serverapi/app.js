@@ -59,7 +59,7 @@ app.use(function(req, res, next) {
       next();
   });
 
-mongoose.connect("mongodb+srv://manpreet:manpreet@123@boomcluster.vu9sc.mongodb.net/boom-advertise?retryWrites=true&w=majority", {
+mongoose.connect("mongodb+srv://vijay:vijay@123@cluster0.bnvrw.mongodb.net/boomadvertise?retryWrites=true&w=majority",  {
 useUnifiedTopology: true,
 useNewUrlParser: true,
 })

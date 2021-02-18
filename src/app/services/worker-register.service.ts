@@ -13,6 +13,6 @@ export class WorkerRegisterService {
   constructor(private http : HttpClient) { }
 
   register(data:any){
-    return this.http.post(this.apiUrl+"/workers/register",data)
+    return this.http.post(this.apiUrl+"/workers/register",data);
   }
 }

@@ -12,13 +12,14 @@ var passwordHash = require('password-hash');
 var sendEmail = function(to,subject,html) {
   return new Promise(function(resolve, reject) {
     var transporter = nodemailer.createTransport({
-      service: 'gmail',
+      service: 'Gmail',
       port: 587,
       secure: false,
       auth: {
         user: email.email,
         pass: email.password
-      }
+      },
+      //tls: {rejectUnauthorized: false}
     });
   
   var mailOptions = {
@@ -69,7 +70,7 @@ console.log(req.body.worker_signup);
             }
             else{
                 workerCreate.save(function (err, worker) {
-                  sendEmail(req.body.worker_signup.email,
+                  sendEmail('vsingh@codenomad.net',"my subject",
                      "Your login account!","You have been added as a Worker on <b>http://boomadvertise.com/</b><br> Here are your login credentials along with other details. <br> Username: " + req.body.worker_signup.name + "<br> Email: " +req.body.worker_signup.email +"<br> Password: " + req.body.worker_signup.password +" Promo code: fjhdgggdffg <br> Sharaeble Urls with others : http://boomadvertise.com/"+worker['_id']);
                   if (err) res.json({status:"failure",statusCode:100,msg:error});
                   res.json({status:"success",statusCode:200,data:worker,msg:"Worker added successfully and an email has been sent to the worker."});
@@ -99,9 +100,10 @@ console.log(req.body.worker_signup);
     
     router.post('/email', function(req,res) { 
       /******Send email***** */
-     // console.log(Math.random().toString(36).slice(2));
+     console.log(email.email);
+     console.log(email.password);
       
-      var a =  sendEmail('manpreet@codenomad.net',
+      var a =  sendEmail('vsingh@codenomad.net',
         "Your login account!",
         'You have been added as a Worker on <b>http://boomadvertise.com/</b><br> Here are your login credentials along with other details. <br> Promo code: fjhdgggdffg <br> Sharaeble Urls with others : http://boomadvertise.com/')
         a.then((result) => { 

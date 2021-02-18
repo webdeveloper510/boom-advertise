@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-check-out',
@@ -9,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class CheckOutComponent implements OnInit {
 
   paypal_image  : string = "/assets/images/Paypal-icon.png";
-  credit_card   : string = "/assets/images/credit-card.jpg";
+  credit_card   : string = "/assets/images/credit-card.png";
   constructor() { }
 
   ngOnInit(): void {
