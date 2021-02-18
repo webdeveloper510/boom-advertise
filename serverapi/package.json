@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon ./bin/www",
+    "prod": "node ./bin/www",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
