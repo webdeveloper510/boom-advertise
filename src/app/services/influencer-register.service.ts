@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class InfluencerRegisterService {
-  apiUrl : string = "http://localhost:3000";
+  apiUrl : string = `${environment.apiUrl}`;
   constructor(private http : HttpClient) { }
 
   register(data:any){

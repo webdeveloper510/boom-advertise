@@ -131,6 +131,7 @@ export class HomeComponent implements OnInit {
   }
 
   influencerSignup(){
+    
     console.log(this.influencer.value);
     
     let twitter   = this.influencer.value.influencer_signup.twitter;

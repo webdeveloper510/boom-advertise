@@ -36,13 +36,11 @@ router.post('/saveAccessTokens', (req, res) => {
   req.body.oauth_verifier,
   (error, oauthAccessToken, oauthAccessTokenSecret, results) => {
     if (error) {
-     // logger.error(error);
+     
       res.send(error, 500);
     }
     else {
-     // req.session.oauthAccessToken = oauthAccessToken;
-      //req.session.oauthAccessTokenSecret = oauthAccessTokenSecret
-     // return res.send({ message: 'token saved' });
+     
 
       const client = new Twitter({
         consumer_key: 'PwtlyF8xzKLgIPNDwS42nL87G',
@@ -52,27 +50,26 @@ router.post('/saveAccessTokens', (req, res) => {
       });
 
       client.get('account/verify_credentials').then(user => {
-      //  res.send(user)
+     
             console.log('mehar');
             live_twitter_follower = user.data.followers_count;
 
-                        /*******update twitter data */
-                influencers_data.influencers_data.updateOne(
-                  { "influencerid": new ObjectID(req.body._id) },
-                  {
-                    $set: { "twitterfollowers" : live_twitter_follower },
-                  },
-                  function(err,result){ 
-                    if (err) {
-                      console.log(err);
-                      res.json({status:"failure",statusCode:100,error:'could not save data'});
-                    }
-                    else{
-                      console.log(result);
-                    res.json({status:"success",statusCode:200,data:result});
-                    }
-                  });
-                /*******update twitter data */
+            influencers_data.influencers_data.updateOne(
+              { "influencerid": new ObjectID(req.body._id) },
+              {
+                $set: { "twitterfollowers" : live_twitter_follower },
+              },
+              function(err,result){ 
+                if (err) {
+                  console.log(err);
+                  res.json({status:"failure",statusCode:100,error:'could not save data'});
+                }
+                else{
+                  console.log(result);
+                res.json({status:"success",statusCode:200,data:result});
+                }
+              });
+               
 
       }).catch(error => {
         res.send(error);

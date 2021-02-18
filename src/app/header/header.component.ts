@@ -88,7 +88,9 @@ export class HeaderComponent implements OnInit {
 
   saveAccessToken(oauthToken: string, oauthVerifier: string) {
     this.loginservice.saveAccessToken(oauthToken, oauthVerifier).subscribe(res => {
+    
     console.log(res);
+    
  
     let local :any = localStorage.getItem(this.loginservice.local_storage_local_midia_check_key);
     let local_storage_values = JSON.parse(local)
@@ -115,7 +117,9 @@ export class HeaderComponent implements OnInit {
       let local_storage_values = JSON.parse(local)
       local_storage_values.facebook = false;
       localStorage.setItem(this.loginservice.local_storage_local_midia_check_key,JSON.stringify(local_storage_values));
+      console.log('user');
       console.log(user);
+      console.log(JSON.stringify(user));
       this.media_check_function();
     });
   }
@@ -207,7 +211,7 @@ export class HeaderComponent implements OnInit {
   }
 
   media_check_function(){
-    console.log("medi check function");
+    
     let local :any = localStorage.getItem(this.loginservice.local_storage_local_midia_check_key);
     let local_storage_values = JSON.parse(local)
 
