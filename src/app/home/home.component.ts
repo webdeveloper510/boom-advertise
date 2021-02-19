@@ -177,8 +177,8 @@ export class HomeComponent implements OnInit {
             this.influnncer_login_form = false;
 
             if(local_midia_check.twitter == true){
-
-             this.signInWithFB();
+              this.redirectToTwitter();
+             //this.signInWithFB();
              // this.signInWithFB();
              
             }
@@ -203,7 +203,11 @@ export class HomeComponent implements OnInit {
   redirectToTwitter() {
     
     this.login_service.getRedirectUrl().subscribe((res: any) => {
+      
       location.href = res.redirectUrl;
+      
+
+      
     })
   }
 
