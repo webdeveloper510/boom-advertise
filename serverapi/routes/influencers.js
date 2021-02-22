@@ -161,9 +161,9 @@ router.post('/register', async function(req,res) {
             var return_data = {
                                 price_data:{
                                   tiktok      : { post_price : 0, story_price : 0},
-                                  instagram   : { post_price : 0, story_price : 0},
-                                  facebook    : { post_price : 0, story_price : 0},
-                                  twitter     : { post_price : 0, story_price : 0},
+                                  instagram   : { post_price : 0, story_price : 0, comment_price :10 , like_price : 20 , follow_price : 30},
+                                  facebook    : { post_price : 0, friend_price : 40 , comment_price : 50 ,like_price : 60},
+                                  twitter     : { tweet_price : 70, retweet_price : 80 , comment_price : 90 , like_price : 70 ,follow_price : 80},
                                 },
                                 profile_data  :"",
                                 followers   : 0,
@@ -175,21 +175,29 @@ router.post('/register', async function(req,res) {
                                 },
                               };
             
-            
+            console.log(influencer_data[0]);
 
             if(influencer_data[0]){
               
-              return_data.price_data.tiktok.post_price  = influencer_data[0].tiktok_post_price ? influencer_data[0].tiktok_post_price : 0;
-              return_data.price_data.tiktok.story_price = influencer_data[0].tiktok_story_price ? influencer_data[0].tiktok_story_price: 0;
+              return_data.price_data.tiktok.post_price      = influencer_data[0].tiktok_post_price ? influencer_data[0].tiktok_post_price : 0;
+              return_data.price_data.tiktok.story_price     = influencer_data[0].tiktok_story_price ? influencer_data[0].tiktok_story_price: 0;
 
-              return_data.price_data.facebook.post_price = influencer_data[0].facebook_post_price ? influencer_data[0].facebook_post_price: 0;
-              return_data.price_data.facebook.story_price = influencer_data[0].facebook_story_price ? influencer_data[0].facebook_story_price: 0;
+              return_data.price_data.facebook.post_price    = influencer_data[0].facebook_post_price ? influencer_data[0].facebook_post_price: 0;
+              return_data.price_data.facebook.friend_price  = influencer_data[0].facebook_friend_price ? influencer_data[0].facebook_friend_price : 0;
+              return_data.price_data.facebook.comment_price = influencer_data[0].facebook_comment_price ? influencer_data[0].facebook_comment_price : 0;
+              return_data.price_data.facebook.like_price    = influencer_data[0].facebook_like_price ? influencer_data[0].facebook_like_price : 0;
               
-              return_data.price_data.instagram.post_price = influencer_data[0].instagram_post_price ? influencer_data[0].instagram_post_price: 0;
-              return_data.price_data.instagram.story_price = influencer_data[0].instagram_story_price ? influencer_data[0].instagram_story_price: 0;
+              return_data.price_data.instagram.post_price     = influencer_data[0].instagram_post_price ? influencer_data[0].instagram_post_price: 0;
+              return_data.price_data.instagram.story_price    = influencer_data[0].instagram_story_price ? influencer_data[0].instagram_story_price: 0;
+              return_data.price_data.instagram.comment_price  = influencer_data[0].instagram_comment_price ? influencer_data[0].instagram_comment_price: 0;
+              return_data.price_data.instagram.like_price     = influencer_data[0].instagram_follow_price ? influencer_data[0].instagram_follow_price: 0;
+              return_data.price_data.instagram.follow_price   = influencer_data[0].instagram_like_price ? influencer_data[0].instagram_like_price: 0;
               
-              return_data.price_data.twitter.post_price = influencer_data[0].twitter_post_price ? influencer_data[0].twitter_post_price: 0;
-              return_data.price_data.twitter.story_price = influencer_data[0].twitter_story_price ? influencer_data[0].twitter_story_price: 0;
+              return_data.price_data.twitter.tweet_price    = influencer_data[0].twitter_tweet_price ? influencer_data[0].twitter_tweet_price: 0;
+              return_data.price_data.twitter.retweet_price  = influencer_data[0].twitter_retweet_price ? influencer_data[0].twitter_retweet_price: 0;
+              return_data.price_data.twitter.comment_price  = influencer_data[0].twitter_comment_price ? influencer_data[0].twitter_comment_price: 0;
+              return_data.price_data.twitter.like_price     = influencer_data[0].twitter_like_price ? influencer_data[0].twitter_like_price: 0;
+              return_data.price_data.twitter.follow_price   = influencer_data[0].twitter_follow_price ? influencer_data[0].twitter_follow_price: 0;
               
               return_data.followers     = influencer_data[0] ? influencer_data[0] : 0;
               return_data.profile_data  = influencer_data[0].vals ? influencer_data[0].vals[0] : "";
@@ -248,7 +256,7 @@ router.post('/register', async function(req,res) {
       router.post('/update_price', function(req , res){
 
         var user_data = req.body;
-
+        
         if(user_data.media_type == "tiktok"){
           var update_data = {
                               tiktok_post_price : user_data.post_price,
@@ -258,8 +266,10 @@ router.post('/register', async function(req,res) {
         }else if(user_data.media_type == "facebook"){
 
           var update_data = {
-                              facebook_post_price : user_data.post_price,
-                              facebook_story_price : user_data.story_price,
+                              facebook_post_price     : user_data.post_price,
+                              facebook_friend_price   : user_data.friend_price,
+                              facebook_comment_price  : user_data.comment_price,
+                              facebook_like_price     : user_data.like_price,
                             }
 
         }else if(user_data.media_type == "instagram"){
@@ -267,13 +277,19 @@ router.post('/register', async function(req,res) {
           var update_data = {
                               instagram_post_price : user_data.post_price,
                               instagram_story_price : user_data.story_price,
+                              instagram_comment_price : user_data.comment_price,
+                              instagram_like_price : user_data.like_price,
+                              instagram_follow_price : user_data.follow_price,
                             }
 
         }else if(user_data.media_type == "twitter"){
 
           var update_data = {
-                              twitter_post_price : user_data.post_price,
-                              twitter_story_price : user_data.story_price,
+                              twitter_tweet_price   : user_data.tweet_price,
+                              twitter_retweet_price : user_data.retweet_price,
+                              twitter_comment_price : user_data.comment_price,
+                              twitter_like_price    : user_data.like_price,
+                              twitter_follow_price  : user_data.follow_price,
                             }
 
         }

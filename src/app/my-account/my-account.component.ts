@@ -22,13 +22,17 @@ export class MyAccountComponent implements OnInit {
   post_edit_model:boolean     = false;
   profile_edit_model:boolean  = false;
   price_edit_model:boolean    = false;
+  facebook_price_edit_model:boolean   = false;
+  instagram_price_edit_model:boolean  = false;
+  tiktok_price_edit_model:boolean     = false;
+  twitter_price_edit_model:boolean    = false;
   type_of_media : any = ['tiktok','instagram', 'facebook' , 'twitter'];
-  type_of_post : any = ['post','story'];
+  type_of_post : any  = ['post','story'];
   media_price : any = {
                         tiktok : { post_price : 0, story_price : 0},
-                        instagram : { post_price : 0, story_price : 0},
-                        facebook : { post_price : 0, friend : 0},
-                        twitter : { post_price : 0, story_price : 0},
+                        instagram : { post_price : 0, story_price : 0 ,comment_price :0 , like_price : 0 , follow_price : 0},
+                        facebook : { post_price : 0, friend_price : 0 , comment_price : 0 ,like_price : 0},
+                        twitter : { tweet_price : 0, retweet_price : 0 , comment_price : 0 , like_price : 0 ,follow_price : 0},
                       };
 
   media_post : any =  {
@@ -97,6 +101,44 @@ export class MyAccountComponent implements OnInit {
       story_price : new FormControl(''),
       media_type  : new FormControl(''),
    });
+
+  tiktok_price_edit = new FormGroup({
+    post_price  : new FormControl(''),
+    story_price : new FormControl(''),
+    media_type  : new FormControl(''),
+  });
+  
+  
+    facebook_price_edit = new FormGroup({
+
+      post_price  : new FormControl(''),
+      friend_price : new FormControl(''),
+      comment_price : new FormControl(''),
+      like_price : new FormControl(''),
+      media_type  : new FormControl(''),
+    });
+    
+    instagram_price_edit = new FormGroup({
+
+      post_price    : new FormControl(''),
+      story_price   : new FormControl(''),
+      comment_price : new FormControl(''),
+      like_price    : new FormControl(''),
+      follow_price  : new FormControl(''),
+      media_type    : new FormControl(''),
+    });
+    
+    twitter_price_edit = new FormGroup({
+
+      tweet_price    : new FormControl(''),
+      retweet_price   : new FormControl(''),
+      comment_price : new FormControl(''),
+      like_price    : new FormControl(''),
+      follow_price  : new FormControl(''),
+      media_type    : new FormControl(''),
+    });
+
+
   
   
 
@@ -153,19 +195,82 @@ export class MyAccountComponent implements OnInit {
 
   openPriceModel(type:string){
 
-    this.price_edit_model = true;
 
-    this.price_edit.patchValue({
+    if(type == 'facebook') {
 
-      post_price  : this.media_price[type].post_price,
-      story_price : this.media_price[type].story_price,
-      media_type  : type,
-    });
+      this.facebook_price_edit_model = true;
+      this.facebook_price_edit.patchValue({
+
+        post_price    : this.media_price[type].post_price,
+        friend_price  : this.media_price[type].friend_price,
+        comment_price : this.media_price[type].comment_price,
+        like_price    : this.media_price[type].like_price,
+        media_type    : type,
+      });
+    } else if(type == 'instagram') {
+
+      this.instagram_price_edit_model = true;
+      this.instagram_price_edit.patchValue({
+
+        post_price    : this.media_price[type].post_price,
+        story_price   : this.media_price[type].story_price,
+        comment_price : this.media_price[type].comment_price,
+        like_price    : this.media_price[type].like_price,
+        follow_price  : this.media_price[type].follow_price,
+        media_type    : type,
+      });
+    } else if(type == 'twitter') {
+
+      this.twitter_price_edit_model = true;
+      
+      this.twitter_price_edit.patchValue({
+
+        tweet_price   : this.media_price[type].tweet_price,
+        retweet_price : this.media_price[type].retweet_price,
+        comment_price : this.media_price[type].comment_price,
+        like_price    : this.media_price[type].like_price,
+        follow_price  : this.media_price[type].follow_price,
+        media_type    : type,
+      });
+    } else {
+
+      this.tiktok_price_edit_model = true;
+
+      this.tiktok_price_edit.patchValue({
+
+          post_price  : this.media_price[type].post_price,
+          story_price : this.media_price[type].story_price,
+          media_type  : type,
+        });
+    }
+
+    // this.price_edit_model = true;
+
+    // this.price_edit.patchValue({
+
+    //   post_price  : this.media_price[type].post_price,
+    //   story_price : this.media_price[type].story_price,
+    //   media_type  : type,
+    // });
   }
 
-  updatePrice(){
+  updatePrice(media_type:any){
 
-    let data      = this.price_edit.value;
+    let data ;
+    if(media_type == 'facebook'){
+
+      data   = this.facebook_price_edit.value;
+    } else if(media_type == 'instagram') {
+
+      data   = this.instagram_price_edit.value;
+    } else if(media_type == 'twitter') {
+
+      data   = this.twitter_price_edit.value;
+      
+    } else {
+      data   = this.tiktok_price_edit.value;
+    }
+    
     data.user_id  = this.loginService.user_id;
     
     this.MyAccountService.updatePrice(data).subscribe(
@@ -174,6 +279,19 @@ export class MyAccountComponent implements OnInit {
         console.log(response);
 
         if(response.statusCode == 200){
+
+          if(media_type == 'facebook'){
+
+            this.facebook_price_edit_model = false;
+          } else if(media_type == 'instagram') {
+      
+            this.instagram_price_edit_model = false;
+          } else if(media_type == 'twitter') {
+      
+            this.twitter_price_edit_model = false;
+          } else {
+            this.tiktok_price_edit_model = false;
+          }
 
           this.price_edit_model = false;
           this.singleInfluencer();
