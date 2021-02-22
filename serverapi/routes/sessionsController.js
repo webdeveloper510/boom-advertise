@@ -52,8 +52,8 @@ router.post('/saveAccessTokens', (req, res) => {
      // return res.send({ message: 'token saved' });
 
       const client = new Twitter({
-        consumer_key: 'PwtlyF8xzKLgIPNDwS42nL87G',
-        consumer_secret: 'hg9QMATkfZp0ZW3K5TXRFvwfsMCe5JChzlbf2Tb3JjL7rJCWUc',
+        consumer_key: _twitterConsumerKey,
+        consumer_secret: _twitterConsumerSecret,
         access_token: oauthAccessToken,
         access_token_secret: oauthAccessTokenSecret
       });
