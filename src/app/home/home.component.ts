@@ -182,7 +182,8 @@ export class HomeComponent implements OnInit {
              // this.signInWithFB();
              
             }
-            if(local_midia_check.twitter == true){
+
+            if(local_midia_check.twitter == true && local_midia_check.facebook != true){
               this.redirectToTwitter();
              //this.signInWithFB();
              // this.signInWithFB();
@@ -227,6 +228,7 @@ export class HomeComponent implements OnInit {
 
   signInWithFB(): void {
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+    
   }
 
 

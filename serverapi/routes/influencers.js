@@ -45,7 +45,7 @@ var upload = multer({
 })
 
 router.post('/register', async function(req,res) {
-      console.log(req.body.influencer_signup);
+     
       var influencerCreate =  new influencer.influencers(req.body.influencer_signup);
       var influencerData =  new influencers_data.influencers_data(req.body.influencer_signup);
 
@@ -68,14 +68,14 @@ router.post('/register', async function(req,res) {
         if (err)  res.json({status:"failure",statusCode:100,msg:err});
         
         if(influencers){
-          console.log(influencers)
+         
           res.json({status:"failure",statusCode:100,msg:"Email already exists!!"});
         }else{
             influencer.influencers.findOne({name:req.body.influencer_signup.name}, function(err, influencers) {
             if (err)  res.json({status:"failure",statusCode:100,msg:err});
         
             if(influencers){
-              console.log(influencers)
+              
               res.json({status:"failure",statusCode:100,msg:"Username already exists!!"});
             }
             else{

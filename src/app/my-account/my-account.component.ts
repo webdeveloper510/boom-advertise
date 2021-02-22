@@ -27,7 +27,7 @@ export class MyAccountComponent implements OnInit {
   media_price : any = {
                         tiktok : { post_price : 0, story_price : 0},
                         instagram : { post_price : 0, story_price : 0},
-                        facebook : { post_price : 0, story_price : 0},
+                        facebook : { post_price : 0, friend : 0},
                         twitter : { post_price : 0, story_price : 0},
                       };
 
@@ -193,9 +193,6 @@ export class MyAccountComponent implements OnInit {
     
   }
 
-  // get f(){
-  //   return this.myForm.controls;
-  // }
 
   uploadPost(){
     
