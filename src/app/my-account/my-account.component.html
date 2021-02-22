@@ -50,7 +50,9 @@
         <div class="media insider"><img src="/assets/images/fb icon 1.png"></div>
         <div class="viwers insider"> 
             <p>{{media_price.facebook.post_price}}$/ Post</p>
-            <p>{{media_price.facebook.story_price}}$/ Story</p>
+            <p>{{media_price.facebook.friend_price}}$/ Friend</p>
+            <p>{{media_price.facebook.comment_price}}$/ Comment</p>
+            <p>{{media_price.facebook.like_price}}$/ Like</p>
         </div>
    
         <div class="edit_delete insider">
@@ -71,6 +73,10 @@
     <div class="viwers insider"> 
         <p>{{media_price.instagram.post_price}}$/ Post</p>
         <p>{{media_price.instagram.story_price}}$/ Story</p>
+        <p>{{media_price.instagram.comment_price}}$/ Comment</p>
+        <p>{{media_price.instagram.like_price}}$/ Like</p>
+        <p>{{media_price.instagram.follow_price}}$/ Follow</p>
+        
     </div>
 
     <div class="edit_delete insider">
@@ -89,8 +95,11 @@
 <div class="first_viewer">
     <div class="media insider"><img src="/assets/images/twitter 1.png"></div>
     <div class="viwers insider"> 
-        <p>{{media_price.twitter.post_price}}$/ Post</p>
-        <p>{{media_price.twitter.story_price}}$/ Story</p>
+        <p>{{media_price.twitter.tweet_price}}$/ Tweet</p>
+        <p>{{media_price.twitter.retweet_price}}$/ Retweet</p>
+        <p>{{media_price.twitter.comment_price}}$/ Comment</p>
+        <p>{{media_price.twitter.like_price}}$/ Like</p>
+        <p>{{media_price.twitter.follow_price}}$/ Follow</p>
     </div>
 
     <div class="edit_delete insider">
@@ -310,6 +319,134 @@
 
 
   <!------------------- Update Price Model End------------------------->
+
+  <!------------------- Update Facebook Price Model Start------------------------->
+
+<div class="w3-container">
+    <div id="edit_price" class="w3-modal" [style.display]="facebook_price_edit_model ? 'block' : 'none'">
+      <div class="w3-modal-content">
+        <div class="w3-container">
+          <span (click)="this.facebook_price_edit_model = false;" class="w3-button w3-display-topright">&times;</span>
+          <div class="promoter_signup">
+            <h2>Edit Price</h2>
+            
+            <form [formGroup]="facebook_price_edit" (ngSubmit)="updatePrice('facebook')"> 
+                <input type="hidden" id="media_type" formControlName="media_type" >
+                <label for="update_post">Post</label>
+                <input type="text" id="update_post" formControlName="post_price" class="form-control" placeholder="post price" autocomplete="off">
+                <label for="update_story">Friend</label>
+                <input type="text" formControlName="friend_price" id="friend_price" placeholder="Friend price" class="form-control" autocomplete="off">  
+                <label for="update_story">Comment </label>
+                <input type="text" formControlName="comment_price" id="comment_price" placeholder="Comment price" class="form-control" autocomplete="off">  
+                <label for="update_story">Like</label>
+                <input type="text" formControlName="like_price" id="like_price" placeholder="Like price" class="form-control" autocomplete="off">  
+               
+                <input type="submit" value="Update" class="btn btn-info update_price_button">
+            </form>
+          </div>     
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!------------------- Update Facebook Price Model End------------------------->
+  <!------------------- Update Instagram Price Model Start------------------------->
+
+<div class="w3-container">
+    <div id="edit_price" class="w3-modal" [style.display]="instagram_price_edit_model ? 'block' : 'none'">
+      <div class="w3-modal-content">
+        <div class="w3-container">
+          <span (click)="this.instagram_price_edit_model = false;" class="w3-button w3-display-topright">&times;</span>
+          <div class="promoter_signup">
+            <h2>Edit Price</h2>
+            
+            <form [formGroup]="instagram_price_edit" (ngSubmit)="updatePrice('instagram')"> 
+                <input type="hidden" id="media_type" formControlName="media_type" >
+                <label for="update_post">Post</label>
+                <input type="text" id="update_post" formControlName="post_price" class="form-control" placeholder="post price" autocomplete="off">
+                <label for="update_story">Story</label>
+                <input type="text" formControlName="story_price" id="story_price" placeholder="Friend price" class="form-control" autocomplete="off">  
+                <label for="update_story">Comment </label>
+                <input type="text" formControlName="comment_price" id="comment_price" placeholder="Comment price" class="form-control" autocomplete="off">  
+                <label for="update_story">Like</label>
+                <input type="text" formControlName="like_price" id="like_price" placeholder="Like price" class="form-control" autocomplete="off">  
+               
+                <label for="update_story">Follow</label>
+                <input type="text" formControlName="follow_price" id="follow_price" placeholder="Follow price" class="form-control" autocomplete="off">  
+               
+                <input type="submit" value="Update" class="btn btn-info update_price_button">
+            </form>
+          </div>     
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!------------------- Update Instagram Price Model End------------------------->
+  <!------------------- Update Tweeter Price Model Start------------------------->
+
+<div class="w3-container">
+    <div id="edit_price" class="w3-modal" [style.display]="twitter_price_edit_model ? 'block' : 'none'">
+      <div class="w3-modal-content">
+        <div class="w3-container">
+          <span (click)="this.twitter_price_edit_model = false;" class="w3-button w3-display-topright">&times;</span>
+          <div class="promoter_signup">
+            <h2>Edit Price</h2>
+            
+            <form [formGroup]="twitter_price_edit" (ngSubmit)="updatePrice('twitter')"> 
+                <input type="hidden" id="media_type" formControlName="media_type" >
+                <label for="update_post">Tweet</label>
+                <input type="text" id="tweet_price" formControlName="tweet_price" class="form-control" placeholder="post price" autocomplete="off">
+                <label for="update_story">Retweet</label>
+                <input type="text" formControlName="retweet_price" id="retweet_price" placeholder="Retweet price" class="form-control" autocomplete="off">  
+                <label for="update_story">Comment </label>
+                <input type="text" formControlName="comment_price" id="comment_price" placeholder="Comment price" class="form-control" autocomplete="off">  
+                <label for="update_story">Like</label>
+                <input type="text" formControlName="like_price" id="like_price" placeholder="Like price" class="form-control" autocomplete="off">  
+               
+                <label for="update_story">Follow</label>
+                <input type="text" formControlName="follow_price" id="follow_price" placeholder="Follow price" class="form-control" autocomplete="off">  
+               
+                <input type="submit" value="Update" class="btn btn-info update_price_button">
+            </form>
+          </div>     
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!------------------- Update Tweeter Price Model End------------------------->
+
+
+  <!------------------- Update Tiktok Price Model Start------------------------->
+
+<div class="w3-container">
+    <div id="edit_price" class="w3-modal" [style.display]="tiktok_price_edit_model ? 'block' : 'none'">
+      <div class="w3-modal-content">
+        <div class="w3-container">
+          <span (click)="this.tiktok_price_edit_model = false;" class="w3-button w3-display-topright">&times;</span>
+          <div class="promoter_signup">
+            <h2>Edit Price</h2>
+            
+            <form [formGroup]="tiktok_price_edit" (ngSubmit)="updatePrice('tiktok')"> 
+                <input type="hidden" id="media_type" formControlName="media_type" >
+                <label for="update_post">Post</label>
+                <input type="text" id="update_post" formControlName="post_price" class="form-control" placeholder="post price" autocomplete="off">
+                <label for="update_story">Story</label>
+                <input type="text" formControlName="story_price" id="update_story" placeholder="story price" class="form-control" autocomplete="off">  
+                <input type="submit" value="Update" class="btn btn-info update_price_button">
+            </form>
+          </div>     
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!------------------- Update Tiktok Price Model End------------------------->
 
 
 
