@@ -119,11 +119,14 @@ export class MyAccountComponent implements OnInit {
         (response:any) =>{
           console.log(response); 
           
-          this.data         = response['data'];
-          this.media_price  = response.mydata.price_data;
-          this.data         = response.mydata.profile_data;
-          this.media_post   = response.mydata.posts;
+          this.data           = response['data'];
+          
+          this.media_price    = response.mydata.price_data;
+          this.data           = response.mydata.profile_data;
+          this.media_post     = response.mydata.posts;
+          this.data.followers = response.mydata.followers;
           this.initProfileEdit();
+          console.log(this.data); 
         }
       )
    }

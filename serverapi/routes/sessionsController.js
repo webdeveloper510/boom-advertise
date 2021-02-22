@@ -17,13 +17,10 @@ var ObjectID = require('mongodb').ObjectID;
 
 router.get('/connect', (req, res) => {
   
-  console.log(consumer);
+  
 
   consumer.getOAuthRequestToken(function (error, oauthToken,   oauthTokenSecret, results) {
-    console.log('oauthToken');
-    console.log(oauthToken);
-    console.log('oauthTokenSecret');
-    console.log(oauthTokenSecret);
+    
     if (error) {
       res.send(error, 500);
     } else {
@@ -60,7 +57,7 @@ router.post('/saveAccessTokens', (req, res) => {
 
       client.get('account/verify_credentials').then(user => {
       //  res.send(user)
-            console.log('mehar');
+            
             live_twitter_follower = user.data.followers_count;
 
                         /*******update twitter data */
@@ -71,12 +68,12 @@ router.post('/saveAccessTokens', (req, res) => {
                   },
                   function(err,result){ 
                     if (err) {
-                      console.log(err);
+                      
                       res.json({status:"failure",statusCode:100,error:'could not save data'});
                     }
                     else{
-                      console.log(result);
-                    res.json({status:"success",statusCode:200,data:result});
+                      
+                    res.json({status:"success",statusCode:200,data:result,twt:user});
                     }
                   });
                 /*******update twitter data */

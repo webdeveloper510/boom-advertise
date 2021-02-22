@@ -9,6 +9,7 @@
           <li  [routerLink]="['/']"><img src="./assets/images/logo.png"/></li>
           <li>Contact Us </li>
           <li  (click)="this.login_form = true" *ngIf="!this.loginservice.is_logged_in">LogIn</li>
+          <li   *ngIf="this.loginservice.is_logged_in" [routerLink]="['/my-account']">My Account</li>
           <li  (click)="logOut()" *ngIf="this.loginservice.is_logged_in">Logout</li>
           <li  (click)="this.signup_form = true" >Admin</li>
       </ul>

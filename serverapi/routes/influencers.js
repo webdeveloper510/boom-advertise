@@ -166,6 +166,7 @@ router.post('/register', async function(req,res) {
                                   twitter     : { post_price : 0, story_price : 0},
                                 },
                                 profile_data  :"",
+                                followers   : 0,
                                 posts         :{
                                                 tiktok    :  [],
                                                 instagram :  [],
@@ -173,6 +174,7 @@ router.post('/register', async function(req,res) {
                                                 twitter   :  [],
                                 },
                               };
+            
             
 
             if(influencer_data[0]){
@@ -189,6 +191,7 @@ router.post('/register', async function(req,res) {
               return_data.price_data.twitter.post_price = influencer_data[0].twitter_post_price ? influencer_data[0].twitter_post_price: 0;
               return_data.price_data.twitter.story_price = influencer_data[0].twitter_story_price ? influencer_data[0].twitter_story_price: 0;
               
+              return_data.followers     = influencer_data[0] ? influencer_data[0] : 0;
               return_data.profile_data  = influencer_data[0].vals ? influencer_data[0].vals[0] : "";
               
             }
@@ -198,11 +201,14 @@ router.post('/register', async function(req,res) {
               if (err)  res.json({status:"failure",statusCode:100,msg:err});
               
               if(profile_data){
-
+                
+                
                 profile_data.profile_picture =  profile_data.profile_picture ? "http://"+req.headers.host+"/"+profile_data.profile_picture : "/assets/images/man-avatar-profile.jpg";
+                
               } 
-             
+              
               return_data.profile_data = profile_data;
+              
               influencer_posts.influencer_posts.find({influencerid:user_id}, function(post_error, posts) {
                 if (post_error)  res.json({status:"failure",statusCode:100,msg:post_error});
                 
