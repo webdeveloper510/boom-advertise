@@ -16,6 +16,7 @@ export class InfluencersRankingService {
   constructor(private http : HttpClient) { }
 
   getdata(){
+    console.log();
     return this.http.get(this.apiUrl+"/influencers/getInfluencers")
   //return this.http.get(environment.url+"/interview/list")
   }
