@@ -1,12 +1,13 @@
 <div class="heading_sec1"> <h1> Authentic Influencers</h1></div>
 <div class="container-fluid main_out">
-  <form [formGroup]="filterForm" class="social_media" >
+  
+  <!-- <form [formGroup]="filterForm" class="social_media" >
     <label>Sort By Social Media: </label>
     <select  formControlName="position" (change)="filter()" >
       <option *ngFor="let position of positionList" [value]="position" >{{position}}</option>
     </select>
  
-  </form>
+  </form> -->
   <div class="outer_promote">
   <table id="datatableexample" class="table table-striped table-bordered table-sm row-border hover" >
 
@@ -25,18 +26,28 @@
       <td>
      
         <div [routerLink]="['/influencer-account',group.vals[0]._id]" class="data1"> 
-          <div class="image"><img src="/assets/images/total influeners.png"></div>
-          <div class="name"><p>{{group.vals[0].name}}</p></div>
-          <div class="mail"><p>{{group.vals[0].email}}</p></div>
+          <div class="image" style="clear: both;"><img src="/assets/images/total influeners.png"></div>
+          <div class="name" style="clear: both;">
+            <p>{{group.vals[0].name}}</p>
+            <p>Tiktok Followers : {{group.tiktokfollowers}}</p>
+            <p>Instagram Followers :{{group.instagramfollowers}}</p>
+            <p>Twitter Followers : {{group.twitterfollowers}}</p>
+            <p>Facebook Followers :  {{group.facebookfollowers}}</p>
+          </div>
+          
+          
         </div>
       </td>
    
-      <td> <ul>
-      <li *ngIf="group.vals[0].tiktok"> <img src="/assets/images/tiktok icon 2.png"> - <span><b>Followers:</b> {{group.tiktokfollowers}}</span>  </li>
-      <li *ngIf="group.vals[0].instagram"> <img src="/assets/images/insta iconn 2.png"> - <span><b>Followers:</b> {{group.instagramfollowers}}</span> </li>
-      <li *ngIf="group.vals[0].twitter"> <img src="/assets/images/twitter 2.png">  - <span><b>Followers:</b> {{group.twitterfollowers}}</span> </li>  
-      <li *ngIf="group.vals[0].facebook"> <img src="/assets/images/fb icon 2.png"> -  <span><b>Followers:</b> {{group.facebookfollowers}}</span>  </li>
-      </ul></td>
+      <td> 
+      <div > <img src="/assets/images/tiktok icon 2.png" style="width: 30px; height : 30px;"> - Post : ${{group.tiktok_post_price}} , Story : ${{group.tiktok_story_price}} </div>
+      <br>
+      <div > <img src="/assets/images/insta iconn 2.png" style="width: 30px; height : 30px;"> - Post : ${{group.instagram_post_price}} , Story : ${{group.instagram_story_price}} , Comment : ${{group.instagram_comment_price}} , Like : ${{group.instagram_like_price}} , Follow : ${{group.instagram_follow_price}}</div>
+      <br>
+      <div > <img src="/assets/images/twitter 2.png" style="width: 30px; height : 30px;">  - Tweet : ${{group.twitter_tweet_price}} , Retweet : ${{group.twitter_retweet_price}} , Comment : ${{group.twitter_comment_price}} , Like : ${{group.twitter_like_price}} , Follow : ${{group.twitter_follow_price}}</div>  
+      <div > <img src="/assets/images/fb icon 2.png" style="width: 30px; height : 30px;"> -   Post : ${{group.facebook_post_price}} , Friend : ${{group.facebook_friend_price}} , Comment : ${{group.facebook_comment_price}} , Like : ${{group.facebook_like_price}}</div>
+      
+      </td>
        </tr>
     </tbody>
   </table>

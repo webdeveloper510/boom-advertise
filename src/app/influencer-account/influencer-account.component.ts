@@ -62,6 +62,7 @@ export class InfluencerAccountComponent implements OnInit {
     this.MyAccountService.singleInfluencer(this.id).subscribe(
       (response:any) => {
         console.log(response);
+        
         if(response.statusCode == 200){
 
           this.influencer_data = response.mydata;

@@ -77,9 +77,17 @@
                 </ng-template>
                 <div class="outer_most">
                     <div class="section_1" *ngFor="let tik_tok_info of media_post.tiktok ; let i = index ">
-                        <div class="image_start">
+                        
+                        <div class="image_start" *ngIf="tik_tok_info.upload_type == 'image'">
                             <img [src]="tik_tok_info.image">
                         </div>
+                        <div class="video_start" *ngIf="tik_tok_info.upload_type == 'video'">
+                           
+                            <video width="300" controls>
+                                <source [src]="tik_tok_info.image">
+                            </video>
+                        </div>
+
                         <h2 class="text_name">{{tik_tok_info.text_name}}</h2>
                         <p class="discription">{{tik_tok_info.description}}</p>
                         <div class="counts">
@@ -118,9 +126,17 @@
                 <div class="outer_most">
                 
                     <div class="section_1" *ngFor="let Instagram of media_post.instagram; let i = index;">
-                        <div class="image_start">
+
+                        <div class="image_start" *ngIf="Instagram.upload_type == 'image'">
                             <img [src]="Instagram.image">
                         </div>
+                        <div class="video_start" *ngIf="Instagram.upload_type == 'video'">
+                           
+                            <video width="300" controls>
+                                <source [src]="Instagram.image">
+                            </video>
+                        </div>
+
                         <h2 class="text_name">{{Instagram.text_name}}</h2>
                         <p class="discription">{{Instagram.description}}</p>
                         <div class="counts">
@@ -157,9 +173,17 @@
                 <div class="outer_most">
                 
                         <div class="section_1" *ngFor="let Facebook of media_post.facebook; let i = index;">
-                            <div class="image_start">
+
+                            <div class="image_start" *ngIf="Facebook.upload_type == 'image'">
                                 <img [src]="Facebook.image">
                             </div>
+                            <div class="video_start" *ngIf="Facebook.upload_type == 'video'">
+                               
+                                <video width="300" controls>
+                                    <source [src]="Facebook.image">
+                                </video>
+                            </div>
+
                             <h2 class="text_name">{{ Facebook.text_name}}</h2>
                             <p class="discription">{{ Facebook.description}}</p>
                             <div class="counts">
@@ -196,9 +220,18 @@
                 <div class="outer_most">
                     
                     <div class="section_1" *ngFor="let Twitter of media_post.twitter; let i = index;">
-                        <div class="image_start">
+                        
+
+                        <div class="image_start" *ngIf="Twitter.upload_type == 'image'">
                             <img [src]="Twitter.image">
                         </div>
+                        <div class="video_start" *ngIf="Twitter.upload_type == 'video'">
+                           
+                            <video width="300" controls>
+                                <source [src]="Twitter.image">
+                            </video>
+                        </div>
+
                         <h2 class="text_name">{{ Twitter.text_name}}</h2>
                         <p class="discription">{{ Twitter.description}}</p>
                         <div class="counts">

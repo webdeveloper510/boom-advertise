@@ -30,6 +30,7 @@ import { FacebookLoginProvider } from "angularx-social-login";
 import { CheckOutComponent } from './check-out/check-out.component';
 import { MatCardModule } from '@angular/material/card'
 import {MatGridListModule} from '@angular/material/grid-list';
+import { ErrorComponent } from './error/error.component';
 //import { MatButtonModule} from '@angular/material/button';
 //import {DataTablesModule} from 'angular-datatables';
 // import {
@@ -57,6 +58,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
     PrivacyComponent,
     CheckOutComponent,
     CheckOutComponent,
+    ErrorComponent,
     //FileSelectDirective
   ],
   imports: [

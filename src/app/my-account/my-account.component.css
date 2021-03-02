@@ -385,3 +385,12 @@ p.filepath.uploaded {
 .post_type {
     margin-top: 20px;
 }
+.video_start {
+   
+    height: 274px;
+}
+
+video {
+    margin-top: 50px;
+    width: 100%;
+}

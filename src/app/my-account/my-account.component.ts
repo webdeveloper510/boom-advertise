@@ -14,20 +14,26 @@ import { LoginService } from '../services/login.service';
 
 export class MyAccountComponent implements OnInit {
 
-  login_form : boolean        = true;
-  login_form1 : boolean       = false;
-  filename:string             = "";
-  image_value :any            = "";
-  data:any                    = [];
-  post_edit_model:boolean     = false;
-  profile_edit_model:boolean  = false;
-  price_edit_model:boolean    = false;
-  facebook_price_edit_model:boolean   = false;
-  instagram_price_edit_model:boolean  = false;
-  tiktok_price_edit_model:boolean     = false;
-  twitter_price_edit_model:boolean    = false;
-  type_of_media : any = ['tiktok','instagram', 'facebook' , 'twitter'];
-  type_of_post : any  = ['post','story'];
+  login_form  : boolean    = true;
+  login_form1 : boolean   = false;
+  filename    : string         = "";
+  image_value : any        = "";
+  data        : any                = [];
+
+  post_edit_model     : boolean  = false;
+  profile_edit_model  : boolean  = false;
+  price_edit_model    : boolean  = false;
+
+  facebook_price_edit_model : boolean = false;
+  instagram_price_edit_model: boolean = false;
+  tiktok_price_edit_model   : boolean = false;
+  twitter_price_edit_model  : boolean = false;
+
+  type_of_media   : any = ['tiktok','instagram', 'facebook' , 'twitter'];
+  type_of_post    : any = ['post','story'];
+  type_of_upload  : any = ['image','video'];
+  allowed_type    : any = 'image/*';
+
   media_price : any = {
                         tiktok : { post_price : 0, story_price : 0},
                         instagram : { post_price : 0, story_price : 0 ,comment_price :0 , like_price : 0 , follow_price : 0},
@@ -76,10 +82,10 @@ export class MyAccountComponent implements OnInit {
   }
 
   myForm = new FormGroup({
-    file: new FormControl('', [Validators.required]),
-    media_name : new FormControl(""),
-    type_post : new FormControl("")
-   
+    file        : new FormControl('', [Validators.required]),
+    media_name  : new FormControl(""),
+    type_post   : new FormControl(""),
+    upload_type : new FormControl(this.type_of_upload[0]),
   });
 
   profile_edit = new FormGroup({
@@ -138,9 +144,7 @@ export class MyAccountComponent implements OnInit {
       media_type    : new FormControl(''),
     });
 
-
-  
-  
+    
 
   initProfileEdit(){
 
@@ -152,14 +156,11 @@ export class MyAccountComponent implements OnInit {
   
 
   singleInfluencer(){
-
-    
-    console.log(this.loginService.user_id);
    
     this.MyAccountService.singleInfluencer(this.loginService.user_id)
       .subscribe(
         (response:any) =>{
-          console.log(response); 
+          //console.log(response); 
           
           this.data           = response['data'];
           
@@ -168,7 +169,7 @@ export class MyAccountComponent implements OnInit {
           this.media_post     = response.mydata.posts;
           this.data.followers = response.mydata.followers;
           this.initProfileEdit();
-          console.log(this.data); 
+         
         }
       )
    }
@@ -182,7 +183,7 @@ export class MyAccountComponent implements OnInit {
     this.MyAccountService.updateProfile(data).subscribe(
       (response : any) => {
 
-        console.log(response);
+        //console.log(response);
         if(response.statusCode == 200){
           this.profile_edit_model = false;
           this.singleInfluencer();
@@ -276,7 +277,7 @@ export class MyAccountComponent implements OnInit {
     this.MyAccountService.updatePrice(data).subscribe(
       (response:any) => {
         
-        console.log(response);
+        //console.log(response);
 
         if(response.statusCode == 200){
 
@@ -304,7 +305,7 @@ export class MyAccountComponent implements OnInit {
 
     this.MyAccountService.deletePost(post_id).subscribe(
       (response:any) => {
-        console.log(response);
+        //console.log(response);
         this.singleInfluencer();
       }
     );
@@ -318,15 +319,18 @@ export class MyAccountComponent implements OnInit {
     
     if(this.image_value && this.myForm.value.media_name && this.myForm.value.type_post){
 
+      
       const formData = new FormData();
       formData.append('uploadedImage', this.image_value);
       formData.append('user_id', this.loginService.user_id);
       formData.append('media_type', this.myForm.value.media_name);
       formData.append('post_type', this.myForm.value.type_post);
+      formData.append('upload_type', this.myForm.value.upload_type);
       
       this.MyAccountService.uploadPost(formData).subscribe(
         (response:any) =>{
-          console.log(response);
+          //console.log(response);
+          
           this.singleInfluencer();
           this.myForm.reset();
           this.myForm.patchValue({media_name : ""});
@@ -356,7 +360,7 @@ export class MyAccountComponent implements OnInit {
 
       this.MyAccountService.updateProfileImage(formData).subscribe(
         (response : any) => {
-          console.log(response);
+          //console.log(response);
           if(response.statusCode == 200){
 
             this.singleInfluencer();

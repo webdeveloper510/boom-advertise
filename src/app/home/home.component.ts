@@ -176,19 +176,22 @@ export class HomeComponent implements OnInit {
             this.influnncer_success_div = false;
             this.influnncer_login_form = false;
 
-            if(local_midia_check.facebook == true){
-              this.signInWithFB();
-             //this.signInWithFB();
-             // this.signInWithFB();
-             
-            }
-
-            if(local_midia_check.twitter == true && local_midia_check.facebook != true){
+            if(local_midia_check.twitter == true) {
               this.redirectToTwitter();
-             //this.signInWithFB();
-             // this.signInWithFB();
-             
             }
+            // if(local_midia_check.facebook == true){
+            //   this.signInWithFB();
+            //  //this.signInWithFB();
+            //  // this.signInWithFB();
+             
+            // }
+
+            // if(local_midia_check.twitter == true && local_midia_check.facebook != true){
+            //   this.redirectToTwitter();
+            //  //this.signInWithFB();
+            //  // this.signInWithFB();
+             
+            // }
 
             this.router.navigate(['/']);
           }, 3000)

@@ -7,8 +7,11 @@ import { PromoterAccountComponent } from './promoter-account/promoter-account.co
 import { TopAuthenticInfluencersRankingComponent } from './top-authentic-influencers-ranking/top-authentic-influencers-ranking.component';
 import { PrivacyComponent } from './privacy/privacy.component';
 import { CheckOutComponent } from './check-out/check-out.component';
+import { ErrorComponent } from './error/error.component';
+
 const routes: Routes = [
  { path: '', pathMatch: 'full' ,  component: HomeComponent},
+ 
     {
      path: 'home', component: HomeComponent
     },
@@ -26,8 +29,9 @@ const routes: Routes = [
     },
     {
       path: 'check-out', component: CheckOutComponent
-    }
- 
+    },
+    { path: '**' ,  component: ErrorComponent},
+    
 ];
 
 @NgModule({

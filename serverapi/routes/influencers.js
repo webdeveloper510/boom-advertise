@@ -12,37 +12,39 @@ const {ObjectId} = require('mongodb');
 const multer = require('multer');
 var fileExtension = require('file-extension')
 var fs = require('fs');
+const path = require('path');
 //process.env.NODE_TLS_REJECT_UNAUTHORIZED = "1";
 
 var storage = multer.diskStorage({
-
-  // Setting directory on disk to save uploaded files
-  destination: function (req, file, cb) {
-      cb(null, 'uploads')
-  },
- 
-
-  // Setting name of file saved
-  filename: function (req, file, cb) {
-      cb(null, file.fieldname + '-' + Date.now() + '.' + fileExtension(file.originalname))
-  }
-})
+                                  // Setting directory on disk to save uploaded files
+                                  destination: function (req, file, cb) {
+                                      
+                                    //cb(null, './uploads')
+                                    cb(null, path.join(__dirname, '../uploads'))
+                                  },
+                                  // Setting name of file saved
+                                  filename: function (req, file, cb) {
+                                      
+                                    cb(null, file.fieldname + '-' + Date.now() + '.' + fileExtension(file.originalname))
+                                  }
+                                });
 
 var upload = multer({
-  storage: storage,
-  limits: {
-      // Setting Image Size Limit to 2MBs
-      fileSize: 200000000
-  },
+  storage : storage,
+  limits  : {
+              fileSize: 200000000 // Setting Image Size Limit to 2MBs
+            },
   fileFilter(req, file, cb) {
-      if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
-          //Error 
-          cb(new Error('Please upload JPG and PNG images only!'))
-      }
+      
+      // if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+      //     //Error 
+      //     cb(new Error('Please upload JPG and PNG images only!'))
+      // }
       //Success 
       cb(undefined, true)
   }
 })
+
 
 router.post('/register', async function(req,res) {
      
@@ -110,7 +112,37 @@ router.post('/register', async function(req,res) {
             }
 
             ], function(err, res_data) {
+
+
+              
               if (err)  res.json({status:"failure",statusCode:100,error:err});
+
+
+
+                for(var i = 0; i < res_data.length; i++){
+
+                  res_data[i].tiktok_story_price    = res_data[i].tiktok_story_price ? res_data[i].tiktok_story_price : 0;
+                  res_data[i].tiktok_post_price     = res_data[i].tiktok_post_price ? res_data[i].tiktok_post_price : 0;
+
+                  res_data[i].twitter_tweet_price       = res_data[i].twitter_tweet_price ? res_data[i].twitter_tweet_price : 0;
+                  res_data[i].twitter_retweet_price     = res_data[i].twitter_retweet_price ? res_data[i].twitter_retweet_price : 0;
+                  res_data[i].twitter_like_price        = res_data[i].twitter_like_price ? res_data[i].twitter_like_price : 0;
+                  res_data[i].twitter_follow_price      = res_data[i].twitter_follow_price ? res_data[i].twitter_follow_price : 0;
+                  res_data[i].twitter_comment_price     = res_data[i].twitter_comment_price ? res_data[i].twitter_comment_price : 0;
+
+                  res_data[i].instagram_post_price      = res_data[i].instagram_post_price ? res_data[i].instagram_post_price : 0;
+                  res_data[i].instagram_story_price     = res_data[i].instagram_story_price ? res_data[i].instagram_story_price : 0;
+                  res_data[i].instagram_comment_price   = res_data[i].instagram_comment_price ? res_data[i].instagram_comment_price : 0;
+                  res_data[i].instagram_follow_price    = res_data[i].instagram_follow_price ? res_data[i].instagram_follow_price : 0;
+                  res_data[i].instagram_like_price      = res_data[i].instagram_like_price ? res_data[i].instagram_like_price : 0;
+                  
+                  res_data[i].facebook_post_price       = res_data[i].facebook_post_price ? res_data[i].facebook_post_price : 0;
+                  res_data[i].facebook_like_price       = res_data[i].facebook_like_price ? res_data[i].facebook_like_price : 0;
+                  res_data[i].facebook_friend_price     = res_data[i].facebook_friend_price ? res_data[i].facebook_friend_price : 0;
+                  res_data[i].facebook_comment_price    = res_data[i].facebook_comment_price ? res_data[i].facebook_comment_price : 0;
+
+                }
+
                 res.json({status:"success",statusCode:200,data:res_data});
             })
 
@@ -175,7 +207,7 @@ router.post('/register', async function(req,res) {
                                 },
                               };
             
-            console.log(influencer_data[0]);
+          
 
             if(influencer_data[0]){
               
@@ -220,6 +252,7 @@ router.post('/register', async function(req,res) {
               influencer_posts.influencer_posts.find({influencerid:user_id}, function(post_error, posts) {
                 if (post_error)  res.json({status:"failure",statusCode:100,msg:post_error});
                 
+                
                 if(posts){
                   
                   for(var i = 0 ; i < posts.length;i++){
@@ -228,6 +261,7 @@ router.post('/register', async function(req,res) {
                                         id : posts[i]._id ,
                                         influencer_id : posts[i].influencerid ,
                                         image : "http://"+req.headers.host+"/"+posts[i].post_name,
+                                        upload_type : posts[i].upload_type ? posts[i].upload_type : 'image',
                                         text_name:"@lorengray "+posts[i].media_type+i,
                                         description:posts[i].media_type+" human machine recognition page",
                                         likes_count:"50.8K",
@@ -344,6 +378,7 @@ router.post('/register', async function(req,res) {
         post_create.influencerid  = user_data.user_id;
         post_create.media_type    = user_data.media_type;
         post_create.post_type     = user_data.post_type;
+        post_create.upload_type   = user_data.upload_type;
         
         post_create.save(function(err ,data){
 
@@ -355,7 +390,7 @@ router.post('/register', async function(req,res) {
         res.status(400).send({ error: error.message })
       });
 
-      router.get("/delete_post",function(req , res){
+      router.get("/delete_post",function(req , res){ 
 
         var  post_id = req.query.post_id;
 
