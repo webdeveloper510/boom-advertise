@@ -31,6 +31,8 @@ import { CheckOutComponent } from './check-out/check-out.component';
 import { MatCardModule } from '@angular/material/card'
 import {MatGridListModule} from '@angular/material/grid-list';
 import { ErrorComponent } from './error/error.component';
+import { TestpayComponent } from './testpay/testpay.component';
+import { TestpaycustomComponent } from './testpaycustom/testpaycustom.component';
 //import { MatButtonModule} from '@angular/material/button';
 //import {DataTablesModule} from 'angular-datatables';
 // import {
@@ -59,6 +61,8 @@ import { ErrorComponent } from './error/error.component';
     CheckOutComponent,
     CheckOutComponent,
     ErrorComponent,
+    TestpayComponent,
+    TestpaycustomComponent,
     //FileSelectDirective
   ],
   imports: [

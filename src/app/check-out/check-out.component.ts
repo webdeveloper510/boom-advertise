@@ -1,6 +1,8 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
+import { FormGroup, FormControl ,FormBuilder, Validators } from '@angular/forms';
+import { MyAccountService } from '../services/my-account.service';
+import {HttpClient} from '@angular/common/http';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-check-out',
   templateUrl: './check-out.component.html',
@@ -9,11 +11,63 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 export class CheckOutComponent implements OnInit {
 
-  paypal_image  : string = "/assets/images/Paypal-icon.png";
-  credit_card   : string = "/assets/images/credit-card.png";
-  constructor() { }
+  paypal_image  : string  = "/assets/images/Paypal-icon.png";
+  credit_card   : string  = "/assets/images/credit-card.png";
+  month_year    : any     = '';
+  constructor(private MyAccountService:MyAccountService,) { }
+
+  paymentForm = new FormGroup({
+    name              : new FormControl('', [Validators.required]),
+    email             : new FormControl("",[Validators.required]),
+    password          : new FormControl("",[Validators.required]),
+    repossword        : new FormControl("",[Validators.required]),
+    phone             : new FormControl("",[Validators.required]),
+    description       : new FormControl("",[Validators.required]),
+    stripe_email      : new FormControl("",[Validators.required]),
+    stripe_username   : new FormControl("",[Validators.required]),
+    stripe_cardnumber : new FormControl("",[Validators.required]),
+    stripe_month_year : new FormControl("",[Validators.required]),
+    stripe_cvc        : new FormControl("",[Validators.required]),
+    stripe_zipcode    : new FormControl("",[Validators.required]),
+  });
 
   ngOnInit(): void {
+  }
+
+  monthYear(value :any){
+   
+    let val = value.replace('/','');
+    val     = val.split('');
+    let len = val.length <= 6 ? val.length : 6;
+    let str = '';
+
+    for(var i=0; i < len; i++){
+      
+      if(i==2){
+          str += '/';
+      }    
+      str += val[i];
+    }
+
+    this.month_year = str;
+  }
+
+  payment(){
+
+    let data = this.paymentForm.value;
+
+    this.MyAccountService.payment(data).subscribe(
+      (response:any) =>{
+        console.log(response);
+        if(response?.code == 100){
+          alert(response.message);
+        }else {
+          alert(response.message.raw.message);
+
+        }
+      }
+    )
+      return false;
   }
  
 }

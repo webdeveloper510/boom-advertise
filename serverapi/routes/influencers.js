@@ -47,7 +47,8 @@ var upload = multer({
 
 
 router.post('/register', async function(req,res) {
-     
+
+      console.log(req.body)
       var influencerCreate =  new influencer.influencers(req.body.influencer_signup);
       var influencerData =  new influencers_data.influencers_data(req.body.influencer_signup);
 
@@ -363,6 +364,7 @@ router.post('/register', async function(req,res) {
 
 
       router.post('/upload_post', upload.single('uploadedImage'), (req, res, next) => {
+        
         const file = req.file
         var user_data = req.body;
         
@@ -387,6 +389,7 @@ router.post('/register', async function(req,res) {
         });
       
       }, (error, req, res, next) => {
+        
         res.status(400).send({ error: error.message })
       });
 

@@ -8,6 +8,8 @@ import { TopAuthenticInfluencersRankingComponent } from './top-authentic-influen
 import { PrivacyComponent } from './privacy/privacy.component';
 import { CheckOutComponent } from './check-out/check-out.component';
 import { ErrorComponent } from './error/error.component';
+import { TestpayComponent } from './testpay/testpay.component';
+import { TestpaycustomComponent } from './testpaycustom/testpaycustom.component';
 
 const routes: Routes = [
  { path: '', pathMatch: 'full' ,  component: HomeComponent},
@@ -29,6 +31,12 @@ const routes: Routes = [
     },
     {
       path: 'check-out', component: CheckOutComponent
+    },
+    {
+      path: 'test', component: TestpayComponent
+    },
+    {
+      path: 'pay', component: TestpaycustomComponent
     },
     { path: '**' ,  component: ErrorComponent},
     

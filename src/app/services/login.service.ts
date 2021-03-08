@@ -28,6 +28,9 @@ export class LoginService {
     let user_data:any = localStorage.getItem(this.local_storage_login_userid_key);
     return this.http.post(this.apiUrl+`/sessions/saveAccessTokens`,{oauth_token:oauthToken,oauth_verifier:oauthVerifier,_id:user_data})
   }
+  payApi() {
+    return this.http.get(this.apiUrl+`/login/payment`,{})
+  }
 
 
   loginCheck() {

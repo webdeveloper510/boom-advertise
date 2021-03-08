@@ -1,61 +1,68 @@
 <div class="heading">Checkout</div>
 <mat-card style="margin:2em;">
     
-    <div class="row">
-        <div class="col-sm-1"></div>
-        <div class="col-sm-4">
-            <input type="text" class="form-control bottom-space" placeholder="Name" autocomplete="new-name">
-            <input type="email" class="form-control bottom-space" placeholder="Email" autocomplete="new-email">
-            <input type="password" class="form-control bottom-space" placeholder="Password" autocomplete="new-pass">
-            <input type="password" class="form-control bottom-space" placeholder="Confirm password" autocomplete="new-pass">
-            <input type="number" class="form-control bottom-space" placeholder="Phone Number" autocomplete="new-phone">
+    <form [formGroup]="paymentForm" (ngSubmit)="payment()">
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-4">
+                <input type="text" class="form-control bottom-space" formControlName="name" placeholder="Name" autocomplete="new-name">
+                <input type="email" class="form-control bottom-space" formControlName="email" placeholder="Email" autocomplete="new-email">
+                <input type="password" class="form-control bottom-space" formControlName="password" placeholder="Password" autocomplete="new-pass">
+                <input type="password" class="form-control bottom-space"  formControlName="repossword" placeholder="Confirm password" autocomplete="new-pass">
+                <input type="number" class="form-control bottom-space" formControlName="phone" placeholder="Phone Number" autocomplete="new-phone">
+            </div>
+            <div class="col-sm-2"></div>
+            
+            <div class="col-sm-4">
+                <div class="total-amount">  Your Total is $250  </div>
+                <div style="text-align: center;color: gray;">  Pay securely with Paypal or Credit Card </div>
+                <br>
+                <div class="payment-images-div">
+                    <div class="row">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-4"><img [src]="credit_card" width="100%"></div>
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-3"><img [src]="paypal_image" width="100%"></div>
+                        <div class="col-sm-2"></div>
+                    </div>
+                </div>
+                <div>
+                    <input type="email" class="form-control bottom-space-secomd" formControlName="stripe_email" placeholder="Email" autocomplete="new-email">
+                    <input type="text" class="form-control bottom-space-secomd" formControlName="stripe_username" placeholder="Name" autocomplete="new-name">
+                    <input type="text" class="form-control bottom-space-secomd" formControlName="stripe_cardnumber" placeholder="Card Number" autocomplete="new-card-number">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <input type="text"  class="form-control" formControlName="stripe_month_year" #monthYearValue placeholder="MM/YY" [value]="month_year" autocomplete="new-MY" maxlength="7" (input)="monthYear(monthYearValue.value)">
+                        </div>
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" formControlName="stripe_cvc" placeholder="CVC" autocomplete="new-CVC">
+                        </div>
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control"  formControlName="stripe_zipcode" placeholder="Zip Code" autocomplete="off" autocomplete="new-zipcode">
+                        </div>
+                    </div>
+                    <div class="guarantee" style="color:red;">
+                        Try it out using the test card number 4242 4242 4242 4242, a random three-digit CVC number, any expiration date in the future, and a random five-digit U.S. ZIP code.
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-1"></div>
         </div>
-        <div class="col-sm-2"></div>
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-8">
+                <textarea rows="8" cols="146" formControlName="description" placeholder="Your Description Here..." style="border-radius: 5px;border-color: darkgray"></textarea>
+            </div>
+            <div class="col-sm-3"></div>
+        </div>
+        <div class="pay">
+            <button type="submit" [disabled]="paymentForm.invalid" class="btn btn-primary" style="background-color: #ffc107;color: black;">Pay $250</button>
+        </div>
         
-        <div class="col-sm-4">
-            <div class="total-amount">  Your Total is $250  </div>
-            <div style="text-align: center;color: gray;">  Pay securely with Paypal or Credit Card </div>
-            <br>
-            <div class="payment-images-div">
-                <div class="row">
-                    <div class="col-sm-2"></div>
-                    <div class="col-sm-4"><img [src]="credit_card" width="100%"></div>
-                    <div class="col-sm-1"></div>
-                    <div class="col-sm-3"><img [src]="paypal_image" width="100%"></div>
-                    <div class="col-sm-2"></div>
-                </div>
-            </div>
-            <div>
-                <input type="email" class="form-control bottom-space-secomd" placeholder="Email" autocomplete="new-email">
-                <input type="text" class="form-control bottom-space-secomd" placeholder="Name" autocomplete="new-name">
-                <input type="text" class="form-control bottom-space-secomd" placeholder="Card Number" autocomplete="new-card-number">
-                <div class="row">
-                    <div class="col-sm-3">
-                        <input type="text" class="form-control" placeholder="MM/YY" autocomplete="new-MY">
-                    </div>
-                    <div class="col-sm-1"></div>
-                    <div class="col-sm-3">
-                        <input type="text" class="form-control" placeholder="CVC" autocomplete="new-CVC">
-                    </div>
-                    <div class="col-sm-1"></div>
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" placeholder="Zip Code" autocomplete="off" autocomplete="new-zipcode">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-1"></div>
-    </div>
-    <div class="row">
-        <div class="col-sm-1"></div>
-        <div class="col-sm-8">
-            <textarea rows="8" cols="146" placeholder="Your Description Here..." style="border-radius: 5px;border-color: darkgray"></textarea>
-        </div>
-        <div class="col-sm-3"></div>
-    </div>
-    <div class="pay">
-        <button class="btn btn-primary" style="background-color: #ffc107;color: black;">Pay $250</button>
-    </div>
+    </form>
+    
     <div class="guarantee">
         If you do not get your advertisement within 30 days then we give you guarantee to return back your money.  
     </div>

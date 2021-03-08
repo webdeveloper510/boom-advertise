@@ -39,6 +39,11 @@ export class MyAccountService {
 
     return this.http.post(this.apiUrl+"/influencers/update_price",data);
   }
+  
+  payment(data:any){
+    
+    return this.http.post(this.apiUrl+"/login/payment",data);
+  }
 
   myAccountInfo(){
 

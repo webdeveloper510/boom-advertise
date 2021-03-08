@@ -12,14 +12,17 @@ var passwordHash = require('password-hash');
 var sendEmail = function(to,subject,html) {
   return new Promise(function(resolve, reject) {
     var transporter = nodemailer.createTransport({
-      service: 'Gmail',
-      port: 587,
-      secure: false,
-      auth: {
+        
+      service: 'gmail', 
+      port:465,
+      auth: { 
         user: email.email,
         pass: email.password
-      },
-      //tls: {rejectUnauthorized: false}
+      } ,
+      tls: {
+        // do not fail on invalid certs
+        rejectUnauthorized: false
+      }
     });
   
   var mailOptions = {
@@ -45,7 +48,7 @@ var sendEmail = function(to,subject,html) {
 
 router.post('/register', function(req,res) {
   var coupon_code  = Math.random().toString(36).slice(2)
-console.log(req.body.worker_signup);
+
       var workerCreate =  new worker.workers(req.body.worker_signup);
 
       var datetime = new Date();
@@ -65,7 +68,7 @@ console.log(req.body.worker_signup);
             if (err)  res.json({status:"failure",statusCode:100,msg:err});
         
             if(workers){
-              console.log(workers)
+              
               res.json({status:"failure",statusCode:100,msg:"Username already exists!!"});
             }
             else{
@@ -74,21 +77,7 @@ console.log(req.body.worker_signup);
                      "Your login account!","You have been added as a Worker on <b>http://boomadvertise.com/</b><br> Here are your login credentials along with other details. <br> Username: " + req.body.worker_signup.name + "<br> Email: " +req.body.worker_signup.email +"<br> Password: " + req.body.worker_signup.password +" Promo code: fjhdgggdffg <br> Sharaeble Urls with others : http://boomadvertise.com/"+worker['_id']);
                   if (err) res.json({status:"failure",statusCode:100,msg:error});
                   res.json({status:"success",statusCode:200,data:worker,msg:"Worker added successfully and an email has been sent to the worker."});
-                //  res.setHeader("Content-Type", "text/html");
-                /******Send email***** */
-              //  var a = sendEmail(req.body.worker_signup.email,
-              //     "Your login account!","You have been added as a Worker on <b>http://boomadvertise.com/</b><br> Here are your login credentials along with other details. <br> Username: " + req.body.worker_signup.name + "<br> Email: " +req.body.worker_signup.email +"<br> Password: " + req.body.worker_signup.password +" Promo code: fjhdgggdffg <br> Sharaeble Urls with others : http://boomadvertise.com/"+worker['_id']);
-              //       a.then((result) => { 
-              //   if(result){
-              //     res.json({status:"success",statusCode:200,data:'hii sent email...'});
-              //   }
-              //   else{
-              //    res.json({status:"failure",statusCode:100,message:"There was some error in your request!!!",data:[]});
-              //   }
-              //     }).catch((err) => {
-              //      res.json({status:"failure",statusCode:100,message:"Could Not Send Email!!!",data:err});
-              //     });
-           /******Send email end***** */
+                
               });
             }
           })
@@ -100,8 +89,7 @@ console.log(req.body.worker_signup);
     
     router.post('/email', function(req,res) { 
       /******Send email***** */
-     console.log(email.email);
-     console.log(email.password);
+     
       
       var a =  sendEmail('vsingh@codenomad.net',
         "Your login account!",

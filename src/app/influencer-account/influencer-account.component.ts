@@ -58,7 +58,7 @@ export class InfluencerAccountComponent implements OnInit {
   }
 
   singleInfluencer(){
-    console.log("functionm calling");
+   
     this.MyAccountService.singleInfluencer(this.id).subscribe(
       (response:any) => {
         console.log(response);
@@ -82,16 +82,24 @@ export class InfluencerAccountComponent implements OnInit {
 
   sendRequestQuotes(){
     
-    let data = this.request_quotes.value
-    data.user_id = this.LoginService.user_id;
+    let data      = this.request_quotes.value
+    data.user_id  = this.LoginService.user_id;
+    data.email    = this.influencer_data.profile_data?.email;
+    
     
     this.proregservice.sendRequestQuotes(data).subscribe(
       (response : any) => {
 
         console.log(response);
-        this.request_quotes_model = false;
+        
+        if(response.statusCode == 100) {
+          alert(response.message)
+          this.request_quotes_model = false;
+        }
+
+        
       }
     );
-    console.log("end request");
+    
   }
 }
