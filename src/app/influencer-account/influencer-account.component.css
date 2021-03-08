@@ -40,7 +40,7 @@
     box-sizing: border-box;
     border-radius: 7px;
     margin: 0 auto;
-    padding: 54px;
+    /* padding: 54px; */
     border-radius: 7px;
     margin-left: 12px;
     margin-bottom: 35px;
@@ -279,4 +279,16 @@ p.discription {
 video {
     margin-top: 50px;
     width: 100%;
+}
+
+.check_box_right {
+    float: left;
+}
+.button-center {
+    text-align: center;
+}
+.checkout {
+    background-color: #FFF953;
+    color: #000000;
+    border: none;
 }

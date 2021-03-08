@@ -150,6 +150,7 @@ router.post('/', function(req, res) {
     let password = req.body.password;
     let phone = req.body.phone;
     let description = req.body.description;
+    let total_amount = req.body.total_amount;
     let stripe_email = req.body.stripe_email;
     let stripe_username = req.body.stripe_username;
     let card_number = req.body.stripe_cardnumber;
@@ -190,14 +191,14 @@ router.post('/', function(req, res) {
         
         
           return stripe.charges.create({ 
-              amount: 25000,     // Charing Rs 25 
+              amount: total_amount * 100,     // Charing Rs 25 
               description: 'Web Development Product', 
               currency: 'INR', 
               customer: customer.id 
           }); 
       }) 
       .then((charge) => { 
-          res.send({code:100,message:"payment has been successfully completed."});  // If no error occurs 
+          res.send({code:100,message: "$"+total_amount+" payment has been successfully completed."});  // If no error occurs 
       }) 
       .catch((err) => {
         res.send({code:200,message:err})

@@ -27,8 +27,19 @@
             <img src="/assets/images/tiktok icon 2.png">
         </div>
         <div class="influencer_tiktok">
-            <p class="singer">{{media_price.tiktok.post_price}}$/ Post</p>
-            <p class="singer">{{media_price.tiktok.story_price}}$/ Story</p>
+            <p class="singer">
+                <input type="checkbox" [value]="tiktok_post_price_check_box" (change)="this.tiktok_post_price_check_box = !this.tiktok_post_price_check_box;">    
+                {{media_price.tiktok.post_price}}$/ Post
+            </p>
+            <p class="singer" >
+                <input type="checkbox" [value]="tiktok_story_price_check_box" (change)="this.tiktok_story_price_check_box = !this.tiktok_story_price_check_box;">
+                {{media_price.tiktok.story_price}}$/ Story
+            </p>
+
+            <p class="button-center">
+
+                <button class="btn btn-primary btn-lg checkout" (click)="checkOut('tiktok')">Buy</button>
+            </p>
         </div> 
     </div>
     <div class="box_2 border-size" *ngIf="facebook_price_div">
@@ -37,8 +48,27 @@
             <img src="/assets/images/fb icon 2.png">
         </div>
         <div class="influencer_tiktok">
-            <p class="singer">{{media_price.facebook.post_price}}$/ Post</p>
-            <p class="singer">{{media_price.facebook.story_price}}$/ Story</p>
+                
+            <p class="singer">
+                <input type="checkbox" [value]="facebook_post_price_check_box" (change)="this.facebook_post_price_check_box = !this.facebook_post_price_check_box;">
+                {{media_price.facebook.post_price}}$/ Post
+            </p>
+            <p class="singer">
+                <input type="checkbox" [value]="facebook_friend_price_check_box" (change)="this.facebook_friend_price_check_box = !this.facebook_friend_price_check_box;">
+                {{media_price.facebook.friend_price}}$/ Friend
+            </p>
+            <p class="singer">
+                <input type="checkbox" [value]="facebook_comment_price_check_box" (change)="this.facebook_comment_price_check_box = !this.facebook_comment_price_check_box;">
+                {{media_price.facebook.comment_price}}$/ Comment
+            </p>
+            <p class="singer">
+                <input type="checkbox" [value]="facebook_like_price_check_box" (change)="this.facebook_like_price_check_box = !this.facebook_like_price_check_box;">
+                {{media_price.facebook.like_price}}$/ Like
+            </p>
+            <p class="button-center">
+
+                <button class="btn btn-primary btn-lg checkout" (click)="checkOut('facebook')">Buy</button>
+            </p>
         </div> 
     </div>
     <div class="box_2 border-size" *ngIf="instagram_price_div">
@@ -76,7 +106,7 @@
                     </span>
                 </ng-template>
                 <div class="outer_most">
-                    <div class="section_1" *ngFor="let tik_tok_info of media_post.tiktok ; let i = index ">
+                    <div class="section_1" *ngFor="let tik_tok_info of media_post ; let i = index ">
                         
                         <div class="image_start" *ngIf="tik_tok_info.upload_type == 'image'">
                             <img [src]="tik_tok_info.image">
@@ -100,12 +130,12 @@
                         </div>
                         <div class="click_add">
                             <div class="Buy"><button type="button" [routerLink]="['/check-out']" class="edit-profile">Buy</button></div>
-                            <div class="Quote"><button type="submit" class="edit-profile" (click)="openRequestModel(tik_tok_info.id,tik_tok_info.influencer_id,'tiktok');">   Request Quote</button></div>
+                            <div class="Quote"><button type="submit" class="edit-profile" (click)="openRequestModel(tik_tok_info.id,tik_tok_info.influencer_id);">   Request Quote</button></div>
                         
                         </div>
                     </div>
                     
-                    <div *ngIf="media_post.tiktok.length == 0" style="text-align: center;">
+                    <div *ngIf="media_post.length == 0" style="text-align: center;">
                         <h1>No post found</h1>
                     </div> 
                     
@@ -125,7 +155,7 @@
                 </ng-template>
                 <div class="outer_most">
                 
-                    <div class="section_1" *ngFor="let Instagram of media_post.instagram; let i = index;">
+                    <div class="section_1" *ngFor="let Instagram of media_post; let i = index;">
 
                         <div class="image_start" *ngIf="Instagram.upload_type == 'image'">
                             <img [src]="Instagram.image">
@@ -149,11 +179,11 @@
                         </div>
                         <div class="click_add">
                             <div class="Buy" ><button type="button" [routerLink]="['/check-out']"  class="edit-profile">Buy</button></div>
-                            <div class="Quote"><button type="submit" class="edit-profile" (click)="openRequestModel(Instagram.id,Instagram.influencer_id,'instagram');">   Request Quote</button></div>
+                            <div class="Quote"><button type="submit" class="edit-profile" (click)="openRequestModel(Instagram.id,Instagram.influencer_id);">   Request Quote</button></div>
                         
                         </div>
                     </div>
-                    <div *ngIf="media_post.instagram.length == 0" style="text-align: center;">
+                    <div *ngIf="media_post.length == 0" style="text-align: center;">
                         <h1>No post found</h1>
                     </div> 
                 </div>
@@ -172,7 +202,7 @@
                 </ng-template>
                 <div class="outer_most">
                 
-                        <div class="section_1" *ngFor="let Facebook of media_post.facebook; let i = index;">
+                        <div class="section_1" *ngFor="let Facebook of media_post; let i = index;">
 
                             <div class="image_start" *ngIf="Facebook.upload_type == 'image'">
                                 <img [src]="Facebook.image">
@@ -196,14 +226,14 @@
                             </div>
                             <div class="click_add">
                                 <div class="Buy"><button type="button" [routerLink]="['/check-out']" class="edit-profile" >Buy</button></div>
-                                <div class="Quote"><button type="submit" class="edit-profile" (click)="openRequestModel(Facebook.id,Facebook.influencer_id,'facebook');">   Request Quote</button></div>
+                                <div class="Quote"><button type="submit" class="edit-profile" (click)="openRequestModel(Facebook.id,Facebook.influencer_id);">   Request Quote</button></div>
                             
                             </div>
                         </div>
-                        <div *ngIf="media_post.facebook.length == 0" style="text-align: center;">
+                        <div *ngIf="media_post.length == 0" style="text-align: center;">
                             <h1>No post found</h1>
                         </div> 
-                    </div>
+                </div>
                 </tab>
             
             <tab class="twitter">
@@ -219,7 +249,7 @@
                     </ng-template>
                 <div class="outer_most">
                     
-                    <div class="section_1" *ngFor="let Twitter of media_post.twitter; let i = index;">
+                    <div class="section_1" *ngFor="let Twitter of media_post; let i = index;">
                         
 
                         <div class="image_start" *ngIf="Twitter.upload_type == 'image'">
@@ -244,11 +274,11 @@
                         </div>
                         <div class="click_add">
                             <div class="Buy"><button type="button" [routerLink]="['/check-out']" class="edit-profile" >Buy</button></div>
-                            <div class="Quote"><button type="submit" class="edit-profile" (click)="openRequestModel(Twitter.id,Twitter.influencer_id,'twitter');">   Request Quote</button></div>
+                            <div class="Quote"><button type="submit" class="edit-profile" (click)="openRequestModel(Twitter.id,Twitter.influencer_id);">   Request Quote</button></div>
                         
                         </div>
                     </div>
-                    <div *ngIf="media_post.twitter.length == 0" style="text-align: center;">
+                    <div *ngIf="media_post.length == 0" style="text-align: center;">
                         <h1>No post found</h1>
                     </div> 
                 </div>

@@ -82,10 +82,13 @@ export class MyAccountComponent implements OnInit {
   }
 
   myForm = new FormGroup({
-    file        : new FormControl('', [Validators.required]),
+    
     media_name  : new FormControl(""),
     type_post   : new FormControl(""),
-    upload_type : new FormControl(this.type_of_upload[0]),
+    file              : new FormControl('', [Validators.required]),
+    post_price        : new FormControl(""),
+    post_description  : new FormControl(""),
+    upload_type       : new FormControl(this.type_of_upload[0]),
   });
 
   profile_edit = new FormGroup({
@@ -160,8 +163,8 @@ export class MyAccountComponent implements OnInit {
     this.MyAccountService.singleInfluencer(this.loginService.user_id)
       .subscribe(
         (response:any) =>{
-          //console.log(response); 
-          
+          console.log(response); 
+               
           this.data           = response['data'];
           
           this.media_price    = response.mydata.price_data;
@@ -315,26 +318,29 @@ export class MyAccountComponent implements OnInit {
 
   uploadPost(){
     
-   
     
-    if(this.image_value && this.myForm.value.media_name && this.myForm.value.type_post){
+    
+    if(this.image_value && this.myForm.value.post_price && this.myForm.value.post_description){
 
+      console.log('hh');
       
       const formData = new FormData();
+      // formData.append('media_type', this.myForm.value.media_name);
+      // formData.append('post_type', this.myForm.value.type_post);
       formData.append('uploadedImage', this.image_value);
       formData.append('user_id', this.loginService.user_id);
-      formData.append('media_type', this.myForm.value.media_name);
-      formData.append('post_type', this.myForm.value.type_post);
+      formData.append('price', this.myForm.value.post_price);
+      formData.append('description', this.myForm.value.post_description);
       formData.append('upload_type', this.myForm.value.upload_type);
       
       this.MyAccountService.uploadPost(formData).subscribe(
         (response:any) =>{
-          //console.log(response);
+          console.log(response);
           
           this.singleInfluencer();
           this.myForm.reset();
-          this.myForm.patchValue({media_name : ""});
-          this.myForm.patchValue({type_post : ""});
+          this.myForm.patchValue({post_description : ""});
+          this.myForm.patchValue({post_price : ""});
           this.filename = "";
           this.image_value = "";
         }

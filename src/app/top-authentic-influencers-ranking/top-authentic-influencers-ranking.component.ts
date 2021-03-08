@@ -47,13 +47,8 @@ export class TopAuthenticInfluencersRankingComponent implements OnInit {
       this.InfluencersRankingService.getdata().subscribe(
            (response:any) =>{
            
-         //  this.data1 = response['data']
-        
         console.log(response)
-         this.data = response['data'];
-
-         console.clear();
-         console.log(JSON.stringify(response));
+        this.data = response['data'];
         
          })
     }

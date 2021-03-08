@@ -303,9 +303,9 @@ p.discription {
     margin-right: 0;
 }
 
-.box_3.border-size {
+.box_31.border-size {
     position: relative;
-    background: url("/assets/images/Group 58.png");
+    /* background: url("/assets/images/Group 58.png"); */
     background-repeat: no-repeat;
     background-position: center;
 
@@ -340,7 +340,7 @@ p.filepath {
 
 
 button.upload {
-    position: absolute;
+    /* position: absolute; */
     left: 0;
     background: #FFF953;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
@@ -393,4 +393,21 @@ p.filepath.uploaded {
 video {
     margin-top: 50px;
     width: 100%;
+}
+
+.space {
+    margin-top: 20px;
+}
+
+.upload_image {
+
+    position: relative;
+    background: url("/assets/images/Group 58.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 300px; width: 100%; 
+}
+
+.upload_filename {
+    text-align: center;
 }

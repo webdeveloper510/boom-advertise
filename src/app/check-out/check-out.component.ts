@@ -14,7 +14,21 @@ export class CheckOutComponent implements OnInit {
   paypal_image  : string  = "/assets/images/Paypal-icon.png";
   credit_card   : string  = "/assets/images/credit-card.png";
   month_year    : any     = '';
-  constructor(private MyAccountService:MyAccountService,) { }
+  checkout          : any     = ''; 
+  constructor(private MyAccountService:MyAccountService, private router : Router) {
+
+    let buy_media = localStorage.getItem('buy_media');
+
+    if(buy_media){
+
+      this.checkout = JSON.parse(buy_media);
+      console.log(this.checkout)
+    } else {
+
+      this.router.navigate(['/influencers']);
+    }
+
+  }
 
   paymentForm = new FormGroup({
     name              : new FormControl('', [Validators.required]),
@@ -55,7 +69,8 @@ export class CheckOutComponent implements OnInit {
   payment(){
 
     let data = this.paymentForm.value;
-
+    data.total_amount = parseInt(this.checkout.total_amount);
+    
     this.MyAccountService.payment(data).subscribe(
       (response:any) =>{
         console.log(response);

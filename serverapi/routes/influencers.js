@@ -48,7 +48,7 @@ var upload = multer({
 
 router.post('/register', async function(req,res) {
 
-      console.log(req.body)
+      
       var influencerCreate =  new influencer.influencers(req.body.influencer_signup);
       var influencerData =  new influencers_data.influencers_data(req.body.influencer_signup);
 
@@ -200,15 +200,10 @@ router.post('/register', async function(req,res) {
                                 },
                                 profile_data  :"",
                                 followers   : 0,
-                                posts         :{
-                                                tiktok    :  [],
-                                                instagram :  [],
-                                                facebook  :  [],
-                                                twitter   :  [],
-                                },
+                                posts         :[],
                               };
             
-          
+            
 
             if(influencer_data[0]){
               
@@ -256,21 +251,28 @@ router.post('/register', async function(req,res) {
                 
                 if(posts){
                   
+                
                   for(var i = 0 ; i < posts.length;i++){
 
                     var post_value = { 
-                                        id : posts[i]._id ,
+                                        id            : posts[i]._id ,
                                         influencer_id : posts[i].influencerid ,
-                                        image : "http://"+req.headers.host+"/"+posts[i].post_name,
-                                        upload_type : posts[i].upload_type ? posts[i].upload_type : 'image',
-                                        text_name:"@lorengray "+posts[i].media_type+i,
-                                        description:posts[i].media_type+" human machine recognition page",
-                                        likes_count:"50.8K",
-                                        comments_count:"20.8K"
+                                        image         : "http://"+req.headers.host+"/"+posts[i].post_name,
+                                        upload_type   : posts[i].upload_type ? posts[i].upload_type : 'image',
+                                        //text_name     : "@lorengray "+posts[i].media_type+i,
+                                        description   : posts[i].description,
+                                        price         : posts[i].price,
+                                        likes_count   : "50.8K",
+                                        comments_count: "20.8K"
                                       };
     
-                    return_data.posts[posts[i].media_type].push(post_value); 
+                    return_data.posts[i] = post_value; 
+                    
                   }
+
+                  //return_data.posts=posts;
+                  
+
                   res.json({status:"success",statusCode:200,data:influencer_data,mydata:return_data});
                 } else {
                   res.json({status:"success",statusCode:200,data:influencer_data,mydata:return_data});
@@ -378,9 +380,12 @@ router.post('/register', async function(req,res) {
         
         post_create.post_name     = file.filename;
         post_create.influencerid  = user_data.user_id;
-        post_create.media_type    = user_data.media_type;
-        post_create.post_type     = user_data.post_type;
+        // post_create.media_type    = user_data.media_type;
+        // post_create.post_type     = user_data.post_type;
+        post_create.price         = user_data.price;
+        post_create.description   = user_data.description;
         post_create.upload_type   = user_data.upload_type;
+        
         
         post_create.save(function(err ,data){
 
