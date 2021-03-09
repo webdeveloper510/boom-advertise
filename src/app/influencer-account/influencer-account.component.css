@@ -46,6 +46,33 @@
     margin-bottom: 35px;
     float: right;
 }
+
+.instagram_border {
+    width: 46%;
+    border: 1px solid #787878;
+    box-sizing: border-box;
+    border-radius: 7px;
+    margin: 0 auto;
+    /* padding: 54px; */
+    border-radius: 7px;
+    margin-left: 12px;
+    /* margin-bottom: 35px; */
+    float: right;
+}
+
+.box_2.twitter_border_size {
+
+    width: 46%;
+    border: 1px solid #787878;
+    box-sizing: border-box;
+    border-radius: 7px;
+    margin: 0 auto;
+    border-radius: 7px;
+    margin-left: 12px;
+    /* margin-bottom: 35px; */
+    float: right;
+}
+
 .image_circle {
     width: 175px;
     border-radius: 50%;
@@ -184,7 +211,7 @@ h2.price {
     margin: 0 auto;
 }
 .influencer_tiktok {
-    margin-top: 65px;
+    margin-top: 20px;
 }
 .nav-item:nth-child(1)::before{
     content: url("/assets/images/tiktok icon 1.png");
@@ -291,4 +318,14 @@ video {
     background-color: #FFF953;
     color: #000000;
     border: none;
+}
+.checkout.description {
+    margin-right: 10px;
+}
+
+.tabs_set {
+    margin-top: 150px;
+}
+p.textarea {
+    margin-left: 15% !important;
 }

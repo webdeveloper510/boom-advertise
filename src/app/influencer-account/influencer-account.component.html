@@ -35,10 +35,15 @@
                 <input type="checkbox" [value]="tiktok_story_price_check_box" (change)="this.tiktok_story_price_check_box = !this.tiktok_story_price_check_box;">
                 {{media_price.tiktok.story_price}}$/ Story
             </p>
+            <p class="textarea">
+                <b>Description</b>
+                <br>
+                <textarea id="tiktok_decsription" #tiktok_decsription  placeholder="Enter your description..."  rows="5" cols="30"   style="width: 80% !important;"></textarea> 
+            </p>
 
             <p class="button-center">
-
-                <button class="btn btn-primary btn-lg checkout" (click)="checkOut('tiktok')">Buy</button>
+                <!-- <button class="btn btn-primary  checkout description" >Add description</button>  -->
+                <button class="btn btn-primary btn-lg checkout" (click)="checkOut('tiktok',tiktok_decsription.value)">Buy</button>
             </p>
         </div> 
     </div>
@@ -65,30 +70,90 @@
                 <input type="checkbox" [value]="facebook_like_price_check_box" (change)="this.facebook_like_price_check_box = !this.facebook_like_price_check_box;">
                 {{media_price.facebook.like_price}}$/ Like
             </p>
+            <p class="textarea">
+                <b>Description</b>
+                <br>
+                <textarea id="facebook_decsription" #facebook_decsription  placeholder="Enter your description..."  rows="5" cols="30"   style="width: 80% !important;"></textarea> 
+            </p>
             <p class="button-center">
 
-                <button class="btn btn-primary btn-lg checkout" (click)="checkOut('facebook')">Buy</button>
+                <button class="btn btn-primary btn-lg checkout" (click)="checkOut('facebook',facebook_decsription.value)">Buy</button>
             </p>
         </div> 
     </div>
-    <div class="box_2 border-size" *ngIf="instagram_price_div">
+    <div class="box_2 instagram_border" *ngIf="instagram_price_div">
         <h2 class="price">Price</h2>
         <div class="image_tiktok">
             <img src="/assets/images/insta iconn 2.png">
         </div>
         <div class="influencer_tiktok">
-            <p class="singer">{{media_price.instagram.post_price}}$/ Post</p>
-            <p class="singer">{{media_price.instagram.story_price}}$/ Story</p>
+            <p class="singer">
+                <input type="checkbox" [value]="instagram_post_price_check_box" (change)="this.instagram_post_price_check_box = !this.instagram_post_price_check_box;">
+                {{media_price.instagram.post_price}}$/ Post
+            </p>
+            <p class="singer">
+                <input type="checkbox" [value]="instagram_story_price_check_box" (change)="this.instagram_story_price_check_box = !this.instagram_story_price_check_box;">
+                {{media_price.instagram.story_price}}$/ Story
+            </p>
+            <p class="singer">
+                <input type="checkbox" [value]="instagram_comment_price_check_box" (change)="this.instagram_comment_price_check_box = !this.instagram_comment_price_check_box;">
+                {{media_price.instagram.comment_price}}$/ Comment
+            </p>
+            <p class="singer">
+                <input type="checkbox" [value]="instagram_like_price_check_box" (change)="this.instagram_like_price_check_box = !this.instagram_like_price_check_box;">
+                {{media_price.instagram.like_price}}$/ Like
+            </p>
+            <p class="singer">
+                <input type="checkbox" [value]="instagram_follow_price_check_box" (change)="this.instagram_follow_price_check_box = !this.instagram_follow_price_check_box;">
+                {{media_price.instagram.follow_price}}$/ Follow
+            </p>
+            <p class="textarea">
+                <b>Description</b>
+                <br>
+                <textarea id="instagram_decsription" #instagram_decsription  placeholder="Enter your description..."  rows="5" cols="30"   style="width: 80% !important;"></textarea> 
+            </p>
+            <p class="button-center">
+
+                <button class="btn btn-primary btn-lg checkout" (click)="checkOut('instagram',instagram_decsription.value)">Buy</button>
+            </p>
         </div> 
     </div>
-    <div class="box_2 border-size" *ngIf="twitter_price_div">
+    <div class="box_2  twitter_border_size" *ngIf="twitter_price_div">
         <h2 class="price">Price</h2>
         <div class="image_tiktok">
             <img src="/assets/images/twitter 2.png">
         </div>
         <div class="influencer_tiktok">
-            <p class="singer">{{media_price.twitter.post_price}}$/ Post</p>
-            <p class="singer">{{media_price.twitter.story_price}}$/ Story</p>
+            <p class="singer">
+                <input type="checkbox" [value]="twitter_tweet_price_check_box" (change)="this.twitter_tweet_price_check_box = !this.twitter_tweet_price_check_box;">
+                {{media_price.twitter.tweet_price}}$/ Tweet
+            </p>
+            <p class="singer">
+                <input type="checkbox" [value]="twitter_retweet_price_check_box" (change)="this.twitter_retweet_price_check_box = !this.twitter_retweet_price_check_box;">
+                {{media_price.twitter.retweet_price}}$/ Retweet
+            </p>
+            <p class="singer">
+                <input type="checkbox" [value]="twitter_comment_price_check_box" (change)="this.twitter_comment_price_check_box = !this.twitter_comment_price_check_box;">
+                {{media_price.twitter.comment_price}}$/ Comment
+            </p>
+            <p class="singer">
+                <input type="checkbox" [value]="twitter_like_price_check_box" (change)="this.twitter_like_price_check_box = !this.twitter_like_price_check_box;">
+                {{media_price.twitter.like_price}}$/ Like
+            </p>
+            <p class="singer">
+                <input type="checkbox" [value]="twitter_follow_price_check_box" (change)="this.twitter_follow_price_check_box = !this.twitter_follow_price_check_box;">
+                {{media_price.twitter.follow_price}}$/ Follow
+            </p>
+            <p class="textarea">
+                <b>Description</b>
+                <br>
+                <textarea id="twitter_decsription" #twitter_decsription  placeholder="Enter your description..."  rows="5" cols="30"   style="width: 80% !important;"></textarea> 
+            </p>
+            <p class="button-center">
+
+                <button class="btn btn-primary btn-lg checkout" (click)="checkOut('twitter',twitter_decsription.value)">Buy</button>
+            </p>
+            
         </div> 
     </div>
 
@@ -301,7 +366,7 @@
           <div class="promoter_signup">
             
             <form [formGroup]="request_quotes" (ngSubmit)="sendRequestQuotes()"> 
-                <input type="hidden" id="media_type" formControlName="media_type" >
+                <!-- <input type="hidden" id="media_type" formControlName="media_type" > -->
                 <input type="hidden" id="post_id" formControlName="post_id" >
                 <input type="hidden" id="influencerid" formControlName="influencerid" >
                 <label for="description" class="description">Your Description Here...</label>

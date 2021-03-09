@@ -2,6 +2,7 @@ import { Component, OnInit,ViewChild } from '@angular/core';
 import { FormGroup, FormControl ,FormBuilder, Validators } from '@angular/forms';
 import { MyAccountService } from '../services/my-account.service';
 import {HttpClient} from '@angular/common/http';
+import { Location } from '@angular/common'
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-check-out',
@@ -14,8 +15,11 @@ export class CheckOutComponent implements OnInit {
   paypal_image  : string  = "/assets/images/Paypal-icon.png";
   credit_card   : string  = "/assets/images/credit-card.png";
   month_year    : any     = '';
-  checkout          : any     = ''; 
-  constructor(private MyAccountService:MyAccountService, private router : Router) {
+  checkout      : any     = ''; 
+  previousUrl   : string  = '';
+  constructor(private MyAccountService:MyAccountService, private router : Router,private location: Location) {
+
+    
 
     let buy_media = localStorage.getItem('buy_media');
 
@@ -30,6 +34,7 @@ export class CheckOutComponent implements OnInit {
 
   }
 
+  
   paymentForm = new FormGroup({
     name              : new FormControl('', [Validators.required]),
     email             : new FormControl("",[Validators.required]),
@@ -68,17 +73,23 @@ export class CheckOutComponent implements OnInit {
 
   payment(){
 
-    let data = this.paymentForm.value;
-    data.total_amount = parseInt(this.checkout.total_amount);
+    let data              = this.paymentForm.value;
+    data.total_amount     = parseInt(this.checkout.total_amount);
+    data.influencer_email = this.checkout.email;
+    data.user_description      = this.checkout.description;
     
     this.MyAccountService.payment(data).subscribe(
       (response:any) =>{
         console.log(response);
         if(response?.code == 100){
           alert(response.message);
+          localStorage.removeItem('buy_media');
+          this.location.back();
+        }else if(response?.code == 201){
+          alert(response.message);
+
         }else {
           alert(response.message.raw.message);
-
         }
       }
     )
