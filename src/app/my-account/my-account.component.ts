@@ -18,7 +18,7 @@ export class MyAccountComponent implements OnInit {
   login_form1 : boolean   = false;
   filename    : string         = "";
   image_value : any        = "";
-  data        : any                = [];
+  data        : any        = {};
 
   post_edit_model     : boolean  = false;
   profile_edit_model  : boolean  = false;
@@ -41,29 +41,30 @@ export class MyAccountComponent implements OnInit {
                         twitter : { tweet_price : 0, retweet_price : 0 , comment_price : 0 , like_price : 0 ,follow_price : 0},
                       };
 
-  media_post : any =  {
+  media_post : any = [];
+  // media_post : any =  {
     
-                        tiktok :[
-                                    {id:1,image :"http://localhost:8082/uploadedImage-1611207278017.jpg",text_name:"@lorengray tiktok1",description:"Tik Tok human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"},
-                                    {id:2,image :"/assets/images/Group 46.png",text_name:"@lorengray tiktok2",description:"Tik Tok human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"},
-                                    {id:3,image :"/assets/images/Group 45.png",text_name:"@lorengray tiktok3",description:"Tik Tok human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"}
-                                  ],
-                        instagram :[
-                                    {id:4,image :"/assets/images/Group 45.png",text_name:"@lorengray instagram1",description:"Instagram human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"},
-                                    {id:5,image :"/assets/images/Group 45.png",text_name:"@lorengray instagram2",description:"Instagram human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"},
-                                    {id:6,image :"/assets/images/Group 46.png",text_name:"@lorengray instagram3",description:"Instagram human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"}
-                                  ],
-                        facebook :[
-                                    {id:7,image :"/assets/images/Group 46.png",text_name:"@lorengray facebook1",description:"Facebook human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"},
-                                    {id:8,image :"/assets/images/Group 45.png",text_name:"@lorengray facebook2",description:"Facebook human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"},
-                                    {id:9,image :"/assets/images/Group 45.png",text_name:"@lorengray facebook3",description:"Facebook human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"}
-                                  ],
-                        twitter :[
-                                    {id:10,image :"/assets/images/Group 46.png",text_name:"@lorengray twitter1",description:"Twitter human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"},
-                                    {id:11,image :"/assets/images/Group 46.png",text_name:"@lorengray twitter2",description:"Twitter human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"},
-                                    {id:12,image :"/assets/images/Group 45.png",text_name:"@lorengray twitter3",description:"Twitter human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"}
-                                  ],
-                      };
+  //                       tiktok :[
+  //                                   {id:1,image :"http://localhost:8082/uploadedImage-1611207278017.jpg",text_name:"@lorengray tiktok1",description:"Tik Tok human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"},
+  //                                   {id:2,image :"/assets/images/Group 46.png",text_name:"@lorengray tiktok2",description:"Tik Tok human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"},
+  //                                   {id:3,image :"/assets/images/Group 45.png",text_name:"@lorengray tiktok3",description:"Tik Tok human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"}
+  //                                 ],
+  //                       instagram :[
+  //                                   {id:4,image :"/assets/images/Group 45.png",text_name:"@lorengray instagram1",description:"Instagram human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"},
+  //                                   {id:5,image :"/assets/images/Group 45.png",text_name:"@lorengray instagram2",description:"Instagram human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"},
+  //                                   {id:6,image :"/assets/images/Group 46.png",text_name:"@lorengray instagram3",description:"Instagram human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"}
+  //                                 ],
+  //                       facebook :[
+  //                                   {id:7,image :"/assets/images/Group 46.png",text_name:"@lorengray facebook1",description:"Facebook human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"},
+  //                                   {id:8,image :"/assets/images/Group 45.png",text_name:"@lorengray facebook2",description:"Facebook human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"},
+  //                                   {id:9,image :"/assets/images/Group 45.png",text_name:"@lorengray facebook3",description:"Facebook human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"}
+  //                                 ],
+  //                       twitter :[
+  //                                   {id:10,image :"/assets/images/Group 46.png",text_name:"@lorengray twitter1",description:"Twitter human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"},
+  //                                   {id:11,image :"/assets/images/Group 46.png",text_name:"@lorengray twitter2",description:"Twitter human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"},
+  //                                   {id:12,image :"/assets/images/Group 45.png",text_name:"@lorengray twitter3",description:"Twitter human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"}
+  //                                 ],
+                     // };
 
   constructor(
               private MyAccountService:MyAccountService,
@@ -159,7 +160,8 @@ export class MyAccountComponent implements OnInit {
   
 
   singleInfluencer(){
-   
+    
+    
     this.MyAccountService.singleInfluencer(this.loginService.user_id)
       .subscribe(
         (response:any) =>{
@@ -339,7 +341,7 @@ export class MyAccountComponent implements OnInit {
           
           this.singleInfluencer();
           this.myForm.reset();
-          this.myForm.patchValue({post_description : ""});
+          this.myForm.patchValue({upload_type : this.type_of_upload[0]});
           this.myForm.patchValue({post_price : ""});
           this.filename = "";
           this.image_value = "";

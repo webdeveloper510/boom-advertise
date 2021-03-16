@@ -169,7 +169,7 @@ export class HomeComponent implements OnInit {
           this.influnncer_error_div = false;
           this.influencer.reset();
           this.login_service.is_logged_in = true;
-          
+          this.login_service.user_id  = response["data"]['_id'];
 
 
           setTimeout (() => {
@@ -192,7 +192,7 @@ export class HomeComponent implements OnInit {
              
             }
 
-            this.router.navigate(['/']);
+            this.router.navigate(['/my-account']);
           }, 3000)
           
         }else{

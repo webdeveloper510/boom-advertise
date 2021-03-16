@@ -339,3 +339,8 @@ a.paginate_button.current {
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+div.content {
+    margin-left: 200px;
+    padding: 1px 16px;
+    height: 1000px;
+  }

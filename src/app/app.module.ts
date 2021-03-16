@@ -33,13 +33,12 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { ErrorComponent } from './error/error.component';
 import { TestpayComponent } from './testpay/testpay.component';
 import { TestpaycustomComponent } from './testpaycustom/testpaycustom.component';
-//import { MatButtonModule} from '@angular/material/button';
-//import {DataTablesModule} from 'angular-datatables';
-// import {
-  
-//   MatTableModule,
-//   MAT_DIALOG_DEFAULT_OPTIONS,
-// } from '@angular/material';
+import { SidebarComponent } from './admin/sidebar/sidebar.component';
+import { AdminFooterComponent } from './admin/admin-footer/admin-footer.component';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { AllInfluencersComponent } from './admin/all-influencers/all-influencers.component';
+import { AllCustomersComponent } from './admin/all-customers/all-customers.component';
+import { DataTablesModule } from 'angular-datatables';
 
 
 @NgModule({ 
@@ -63,9 +62,15 @@ import { TestpaycustomComponent } from './testpaycustom/testpaycustom.component'
     ErrorComponent,
     TestpayComponent,
     TestpaycustomComponent,
+    SidebarComponent,
+    AdminFooterComponent,
+    DashboardComponent,
+    AllInfluencersComponent,
+    AllCustomersComponent,
+    
     //FileSelectDirective
   ],
-  imports: [
+  imports: [ 
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
@@ -77,8 +82,8 @@ import { TestpaycustomComponent } from './testpaycustom/testpaycustom.component'
     BrowserAnimationsModule,
     SocialLoginModule,
     MatCardModule,
-    MatGridListModule
-   // DataTablesModule
+    MatGridListModule,
+    DataTablesModule
 
   ],
   providers: [

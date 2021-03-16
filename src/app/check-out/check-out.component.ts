@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy  } from '@angular/core';
 import { FormGroup, FormControl ,FormBuilder, Validators } from '@angular/forms';
 import { MyAccountService } from '../services/my-account.service';
 import {HttpClient} from '@angular/common/http';
@@ -34,6 +34,9 @@ export class CheckOutComponent implements OnInit {
 
   }
 
+  ngOnDestroy() {
+    localStorage.removeItem('buy_media');
+  }
   
   paymentForm = new FormGroup({
     name              : new FormControl('', [Validators.required]),
@@ -51,6 +54,9 @@ export class CheckOutComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    this.paymentForm.patchValue({
+      description : this.checkout.description,
+    });
   }
 
   monthYear(value :any){
@@ -83,8 +89,9 @@ export class CheckOutComponent implements OnInit {
         console.log(response);
         if(response?.code == 100){
           alert(response.message);
-          localStorage.removeItem('buy_media');
-          this.location.back();
+          console.log(JSON.stringify(response));
+          // localStorage.removeItem('buy_media');
+          // this.location.back();
         }else if(response?.code == 201){
           alert(response.message);
 

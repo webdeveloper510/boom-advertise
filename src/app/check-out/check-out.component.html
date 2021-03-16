@@ -1,3 +1,5 @@
+<app-header></app-header>
+
 <div class="heading">Checkout</div>
 <mat-card style="margin:2em;">
     
@@ -53,12 +55,12 @@
         <div class="row">
             <div class="col-sm-1"></div>
             <div class="col-sm-8">
-                <textarea rows="8" cols="146" formControlName="description" placeholder="Your Description Here..." style="border-radius: 5px;border-color: darkgray"></textarea>
+                <textarea rows="8" cols="146" formControlName="description" placeholder="Your Description Here..." style="border-radius: 5px;border-color: darkgray">{{paypal_image}} </textarea>
             </div>
             <div class="col-sm-3"></div>
         </div>
         <div class="pay">
-            <button type="submit" [disabled]="paymentForm.invalid" class="btn btn-primary" style="background-color: #ffc107;color: black;">Pay $250</button>
+            <button type="submit" [disabled]="paymentForm.invalid" class="btn btn-primary" style="background-color: #ffc107;color: black;">Pay ${{checkout.total_amount}} </button>
         </div>
         
     </form>
@@ -68,3 +70,5 @@
     </div>
   
 </mat-card>
+
+<app-footer></app-footer>

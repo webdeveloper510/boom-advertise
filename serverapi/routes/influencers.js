@@ -239,7 +239,8 @@ router.post('/register', async function(req,res) {
               if(profile_data){
                 
                 
-                profile_data.profile_picture =  profile_data.profile_picture ? "http://"+req.headers.host+"/"+profile_data.profile_picture : "/assets/images/man-avatar-profile.jpg";
+                //profile_data.profile_picture =  profile_data.profile_picture ? "http://"+req.headers.host+"/"+profile_data.profile_picture : "/assets/images/man-avatar-profile.jpg";
+                profile_data.profile_picture =  profile_data.profile_picture ? "http://"+req.headers.host+"/"+profile_data.profile_picture : "";
                 
               } 
               
@@ -436,5 +437,75 @@ router.post('/register', async function(req,res) {
         res.status(400).send({ error: error.message })
       });
 
+      router.get('/influencers',function(req, res, next) {
+        influencers_data.influencers_data.aggregate([
+            { "$lookup": {
+                    "from": "influencers",
+                    "localField": "influencerid",
+                    "foreignField": "_id",
+                    "as": "vals"
+                  }
+            }
+
+            ], function(err, res_data) {
+              
+              if (err)  res.json({status:"failure",statusCode:100,error:err});
+
+                for(var i = 0; i < res_data.length; i++){
+
+                  res_data[i].twitterfollowers          = res_data[i].twitterfollowers ? res_data[i].twitterfollowers : 0;
+                  res_data[i].tiktokfollowers           = res_data[i].tiktokfollowers ? res_data[i].tiktokfollowers : 0;
+                  res_data[i].facebookfollowers         = res_data[i].facebookfollowers ? res_data[i].facebookfollowers : 0;
+                  res_data[i].instagramfollowers        = res_data[i].instagramfollowers ? res_data[i].instagramfollowers : 0;
+                  
+                  
+                  res_data[i].tiktok_story_price        = res_data[i].tiktok_story_price ? res_data[i].tiktok_story_price : 0;
+                  res_data[i].tiktok_post_price         = res_data[i].tiktok_post_price ? res_data[i].tiktok_post_price : 0;
+
+                  res_data[i].twitter_tweet_price       = res_data[i].twitter_tweet_price ? res_data[i].twitter_tweet_price : 0;
+                  res_data[i].twitter_retweet_price     = res_data[i].twitter_retweet_price ? res_data[i].twitter_retweet_price : 0;
+                  res_data[i].twitter_like_price        = res_data[i].twitter_like_price ? res_data[i].twitter_like_price : 0;
+                  res_data[i].twitter_follow_price      = res_data[i].twitter_follow_price ? res_data[i].twitter_follow_price : 0;
+                  res_data[i].twitter_comment_price     = res_data[i].twitter_comment_price ? res_data[i].twitter_comment_price : 0;
+
+                  res_data[i].instagram_post_price      = res_data[i].instagram_post_price ? res_data[i].instagram_post_price : 0;
+                  res_data[i].instagram_story_price     = res_data[i].instagram_story_price ? res_data[i].instagram_story_price : 0;
+                  res_data[i].instagram_comment_price   = res_data[i].instagram_comment_price ? res_data[i].instagram_comment_price : 0;
+                  res_data[i].instagram_follow_price    = res_data[i].instagram_follow_price ? res_data[i].instagram_follow_price : 0;
+                  res_data[i].instagram_like_price      = res_data[i].instagram_like_price ? res_data[i].instagram_like_price : 0;
+                  
+                  res_data[i].facebook_post_price       = res_data[i].facebook_post_price ? res_data[i].facebook_post_price : 0;
+                  res_data[i].facebook_like_price       = res_data[i].facebook_like_price ? res_data[i].facebook_like_price : 0;
+                  res_data[i].facebook_friend_price     = res_data[i].facebook_friend_price ? res_data[i].facebook_friend_price : 0;
+                  res_data[i].facebook_comment_price    = res_data[i].facebook_comment_price ? res_data[i].facebook_comment_price : 0;
+
+                }
+
+                res.json({status:"success",statusCode:200,data:res_data});
+            })
+
+    });
+
+    router.post('/deleteInfluencers',function(req , res , next){
+
+      let influencer_id = req.body.influencer_id;
+
+      influencer_posts.influencer_posts.deleteMany({ influencerid : influencer_id },function(post_error , data){
+        if(post_error) res.json({status:"failure",statusCode:100,data:post_error});
+
+        influencers_data.influencers_data.deleteMany({influencerid:influencer_id},function(influencer_error , data){
+          if(influencer_error) res.json({status:"failure",statusCode:100,data:error});
+
+          influencer.influencers.deleteOne({_id:influencer_id},function(error , data){
+            if(error) res.json({status:"failure",statusCode:100,data:error});
+  
+  
+            res.json({statusCode: 200, status: 'success', data: 'Influencer deleted successfully.'});
+          })
+          //res.json({statusCode: 200, status: 'success', data: 'Influencer deleted successfully.'});
+        })
+        //res.json({statusCode: 200, status: 'success', data: data});
+      })
+    });
   
     module.exports = router;

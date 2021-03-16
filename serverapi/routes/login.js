@@ -13,6 +13,7 @@ var Publishable_Key = 'pk_test_51HI9qMEXA7xfj1nHVxgdLB9TapBg5XlzSdvp991XoqXlLheP
 var Secret_Key = 'sk_test_51HI9qMEXA7xfj1nHePxD4KlYqi9nUUlpjvpDmwNQhMEyQCeTMCiUGw6AFWuJ4YytCyVgr9Br1BkqohBvFJGG3skO00THMGx9Fv'
 const stripe = require('stripe')(Secret_Key);
 
+
   // Send Email Function 
 
   var sendEmail = function(to,subject,html) {
@@ -144,6 +145,27 @@ const stripe = require('stripe')(Secret_Key);
     let exp_month       = month_year[0];
     let exp_year        = month_year[1] ? month_year[1]: '';
 
+    let date_ob = new Date();
+
+
+    let date = ("0" + date_ob.getDate()).slice(-2);
+
+
+    let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+
+    let year = date_ob.getFullYear();
+
+
+    let hours = date_ob.getHours();
+
+
+    let minutes = date_ob.getMinutes();
+
+
+    let seconds = date_ob.getSeconds();
+    // prints date & time in YYYY-MM-DD HH:MM:SS format
+    let dateTime = year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds;
+
     
     if(!influencer_email){
       res.send({code:201,message: " Influencer doesn't have any email"});
@@ -184,13 +206,15 @@ const stripe = require('stripe')(Secret_Key);
           }); 
       }) 
       .then((charge) => { 
+        
+        
+        
 
         let subject = 'Buy by user from Boomadvertisement';
         
         sendEmail(influencer_email , subject,user_description);
-        
+        res.send({code:100,message: "$"+total_amount+" payment has been successfully completed."});  // If no error occurs 
 
-          res.send({code:100,message: "$"+total_amount+" payment has been successfully completed."});  // If no error occurs 
       }) 
       .catch((err) => {
         res.send({code:200,message:err})

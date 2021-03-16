@@ -1,10 +1,12 @@
+<app-header></app-header>
+
 <div class="container-fluid outer_all">
 <div class="image_bg">
 
 <div class="left_sec"><h1>Create engaging videos <br> and make an impact</h1>
     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the </p>
     <div class="button_slide">
-        <button class="btn btn_rounded"  (click)="this.promotor_login_form  = true" *ngIf="!this.login_service.is_logged_in" >I am a Promoter </button>
+        <button class="btn btn_rounded"  (click)="this.promotor_login_form  = true" *ngIf="!this.login_service.is_logged_in" >I am a Customer </button>
         <button class="btn btn_rounded"  (click)="this.influnncer_login_form  = true" *ngIf="!this.login_service.is_logged_in" >I am a Influencer </button>
     </div>
 </div>
@@ -116,13 +118,13 @@
         </ul>
     </div>
     </div>
-    <div class="w3-container">
+    <div class="w3-container" [style.display]="promotor_login_form ? 'block' : 'none'">
         <div id="id01" class="w3-modal" [style.display]="promotor_login_form ? 'block' : 'none'">
             <div class="w3-modal-content">
                 <div class="w3-container">
                     <span (click)="this.promotor_login_form  = false" class="w3-button w3-display-topright">&times;</span>
                     <div class="promoter_signup">
-                        <h2>Promoter’s SignUp</h2>
+                        <h2>Customer's SignUp</h2>
                         <p>It’s Free!</p>
                         <form [formGroup]="profileForm" (ngSubmit)="promotersignup()">
                             <div formGroupName="promoter_signup">
@@ -146,7 +148,7 @@
         </div>
     </div>
 
-    <div class="w3-container">
+    <div class="w3-container" [style.display]="influnncer_login_form ? 'block' : 'none'">
         <div id="id02" class="w3-modal" [style.display]="influnncer_login_form ? 'block' : 'none'">
             <div class="w3-modal-content">
                 <div class="w3-container">
@@ -204,7 +206,7 @@
                                 <p class="centet_text" *ngIf="influnncer_error_div" style="color: red;font-size: 25px; font-style: italic; font-weight: 600;">{{influnncer_error_message}}</p>
                                 
                                 <p class="have_account">Already have an account ? <b><u>LogIn</u></b></p>
-                                <p><button (click)="signInWithFB()">Facebook Login</button></p>
+                                <!-- <p><button (click)="signInWithFB()">Facebook Login</button></p> -->
                           </div>
                         </form>
                     </div> 
@@ -214,4 +216,4 @@
     </div>
 
     
-   
+    <app-footer></app-footer>

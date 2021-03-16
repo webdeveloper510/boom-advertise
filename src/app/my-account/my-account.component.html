@@ -1,9 +1,10 @@
+<app-header></app-header>
 
 <div class="heading_sec1"> <h1>My Account</h1></div>
 <div class="first_sec container-fluid">
     <div class="allside">
     <div *ngIf="data" class="box_1 border-size">
-        <div class="image_circle">
+        <div class="image_circle" *ngIf="data.profile_picture">
             <img [src]="data.profile_picture">
         </div>
 
@@ -11,16 +12,16 @@
         <span class="tag"> {{ data.email }} </span>
         <p class="singer">Twitter Followers: {{ data.followers?.twitterfollowers }}</p>
         <p class="singer">Facebook Followers: 0</p>
-        <div class="small_elements">
+        <!-- <div class="small_elements">
          <div class="element_1">
-            <p>44.9M</p>
+            <p>0M</p>
             <span>Reach</span>
          </div>  
          <div class="element_2">
-            <p>44.9M</p>
+            <p>0M</p>
             <span>Views</span>
          </div>  
-        </div>
+        </div> -->
         <input type="file" #profile_image style="display: none;" (change)="updateProfileImage($event)" accept="image/*">
         <button type="submit" class="edit-profile" (click)="profile_image.click()">Upload Profile Picture</button>
     </div>
@@ -358,4 +359,4 @@
 
 
 
-  
+  <app-footer></app-footer>

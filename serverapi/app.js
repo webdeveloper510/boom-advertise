@@ -19,7 +19,7 @@ var influencers = require('./routes/influencers');
 var login       = require('./routes/login');
 var sessions    = require('./routes/sessionsController');
 
-var app = express();
+var app = express(); 
 //app.use(express.static('uploads'));
 app.use(express.static(path.join(__dirname, "./uploads")));
 app.get('/', (req, res) => {
