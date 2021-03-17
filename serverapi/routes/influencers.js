@@ -1,18 +1,19 @@
 
-var express = require('express');
-var router = express.Router();
-var mongoose = require('mongoose');
-const influencer = require('../models/influencers');
-const influencers_data = require('../models/influencers_data');
-const influencer_posts = require('../models/influencers_posts');
-//const email = require('../config/email');
-//const nodemailer = require('nodemailer');
-var passwordHash = require('password-hash');
-const {ObjectId} = require('mongodb'); 
-const multer = require('multer');
-var fileExtension = require('file-extension')
-var fs = require('fs');
-const path = require('path');
+var express             = require('express');
+var router              = express.Router();
+var mongoose            = require('mongoose');
+const influencer        = require('../models/influencers');
+const influencers_data  = require('../models/influencers_data');
+const influencer_posts  = require('../models/influencers_posts');
+const checkout          = require('../models/checkout');
+
+var passwordHash        = require('password-hash');
+const {ObjectId}        = require('mongodb'); 
+const multer            = require('multer');
+var fileExtension       = require('file-extension')
+var fs                  = require('fs');
+const path              = require('path');
+
 //process.env.NODE_TLS_REJECT_UNAUTHORIZED = "1";
 
 var storage = multer.diskStorage({
@@ -282,11 +283,6 @@ router.post('/register', async function(req,res) {
               })
 
             });
-
-            
-
-            
-             
             
           });
       });
@@ -342,8 +338,6 @@ router.post('/register', async function(req,res) {
           }
         })
 
-
-        
       });
 
       router.post('/update_profile',function(req , res){
@@ -505,6 +499,20 @@ router.post('/register', async function(req,res) {
           //res.json({statusCode: 200, status: 'success', data: 'Influencer deleted successfully.'});
         })
         //res.json({statusCode: 200, status: 'success', data: data});
+      })
+    });
+
+    router.get('/getNotifications',function(req, res, next){
+      
+      let influencer_id = req.query.influencer_id;
+      
+      checkout.checkout.find({ influencerid : influencer_id }) .sort([['_id', -1]]).exec( function( error , all_notifications){
+        
+        if(error) res.json({statusCode: 200, status: 'error', data: error});
+        
+        res.json({statusCode: 100, status: 'success', data: all_notifications});
+
+
       })
     });
   

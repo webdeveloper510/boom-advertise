@@ -78,7 +78,7 @@ export class InfluencerAccountComponent implements OnInit {
   checkOut(media_type : any , description : string){
 
     let total_amount = 0;
-
+    let MEDIA_OPTION :any = [];
 
     
     if(media_type == 'tiktok'){
@@ -96,6 +96,14 @@ export class InfluencerAccountComponent implements OnInit {
         let story_price = this.tiktok_story_price_check_box ?  this.media_price[media_type].story_price : 0; 
         total_amount = parseInt(post_price) + parseInt(story_price);
 
+        if(this.tiktok_post_price_check_box){
+          MEDIA_OPTION.push('POST');
+        }
+        if(this.tiktok_story_price_check_box){
+          MEDIA_OPTION.push('STORY');
+        }
+
+
         let buy_media = {
             media_key     : 'tiktok',
             post_price    : this.tiktok_post_price_check_box,
@@ -103,13 +111,19 @@ export class InfluencerAccountComponent implements OnInit {
             description   : description,
             total_amount  : total_amount,
             influencer_id : this.id,
-            email         : this.influencer_data.profile_data?.email
+            email         : this.influencer_data.profile_data?.email,
+            media_option  : MEDIA_OPTION.toString(),
         }
 
         localStorage.setItem('buy_media' , JSON.stringify(buy_media));
         this.router.navigate(['/check-out']);
+
       }
+
+
+
     } else if(media_type == 'facebook'){
+
 
       if( this.facebook_post_price_check_box    == true || 
           this.facebook_friend_price_check_box  == true || 
@@ -124,6 +138,22 @@ export class InfluencerAccountComponent implements OnInit {
 
           total_amount = parseInt(post_price) + parseInt(friend_price)+ parseInt(comment_price)+ parseInt(like_price);
           
+          if(this.facebook_post_price_check_box){
+            MEDIA_OPTION.push('POST');
+          }
+
+          if(this.facebook_friend_price_check_box){
+            MEDIA_OPTION.push('FRIEND');
+          }
+
+          if(this.facebook_comment_price_check_box){
+            MEDIA_OPTION.push('COMMENT');
+          }
+
+          if(this.facebook_like_price_check_box){
+            MEDIA_OPTION.push('LIKE');
+          }
+
           let buy_media = {
               media_key       : 'facebook',
               post_price      : this.facebook_post_price_check_box,
@@ -133,7 +163,8 @@ export class InfluencerAccountComponent implements OnInit {
               description     : description,
               total_amount    : total_amount,
               influencer_id   : this.id,
-              email           : this.influencer_data.profile_data?.email
+              email           : this.influencer_data.profile_data?.email,
+              media_option    : MEDIA_OPTION.toString(),
           }
           
           localStorage.setItem('buy_media' , JSON.stringify(buy_media));
@@ -157,6 +188,26 @@ export class InfluencerAccountComponent implements OnInit {
 
         total_amount = parseInt(post_price) + parseInt(story_price)+ parseInt(comment_price)+ parseInt(like_price)+parseInt(follow_price);
 
+        if(this.instagram_post_price_check_box){
+          MEDIA_OPTION.push('POST');
+        }
+
+        if(this.instagram_story_price_check_box){
+          MEDIA_OPTION.push('STORY');
+        }
+
+        if(this.instagram_comment_price_check_box){
+          MEDIA_OPTION.push('COMMENT');
+        }
+        
+        if(this.instagram_like_price_check_box){
+          MEDIA_OPTION.push('LIKE');
+        }
+        
+        if(this.instagram_follow_price_check_box){
+          MEDIA_OPTION.push('FOLLOW');
+        }
+
         let buy_media = {
           media_key       : 'instagram',
           post_price      : this.instagram_post_price_check_box,
@@ -167,7 +218,8 @@ export class InfluencerAccountComponent implements OnInit {
           description     : description,
           total_amount    : total_amount,
           influencer_id   : this.id,
-          email           : this.influencer_data.profile_data?.email
+          email           : this.influencer_data.profile_data?.email,
+          media_option    : MEDIA_OPTION.toString(),
         }
       
         localStorage.setItem('buy_media' , JSON.stringify(buy_media));
@@ -192,6 +244,28 @@ export class InfluencerAccountComponent implements OnInit {
 
         total_amount = parseInt(tweet_price) + parseInt(retweet_price)+ parseInt(comment_price)+ parseInt(like_price)+parseInt(follow_price);
 
+
+        if(this.twitter_tweet_price_check_box){
+          MEDIA_OPTION.push('TWEET');
+        }
+
+        if(this.twitter_retweet_price_check_box){
+          MEDIA_OPTION.push('RETWEET');
+        }
+
+        if(this.twitter_comment_price_check_box){
+          MEDIA_OPTION.push('COMMENT');
+        }
+        
+        if(this.twitter_like_price_check_box){
+          MEDIA_OPTION.push('LIKE');
+        }
+        
+        if(this.twitter_follow_price_check_box){
+          MEDIA_OPTION.push('FOLLOW');
+        }
+
+
         let buy_media = {
           media_key       : 'twitter',
           tweet_price     : this.twitter_tweet_price_check_box,
@@ -202,7 +276,8 @@ export class InfluencerAccountComponent implements OnInit {
           description     : description,
           total_amount    : total_amount,
           influencer_id   : this.id,
-          email           : this.influencer_data.profile_data?.email
+          email           : this.influencer_data.profile_data?.email,
+          media_option    : MEDIA_OPTION.toString(),
         }
 
         localStorage.setItem('buy_media' , JSON.stringify(buy_media));

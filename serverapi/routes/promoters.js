@@ -56,8 +56,8 @@ var   passwordHash  = require('password-hash');
           var datetime = new Date();
           let pass = passwordHash.generate(req.body.promoter_signup.password)
 
-          promoterCreate.joindate = datetime
-          promoterCreate.password = pass
+          promoterCreate.joindate = datetime;
+          promoterCreate.password = pass;
           
           promoter.promoters.findOne({email:req.body.promoter_signup.email}, function(err, promoters) {
             if (err)  res.json({status:"failure",statusCode:100,msg:err});

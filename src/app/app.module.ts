@@ -39,6 +39,7 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { AllInfluencersComponent } from './admin/all-influencers/all-influencers.component';
 import { AllCustomersComponent } from './admin/all-customers/all-customers.component';
 import { DataTablesModule } from 'angular-datatables';
+import { InfluencerNotificationsComponent } from './influencer-notifications/influencer-notifications.component';
 
 
 @NgModule({ 
@@ -67,6 +68,7 @@ import { DataTablesModule } from 'angular-datatables';
     DashboardComponent,
     AllInfluencersComponent,
     AllCustomersComponent,
+    InfluencerNotificationsComponent,
     
     //FileSelectDirective
   ],

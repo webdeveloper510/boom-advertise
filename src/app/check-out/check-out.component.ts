@@ -4,6 +4,8 @@ import { MyAccountService } from '../services/my-account.service';
 import {HttpClient} from '@angular/common/http';
 import { Location } from '@angular/common'
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-check-out',
   templateUrl: './check-out.component.html',
@@ -22,7 +24,7 @@ export class CheckOutComponent implements OnInit {
     
 
     let buy_media = localStorage.getItem('buy_media');
-
+    
     if(buy_media){
 
       this.checkout = JSON.parse(buy_media);
@@ -34,9 +36,13 @@ export class CheckOutComponent implements OnInit {
 
   }
 
+  
+
   ngOnDestroy() {
     localStorage.removeItem('buy_media');
   }
+
+  
   
   paymentForm = new FormGroup({
     name              : new FormControl('', [Validators.required]),
@@ -82,25 +88,49 @@ export class CheckOutComponent implements OnInit {
     let data              = this.paymentForm.value;
     data.total_amount     = parseInt(this.checkout.total_amount);
     data.influencer_email = this.checkout.email;
-    data.user_description      = this.checkout.description;
+    data.user_description = this.checkout.description;
+    data.influencer_id    = this.checkout.influencer_id;
+    data.media_option     = this.checkout.media_option;
+    data.media_key        = this.checkout.media_key;
     
+    //console.log(this.checkout.influencer_id.media_option);return;
     this.MyAccountService.payment(data).subscribe(
       (response:any) =>{
+        
         console.log(response);
+        
         if(response?.code == 100){
-          alert(response.message);
-          console.log(JSON.stringify(response));
-          // localStorage.removeItem('buy_media');
-          // this.location.back();
-        }else if(response?.code == 201){
-          alert(response.message);
+         
+          localStorage.removeItem('buy_media');
+          this.swalAlert(response.message,'success',response?.code);
 
+        }else if(response?.code == 201){
+
+          this.swalAlert(response.message,'warning',response?.code);
         }else {
-          alert(response.message.raw.message);
+          
+          this.swalAlert(response.message.raw.message,'warning',response?.code);
+          
         }
       }
     )
       return false;
+  }
+
+  swalAlert(title:any , message_type : any, code : any){
+    Swal.fire({
+      title: title,
+      //text: 'You will not be able to recover this file!',
+      icon: message_type,
+      showCancelButton: false,
+      confirmButtonText: 'OK',
+      //cancelButtonText: 'No, keep it'
+    }).then((result) => {
+      
+      if(code == 100){
+        this.location.back();
+      }
+    })
   }
  
 }

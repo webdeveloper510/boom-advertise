@@ -56,6 +56,11 @@ export class MyAccountService {
     }
   }
 
+  getNotifications(influencer_id:any){
+    
+    return this.http.get(this.apiUrl+"/influencers/getNotifications?influencer_id="+influencer_id);
+  }
+
   
 
 }

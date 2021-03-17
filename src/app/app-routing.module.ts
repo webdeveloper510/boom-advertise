@@ -12,6 +12,7 @@ import { TestpaycustomComponent } from './testpaycustom/testpaycustom.component'
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { AllInfluencersComponent } from './admin/all-influencers/all-influencers.component';
 import { AllCustomersComponent } from './admin/all-customers/all-customers.component';
+import { InfluencerNotificationsComponent } from './influencer-notifications/influencer-notifications.component';
 
 const routes: Routes = [
  { path: '', pathMatch: 'full' ,  component: HomeComponent},
@@ -39,6 +40,9 @@ const routes: Routes = [
     },
     {
       path: 'pay', component: TestpaycustomComponent
+    },
+    {
+      path: 'notifications', component: InfluencerNotificationsComponent
     },
     {
       path: 'admin', component: DashboardComponent

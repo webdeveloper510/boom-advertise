@@ -4,6 +4,7 @@ var router          = express.Router();
 var   mongoose      = require('mongoose');
 const promoters     = require('../models/promoters');
 const influencers   = require('../models/influencers');
+const checkout      = require('../models/checkout');
 var   passwordHash  = require('password-hash');
 const email         = require('../config/email');
 const nodemailer    = require('nodemailer');
@@ -13,6 +14,8 @@ var Publishable_Key = 'pk_test_51HI9qMEXA7xfj1nHVxgdLB9TapBg5XlzSdvp991XoqXlLheP
 var Secret_Key = 'sk_test_51HI9qMEXA7xfj1nHePxD4KlYqi9nUUlpjvpDmwNQhMEyQCeTMCiUGw6AFWuJ4YytCyVgr9Br1BkqohBvFJGG3skO00THMGx9Fv'
 const stripe = require('stripe')(Secret_Key);
 
+const unread  = 0;
+const read    = 1;
 
   // Send Email Function 
 
@@ -132,8 +135,10 @@ const stripe = require('stripe')(Secret_Key);
     let phone             = req.body.phone;
     let description       = req.body.description;
     let total_amount      = req.body.total_amount;
-    let user_description  = req.body.user_description;
     let influencer_email  = req.body.influencer_email.trim();
+    let influencer_id     = req.body.influencer_id;
+    let media_option      = req.body.media_option;
+    let media_type        = req.body.media_key;
 
     let stripe_email    = req.body.stripe_email;
     let stripe_username = req.body.stripe_username;
@@ -149,23 +154,15 @@ const stripe = require('stripe')(Secret_Key);
 
 
     let date = ("0" + date_ob.getDate()).slice(-2);
-
-
     let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
-
     let year = date_ob.getFullYear();
-
-
     let hours = date_ob.getHours();
-
-
     let minutes = date_ob.getMinutes();
-
-
     let seconds = date_ob.getSeconds();
     // prints date & time in YYYY-MM-DD HH:MM:SS format
     let dateTime = year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds;
 
+    
     
     if(!influencer_email){
       res.send({code:201,message: " Influencer doesn't have any email"});
@@ -181,7 +178,7 @@ const stripe = require('stripe')(Secret_Key);
         },
     })
     .then((token) => { 
-        //res.send(token)  // If no error occurs 
+        
         let token_id = token.id;
         stripe.customers.create({ 
           email: stripe_email, 
@@ -208,15 +205,33 @@ const stripe = require('stripe')(Secret_Key);
       .then((charge) => { 
         
         
+        let checkout_data =  new checkout.checkout();
+
+        checkout_data.influencerid  = influencer_id;
+        checkout_data.influencer_id  = influencer_id;
+        checkout_data.name          = name;
+        checkout_data.email         = email;
+        checkout_data.phone         = phone;
+        checkout_data.description   = description;
+        checkout_data.media_type    = media_type;
+        checkout_data.media_option  = media_option;
+        checkout_data.response      = JSON.stringify(charge);
+        checkout_data.amount        = total_amount;
+        checkout_data.status        = unread;
+        checkout_data.date          = dateTime;
+        checkout_data.created_at    = dateTime;
+
         
+        checkout_data.save(function(error , data){});
 
         let subject = 'Buy by user from Boomadvertisement';
         
-        sendEmail(influencer_email , subject,user_description);
+        sendEmail(influencer_email , subject,description);
         res.send({code:100,message: "$"+total_amount+" payment has been successfully completed."});  // If no error occurs 
 
       }) 
       .catch((err) => {
+        console.log(err);
         res.send({code:200,message:err})
             // If some error occurs 
       });

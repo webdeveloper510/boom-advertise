@@ -148,7 +148,7 @@ export class MyAccountComponent implements OnInit {
       media_type    : new FormControl(''),
     });
 
-    
+     
 
   initProfileEdit(){
 

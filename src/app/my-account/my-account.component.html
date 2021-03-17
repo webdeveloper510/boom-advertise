@@ -24,6 +24,7 @@
         </div> -->
         <input type="file" #profile_image style="display: none;" (change)="updateProfileImage($event)" accept="image/*">
         <button type="submit" class="edit-profile" (click)="profile_image.click()">Upload Profile Picture</button>
+        <button type="button" class="edit-profile"  [routerLink]="['/notifications']">Notifications</button>
     </div>
     <div class="box_2 border-size">
         <h2 class="price">Price</h2>
@@ -150,12 +151,14 @@
                     <label for="post_description" class="space">Post Description </label>
                     <textarea formControlName="post_description" id="post_description" rows="8" cols="50" placeholder="your description ..."  class="form-control" > </textarea> 
 
-                    <div class="space upload_image" (click)="upload_file.click();">
+                    <!-- <div class="space upload_image" (click)="upload_file.click();">  </div> -->
+                    <br>
 
-                    </div>
-                    
-                        <p class="upload_filename" [style.display]="login_form ? 'block' : 'none'">{{filename}}</p>
-                        <p class="uploaded" [style.display]="login_form1 ? 'block' : 'none'">Uploaded</p>
+                    <button class="btn btn-primary" (click)="upload_file.click();">Upload Post</button>
+                    <span  [style.display]="login_form ? 'block' : 'none'">{{filename}}</span>
+                    <p class="uploaded" [style.display]="login_form1 ? 'block' : 'none'">Uploaded</p>
+
+                    <br>
                     <button class="btn btn-primary" type="submit" class="upload">Upload</button>
                 </div>
             </form>
