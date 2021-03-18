@@ -4,7 +4,7 @@
 <div class="image_bg">
 
 <div class="left_sec"><h1>Create engaging videos <br> and make an impact</h1>
-    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the </p>
+    <!-- <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the </p> -->
     <div class="button_slide">
         <button class="btn btn_rounded"  (click)="this.promotor_login_form  = true" *ngIf="!this.login_service.is_logged_in" >I am a Customer </button>
         <button class="btn btn_rounded"  (click)="this.influnncer_login_form  = true" *ngIf="!this.login_service.is_logged_in" >I am a Influencer </button>
@@ -13,7 +13,7 @@
 <div class="right_sec"><img src="./assets/images/homeslide_1.png"></div>
 </div></div> 
 <div class="next_sec">
-    <h1>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown </h1>
+    <!-- <h1>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown </h1> -->
     </div>
 <div class="next_sec1">
 <div class="container-fluid">
@@ -132,8 +132,13 @@
                                 <input type="email" formControlName="email" placeholder="Email" required>
                                 <input type="password" formControlName="password" placeholder="Password" required>
                                 <input type="password" formControlName="confirm" placeholder="Confirm Password" required>
-                                <input type="checkbox" id="checked" formControlName="checked">
-                                <label for="horns" class="text_check">I Agree to <b>Terms of Service</b> and <b>Privacy Policy.</b></label>
+                                <input type="checkbox" id="checked" class="agree" formControlName="checked">
+                                <label for="horns" class="text_check">I Agree to <b><a href="javascript:void(0)" class="link" target="_blank" [routerLink]="['/terms-of-services']">Terms of Service</a></b> and <b><a href="javascript:void(0)" class="link" target="_blank" [routerLink]="['/privecy-policy']">Privacy Policy</a>.</b></label>
+                                <span  *ngIf="customer_terms">
+                                    <p style="color: red;">
+                                        Please select Terms and Policy.
+                                    </p>
+                                </span>
                                 <button type="submit" [disabled]="!profileForm.valid">SignUp</button>
                                 <p class="centet_text" *ngIf="promotor_success_div" style="color: green;font-size: 25px; font-style: italic; font-weight: 600;">{{promotor_success_message}}</p>
                                 <p class="centet_text" *ngIf="promotor_error_div" style="color: red;font-size: 25px; font-style: italic; font-weight: 600;">{{promotor_error_message}}</p>
@@ -200,7 +205,12 @@
                                    
                                   </div>
                                 <input type="checkbox" id="checked" formControlName="checked">
-                                <label for="horns" class="text_check">I Agree to <b>Terms of Service</b> and <b>Privacy Policy.</b></label>
+                                <label for="horns" class="text_check">I Agree to <b><a href="javascript:void(0)" class="link" target="_blank" [routerLink]="['/terms-of-services']">Terms of Service</a></b> and <b><a href="javascript:void(0)" class="link" target="_blank" [routerLink]="['/privecy-policy']">Privacy Policy</a>.</b></label>
+                                <span  *ngIf="influencer_terms">
+                                    <p style="color: red;">
+                                        Please select Terms and Policy.
+                                    </p>
+                                </span>
                                 <button class="influencer_btn" type="submit" [disabled]="!influencer.valid">SignUp</button>
                                 <p class="centet_text" *ngIf="influnncer_success_div" style="color: green;font-size: 25px; font-style: italic; font-weight: 600;">{{influnncer_success_message}}</p>
                                 <p class="centet_text" *ngIf="influnncer_error_div" style="color: red;font-size: 25px; font-style: italic; font-weight: 600;">{{influnncer_error_message}}</p>

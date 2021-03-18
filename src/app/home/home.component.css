@@ -511,3 +511,8 @@ button.influencer_btn:focus {
     display: block;
     height: 41px !important;
 }
+
+.link {
+    color: inherit;
+    text-decoration: none;
+}

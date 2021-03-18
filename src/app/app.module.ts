@@ -30,6 +30,7 @@ import { FacebookLoginProvider } from "angularx-social-login";
 import { CheckOutComponent } from './check-out/check-out.component';
 import { MatCardModule } from '@angular/material/card'
 import {MatGridListModule} from '@angular/material/grid-list';
+
 import { ErrorComponent } from './error/error.component';
 import { TestpayComponent } from './testpay/testpay.component';
 import { TestpaycustomComponent } from './testpaycustom/testpaycustom.component';
@@ -40,6 +41,7 @@ import { AllInfluencersComponent } from './admin/all-influencers/all-influencers
 import { AllCustomersComponent } from './admin/all-customers/all-customers.component';
 import { DataTablesModule } from 'angular-datatables';
 import { InfluencerNotificationsComponent } from './influencer-notifications/influencer-notifications.component';
+import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
 
 
 @NgModule({ 
@@ -57,7 +59,6 @@ import { InfluencerNotificationsComponent } from './influencer-notifications/inf
     FormcustomComponent,
     TopAuthenticInfluencersRankingComponent,
     PrivacyComponent,
-    PrivacyComponent,
     CheckOutComponent,
     CheckOutComponent,
     ErrorComponent,
@@ -69,6 +70,7 @@ import { InfluencerNotificationsComponent } from './influencer-notifications/inf
     AllInfluencersComponent,
     AllCustomersComponent,
     InfluencerNotificationsComponent,
+    TermsOfServiceComponent,
     
     //FileSelectDirective
   ],

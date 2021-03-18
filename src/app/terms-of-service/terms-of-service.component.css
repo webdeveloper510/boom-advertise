@@ -14,7 +14,11 @@ mat-card-subtitle {
     font-weight: 500;
     color: black;
 }
-
-ul li {
+.order-list li .any{
     margin: 20px !important;
 }
+
+.prohibited-list li{
+    margin-top: 20px !important;
+}
+  

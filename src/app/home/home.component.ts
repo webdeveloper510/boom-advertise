@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { PromoterRegisterService } from '../services/promoter-register.service';
-import { FormControl, FormGroup} from '@angular/forms';
+import { FormControl, FormGroup,Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { InfluencerRegisterService } from '../services/influencer-register.service';
 import { LoginService } from '../services/login.service';
 import { SocialAuthService } from "angularx-social-login";
 import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
+import { Console } from 'console';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,10 @@ import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-logi
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  is_logged_in : any ;
+  is_logged_in      : any ;
+  customer_terms    : boolean = false;
+  influencer_terms  : boolean = false;
+
   constructor(
                 private proregservice:PromoterRegisterService,
                 private http : HttpClient,
@@ -70,8 +74,8 @@ export class HomeComponent implements OnInit {
       email: new FormControl(''),
       password: new FormControl(''),
       confirm: new FormControl(''),
-      checked: new FormControl('')
-    })
+      checked: new FormControl('', [Validators.required]), 
+    }) 
   });
 
   influencer = new FormGroup({
@@ -96,11 +100,20 @@ export class HomeComponent implements OnInit {
 
   promotersignup(){
 
-    console.log(this.login_service.is_logged_in);
-
     console.log(this.profileForm.value);
    
     let data = this.profileForm.value;
+   
+    if(!data.promoter_signup.checked){
+      
+      this.customer_terms = true;
+      return;
+    } else {
+
+      this.customer_terms = false;
+    }
+  
+
     this.proregservice.register(data)
     .subscribe(
       (response:any) => {                           
@@ -153,6 +166,14 @@ export class HomeComponent implements OnInit {
     
     let data = this.influencer.value;
 
+    if(!data.influencer_signup.checked){
+
+      this.influencer_terms = true;
+      return;
+    } else {
+      this.influencer_terms = false;
+    }
+    
     this.influregservice.register(data)
     .subscribe(
       (response:any) => {                           

@@ -13,12 +13,20 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { AllInfluencersComponent } from './admin/all-influencers/all-influencers.component';
 import { AllCustomersComponent } from './admin/all-customers/all-customers.component';
 import { InfluencerNotificationsComponent } from './influencer-notifications/influencer-notifications.component';
+import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
+import { PrivacyComponent } from './privacy/privacy.component';
 
 const routes: Routes = [
  { path: '', pathMatch: 'full' ,  component: HomeComponent},
  
     {
      path: 'home', component: HomeComponent
+    },
+    {
+     path: 'terms-of-services', component: TermsOfServiceComponent
+    },
+    {
+     path: 'privecy-policy', component: PrivacyComponent
     },
     {
       path: 'influencer-account/:id', component: InfluencerAccountComponent
