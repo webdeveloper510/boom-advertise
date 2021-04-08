@@ -9,6 +9,8 @@ export class PrivacyComponent implements OnInit {
 
   constructor() { }
 
+  TITLE : string = 'PRIVACY POLICY';
+
   ngOnInit(): void {
   }
 

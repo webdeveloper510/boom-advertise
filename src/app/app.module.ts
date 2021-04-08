@@ -30,13 +30,18 @@ import { FacebookLoginProvider } from "angularx-social-login";
 import { CheckOutComponent } from './check-out/check-out.component';
 import { MatCardModule } from '@angular/material/card'
 import {MatGridListModule} from '@angular/material/grid-list';
-//import { MatButtonModule} from '@angular/material/button';
-//import {DataTablesModule} from 'angular-datatables';
-// import {
-  
-//   MatTableModule,
-//   MAT_DIALOG_DEFAULT_OPTIONS,
-// } from '@angular/material';
+
+import { ErrorComponent } from './error/error.component';
+import { TestpayComponent } from './testpay/testpay.component';
+import { TestpaycustomComponent } from './testpaycustom/testpaycustom.component';
+import { SidebarComponent } from './admin/sidebar/sidebar.component';
+import { AdminFooterComponent } from './admin/admin-footer/admin-footer.component';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { AllInfluencersComponent } from './admin/all-influencers/all-influencers.component';
+import { AllCustomersComponent } from './admin/all-customers/all-customers.component';
+import { DataTablesModule } from 'angular-datatables';
+import { InfluencerNotificationsComponent } from './influencer-notifications/influencer-notifications.component';
+import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
 
 
 @NgModule({ 
@@ -54,12 +59,22 @@ import {MatGridListModule} from '@angular/material/grid-list';
     FormcustomComponent,
     TopAuthenticInfluencersRankingComponent,
     PrivacyComponent,
-    PrivacyComponent,
     CheckOutComponent,
     CheckOutComponent,
+    ErrorComponent,
+    TestpayComponent,
+    TestpaycustomComponent,
+    SidebarComponent,
+    AdminFooterComponent,
+    DashboardComponent,
+    AllInfluencersComponent,
+    AllCustomersComponent,
+    InfluencerNotificationsComponent,
+    TermsOfServiceComponent,
+    
     //FileSelectDirective
   ],
-  imports: [
+  imports: [ 
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
@@ -71,8 +86,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
     BrowserAnimationsModule,
     SocialLoginModule,
     MatCardModule,
-    MatGridListModule
-   // DataTablesModule
+    MatGridListModule,
+    DataTablesModule
 
   ],
   providers: [

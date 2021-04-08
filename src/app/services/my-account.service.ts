@@ -39,6 +39,11 @@ export class MyAccountService {
 
     return this.http.post(this.apiUrl+"/influencers/update_price",data);
   }
+  
+  payment(data:any){
+    
+    return this.http.post(this.apiUrl+"/login/payment",data);
+  }
 
   myAccountInfo(){
 
@@ -49,6 +54,11 @@ export class MyAccountService {
       return JSON.parse(user_data);
       
     }
+  }
+
+  getNotifications(influencer_id:any){
+    
+    return this.http.get(this.apiUrl+"/influencers/getNotifications?influencer_id="+influencer_id);
   }
 
   

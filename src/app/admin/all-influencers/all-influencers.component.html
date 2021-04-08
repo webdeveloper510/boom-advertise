@@ -1,0 +1,46 @@
+<app-sidebar></app-sidebar>
+
+<div class="content">
+
+    <h2>All Influencers</h2>
+
+    <span class="success_message">{{delete_success}}</span>
+    <span class="error_message">{{delete_error}}</span>
+    <br>
+   
+    <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover" id="datatableexample">
+    <thead>
+        <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Twitter</th>
+        <th>Toktok</th>
+        <th>Facebook</th>
+        <th>Instagram</th>
+        <th>Delete</th>
+        <th>View</th>
+        <th>Edit</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let post of all_influencers; index as i;">
+        <td>{{ i+1 }}</td>
+        <td>{{ post.vals[0].name }}</td>
+        <td>{{ post.vals[0].email }}</td>
+        <td>{{ post.twitterfollowers }}</td>
+        <td>{{ post.tiktokfollowers }}</td>
+        <td>{{ post.facebookfollowers }}</td>
+        <td>{{ post.instagramfollowers }}</td>
+        <td>
+            <a href="javascript:void(0)" (click)="deleteInfluencer(post.vals[0]._id,i)"><span class="glyphicon glyphicon-trash text-danger delete"></span></a>
+        </td><td><a href="javascript:void(0)" ><span class="glyphicon glyphicon-eye-open view"></span></a>
+        </td><td>   <a href="javascript:void(0)" ><span class="glyphicon glyphicon-edit edit text-success"></span></a>
+        </td>
+        </tr>
+    </tbody>
+    </table>
+    
+</div>
+
+<app-admin-footer></app-admin-footer>

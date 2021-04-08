@@ -1,27 +1,30 @@
+<app-header></app-header>
 
 <div class="heading_sec1"> <h1>My Account</h1></div>
 <div class="first_sec container-fluid">
     <div class="allside">
     <div *ngIf="data" class="box_1 border-size">
-        <div class="image_circle">
+        <div class="image_circle" *ngIf="data.profile_picture">
             <img [src]="data.profile_picture">
         </div>
 
         <p class="name"> {{ data.name }}</p>
         <span class="tag"> {{ data.email }} </span>
         <p class="singer">Twitter Followers: {{ data.followers?.twitterfollowers }}</p>
-        <div class="small_elements">
+        <p class="singer">Facebook Followers: 0</p>
+        <!-- <div class="small_elements">
          <div class="element_1">
-            <p>44.9M</p>
+            <p>0M</p>
             <span>Reach</span>
          </div>  
          <div class="element_2">
-            <p>44.9M</p>
+            <p>0M</p>
             <span>Views</span>
          </div>  
-        </div>
+        </div> -->
         <input type="file" #profile_image style="display: none;" (change)="updateProfileImage($event)" accept="image/*">
         <button type="submit" class="edit-profile" (click)="profile_image.click()">Upload Profile Picture</button>
+        <button type="button" class="edit-profile"  [routerLink]="['/notifications']">Notifications</button>
     </div>
     <div class="box_2 border-size">
         <h2 class="price">Price</h2>
@@ -123,9 +126,11 @@
                         formControlName="file"
                         id="file" 
                         type="file" 
+                        #upload_file
+                        [attr.accept]="allowed_type"
                         class="form-control" (change)="selectFile($event)">
 
-                    <select class="form-control" formControlName="media_name">
+                    <!-- <select class="form-control" formControlName="media_name">
                         <option value="" disabled selected>Select your media type</option>
                         <option *ngFor="let media_name of type_of_media;" [value]="media_name">{{ media_name | titlecase}}</option>
                     </select>
@@ -133,10 +138,27 @@
                     <select class="form-control post_type" formControlName="type_post" >
                         <option value="" disabled selected>Select your post type</option>
                         <option *ngFor="let post_type of type_of_post;" [value]="post_type">{{ post_type | titlecase}}</option>
+                    </select> -->
+                    <label for="upload_type" class="">Upload Type </label>
+                    <select #upload_type id="upload_type" class="form-control" formControlName="upload_type"(change)=" allowed_type = upload_type.value == 'image' ? 'image/*' : 'video/*'" >
+                        <option value="" disabled selected>Select your upload type</option>
+                        <option *ngFor="let upload_type of type_of_upload;" [value]="upload_type">{{ upload_type | titlecase}}</option>
                     </select>
+
+                    <label for="price_post" class="space">Post Price ($) </label>
+                    <input type="text" class="form-control" id="price_post"  formControlName="post_price" placeholder="price"/>
                     
-                        <p class="filepath" [style.display]="login_form ? 'block' : 'none'">{{filename}}</p>
-                        <p class="filepath uploaded" [style.display]="login_form1 ? 'block' : 'none'">Uploaded</p>
+                    <label for="post_description" class="space">Post Description </label>
+                    <textarea formControlName="post_description" id="post_description" rows="8" cols="50" placeholder="your description ..."  class="form-control" > </textarea> 
+
+                    <!-- <div class="space upload_image" (click)="upload_file.click();">  </div> -->
+                    <br>
+
+                    <button class="btn btn-primary" (click)="upload_file.click();">Upload Post</button>
+                    <span  [style.display]="login_form ? 'block' : 'none'">{{filename}}</span>
+                    <p class="uploaded" [style.display]="login_form1 ? 'block' : 'none'">Uploaded</p>
+
+                    <br>
                     <button class="btn btn-primary" type="submit" class="upload">Upload</button>
                 </div>
             </form>
@@ -145,123 +167,38 @@
     <div class="tabs_set">
         <tabset>
             <tab>
-            <ng-template tabHeading> <img src="/assets/images/tiktok icon 1.png">  Tik Tok</ng-template>
+            <ng-template tabHeading>   All Posts</ng-template>
             <div class="outer_most">
-                <div class="section_1" *ngFor="let tik_tok_info of media_post.tiktok ; let i = index ">
-                    <div class="image_start">
-                        <img [src]="tik_tok_info.image">
+                <div class="section_1" *ngFor="let post of media_post ; let i = index ">
+                    
+                    <div class="image_start" *ngIf="post.upload_type == 'image'">
+                        <img [src]="post.image">
                     </div>
-                    <!-- <h2 class="text_name">{{tik_tok_info.text_name}}</h2>
-                    <p class="discription">{{tik_tok_info.description}}</p>
-                    <div class="counts">
-                        <div class="likes">
-                            <img src="/assets/images/favourite red 1.png"><span>{{ tik_tok_info.likes_count}}</span>
-                        </div>
-                        <div class="comments">
-                            <img src="/assets/images/COMMENT 1.png"><span>{{ tik_tok_info.comments_count}}</span>
-                        </div>
-                    </div> -->
+                    <div class="video_start" *ngIf="post.upload_type == 'video'">
+                       
+                        <video width="300" controls>
+                            <source [src]="post.image" >
+                        </video>
+                    </div>
+                    <div class="space">
+                        <b>Price : </b>{{ post.price}}
+                    </div>
+                    <div class="space">
+                        <b>Description : </b>{{ post.description }}
+                    </div>
+                    
                     <div class="click_add">
-                        <div class="Buy"><button type="submit" class="edit-profile" (click)="deletePost(tik_tok_info.id)">Delete Post</button></div>
+                        <div class="Buy"><button type="submit" class="edit-profile" (click)="deletePost(post.id)">Delete Post</button></div>
                         
 
                     </div>
                 </div>
-                <div *ngIf="media_post.tiktok.length == 0" style="text-align: center;">
+                <div *ngIf="media_post.length == 0" style="text-align: center;">
                     <h1>No post found</h1>
                 </div> 
                 
                 </div>
             </tab> 
-            <tab class="insta">
-            <ng-template tabHeading> <img src="/assets/images/insta iconn 1.png">  Instagram</ng-template>
-            <div class="outer_most">
-                <div class="section_1" *ngFor="let Instagram of media_post.instagram; let i = index;">
-                    <div class="image_start">
-                    <img [src]="Instagram.image">
-                    </div>
-                    <!-- <h2 class="text_name">{{Instagram.text_name}}</h2>
-                    <p class="discription">{{Instagram.description}}</p>
-                    <div class="counts">
-                        <div class="likes">
-                            <img src="/assets/images/favourite red 1.png"><span>{{ Instagram.likes_count}}</span>
-                        </div>
-                        <div class="comments">
-                            <img src="/assets/images/COMMENT 1.png"><span>{{ Instagram.comments_count}}</span>
-                        </div>
-                    </div> -->
-                    <div class="click_add">
-                    <div class="Buy"><button type="submit" class="edit-profile" (click)="deletePost(Instagram.id)">Delete Post</button></div>
-                  
-
-                    </div>
-                </div>
-
-                <div *ngIf="media_post.instagram.length == 0" style="text-align: center;">
-                    <h1>No post found</h1>
-                </div> 
-        
-
-            </div>
-            </tab>
-            
-            <tab class="facebook" > 
-                <ng-template tabHeading> <img src="/assets/images/fb icon 1.png">  Facebook</ng-template>
-                <div class="outer_most">
-                    <div class="section_1" *ngFor="let Facebook of media_post.facebook; let i = index;">
-                        <div class="image_start">
-                            <img [src]="Facebook.image">
-                        </div>
-                        <!-- <h2 class="text_name">{{ Facebook.text_name}}</h2>
-                        <p class="discription">{{ Facebook.description}}</p>
-                        <div class="counts">
-                            <div class="likes">
-                                <img src="/assets/images/favourite red 1.png"><span>{{ Facebook.likes_count}}</span>
-                            </div>
-                            <div class="comments">
-                                <img src="/assets/images/COMMENT 1.png"><span>{{Facebook.comments_count}}</span>
-                            </div>
-                        </div> -->
-                        <div class="click_add">
-                            <div class="Buy"><button type="submit" class="edit-profile" (click)="deletePost(Facebook.id)">Delete Post</button></div>
-                            
-                        </div>
-                    </div>
-                    <div *ngIf="media_post.facebook.length == 0" style="text-align: center;">
-                        <h1>No post found</h1>
-                    </div> 
-            </div>
-            </tab>
-            
-            <tab class="twitter">
-                <ng-template tabHeading> <img src="/assets/images/twitter 1.png">  Twitter</ng-template>
-                <div class="outer_most">
-                    
-                    <div class="section_1"  *ngFor="let Twitter of media_post.twitter; let i = index;" >
-                        <div class="image_start">
-                            <img [src]="Twitter.image">
-                        </div>
-                        <!-- <h2 class="text_name">{{ Twitter.text_name}}</h2>
-                        <p class="discription">{{ Twitter.description}}</p>
-                        <div class="counts">
-                            <div class="likes">
-                                <img src="/assets/images/favourite red 1.png"><span>{{ Twitter.likes_count}}</span>
-                            </div>
-                            <div class="comments">
-                                <img src="/assets/images/COMMENT 1.png"><span>{{ Twitter.comments_count}}</span>
-                            </div>
-                        </div> -->
-                        <div class="click_add">
-                        <div class="Buy"><button type="submit" class="edit-profile" (click)="deletePost(Twitter.id)">Delete Post</button></div>
-                        
-
-                        </div>
-                    </div>
-                    <div *ngIf="media_post.twitter.length == 0" style="text-align: center;">
-                        <h1>No post found</h1>
-                    </div>  
-                </div>
-            </tab>
         </tabset>
     </div>
 
@@ -450,4 +387,4 @@
 
 
 
-  
+  <app-footer></app-footer>

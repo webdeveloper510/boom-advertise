@@ -4,8 +4,9 @@
 
 export const environment = {
   production: false,
-  //apiUrl : "http://localhost:8082",
-  apiUrl : "http://boomadvertise.com:8082",
+  //apiUrl : "http://15.206.122.142:8082",
+  apiUrl : "http://localhost:8082",
+  //apiUrl : "http://boomadvertise.com:8082",
 };
 
 /*s

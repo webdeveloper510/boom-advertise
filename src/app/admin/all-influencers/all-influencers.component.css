@@ -1,0 +1,16 @@
+.delete,.view,.edit{
+    font-size: 25px;
+}
+.success_message {
+    float: right;
+    color: green;
+    font-size: 18px;
+    font-style: italic;
+}
+
+.error_message {
+    float: right;
+    color: red;
+    font-size: 18px;
+    font-style: italic;
+}

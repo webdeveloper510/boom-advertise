@@ -14,20 +14,26 @@ import { LoginService } from '../services/login.service';
 
 export class MyAccountComponent implements OnInit {
 
-  login_form : boolean        = true;
-  login_form1 : boolean       = false;
-  filename:string             = "";
-  image_value :any            = "";
-  data:any                    = [];
-  post_edit_model:boolean     = false;
-  profile_edit_model:boolean  = false;
-  price_edit_model:boolean    = false;
-  facebook_price_edit_model:boolean   = false;
-  instagram_price_edit_model:boolean  = false;
-  tiktok_price_edit_model:boolean     = false;
-  twitter_price_edit_model:boolean    = false;
-  type_of_media : any = ['tiktok','instagram', 'facebook' , 'twitter'];
-  type_of_post : any  = ['post','story'];
+  login_form  : boolean    = true;
+  login_form1 : boolean   = false;
+  filename    : string         = "";
+  image_value : any        = "";
+  data        : any        = {};
+
+  post_edit_model     : boolean  = false;
+  profile_edit_model  : boolean  = false;
+  price_edit_model    : boolean  = false;
+
+  facebook_price_edit_model : boolean = false;
+  instagram_price_edit_model: boolean = false;
+  tiktok_price_edit_model   : boolean = false;
+  twitter_price_edit_model  : boolean = false;
+
+  type_of_media   : any = ['tiktok','instagram', 'facebook' , 'twitter'];
+  type_of_post    : any = ['post','story'];
+  type_of_upload  : any = ['image','video'];
+  allowed_type    : any = 'image/*';
+
   media_price : any = {
                         tiktok : { post_price : 0, story_price : 0},
                         instagram : { post_price : 0, story_price : 0 ,comment_price :0 , like_price : 0 , follow_price : 0},
@@ -35,29 +41,30 @@ export class MyAccountComponent implements OnInit {
                         twitter : { tweet_price : 0, retweet_price : 0 , comment_price : 0 , like_price : 0 ,follow_price : 0},
                       };
 
-  media_post : any =  {
+  media_post : any = [];
+  // media_post : any =  {
     
-                        tiktok :[
-                                    {id:1,image :"http://localhost:8082/uploadedImage-1611207278017.jpg",text_name:"@lorengray tiktok1",description:"Tik Tok human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"},
-                                    {id:2,image :"/assets/images/Group 46.png",text_name:"@lorengray tiktok2",description:"Tik Tok human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"},
-                                    {id:3,image :"/assets/images/Group 45.png",text_name:"@lorengray tiktok3",description:"Tik Tok human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"}
-                                  ],
-                        instagram :[
-                                    {id:4,image :"/assets/images/Group 45.png",text_name:"@lorengray instagram1",description:"Instagram human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"},
-                                    {id:5,image :"/assets/images/Group 45.png",text_name:"@lorengray instagram2",description:"Instagram human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"},
-                                    {id:6,image :"/assets/images/Group 46.png",text_name:"@lorengray instagram3",description:"Instagram human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"}
-                                  ],
-                        facebook :[
-                                    {id:7,image :"/assets/images/Group 46.png",text_name:"@lorengray facebook1",description:"Facebook human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"},
-                                    {id:8,image :"/assets/images/Group 45.png",text_name:"@lorengray facebook2",description:"Facebook human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"},
-                                    {id:9,image :"/assets/images/Group 45.png",text_name:"@lorengray facebook3",description:"Facebook human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"}
-                                  ],
-                        twitter :[
-                                    {id:10,image :"/assets/images/Group 46.png",text_name:"@lorengray twitter1",description:"Twitter human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"},
-                                    {id:11,image :"/assets/images/Group 46.png",text_name:"@lorengray twitter2",description:"Twitter human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"},
-                                    {id:12,image :"/assets/images/Group 45.png",text_name:"@lorengray twitter3",description:"Twitter human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"}
-                                  ],
-                      };
+  //                       tiktok :[
+  //                                   {id:1,image :"http://localhost:8082/uploadedImage-1611207278017.jpg",text_name:"@lorengray tiktok1",description:"Tik Tok human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"},
+  //                                   {id:2,image :"/assets/images/Group 46.png",text_name:"@lorengray tiktok2",description:"Tik Tok human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"},
+  //                                   {id:3,image :"/assets/images/Group 45.png",text_name:"@lorengray tiktok3",description:"Tik Tok human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"}
+  //                                 ],
+  //                       instagram :[
+  //                                   {id:4,image :"/assets/images/Group 45.png",text_name:"@lorengray instagram1",description:"Instagram human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"},
+  //                                   {id:5,image :"/assets/images/Group 45.png",text_name:"@lorengray instagram2",description:"Instagram human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"},
+  //                                   {id:6,image :"/assets/images/Group 46.png",text_name:"@lorengray instagram3",description:"Instagram human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"}
+  //                                 ],
+  //                       facebook :[
+  //                                   {id:7,image :"/assets/images/Group 46.png",text_name:"@lorengray facebook1",description:"Facebook human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"},
+  //                                   {id:8,image :"/assets/images/Group 45.png",text_name:"@lorengray facebook2",description:"Facebook human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"},
+  //                                   {id:9,image :"/assets/images/Group 45.png",text_name:"@lorengray facebook3",description:"Facebook human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"}
+  //                                 ],
+  //                       twitter :[
+  //                                   {id:10,image :"/assets/images/Group 46.png",text_name:"@lorengray twitter1",description:"Twitter human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"},
+  //                                   {id:11,image :"/assets/images/Group 46.png",text_name:"@lorengray twitter2",description:"Twitter human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"},
+  //                                   {id:12,image :"/assets/images/Group 45.png",text_name:"@lorengray twitter3",description:"Twitter human machine recognition page",likes_count:"50.8K",comments_count:"20.8K"}
+  //                                 ],
+                     // };
 
   constructor(
               private MyAccountService:MyAccountService,
@@ -76,10 +83,13 @@ export class MyAccountComponent implements OnInit {
   }
 
   myForm = new FormGroup({
-    file: new FormControl('', [Validators.required]),
-    media_name : new FormControl(""),
-    type_post : new FormControl("")
-   
+    
+    media_name  : new FormControl(""),
+    type_post   : new FormControl(""),
+    file              : new FormControl('', [Validators.required]),
+    post_price        : new FormControl(""),
+    post_description  : new FormControl(""),
+    upload_type       : new FormControl(this.type_of_upload[0]),
   });
 
   profile_edit = new FormGroup({
@@ -138,9 +148,7 @@ export class MyAccountComponent implements OnInit {
       media_type    : new FormControl(''),
     });
 
-
-  
-  
+     
 
   initProfileEdit(){
 
@@ -152,15 +160,13 @@ export class MyAccountComponent implements OnInit {
   
 
   singleInfluencer(){
-
     
-    console.log(this.loginService.user_id);
-   
+    
     this.MyAccountService.singleInfluencer(this.loginService.user_id)
       .subscribe(
         (response:any) =>{
           console.log(response); 
-          
+               
           this.data           = response['data'];
           
           this.media_price    = response.mydata.price_data;
@@ -168,7 +174,7 @@ export class MyAccountComponent implements OnInit {
           this.media_post     = response.mydata.posts;
           this.data.followers = response.mydata.followers;
           this.initProfileEdit();
-          console.log(this.data); 
+         
         }
       )
    }
@@ -182,7 +188,7 @@ export class MyAccountComponent implements OnInit {
     this.MyAccountService.updateProfile(data).subscribe(
       (response : any) => {
 
-        console.log(response);
+        //console.log(response);
         if(response.statusCode == 200){
           this.profile_edit_model = false;
           this.singleInfluencer();
@@ -276,7 +282,7 @@ export class MyAccountComponent implements OnInit {
     this.MyAccountService.updatePrice(data).subscribe(
       (response:any) => {
         
-        console.log(response);
+        //console.log(response);
 
         if(response.statusCode == 200){
 
@@ -304,7 +310,7 @@ export class MyAccountComponent implements OnInit {
 
     this.MyAccountService.deletePost(post_id).subscribe(
       (response:any) => {
-        console.log(response);
+        //console.log(response);
         this.singleInfluencer();
       }
     );
@@ -314,23 +320,29 @@ export class MyAccountComponent implements OnInit {
 
   uploadPost(){
     
-   
     
-    if(this.image_value && this.myForm.value.media_name && this.myForm.value.type_post){
+    
+    if(this.image_value && this.myForm.value.post_price && this.myForm.value.post_description){
 
+      console.log('hh');
+      
       const formData = new FormData();
+      // formData.append('media_type', this.myForm.value.media_name);
+      // formData.append('post_type', this.myForm.value.type_post);
       formData.append('uploadedImage', this.image_value);
       formData.append('user_id', this.loginService.user_id);
-      formData.append('media_type', this.myForm.value.media_name);
-      formData.append('post_type', this.myForm.value.type_post);
+      formData.append('price', this.myForm.value.post_price);
+      formData.append('description', this.myForm.value.post_description);
+      formData.append('upload_type', this.myForm.value.upload_type);
       
       this.MyAccountService.uploadPost(formData).subscribe(
         (response:any) =>{
           console.log(response);
+          
           this.singleInfluencer();
           this.myForm.reset();
-          this.myForm.patchValue({media_name : ""});
-          this.myForm.patchValue({type_post : ""});
+          this.myForm.patchValue({upload_type : this.type_of_upload[0]});
+          this.myForm.patchValue({post_price : ""});
           this.filename = "";
           this.image_value = "";
         }
@@ -356,7 +368,7 @@ export class MyAccountComponent implements OnInit {
 
       this.MyAccountService.updateProfileImage(formData).subscribe(
         (response : any) => {
-          console.log(response);
+          //console.log(response);
           if(response.statusCode == 200){
 
             this.singleInfluencer();

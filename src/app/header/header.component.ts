@@ -24,7 +24,7 @@ export class HeaderComponent implements OnInit {
     private authService: SocialAuthService,
   ) {
     
-    this.signInWithFB();
+    //this.signInWithFB();
     let user_id = localStorage.getItem('login_userid');
 
     if(user_id){
@@ -50,6 +50,7 @@ export class HeaderComponent implements OnInit {
   error_message : string = "";
   success_div : boolean = false;
   error_div : boolean = false;
+
 
   // Login variables end
 

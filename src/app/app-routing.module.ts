@@ -5,12 +5,28 @@ import { InfluencerAccountComponent } from './influencer-account/influencer-acco
 import { MyAccountComponent } from './my-account/my-account.component';
 import { PromoterAccountComponent } from './promoter-account/promoter-account.component';
 import { TopAuthenticInfluencersRankingComponent } from './top-authentic-influencers-ranking/top-authentic-influencers-ranking.component';
-import { PrivacyComponent } from './privacy/privacy.component';
 import { CheckOutComponent } from './check-out/check-out.component';
+import { ErrorComponent } from './error/error.component';
+import { TestpayComponent } from './testpay/testpay.component';
+import { TestpaycustomComponent } from './testpaycustom/testpaycustom.component';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { AllInfluencersComponent } from './admin/all-influencers/all-influencers.component';
+import { AllCustomersComponent } from './admin/all-customers/all-customers.component';
+import { InfluencerNotificationsComponent } from './influencer-notifications/influencer-notifications.component';
+import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
+import { PrivacyComponent } from './privacy/privacy.component';
+
 const routes: Routes = [
  { path: '', pathMatch: 'full' ,  component: HomeComponent},
+ 
     {
      path: 'home', component: HomeComponent
+    },
+    {
+     path: 'terms-of-services', component: TermsOfServiceComponent
+    },
+    {
+     path: 'privecy-policy', component: PrivacyComponent
     },
     {
       path: 'influencer-account/:id', component: InfluencerAccountComponent
@@ -26,8 +42,27 @@ const routes: Routes = [
     },
     {
       path: 'check-out', component: CheckOutComponent
-    }
- 
+    },
+    {
+      path: 'test', component: TestpayComponent
+    },
+    {
+      path: 'pay', component: TestpaycustomComponent
+    },
+    {
+      path: 'notifications', component: InfluencerNotificationsComponent
+    },
+    {
+      path: 'admin', component: DashboardComponent
+    },
+    {
+      path: 'all-influencers', component: AllInfluencersComponent
+    },
+    {
+      path: 'all-customers', component: AllCustomersComponent
+    },
+    { path: '**' ,  component: ErrorComponent},
+    
 ];
 
 @NgModule({

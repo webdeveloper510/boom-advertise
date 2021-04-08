@@ -1,0 +1,32 @@
+<app-header></app-header>
+<div class="heading"><h2><b>{{ TITLE | titlecase}}</b></h2></div>
+
+<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover" id="datatableexample">
+    <thead>
+        <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>EMAIL</th>
+        <th>PHONE</th>
+        <th>AMOUINT</th>
+        <th>MEDIA TYPE</th>
+        <th>MEDIA OPTION</th>
+        <th>DESCRIPTION</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr *ngFor="let notification of ALL_NOTIFICATIONS; index as i;">
+        <td>{{ i+1 }}</td>
+        <td>{{ notification.name }}</td>
+        <td>{{ notification.email }}</td>
+        <td>{{ notification.phone }}</td>
+        <td>$ {{ notification.amount }}</td>
+        <td>{{ notification.media_type | uppercase }}</td>
+        <td>{{ notification.media_option }}</td>
+        <td>{{ notification.description }}</td>
+        </tr>
+
+    </tbody>
+    </table>
+<app-footer></app-footer>
