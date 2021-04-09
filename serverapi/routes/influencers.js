@@ -533,7 +533,7 @@ router.post('/register', async function(req,res) {
 
           res.json({statusCode: 100, status: 'success', data: all_notifications});
         } else {
-          console.log("no");
+          
           res.json({statusCode: 200, status: 'error', data: "No data found"});
         }
 
