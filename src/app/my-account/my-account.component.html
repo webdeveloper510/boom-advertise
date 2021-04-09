@@ -230,7 +230,32 @@
 
   <!------------------- Update Profile Model End------------------------->
 
+<!------------------- Update Price Model Start------------------------->
+<!-- 
+<div class="w3-container">
+    <div id="edit_price" class="w3-modal" [style.display]="price_edit_model ? 'block' : 'none'">
+      <div class="w3-modal-content">
+        <div class="w3-container">
+          <span (click)="this.price_edit_model = false;" class="w3-button w3-display-topright">&times;</span>
+          <div class="promoter_signup">
+            <h2>Edit Price</h2>
+            
+            <form [formGroup]="price_edit" (ngSubmit)="updatePrice()"> 
+                <input type="hidden" id="media_type" formControlName="media_type" >
+                <label for="update_post">Post</label>
+                <input type="text" id="update_post" formControlName="post_price" class="form-control" placeholder="post price" autocomplete="off">
+                <label for="update_story">Story</label>
+                <input type="text" formControlName="story_price" id="update_story" placeholder="story price" class="form-control" autocomplete="off">  
+                <input type="submit" value="Update" class="btn btn-info update_price_button">
+            </form>
+          </div>     
+        </div>
+      </div>
+    </div>
+  </div> -->
 
+
+  <!------------------- Update Price Model End------------------------->
 
   <!------------------- Update Facebook Price Model Start------------------------->
 
