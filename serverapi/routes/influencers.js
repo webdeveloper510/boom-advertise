@@ -509,8 +509,33 @@ router.post('/register', async function(req,res) {
       checkout.checkout.find({ influencerid : influencer_id }) .sort([['_id', -1]]).exec( function( error , all_notifications){
         
         if(error) res.json({statusCode: 200, status: 'error', data: error});
+
+        checkout.checkout.updateMany({influencerid : influencer_id},{$set:{ status : 1 }},function(err , update_dta){
+
+        });
         
         res.json({statusCode: 100, status: 'success', data: all_notifications});
+
+
+      })
+    });
+    
+    router.get('/getNotificationUnreadCount',function(req, res, next){
+      
+      let influencer_id = req.query.influencer_id;
+      
+      checkout.checkout.find({ influencerid : influencer_id ,status : 0}) .sort([['_id', -1]]).exec( function( error , all_notifications){
+        
+        if(error) res.json({statusCode: 200, status: 'error', data: error});
+        
+        
+        if(all_notifications.length){
+
+          res.json({statusCode: 100, status: 'success', data: all_notifications});
+        } else {
+          console.log("no");
+          res.json({statusCode: 200, status: 'error', data: "No data found"});
+        }
 
 
       })

@@ -411,3 +411,7 @@ video {
 .upload_filename {
     text-align: center;
 }
+
+.notification {
+    background: red !important;
+}

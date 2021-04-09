@@ -19,6 +19,7 @@ export class MyAccountComponent implements OnInit {
   filename    : string         = "";
   image_value : any        = "";
   data        : any        = {};
+  new_notification : any   = "";
 
   post_edit_model     : boolean  = false;
   profile_edit_model  : boolean  = false;
@@ -33,6 +34,7 @@ export class MyAccountComponent implements OnInit {
   type_of_post    : any = ['post','story'];
   type_of_upload  : any = ['image','video'];
   allowed_type    : any = 'image/*';
+
 
   media_price : any = {
                         tiktok : { post_price : 0, story_price : 0},
@@ -80,6 +82,7 @@ export class MyAccountComponent implements OnInit {
   ngOnInit(): void {
 
     this.singleInfluencer();
+    this.getNotificationUnreadCount();
   }
 
   myForm = new FormGroup({
@@ -158,6 +161,24 @@ export class MyAccountComponent implements OnInit {
     });
   }
   
+  getNotificationUnreadCount(){
+    this.MyAccountService.getNotificationUnreadCount(this.loginService.user_id)
+      .subscribe(
+        (response:any) =>{
+
+          console.log("response");
+          console.log(response);
+
+          if(response.statusCode == 100){
+
+            this.new_notification = response.data.length
+          } else {
+            
+            this.new_notification = 0;
+          }
+        }
+      );
+  }
 
   singleInfluencer(){
     
@@ -178,7 +199,7 @@ export class MyAccountComponent implements OnInit {
         }
       )
    }
-
+ 
    updateProfile(){
 
     //let user_data = this.MyAccountService.myAccountInfo();

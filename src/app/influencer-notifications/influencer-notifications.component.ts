@@ -49,7 +49,7 @@ export class InfluencerNotificationsComponent implements OnInit {
           
           alert(response.data);
         } else {
-          alert("server problem. Please try again later.")
+          alert("Server problem. Please try again later.")
         }
         this.dtTrigger.next();
       }
