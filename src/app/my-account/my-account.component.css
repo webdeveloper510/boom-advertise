@@ -88,6 +88,16 @@ p.singer {
     text-align: center;
 }
 
+p.link {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 37px;
+    color: #787878;
+    text-align: center;
+}
+
 .small_elements {
     display: flex;
     justify-content: center;

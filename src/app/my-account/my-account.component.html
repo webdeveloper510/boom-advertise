@@ -7,7 +7,6 @@
         <div class="image_circle" *ngIf="data.profile_picture">
             <img [src]="data.profile_picture">
         </div>
-
         <p class="name"> {{ data.name }}</p>
         
         <p class="influencer_url_text"> My Link :  {{influencer_url}} </p>
@@ -25,9 +24,11 @@
             <span>Views</span>
          </div>  
         </div> -->
+
         <input type="file" #profile_image style="display: none;" (change)="updateProfileImage($event)" accept="image/*">
         <button type="submit" class="edit-profile" (click)="profile_image.click()">Upload Profile Picture</button>
         <button type="button" class="edit-profile"  [routerLink]="['/notifications']">Notifications <span *ngIf="new_notification"  class="notification badge badge-success">{{new_notification}}</span></button>
+    
     </div>
     <div class="box_2 border-size">
         <h2 class="price">Price</h2>
