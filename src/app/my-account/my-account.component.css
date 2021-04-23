@@ -415,3 +415,12 @@ video {
 .notification {
     background: red !important;
 }
+
+.influencer_url_text {
+    color: grey;
+    text-align: center;
+}
+
+.copy_button {
+    margin-left: 35%;
+}

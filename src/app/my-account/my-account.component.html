@@ -9,6 +9,9 @@
         </div>
 
         <p class="name"> {{ data.name }}</p>
+        
+        <p class="influencer_url_text"> My Link :  {{influencer_url}} </p>
+        <button class="btn copy_button" [ngClass]="copy_button_class" (click)="copyToClipboard();">{{ copy_button_text }}</button>
         <span class="tag"> {{ data.email }} </span>
         <p class="singer">Twitter Followers: {{ data.followers?.twitterfollowers }}</p>
         <p class="singer">Facebook Followers: 0</p>

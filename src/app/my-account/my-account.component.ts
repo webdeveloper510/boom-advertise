@@ -35,6 +35,9 @@ export class MyAccountComponent implements OnInit {
   type_of_upload  : any = ['image','video'];
   allowed_type    : any = 'image/*';
 
+  influencer_url    : string = location.origin;
+  copy_button_text  : string = "Copy Link";
+  copy_button_class : string = "btn-info";
 
   media_price : any = {
                         tiktok : { post_price : 0, story_price : 0},
@@ -75,9 +78,33 @@ export class MyAccountComponent implements OnInit {
               private router: Router,
               ) {  
               
+                this.influencer_url = this.influencer_url+"/influencer-account/"+this.loginService.user_id;
   }
         
-          
+  copyToClipboard(){
+
+    this.copy_button_text = "Copied";
+    this.copy_button_class = "btn-success";
+    let selBox = document.createElement("textarea");
+    selBox.style.position = "fixed";
+    selBox.style.left = "0";
+    selBox.style.top = "0";
+    selBox.style.opacity = "1";
+    selBox.value = this.influencer_url;
+   
+    document.body.appendChild(selBox);
+    selBox.focus();
+    selBox.select();
+    document.execCommand("copy");
+    document.body.removeChild(selBox);
+
+    setTimeout(() => {
+
+      this.copy_button_class  = "btn-info";
+      this.copy_button_text  = "Copy Link";
+    },1000);
+
+  }
         
   ngOnInit(): void {
 
