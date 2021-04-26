@@ -43,7 +43,7 @@ const stripe = require('stripe')(Secret_Key);
       account_id,
       {
         //external_account:"tok_1IkVLfCe7ZPGJJ1Pu1VPe2BI",
-        external_account:'tok_1IkVxOEXA7xfj1nHkkwNXXqd',
+        external_account:token.id,
       },
     ).then((details) => {
       console.log(details)
