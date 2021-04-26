@@ -42,7 +42,8 @@ export class MyAccountService {
   
   payment(data:any){
     
-    return this.http.post(this.apiUrl+"/login/payment",data);
+    //return this.http.post(this.apiUrl+"/login/payment",data);
+    return this.http.post(this.apiUrl+"/test/account",data);
   }
 
   myAccountInfo(){

@@ -46,6 +46,7 @@ export class TestpayComponent implements OnInit {
         // You can access the token ID with `token.id`.
         // Get the token ID to your server-side code for use.
         console.log(token)
+        console.log('token.id')
         console.log(token.id)
         this.v = token.id;
         console.log('my token'+this.v);

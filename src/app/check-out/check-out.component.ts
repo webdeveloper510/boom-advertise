@@ -92,13 +92,14 @@ export class CheckOutComponent implements OnInit {
     data.influencer_id    = this.checkout.influencer_id;
     data.media_option     = this.checkout.media_option;
     data.media_key        = this.checkout.media_key;
-    
+    console.log(data);
     //console.log(this.checkout.influencer_id.media_option);return;
     this.MyAccountService.payment(data).subscribe(
       (response:any) =>{
         
         console.log(response);
         
+        return false;
         if(response?.code == 100){
          
           localStorage.removeItem('buy_media');

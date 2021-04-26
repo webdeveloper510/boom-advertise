@@ -17,6 +17,7 @@ var promoters   = require('./routes/promoters');
 var workers     = require('./routes/workers');
 var influencers = require('./routes/influencers');
 var login       = require('./routes/login');
+var test       = require('./routes/test');
 var sessions    = require('./routes/sessionsController');
 
 var app = express(); 
@@ -57,6 +58,7 @@ app.use('/test', influencers);
 app.use('/promoters', promoters);
 app.use('/influencers', influencers);
 app.use('/login', login);
+app.use('/test', test);
 
 
 //app.use(logger({ path: "log/express.log" }));
