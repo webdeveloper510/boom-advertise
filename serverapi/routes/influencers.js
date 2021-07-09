@@ -6,6 +6,7 @@ const influencer        = require('../models/influencers');
 const influencers_data  = require('../models/influencers_data');
 const influencer_posts  = require('../models/influencers_posts');
 const checkout          = require('../models/checkout');
+const account_data      = require('../models/account_data');
 
 var passwordHash        = require('password-hash');
 const {ObjectId}        = require('mongodb'); 
@@ -13,6 +14,14 @@ const multer            = require('multer');
 var fileExtension       = require('file-extension')
 var fs                  = require('fs');
 const path              = require('path');
+const stripe_detail     = require('../config/stripe');
+
+const account_id        = stripe_detail.account_id; // get it from stripe's account profile info 
+var   Publishable_Key   = stripe_detail.Publishable_Key;
+var   Secret_Key        = stripe_detail.Secret_Key;
+
+
+const stripe = require('stripe')(Secret_Key);
 
 //process.env.NODE_TLS_REJECT_UNAUTHORIZED = "1";
 
@@ -49,7 +58,6 @@ var upload = multer({
 
 router.post('/register', async function(req,res) {
 
-      
       var influencerCreate =  new influencer.influencers(req.body.influencer_signup);
       var influencerData =  new influencers_data.influencers_data(req.body.influencer_signup);
 
@@ -63,10 +71,29 @@ router.post('/register', async function(req,res) {
       influencerCreate.facebook = req.body.influencer_signup.fb
       influencerCreate.twitter = req.body.influencer_signup.twitter
 
-      influencerData.twitterfollowers = req.body.influencer_signup.twitter_followers
-      influencerData.tiktokfollowers = req.body.influencer_signup.tiktok_followers
-      influencerData.facebookfollowers = req.body.influencer_signup.fb_followers
-      influencerData.instagramfollowers = req.body.influencer_signup.insta_followers
+      influencerData.twitterfollowers = req.body.influencer_signup.twitter_followers;
+      influencerData.tiktokfollowers = req.body.influencer_signup.tiktok_followers;
+      influencerData.facebookfollowers = req.body.influencer_signup.fb_followers;
+      influencerData.instagramfollowers = req.body.influencer_signup.insta_followers;
+
+      influencerData.tiktok_post_price = 0;
+      influencerData.tiktok_story_price = 0;
+      influencerData.facebook_post_price = 0;
+      influencerData.facebook_friend_price = 0;
+      influencerData.facebook_comment_price = 0;
+      influencerData.facebook_like_price = 0;
+      influencerData.twitter_tweet_price = 0;
+      influencerData.twitter_retweet_price = 0;
+      influencerData.twitter_comment_price = 0;
+      influencerData.twitter_like_price = 0;
+      influencerData.twitter_follow_price = 0;
+      influencerData.instagram_post_price = 0;
+      influencerData.instagram_story_price = 0;
+      influencerData.instagram_comment_price = 0;
+      influencerData.instagram_like_price = 0;
+      influencerData.instagram_follow_price = 0;
+     
+      
       
       influencer.influencers.findOne({email:req.body.influencer_signup.email}, function(err, influencers) {
         if (err)  res.json({status:"failure",statusCode:100,msg:err});
@@ -83,15 +110,20 @@ router.post('/register', async function(req,res) {
               res.json({status:"failure",statusCode:100,msg:"Username already exists!!"});
             }
             else{
+
+              influencerCreate.save(function (influencer_res_err, influencer_res) {
+
+                influencerData.influencerid = influencer_res._id;
+                influencerData.influencermatchid = influencer_res._id;
+                influencerData.save(function (influencer_data_err, influencer_data_res) {
+
+                  if(influencer_res_err) res.json({ status:'failure' , statusCode : 100 , msg :influencer_res_err});
+                  res.json({status:"success",statusCode:200,data:influencer_res,msg:"Signup & SignIn successfully!"});
               
-                influencerCreate.save(function (err, influencer_res) {
-                  influencerData.influencerid = influencer_res['_id']
-                  influencerData.influencermatchid = influencer_res['_id']
-                  influencerData.save(function (err1, influ_data_res) {
-                    if (err || err1) res.json({status:"failure",statusCode:100,msg:err});
-                    res.json({status:"success",statusCode:200,data:influencer_res,msg:"Signup & SignIn successfully!"});
-                  });
                 });
+                
+              })
+              
             }
           })
         }
@@ -151,20 +183,20 @@ router.post('/register', async function(req,res) {
     });
 
     /**** Trying to get all influencers data as first table influencers ***/
-      router.get('/getInfluencers1', function(req, res, next) {
-            influencer.influencers.aggregate([
-              { "$lookup": {
-                      "from": "influencers_data",
-                      "localField": "_id",
-                      "foreignField": "influencerid",
-                      "as": "vals"
-                    }
-              }
-              ], function(err, res_data) {
-                  if (err)  res.json({status:"failure",statusCode:100,error:err});
-                    res.json({status:"success",statusCode:200,data:res_data});
-                  })
-      });
+      // router.get('/getInfluencers1', function(req, res, next) {
+      //       influencer.influencers.aggregate([
+      //         { "$lookup": {
+      //                 "from": "influencers_data",
+      //                 "localField": "_id",
+      //                 "foreignField": "influencerid",
+      //                 "as": "vals"
+      //               }
+      //         }
+      //         ], function(err, res_data) {
+      //             if (err)  res.json({status:"failure",statusCode:100,error:err});
+      //               res.json({status:"success",statusCode:200,data:res_data});
+      //             })
+      // });
 
      router.get('/singleInfluencer', function(req, res) {
 
@@ -189,8 +221,6 @@ router.post('/register', async function(req,res) {
           ]
             ,function(err,influencer_data){
             if(err) res.json({status:"failure",statusCode:100,error:err});
-
-            
             
             var return_data = {
                                 price_data:{
@@ -291,6 +321,7 @@ router.post('/register', async function(req,res) {
 
         var user_data = req.body;
         
+
         if(user_data.media_type == "tiktok"){
           var update_data = {
                               tiktok_post_price : user_data.post_price,
@@ -328,6 +359,7 @@ router.post('/register', async function(req,res) {
 
         }
 
+        //console.log(update_data);return;
         influencers_data.influencers_data.updateOne({influencerid : new ObjectId(user_data.user_id)} , {$set:update_data},function(err , data){
 
           if(err){
@@ -538,5 +570,98 @@ router.post('/register', async function(req,res) {
         }
       })
     });
+
+    router.post('/addCard', function(req , res){
+
+      console.log("req.body")
+      console.log(req.body)
+
+      let card_number = req.body.card_number;
+      let expiry_month = req.body.expiry_month;
+      let expiry_year = req.body.expiry_year;
+      let cvc = req.body.cvc;
+      let influencer_id = req.body.influencer_id;
+      let email = req.body.email;
+      
+      
+
+            //  Create token
+
+            const token =  stripe.tokens.create({
+
+              card  : {
+                        number    : card_number,
+                        exp_month : expiry_month,
+                        exp_year  : expiry_year,
+                        cvc       : cvc,
+                        currency  : 'USD',
+                      },
+              
+            }).then((token) => {
+              
+              const bankAccount =  stripe.accounts.createExternalAccount(
+                
+                account_id,
+                {
+                  external_account  : token.id,
+                }
+              ).then((card_response) => {
+
+                
+                // Craete Bank account id
+
+                const account =  stripe.accounts.create({
+      
+                  type          : 'custom',
+                  country       : 'US',
+                  email         : email,
+                  capabilities  : {
+                                    card_payments : {requested: true},
+                                    transfers     : {requested: true},
+                                  },
+                  requested_capabilities: ['card_payments', 'transfers']
+                }).then((account_rsponse) => {
+
+                  var account_info                      = new account_data.account_data();
+                      account_info.influencerid         = influencer_id;
+                      account_info.bank_account_id      = account_rsponse.id;
+                      account_info.card_id              = card_response.id;
+                      account_info.last_4               = card_response.last4;
+                      account_info.card_added_response  = JSON.stringify(card_response);
+                      account_info.created_at           = new Date();
+
+                     
+                      console.log(account_info);
+
+                      account_info.save(function(account_info_err, account_info_response) {
+          
+                        if(account_info_err) res.json({ status:'failure' , statusCode : 100 , msg :account_info_err});
+                        res.json({status:"success",statusCode:200,data:account_info,msg:"Account created successfully"});
+                      });
+
+                }).catch((account_error) => {
+
+                  console.log('account_erro');
+                  console.log(account_error);
+                  res.send({status:'failure' ,statusCode:100,msg:account_error.raw.message , type:"account error"});
+                });
+
+
+
+              }).catch((bankAccountError) => {
+
+                console.log('bankAccountError');
+                  console.log(bankAccountError);
+                res.send({status:'failure' ,statusCode:100,msg:bankAccountError.raw.message , type:"bank account error"});
+              });
+              
+            }).catch((token_err) => {
+              
+              console.log('token_err');
+                  console.log(token_err);
+              res.send({status:'failure' ,statusCode:100,msg:token_err.raw.message , type:"token error"});
+            });
+            
+    })
   
     module.exports = router;

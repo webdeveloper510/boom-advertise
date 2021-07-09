@@ -116,14 +116,24 @@ export class HomeComponent implements OnInit {
 
     this.proregservice.register(data)
     .subscribe(
-      (response:any) => {                           
+      (response:any) => { 
+        
+        console.log('response');
+        console.log(response);
+      
         if(response['status'] == 'success'){
+
+          localStorage.setItem(this.login_service.local_storage_login_userid_key,response["data"]['_id']);
+          localStorage.setItem(this.login_service.local_storage_key,JSON.stringify(response["data"]));
+
           this.promotor_success_message = response['msg'];
           this.is_login = true;
           this.promotor_success_div = true;
           this.promotor_error_div = false;
           this.profileForm.reset();
           this.login_service.is_logged_in = true;
+          this.login_service.user_id  = response["data"]['_id'];
+
           setTimeout (() => {
             this.promotor_success_div = false;
             this.promotor_login_form = false;
@@ -131,6 +141,7 @@ export class HomeComponent implements OnInit {
           }, 3000)
           
         }else{
+          
           this.promotor_error_message = response['msg'];
           this.promotor_success_div = false;
           this.promotor_error_div = true;
@@ -176,7 +187,10 @@ export class HomeComponent implements OnInit {
     
     this.influregservice.register(data)
     .subscribe(
-      (response:any) => {                           
+      (response:any) => {     
+        
+        console.log(response);
+        
         if(response['status'] == 'success'){
 
           console.log(response);

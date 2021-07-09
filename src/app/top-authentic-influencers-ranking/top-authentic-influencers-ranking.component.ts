@@ -12,8 +12,14 @@ export class TopAuthenticInfluencersRankingComponent implements OnInit {
 
   public socialmedia: string="";
   public tiktok: string="";
-  constructor(private InfluencersRankingService:InfluencersRankingService,private http : HttpClient,private router: Router,) { 
-  }
+
+  constructor(
+    private InfluencersRankingService:InfluencersRankingService,
+    private http : HttpClient,
+    private router: Router,
+    ) { 
+
+    }
 
   data:any = [];
   title1 = 'angulardatatables  multiple filter';
@@ -51,7 +57,11 @@ export class TopAuthenticInfluencersRankingComponent implements OnInit {
         console.log(JSON.stringify(response));
         this.data = response['data'];
         
-         })
+         }),
+         (err : any) => {
+
+          console.log("error occuring on backedn side");
+         }
     }
 
     filter(){

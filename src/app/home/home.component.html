@@ -167,39 +167,30 @@
                                 <input type="email" formControlName="email" placeholder="Email" required>
                                 <input type="password" formControlName="password" placeholder="Password" required>
                                 <input type="password" formControlName="confirm" placeholder="Confirm Password" required>
-                    
+                            
+                                
                                 <div class="influencer_media">
                                     <ul> 
-                                      <li><input type="checkbox"  class="checkboxes all" id="tiktok" formControlName="tiktok" (click)="this.tiktok_fol = !this.tiktok_fol">
-                                      <img src="/assets/images/tiktok icon 2.png"/>
-                                      <!-- <div class="box_in" [style.display]="tiktok_fol ? 'block' : 'none'">
-                                      <p>Followers</p>
-                                      <input type="number" formControlName="tiktok_followers" class="input_all"/></div> -->
-                                      </li> 
-                                      <li><input type="checkbox" class="checkboxes" id="insta" formControlName="insta" (click)="this.insta = !this.insta">
-                                        <img src="/assets/images/insta iconn 2.png"> 
-                                        <!-- <div class="box_in" [style.display]="insta ? 'block' : 'none'">
-                                        <p>Followers</p>
-                                        <input type="number" formControlName="insta_followers" class="input_all"/></div> -->
+
+                                        <li>
+                                          <input type="checkbox"  class="checkboxes all" id="tiktok" formControlName="tiktok" (click)="this.tiktok_fol = !this.tiktok_fol">
+                                            <img src="/assets/images/tiktok icon 2.png"/>
+                                        </li> 
+
+                                        <li>
+                                            <input type="checkbox" class="checkboxes" id="insta" formControlName="insta" (click)="this.insta = !this.insta">
+                                            <img src="/assets/images/insta iconn 2.png"> 
                                         </li>
                                         
                                         <li>
-                                            <!--button (click)="signInWithFB()" class="btn btn-primary">Login Facebook</button---->
                                             <input type="checkbox" class="checkboxes" id="fb" formControlName="fb" (click)="this.fb = !this.fb">
-                                          <img src="/assets/images/fb icon 2.png">
-                                          <!-- <div class="box_in" [style.display]="fb ? 'block' : 'none'">
-                                          <p>Followers</p>
-                                          <input type="number" formControlName="fb_followers" class="input_all"/></div> -->
-                                          </li> 
-                                          <li>
-                                            <!-- <img  src="/assets/images/twitter 2.png">  -->
-                                            <!--button (click)='redirectToTwitter()'>Twitter</button-->
+                                            <img src="/assets/images/fb icon 2.png">
+                                        </li> 
+                                        
+                                        <li>
                                             <input type="checkbox" class="checkboxes alll" id="twitter"  formControlName="twitter" (click)="this.twitter = !this.twitter">
-                                            <img src="/assets/images/twitter 2.png"> 
-                                             <!-- <div class="box_in" [style.display]="twitter ? 'block' : 'none'">
-                                            <p>Followers</p>
-                                            <input type="number" formControlName="twitter_followers" class="input_all"/></div> -->
-                                            </li> 
+                                            <img src="/assets/images/twitter 2.png">     
+                                        </li> 
                                          
                                     </ul>
                                    

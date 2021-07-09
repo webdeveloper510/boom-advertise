@@ -3,12 +3,12 @@ var config = {};
 
 // config.email = 'deligoch@gmail.com'
 // config.password= 'deey5old4rhus_GEEN'
-config.email = 'vsingh@codenomad.net'
-config.password= '1502252504'
+config.email = 'vsingh@codenomad.net';
+config.password= '1502252504';
 
-config.adminemail='deligoch@gmail.com'
-config.url='http://boomadvertise.com/'
-config.adminurl='http://boomadvertise.com/'
+config.adminemail='deligoch@gmail.com';
+config.url='http://boomadvertise.com/';
+config.adminurl='http://boomadvertise.com/';
 module.exports = config;
 
 

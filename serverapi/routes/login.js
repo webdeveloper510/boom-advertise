@@ -5,13 +5,19 @@ var   mongoose      = require('mongoose');
 const promoters     = require('../models/promoters');
 const influencers   = require('../models/influencers');
 const checkout      = require('../models/checkout');
+const account_data  = require('../models/account_data');
 var   passwordHash  = require('password-hash');
 const email         = require('../config/email');
 const nodemailer    = require('nodemailer');
 const path = require('path') 
 
-var Publishable_Key = 'pk_test_51HI9qMEXA7xfj1nHVxgdLB9TapBg5XlzSdvp991XoqXlLhePzY4I8l54WyzzRyDpMfWG8ubnIqUq7llRkahqiOsi00BDEFDLGg'
-var Secret_Key = 'sk_test_51HI9qMEXA7xfj1nHePxD4KlYqi9nUUlpjvpDmwNQhMEyQCeTMCiUGw6AFWuJ4YytCyVgr9Br1BkqohBvFJGG3skO00THMGx9Fv'
+var account_id= 'acct_1HcUqfDnJHxQJk0M';
+var Publishable_Key = 'pk_test_wtJVzJKpR9dbqN7Ml7vnR1lc00m9k1B0uR';
+var Secret_Key = 'sk_test_STTTocdv5NxCwUDDwIBs5rZW00zadVbJnf';
+//const account_id = 'acct_1HI9qMEXA7xfj1nH'; 
+// var Publishable_Key = 'pk_test_51HI9qMEXA7xfj1nHVxgdLB9TapBg5XlzSdvp991XoqXlLhePzY4I8l54WyzzRyDpMfWG8ubnIqUq7llRkahqiOsi00BDEFDLGg'
+// var Secret_Key = 'sk_test_51HI9qMEXA7xfj1nHePxD4KlYqi9nUUlpjvpDmwNQhMEyQCeTMCiUGw6AFWuJ4YytCyVgr9Br1BkqohBvFJGG3skO00THMGx9Fv'
+
 const stripe = require('stripe')(Secret_Key);
 
 const unread  = 0;
@@ -162,12 +168,73 @@ const read    = 1;
     // prints date & time in YYYY-MM-DD HH:MM:SS format
     let dateTime = year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds;
 
+    let commission = 20;
+
+    let to_admin_amount       = (commission/100) * total_amount;
+    let to_influencer_amount  = total_amount - to_admin_amount;
+
+
     
+    let checkout_data =  new checkout.checkout();
+
+        checkout_data.influencerid  = influencer_id;
+        checkout_data.influencer_id = influencer_id;
+        checkout_data.name          = name;
+        checkout_data.email         = email;
+        checkout_data.phone         = phone;
+        checkout_data.description   = description;
+        checkout_data.media_type    = media_type;
+        checkout_data.media_option  = media_option;
+        checkout_data.response      = '';
+        checkout_data.amount        = to_influencer_amount;
+        checkout_data.status        = unread;
+        checkout_data.date          = dateTime;
+        checkout_data.created_at    = dateTime;
+
+        
+        /*checkout_data.save(function(error , data){
+
+          let subject = 'Buy by user from Boomadvertisement';
+        
+          sendEmail(influencer_email , subject,description);
+          res.send({code:100,message: "$"+total_amount+" payment has been successfully completed."}); 
+
+        });
+
+        return false;*/
+
+    let bank_account_id = '';
+    await account_data.account_data.findOne({ influencerid : influencer_id} , function(account_data_err ,  account_data_res){
+
+      if (account_data_err) {
+
+        res.json({code:201,message: " Influencer's account does not exist'"});
+        return;
+      } 
+
+      bank_account_id = account_data_res.bank_account_id;
+    
+    });
+
+
+    
+    let account_status =false;
     
     if(!influencer_email){
       res.send({code:201,message: " Influencer doesn't have any email"});
       return;
     }
+
+    const account = await stripe.accounts.retrieve(bank_account_id);
+
+    account_status = account.capabilities.transfers == 'active' ? true : false;
+
+
+    // if(!account_status){
+      
+    //   res.send({code:201,message: " Influencer's account not verified yet."});
+    //   return;
+    // }
 
     const token = await stripe.tokens.create({
         card: {
@@ -194,17 +261,38 @@ const read    = 1;
       }) 
       .then((customer) => { 
         
-        
+         
           return stripe.charges.create({ 
-              amount: total_amount * 100,     // Charing Rs 25 
+              amount: to_admin_amount * 100,     // Charing Rs 25 
               description: 'Web Development Product', 
-              currency: 'INR', 
+              //currency: 'INR', 
+              currency: 'USD', 
               customer: customer.id 
           }); 
       }) 
       .then((charge) => { 
         
+        //Transfer into influencer's account 
         
+        let transfer = stripe.transfers.create(
+          {
+            amount: to_influencer_amount * 100,
+            'currency' : 'USD',
+            'destination' : bank_account_id
+          }
+        ).then((result) => {
+ 
+
+        console.log("vijay cheking start");
+        console.log(result);
+        console.log("vijay cheking e nd");
+        }).catch((err) => {
+        console.log(err);
+        res.send({code:200,message:err,data:"vijay cking"})
+            // If some error occurs 
+      });;
+
+        return
         let checkout_data =  new checkout.checkout();
 
         checkout_data.influencerid  = influencer_id;
@@ -222,12 +310,16 @@ const read    = 1;
         checkout_data.created_at    = dateTime;
 
         
-        checkout_data.save(function(error , data){});
+        checkout_data.save(function(error , data){
 
-        let subject = 'Buy by user from Boomadvertisement';
+          let subject = 'Buy by user from Boomadvertisement';
         
-        sendEmail(influencer_email , subject,description);
-        res.send({code:100,message: "$"+total_amount+" payment has been successfully completed."});  // If no error occurs 
+          sendEmail(influencer_email , subject,description);
+          res.send({code:100,message: "$"+total_amount+" payment has been successfully completed."}); 
+
+        });
+
+         // If no error occurs 
 
       }) 
       .catch((err) => {

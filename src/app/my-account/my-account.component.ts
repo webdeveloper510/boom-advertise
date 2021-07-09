@@ -21,6 +21,8 @@ export class MyAccountComponent implements OnInit {
   data        : any        = {};
   new_notification : any   = "";
 
+  card_model : boolean  = false;
+
   post_edit_model     : boolean  = false;
   profile_edit_model  : boolean  = false;
   price_edit_model    : boolean  = false;
@@ -111,6 +113,15 @@ export class MyAccountComponent implements OnInit {
     this.singleInfluencer();
     this.getNotificationUnreadCount();
   }
+
+  card_model_form = new FormGroup({
+    email        : new FormControl(''),
+    card_number  : new FormControl(''),
+    expiry_month : new FormControl(''),
+    expiry_year  : new FormControl(''),
+    cvc  : new FormControl(''),
+    influencer_id  : new FormControl(this.loginService.user_id),
+  });
 
   myForm = new FormGroup({
     
@@ -330,7 +341,8 @@ export class MyAccountComponent implements OnInit {
     this.MyAccountService.updatePrice(data).subscribe(
       (response:any) => {
         
-        //console.log(response);
+        console.log('coming ');
+        console.log(response);
 
         if(response.statusCode == 200){
 
@@ -368,12 +380,8 @@ export class MyAccountComponent implements OnInit {
 
   uploadPost(){
     
-    
-    
     if(this.image_value && this.myForm.value.post_price && this.myForm.value.post_description){
 
-      console.log('hh');
-      
       const formData = new FormData();
       // formData.append('media_type', this.myForm.value.media_name);
       // formData.append('post_type', this.myForm.value.type_post);
@@ -428,4 +436,27 @@ export class MyAccountComponent implements OnInit {
     }
   }
 
+
+  addCard() {
+
+    this.MyAccountService.addCard(this.card_model_form.value).subscribe(
+      (response : any) => {
+        
+        console.log(response);
+
+        if(response.statusCode == 200){
+
+          this.card_model = false;
+          alert(response.msg);
+        } else {
+          alert(response.msg);
+        }
+      },
+      (error : any) => {
+
+        console.log(error);
+        
+      }
+    );
+  }
 }

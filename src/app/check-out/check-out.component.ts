@@ -21,7 +21,7 @@ export class CheckOutComponent implements OnInit {
   previousUrl   : string  = '';
   constructor(private MyAccountService:MyAccountService, private router : Router,private location: Location) {
 
-    
+   
 
     let buy_media = localStorage.getItem('buy_media');
     
@@ -45,11 +45,11 @@ export class CheckOutComponent implements OnInit {
   
   
   paymentForm = new FormGroup({
-    name              : new FormControl('', [Validators.required]),
-    email             : new FormControl("",[Validators.required]),
-    password          : new FormControl("",[Validators.required]),
-    repossword        : new FormControl("",[Validators.required]),
-    phone             : new FormControl("",[Validators.required]),
+    name              : new FormControl(''),
+    email             : new FormControl(""),
+    password          : new FormControl(""),
+    repossword        : new FormControl(""),
+    phone             : new FormControl(""),
     description       : new FormControl("",[Validators.required]),
     stripe_email      : new FormControl("",[Validators.required]),
     stripe_username   : new FormControl("",[Validators.required]),
@@ -86,7 +86,8 @@ export class CheckOutComponent implements OnInit {
   payment(){
 
     let data              = this.paymentForm.value;
-    data.total_amount     = parseInt(this.checkout.total_amount);
+    //data.total_amount     = parseInt(this.checkout.total_amount);
+    data.total_amount     = 10;
     data.influencer_email = this.checkout.email;
     data.user_description = this.checkout.description;
     data.influencer_id    = this.checkout.influencer_id;
@@ -98,21 +99,26 @@ export class CheckOutComponent implements OnInit {
       (response:any) =>{
         
         console.log(response);
+        return;
+        setTimeout(() => {
+      
         
-        return false;
-        if(response?.code == 100){
-         
-          localStorage.removeItem('buy_media');
-          this.swalAlert(response.message,'success',response?.code);
-
-        }else if(response?.code == 201){
-
-          this.swalAlert(response.message,'warning',response?.code);
-        }else {
+          if(response?.code == 100){
           
-          this.swalAlert(response.message.raw.message,'warning',response?.code);
-          
-        }
+            localStorage.removeItem('buy_media');
+            this.swalAlert(response.message,'success',response?.code);
+
+          }else if(response?.code == 201){
+
+            this.swalAlert(response.message,'warning',response?.code);
+          }else {
+            
+            this.swalAlert(response.message.raw.message,'warning',response?.code);
+            
+          }
+
+        }, 3000);
+
       }
     )
       return false;
